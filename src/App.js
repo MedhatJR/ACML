@@ -1,21 +1,23 @@
 // External variables
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./Routes/IndividualController");
-const instructorRouter = require("./Routes/InstructorController");
+
 //App variables
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //app.use("/users", require("./routes/users"));
-app.use(router);
-app.use(instructorRouter);
+
+
 const port = process.env.PORT || "8000";
 const User = require("./Models/IndividualTrainee");
 
 // #Importing the userController
-
+const router = require("./Routes/IndividualController");
+const instructorRouter = require("./Routes/InstructorController");
+app.use(router);
+app.use(instructorRouter);
 mongoose
   .connect(
     "mongodb+srv://mohamedmedhat:MMMMS12345@cluster0.7j7qatg.mongodb.net/?retryWrites=true&w=majority"
