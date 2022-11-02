@@ -4,7 +4,7 @@ const express = require("express");
 // const mongoose = require("mongoose");
 const appRouter = express.Router();
 
-const User = require("../Models/User");
+const Individual = require("../Models/IndividualTrainee");
 
 // var bodyParser = require("body-parser");
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,7 +27,7 @@ const User = require("../Models/User");
 //   .toArray();
 //to display the register page
 appRouter.get("/", async (req, res) => {
-  // const newuser = new User({
+  // const newuser = new Individual({
   //   Name: "Ahmed",
   //   Email: "sks@gmail.com",
   //   Age: 20,
@@ -38,7 +38,7 @@ appRouter.get("/", async (req, res) => {
   //   Job: "Engineer",
   // });
   // try {
-  //   await User.create(newuser);
+  //   await Individual.create(newuser);
   // } catch (err) {
   //   console.log(err);
   // }
@@ -49,7 +49,7 @@ appRouter.get("/createUser", (req, res) => {
   res.status(200).send("Welcome to registration page");
 });
 appRouter.post("/createUser", async (req, res) => {
-  const newuser = new User({
+  const newuser = new Individual({
     Name: req.body.Name,
     Email: req.body.Email,
     Age: req.body.Age,
@@ -60,7 +60,7 @@ appRouter.post("/createUser", async (req, res) => {
     Job: req.body.Job,
   });
   try {
-    await User.create(newuser);
+    await Individual.create(newuser);
   } catch (err) {
     console.log(err);
   }
@@ -69,7 +69,7 @@ appRouter.post("/createUser", async (req, res) => {
   res.status(200).send("registration successful");
 });
 appRouter.post("/update", async (req, res) => {
-  User.findOneAndUpdate(
+  Individual.findOneAndUpdate(
     { Name: req.body.Name },
     { Email: req.body.Email },
     { new: true },
@@ -84,7 +84,7 @@ appRouter.post("/update", async (req, res) => {
   res.status(200).send("update done");
 });
 appRouter.get("/read", async (req, res) => {
-  User.find({ Name: req.body.Name }, (error, data) => {
+  Individual.find({ Name: req.body.Name }, (error, data) => {
     if (error) {
       res.send(error);
     } else res.send(data);
@@ -92,11 +92,14 @@ appRouter.get("/read", async (req, res) => {
   //res.status(200).send(data);
 });
 appRouter.post("/delete", (req, res) => {
-  User.findOneAndRemove({ Name: req.body.Name }, (error, deletedRecord) => {
-    if (!error) {
-      console.log(deletedRecord);
+  Individual.findOneAndRemove(
+    { Name: req.body.Name },
+    (error, deletedRecord) => {
+      if (!error) {
+        console.log(deletedRecord);
+      }
     }
-  });
+  );
   //res.status(200).send("delete done");
 });
 

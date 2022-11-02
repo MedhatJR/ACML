@@ -2,7 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 //const appRouter = require("../src/Routes/userController");
-const router = require("../src/Routes/userController");
+const router = require("./Routes/IndividualController");
 // var bodyParser = require("body-parser");
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
@@ -19,7 +19,7 @@ app.use(express.json());
 //app.use("/users", require("./routes/users"));
 app.use(router);
 const port = process.env.PORT || "8000";
-const User = require("./Models/User");
+const User = require("./Models/IndividualTrainee");
 
 // #Importing the userController
 
