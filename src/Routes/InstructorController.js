@@ -25,3 +25,7 @@ appRouter.post('/Instructor_addcourse',async(req,res) =>{
       } 
          
 });
+
+appRouter.get("/instructor_viewCourses", (req, res) => {
+  Instructor;
+});

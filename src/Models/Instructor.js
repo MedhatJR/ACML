@@ -31,6 +31,10 @@ const InstructorSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    Courses: {
+      type: Array,
+      required: true,
+    },
   },
   { timestamps: true }
 );

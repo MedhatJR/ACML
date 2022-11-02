@@ -39,6 +39,10 @@ const courseSchema = new Schema(
       type: Number,
       required: true,
     },
+    Courses: {
+      type: Array,
+      required: true,
+    },
   },
   { timestamps: true }
 );
