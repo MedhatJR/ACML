@@ -7,6 +7,14 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+    Subtitle: {
+      type: String,
+      required: true,
+    },
+    Shortsummary: {
+      type: String,
+      required: true,
+    },
     Subject: {
       type: String,
       required: true,
