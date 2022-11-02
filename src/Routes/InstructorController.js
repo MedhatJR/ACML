@@ -3,6 +3,7 @@ const appRouter = express.Router();
 
 const Instructor = require("../Models/IndividualTrainee");
 const Course = require("../Models/Course");
+
 appRouter.post('/Instructor_addcourse',async(req,res) =>{
     const course  = new Course( {
         Name : req.body.Name ,
@@ -28,4 +29,7 @@ appRouter.post('/Instructor_addcourse',async(req,res) =>{
 
 appRouter.get("/instructor_viewCourses", (req, res) => {
   Instructor;
-});
+})
+
+
+module.exports = appRouter;
