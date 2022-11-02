@@ -1,47 +1,13 @@
 // #Task route solution
 
 const express = require("express");
-// const mongoose = require("mongoose");
 const appRouter = express.Router();
 
 const Individual = require("../Models/IndividualTrainee");
 
-// var bodyParser = require("body-parser");
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
-//const appRouter = express.appRouter();
-
-//const { appRouter } = require("../appRouter");
-
-// appRouter.get("/", (req, res) => {
-//   res.status(200).send("GET request to the homepage");
-// });
-// appRouter.get("/login", (req, res) => {
-//   res.send("Welcome to the login page");
-// });
-// var output = await client
-//   .db("firstdb")
-//   .collection("firstcollection")
-//   .find()
-//   .toArray();
 //to display the register page
 appRouter.get("/", async (req, res) => {
-  // const newuser = new Individual({
-  //   Name: "Ahmed",
-  //   Email: "sks@gmail.com",
-  //   Age: 20,
-  //   BornIn: "two thousand",
-  //   LivesIn: "Berlin",
-  //   MartialStatus: "single",
-  //   PhoneNumber: 011111,
-  //   Job: "Engineer",
-  // });
-  // try {
-  //   await Individual.create(newuser);
-  // } catch (err) {
-  //   console.log(err);
-  // }
+ 
   res.status(200).send("Home");
 });
 
@@ -64,7 +30,6 @@ appRouter.post("/createUser", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  //console.log(req.body.Name);
   console.log("Hello");
   res.status(200).send("registration successful");
 });
@@ -89,7 +54,6 @@ appRouter.get("/read", async (req, res) => {
       res.send(error);
     } else res.send(data);
   });
-  //res.status(200).send(data);
 });
 appRouter.post("/delete", (req, res) => {
   Individual.findOneAndRemove(
@@ -100,7 +64,6 @@ appRouter.post("/delete", (req, res) => {
       }
     }
   );
-  //res.status(200).send("delete done");
 });
 
 module.exports = appRouter;
