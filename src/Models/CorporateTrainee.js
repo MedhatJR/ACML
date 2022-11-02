@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//skmkjkj
+
 
 const CorporateTraineeSchema = new Schema(
   {
