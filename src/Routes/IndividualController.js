@@ -3,7 +3,6 @@
 const express = require("express");
 const Course = require("../Models/Course");
 const appRouter = express.Router();
-
 const Individual = require("../Models/IndividualTrainee");
 
 //to display the register page
@@ -86,6 +85,19 @@ appRouter.post("/delete", (req, res) => {
       }
     }
   );
+});
+
+appRouter.post("/Individual_filtercourse", async (req, res) => {
+  const minrating = req.body.minrating;
+  const maxrating = req.body.maxrating;
+  Course.find({ Rating : { $gte: minrating , $lte: maxrating } }, function(err , result) {
+    if(err){
+      res.send("Error");
+    }
+      else {
+        res.send(result);
+      }
+  });
 });
 
 module.exports = appRouter;

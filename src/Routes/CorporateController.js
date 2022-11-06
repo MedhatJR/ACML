@@ -22,4 +22,18 @@ appRouter.post("/Corporate_SelectCountry", async (req, res) => {
     res.send(await Course.find().select(["Title","Hours","Rating"]));
   })
 
+
+appRouter.post("/Corporate_filtercourse", async (req, res) => {
+    const minrating = req.body.minrating;
+    const maxrating = req.body.maxrating;
+    Course.find({ Rating : { $gte: minrating , $lte: maxrating } }, function(err , result) {
+      if(err){
+        res.send("Error");
+      }
+        else {
+          res.send(result);
+        }
+    });
+  });
+
   module.exports = appRouter;

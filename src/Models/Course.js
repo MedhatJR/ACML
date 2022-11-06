@@ -3,7 +3,20 @@ const Schema = mongoose.Schema;
 
 const courseSchema = new Schema(
   {
+    Name: {
+      type: String,
+      required: true,
+    },
+
     Title: {
+      type: String,
+      required: true,
+    },
+    Subtitle: {
+      type: String,
+      required: true,
+    },
+    Shortsummary: {
       type: String,
       required: true,
     },
@@ -29,6 +42,10 @@ const courseSchema = new Schema(
     },
     Views: {
       type: Number,
+      required: true,
+    },
+    Courses: {
+      type: Array,
       required: true,
     },
   },

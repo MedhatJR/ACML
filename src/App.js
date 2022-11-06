@@ -9,13 +9,18 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(router);
+
+
+
 const port = process.env.PORT || "8000";
 
 const instructorRouter = require("./Routes/InstructorController");
 app.use(instructorRouter);
 
-
-// #Importing the userController
+const guestRouter = require("./Routes/GuestController");
+const corporateRouter = require("./Routes/CorporateController");
+app.use(corporateRouter);
+app.use(guestRouter);
 
 mongoose
   .connect(
