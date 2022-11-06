@@ -53,8 +53,16 @@ appRouter.get("/Individual_retrieveCourses", async (req,res) => {
   res.send(await Course.find().select(["Title","Hours","Rating"]));
 });
 
-appRouter.get("/read", async (req, res) => {
+appRouter.get("/Individual_read", async (req, res) => {
   Individual.find({ Name: req.body.Name }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  });
+});
+
+appRouter.get("/Individual_searchCourse", async (req, res) => {
+  Course.find({ $or : [{Title: req.body.Title} ,{ Subject: req.body.Subject }, {Instructor: req.body.Instructor}]}, (error, data) => {
     if (error) {
       res.send(error);
     } else res.send(data);

@@ -3,6 +3,22 @@ const appRouter = express.Router();
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 
+appRouter.get("/Instructor_read", async (req, res) => {
+    Instructor.find({ Name: req.body.Name }, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else res.send(data);
+    });
+  });
+
+  appRouter.get("/Instructor_searchCourse", async (req, res) => {
+    Course.find({ $or : [{Title: req.body.Title} ,{ Subject: req.body.Subject }, {Instructor: req.body.Instructor}]}, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else res.send(data);
+    });
+  });
+
 appRouter.post("/Instructor_SelectCountry", async (req, res) => {
     Instructor.findOneAndUpdate(
         { Email: req.body.Email },
