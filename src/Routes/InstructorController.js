@@ -25,7 +25,7 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
 
 appRouter.post("/Instructor_addcourse", async (req, res) => {
   const course = new Course({
-    Name: req.body.Name,
+    
     Title: req.body.Title,
     Subtitle: req.body.Subtitle,
     Shortsummary: req.body.Shortsummary,
@@ -39,8 +39,8 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
   try {
    await  Course.create(course);
 
-   const name = req.body.Name;
-   Instructor.findOneAndUpdate({lastName : req.body.Instructor},  {$push: {Courses : {name}}} ,function(error, doc) {
+   const title = req.body.Title;
+   Instructor.findOneAndUpdate({Lastname : {$eq : req.body.Instructor}},  {$push: {Courses : {title}}} ,function(error, doc) {
 
       
       if(error){
