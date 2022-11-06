@@ -69,7 +69,10 @@ appRouter.get("/instructor_viewCourses", async (req, res) => {
 appRouter.post("/Instructor_filtercourse", async (req, res) => {
   const minrating = req.body.minrating;
   const maxrating = req.body.maxrating;
-  Course.find({ Rating : { $gte: minrating , $lte: maxrating } }, function(err , result) {
+  const Subject  = req.body.Subject;
+  Course.find({ $or : [ { Rating : { $gte: minrating , $lte: maxrating } } , 
+    { Subject : Subject}
+  ] }, function(err , result) {
     if(err){
       res.send("Error");
     }
