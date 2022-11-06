@@ -3,10 +3,7 @@ const Schema = mongoose.Schema;
 
 const courseSchema = new Schema(
   {
-    Name: {
-      type: String,
-      required: true,
-    },
+    
 
     Title: {
       type: String,

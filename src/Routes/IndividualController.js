@@ -1,8 +1,8 @@
 // #Task route solution
 
 const express = require("express");
+const Course = require("../Models/Course");
 const appRouter = express.Router();
-
 const Individual = require("../Models/IndividualTrainee");
 
 //to display the register page
@@ -48,13 +48,42 @@ appRouter.post("/update", async (req, res) => {
   );
   res.status(200).send("update done");
 });
-appRouter.get("/read", async (req, res) => {
+
+appRouter.get("/Individual_retrieveCourses", async (req,res) => {
+  res.send(await Course.find().select(["Title","Hours","Rating"]));
+});
+
+appRouter.get("/Individual_read", async (req, res) => {
   Individual.find({ Name: req.body.Name }, (error, data) => {
     if (error) {
       res.send(error);
     } else res.send(data);
   });
 });
+
+appRouter.get("/Individual_searchCourse", async (req, res) => {
+  Course.find({ $or : [{Title: req.body.Title} ,{ Subject: req.body.Subject }, {Instructor: req.body.Instructor}]}, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  });
+});
+
+appRouter.post("/Individual_SelectCountry", async (req, res) => {
+  Individual.findOneAndUpdate(
+    { Email: req.body.Email },
+    {Country: req.body.Country  },
+    { new: true },
+    (error, data) => {
+      if(error) {
+        consosle.log(error);
+      }
+      else{
+        console.log(data);
+      }
+    } )
+});
+
 appRouter.post("/delete", (req, res) => {
   Individual.findOneAndRemove(
     { Name: req.body.Name },
@@ -64,6 +93,19 @@ appRouter.post("/delete", (req, res) => {
       }
     }
   );
+});
+
+appRouter.post("/Individual_filtercourse", async (req, res) => {
+  const minrating = req.body.minrating;
+  const maxrating = req.body.maxrating;
+  Course.find({ Rating : { $gte: minrating , $lte: maxrating } }, function(err , result) {
+    if(err){
+      res.send("Error");
+    }
+      else {
+        res.send(result);
+      }
+  });
 });
 
 module.exports = appRouter;
