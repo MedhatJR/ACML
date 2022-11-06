@@ -37,10 +37,14 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
   }
 });
 
-appRouter.get("/instructor_viewCourses", (req, res) => {
-  Instructor;
-})
-
+appRouter.get("/instructor_viewCourses", async (req, res) => {
+  //data = req.body.Courses;
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  }).select("Courses");
+});
 
 appRouter.post("/Instructor_filtercourse", async (req, res) => {
   const minrating = req.body.minrating;
