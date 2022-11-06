@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const InstructorSchema = new Schema(
+
+const AdminstratorSchema = new Schema(
   {
     Username: {
       type: String,
@@ -31,18 +32,12 @@ const InstructorSchema = new Schema(
       type: String,
       required: true,
     },
-    Courses: {
-      type: Array,
-      required: true,
-    },
-    Rating: {
-      type: Number,
-      required: true,
-    },
-
   },
   { timestamps: true }
 );
 
-const Instructor = mongoose.model("Instructor", InstructorSchema);
-module.exports = Instructor;
+const Adminstrator = mongoose.model(
+  "Adminstrator",
+  AdminstratorSchema
+);
+module.exports = Adminstrator;

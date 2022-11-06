@@ -1,7 +1,7 @@
 const express = require("express");
 const appRouter = express.Router();
 
-const Instructor = require("../Models/IndividualTrainee");
+const Instructor = require("../Models/Instructor");
 const Course = require("../Models/Course");
 appRouter.post("/Instructor_addcourse", async (req, res) => {
   const course = new Course({
