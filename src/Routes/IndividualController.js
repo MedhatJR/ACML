@@ -1,6 +1,7 @@
 // #Task route solution
 
 const express = require("express");
+const Course = require("../Models/Course");
 const appRouter = express.Router();
 
 const Individual = require("../Models/IndividualTrainee");
@@ -48,6 +49,11 @@ appRouter.post("/update", async (req, res) => {
   );
   res.status(200).send("update done");
 });
+
+appRouter.get("/Individual_retrieveCourses", async (req,res) => {
+  res.send(await Course.find().select(["Title","Hours","Rating"]));
+});
+
 appRouter.get("/read", async (req, res) => {
   Individual.find({ Name: req.body.Name }, (error, data) => {
     if (error) {
@@ -55,6 +61,22 @@ appRouter.get("/read", async (req, res) => {
     } else res.send(data);
   });
 });
+
+appRouter.post("/Individual_SelectCountry", async (req, res) => {
+  Individual.findOneAndUpdate(
+    { Email: req.body.Email },
+    {Country: req.body.Country  },
+    { new: true },
+    (error, data) => {
+      if(error) {
+        consosle.log(error);
+      }
+      else{
+        console.log(data);
+      }
+    } )
+});
+
 appRouter.post("/delete", (req, res) => {
   Individual.findOneAndRemove(
     { Name: req.body.Name },
