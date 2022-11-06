@@ -16,8 +16,12 @@ const User = require("./Models/IndividualTrainee");
 // #Importing the userController
 const router = require("./Routes/IndividualController");
 const instructorRouter = require("./Routes/InstructorController");
+const guestRouter = require("./Routes/GuestController");
+const corporateRouter = require("./Routes/CorporateController");
+app.use(corporateRouter);
 app.use(router);
 app.use(instructorRouter);
+app.use(guestRouter);
 mongoose
   .connect(
     "mongodb+srv://mohamedmedhat:MMMMS12345@cluster0.7j7qatg.mongodb.net/?retryWrites=true&w=majority"

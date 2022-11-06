@@ -1,7 +1,7 @@
 const express = require("express");
 const appRouter = express.Router();
 
-const Instructor = require("../Models/IndividualTrainee");
+const Instructor= require("../Models/Instructor");
 const Course = require("../Models/Course");
 appRouter.post("/Instructor_addcourse", async (req, res) => {
   const course = new Course({
@@ -17,10 +17,23 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
     Views: req.body.Views,
   });
   try {
-    await Course.create(course);
-    res.send("Data Inserted");
-  } catch (err) {
+   await  Course.create(course);
+
+   const name = req.body.Name;
+   Instructor.findOneAndUpdate({lastName : req.body.Instructor},  {$push: {Courses : {name}}} ,function(error, doc) {
+
+      
+      if(error){
+       res.send("update_Error");
+      }else{
+        res.send("Data Inserted");
+       // res.send(doc);
+      }
+  });
+  
+  } catch (error) {
     res.send("Error");
+
   }
 });
 
@@ -28,5 +41,20 @@ appRouter.get("/instructor_viewCourses", (req, res) => {
   Instructor;
 })
 
+
+appRouter.post("/Instructor_filtercourse", async (req, res) => {
+  const minrating = req.body.minrating;
+  const maxrating = req.body.maxrating;
+  Course.find({ Rating : { $gte: minrating , $lte: maxrating } }, function(err , result) {
+    if(err){
+      res.send("Error");
+    }
+      else {
+        res.send(result);
+      }
+  });
+  
+
+});
 
 module.exports = appRouter;
