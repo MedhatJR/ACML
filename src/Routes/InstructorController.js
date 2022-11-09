@@ -180,4 +180,28 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
   );
 });
 
+
+//view the price of each course
+appRouter.get("/Instructor_coursesPrice", async (req,res) => {
+  res.send(await Course.find().select(["Price"]));
+});
+
+// filter the courses based on price (price can be FREE)
+appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
+  
+  //const Price1 = req.body.Price;
+  Course.find(
+    {
+       Price :{$eq: req.body.Price}  
+    },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 module.exports = appRouter;

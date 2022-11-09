@@ -22,6 +22,28 @@ appRouter.post("/Guest_filtercourse", async (req, res) => {
 
 
 
+//view the price of each course
+appRouter.get("/Guest_coursesPrice", async (req,res) => {
+  res.send(await Course.find().select(["Price"]));
+});
+
+
+// filter the courses based on price (price can be FREE)
+appRouter.post("/Guest_filtercourse_price", async (req, res) => {
+    const Price = req.body.Price;
+  Course.find(
+    {
+      Price :{$eq: req.body.Price}
+    },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 
 
 
