@@ -184,4 +184,79 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
   );
 });
 
+appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
+  
+  //const Price1 = req.body.Price;
+  Course.find(
+    {
+       Price :{$eq: req.body.Price}  
+    },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+appRouter.post("/Instructor_editemail",async(req,res) => {
+  const Emailold = req.body.Emailold;
+  const Emailnew = req.body.Emailnew;
+  Instructor.findOneAndUpdate(
+    { Email: Emailold },
+    { Email: Emailnew },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+appRouter.post("/Instructor_editbiography",async(req,res) => {
+  const Email = req.body.Emailold;
+  const Biography = req.body.biography;
+  Instructor.findOneAndUpdate(
+    { Email: Email },
+    { Biography: Biography },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Instructor_addpromotion",async(req,res) => {
+  const Title = req.body.Title;
+  const Promotion = req.body.Promotion;
+  const Promotion_valid_for = req.body.Promotionfor;
+  const p  = (100-Promotion)/100; 
+  Course.findOneAndUpdate(
+    { Title: Title },
+    { Promotion: Promotion , Promotion_valid_for: Promotion_valid_for , $mul: {price: p }} ,
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);  
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+
+});
+
+
+
 module.exports = appRouter;

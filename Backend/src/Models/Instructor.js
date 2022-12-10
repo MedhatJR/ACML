@@ -39,6 +39,11 @@ const InstructorSchema = new Schema(
       type: Number,
       required: true,
     },
+    Biography:{
+      type: String,
+      required: true,
+    }
+
   },
   { timestamps: true }
 );

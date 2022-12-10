@@ -51,6 +51,16 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+    Promotion: {
+      type: Number,
+      required: true,
+      
+    },
+    Promotion_valid_for: {
+      type: String,
+      required: true,
+      
+    },
   },
   { timestamps: true }
 );
