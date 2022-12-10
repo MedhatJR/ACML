@@ -256,6 +256,31 @@ appRouter.post("/Instructor_addpromotion",async(req,res) => {
   );
 
 });
+appRouter.post("/Instructor_create_exams", async (req, res) => {
+  const exams = new Exams({
+   
+    Question1: req.body.Question1,
+    Choice11: req.body.Choice11,
+    Choice12: req.body.Choice12,
+    Choice13: req.body.Choice13,
+    Choice14: req.body.Choice14,
+    Answer1: req.body.Answer1,
+    Question2: req.body.Question2,
+    Choice21: req.body.Choice21,
+    Choice22: req.body.Choice22,
+    Choice23: req.body.Choice23,
+    Choice24: req.body.Choice24,
+    Answer2: req.body.Answer2,
+    
+     
+  });
+  try {
+     Exams.create(exams);
+    res.send("Data Inserted");
+  } catch (err) {
+    res.send("Error");
+  }
+});
 
 
 
