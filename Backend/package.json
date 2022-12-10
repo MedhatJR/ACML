@@ -1,0 +1,31 @@
+{
+  "name": "acl_tasks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Advanced-Computer-Lab-2022/Task_1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Advanced-Computer-Lab-2022/Task_1/issues"
+  },
+  "homepage": "https://github.com/Advanced-Computer-Lab-2022",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsx": "^0.9.89",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^4.0.3"
+  }
+}
