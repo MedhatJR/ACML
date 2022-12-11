@@ -106,20 +106,6 @@ appRouter.get("/instructor_viewRatings", async (req, res) => {
 });
 
 appRouter.get("/instructor_viewCourseRatings", async (req, res) => {
-//   dbcourses.push( Instructor.find({ Email: req.body.Email }, (error, data) => {
-//     if (error) {
-//       res.send(error);
-//     } else res.send(data);
-//   }).select("Courses"));
-
-//   for(const val of dbcourses) {
-//     console.log("entered");
-//     Course.find({ Title: { $eq: val } }, (error, data) => {
-//       if (error) {
-//         res.send(error);
-//       } else res.send(data);
-//     }).select(["Rating"]);
-// }
 Course.find({ Instructor: req.body.Instructor }, (error, data) => {
   if (error) {
     res.send(error);
