@@ -94,6 +94,15 @@ appRouter.get("/instructor_viewCourses", async (req, res) => {
   }).select("Courses");
 });
 
+appRouter.get("/instructor_viewMyCourses", async (req, res) => {
+  //data = req.body.Courses;
+  Course.find({ Instructor: req.body.Instructor }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  });
+});
+
 appRouter.get("/instructor_search", async (req, res) => {
   //data = req.body.Courses;
   Course.find(
