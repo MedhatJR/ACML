@@ -3,7 +3,8 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import ViewData from "./pages/ViewData";
 import AddCourse from "./pages/AddCourse";
-import InstructorViewCourse from "./pages/";
+import InstructorViewCourse from "./pages/InstructorViewCourse";
+import InstructorPage from "./pages/InstructorPage";
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
                 path="/InstructorViewCourse"
                 element={<InstructorViewCourse />}
               />
+              <Route
+                path="/InstructorPage"
+                element={<InstructorPage />}
+              />
+              
             </Routes>
           </div>
         </BrowserRouter>
