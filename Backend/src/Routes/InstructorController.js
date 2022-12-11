@@ -6,6 +6,8 @@ appRouter.use(cors());
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 
+var dbcourses =[];
+
 appRouter.get("/Instructor_read", async (req, res) => {
   Instructor.find({ Name: req.body.Name }, (error, data) => {
     if (error) {
@@ -93,6 +95,40 @@ appRouter.get("/instructor_viewCourses", async (req, res) => {
     } else res.send(data);
   }).select("Courses");
 });
+
+appRouter.get("/instructor_viewRatings", async (req, res) => {
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  }).select("Rating");
+
+});
+
+appRouter.get("/instructor_viewCourseRatings", async (req, res) => {
+//   dbcourses.push( Instructor.find({ Email: req.body.Email }, (error, data) => {
+//     if (error) {
+//       res.send(error);
+//     } else res.send(data);
+//   }).select("Courses"));
+
+//   for(const val of dbcourses) {
+//     console.log("entered");
+//     Course.find({ Title: { $eq: val } }, (error, data) => {
+//       if (error) {
+//         res.send(error);
+//       } else res.send(data);
+//     }).select(["Rating"]);
+// }
+Course.find({ Instructor: req.body.Instructor }, (error, data) => {
+  if (error) {
+    res.send(error);
+  } else res.send(data);
+}).select(["Title","Rating"]);
+
+
+});
+
 
 appRouter.get("/instructor_search", async (req, res) => {
   //data = req.body.Courses;
