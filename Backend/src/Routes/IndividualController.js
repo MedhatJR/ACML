@@ -6,6 +6,7 @@ const appRouter = express.Router();
 const Individual = require("../Models/IndividualTrainee");
 const cors = require("cors");
 appRouter.use(cors());
+const Instructor = require("../Models/Instructor");
 
 //to display the register page
 appRouter.get("/", async (req, res) => {
@@ -38,6 +39,38 @@ appRouter.post("/update", async (req, res) => {
   Individual.findOneAndUpdate(
     { Name: req.body.Name },
     { Email: req.body.Email },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Individual_rateInstructor", async (req, res) => {
+  Instructor.findOneAndUpdate(
+    {Email: req.body.Email},
+    { Rating: req.body.Rating },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Individual_rateCourse", async (req, res) => {
+  Course.findOneAndUpdate(
+    {Name: req.body.Name},
+    { Rating: req.body.Rating },
     { new: true },
     (error, data) => {
       if (error) {

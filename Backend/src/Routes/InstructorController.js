@@ -6,6 +6,8 @@ appRouter.use(cors());
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 
+var dbcourses = [];
+
 appRouter.get("/Instructor_read", async (req, res) => {
   Instructor.find({ Name: req.body.Name }, (error, data) => {
     if (error) {
@@ -103,6 +105,22 @@ appRouter.get("/instructor_viewMyCourses", async (req, res) => {
   });
 });
 
+appRouter.get("/instructor_viewRatings", async (req, res) => {
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  }).select("Rating");
+});
+
+appRouter.get("/instructor_viewCourseRatings", async (req, res) => {
+  Course.find({ Instructor: req.body.Instructor }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  }).select(["Title", "Rating"]);
+});
+
 appRouter.get("/instructor_search", async (req, res) => {
   //data = req.body.Courses;
   Course.find(
@@ -191,6 +209,103 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
       }
     }
   );
+});
+
+appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
+  //const Price1 = req.body.Price;
+  Course.find(
+    {
+      Price: { $eq: req.body.Price },
+    },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+appRouter.post("/Instructor_editemail", async (req, res) => {
+  const Emailold = req.body.Emailold;
+  const Emailnew = req.body.Emailnew;
+  Instructor.findOneAndUpdate(
+    { Email: Emailold },
+    { Email: Emailnew },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+appRouter.post("/Instructor_editbiography", async (req, res) => {
+  const Email = req.body.Emailold;
+  const Biography = req.body.biography;
+  Instructor.findOneAndUpdate(
+    { Email: Email },
+    { Biography: Biography },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Instructor_addpromotion", async (req, res) => {
+  const Title = req.body.Title;
+  const Promotion = req.body.Promotion;
+  const Promotion_valid_for = req.body.Promotionfor;
+  const p = (100 - Promotion) / 100;
+  Course.findOneAndUpdate(
+    { Title: Title },
+    {
+      Promotion: Promotion,
+      Promotion_valid_for: Promotion_valid_for,
+      $mul: { price: p },
+    },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
+appRouter.post("/Instructor_create_exams", async (req, res) => {
+  const exams = new Exams({
+    Question1: req.body.Question1,
+    Choice11: req.body.Choice11,
+    Choice12: req.body.Choice12,
+    Choice13: req.body.Choice13,
+    Choice14: req.body.Choice14,
+    Answer1: req.body.Answer1,
+    Question2: req.body.Question2,
+    Choice21: req.body.Choice21,
+    Choice22: req.body.Choice22,
+    Choice23: req.body.Choice23,
+    Choice24: req.body.Choice24,
+    Answer2: req.body.Answer2,
+  });
+  try {
+    Exams.create(exams);
+    res.send("Data Inserted");
+  } catch (err) {
+    res.send("Error");
+  }
 });
 
 module.exports = appRouter;
