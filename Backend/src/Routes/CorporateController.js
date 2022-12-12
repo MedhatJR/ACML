@@ -2,9 +2,10 @@ const express = require("express");
 const appRouter = express.Router();
 const Course = require("../Models/Course");
 const Corporate = require("../Models/CorporateTrainee");
-const CorporateTrainee = require("../Models/CorporateTrainee");
+const CorporateTrainee = require("../Models/CorporateTrainee");   ///////Twice????????????
 const cors = require("cors");
 appRouter.use(cors());
+const Instructor = require("../Models/Instructor");
 
 appRouter.get("/Corporate_read", async (req, res) => {
   Corporate.find({ Name: req.body.Name }, (error, data) => {
@@ -44,6 +45,39 @@ appRouter.post("/Corporate_SelectCountry", async (req, res) => {
       }
     }
   );
+});
+
+
+appRouter.post("/Corporate_rateInstructor", async (req, res) => {
+  Instructor.findOneAndUpdate(
+    {Email: req.body.Email},
+    { Rating: req.body.Rating },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Corporate_rateCourse", async (req, res) => {
+  Course.findOneAndUpdate(
+    {Name: req.body.Name},
+    { Rating: req.body.Rating },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
 });
 
 appRouter.get("/Corporate_retrieveCourses", async (req, res) => {
