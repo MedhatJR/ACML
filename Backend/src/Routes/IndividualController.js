@@ -9,6 +9,7 @@ const cors = require("cors");
 const Instructor = require("../Models/Instructor");
 const IndividualExam = require("../Models/IndividualExam")
 appRouter.use(cors());
+const Instructor = require("../Models/Instructor");
 
 //to display the register page
 appRouter.get("/", async (req, res) => {
@@ -42,6 +43,38 @@ appRouter.post("/update", async (req, res) => {
   Individual.findOneAndUpdate(
     { Name: req.body.Name },
     { Email: req.body.Email },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Individual_rateInstructor", async (req, res) => {
+  Instructor.findOneAndUpdate(
+    { Email: req.body.Email },
+    { Rating: req.body.Rating },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+  res.status(200).send("update done");
+});
+
+appRouter.post("/Individual_rateCourse", async (req, res) => {
+  Course.findOneAndUpdate(
+    { Name: req.body.Name },
+    { Rating: req.body.Rating },
     { new: true },
     (error, data) => {
       if (error) {
@@ -128,37 +161,115 @@ appRouter.get("/Individual_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
 
-appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
+appRouter.post("/addIndividual", async (req, res) => {
+  const newIndividual = new Individual({
+    Username: req.body.Username,
+    Email: req.body.Email,
+    Password: req.body.Password,
+    Country: req.body.Country,
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Gender: req.body.Gender,
+    RegisteredCourses: req.body.RegisteredCourses,
+  });
+  try {
+    Individual.create(newIndividual);
+    res.send("Data Inserted");
+  } catch (err) {
+    res.send("Error");
+  }
+});
+
+appRouter.get("/Individual_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
-  const RegisteredCourses = Individual.find(
+  var RegisteredCoursesArr = [];
+  var final = [];
+
+  Individual.find(
     {
-      RegisteredCourses: { $eq: req.body.RegisteredCourses },
+      Username: { $eq: req.body.Username },
     },
     function (err, result) {
       if (err) {
-        res.send("Error");
+        console.log("err");
       } else {
-        res.send(result);
+        // console.log(RegisteredCoursesArr);
+        console.log("Done1");
+        //RegisteredCoursesArr = result[0];
+        RegisteredCoursesArr = result;
+        final = RegisteredCoursesArr[0].RegisteredCourses;
+        console.log(final[1]);
+        console.log(final.length);
+
+        Course.find({ Title: final }, function (err, result1) {
+          if (err) {
+            res.send("err");
+          } else {
+            console.log(result1);
+            res.send({ CourseDetails: result1 });
+            console.log("Done2");
+          }
+        }).select([
+          "Title",
+          "Shortsummary",
+          "Subject",
+          "Price",
+          "Instructor",
+          "Rating",
+        ]);
       }
     }
-  );
-  Course.find({ Title: { $eq: RegisteredCourses } }, function (err, result) {
-    if (err) {
-      res.send("Error");
-    } else {
-      res.send(result);
+  ).select("RegisteredCourses");
+  console.log(final.length);
+});
+
+appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
+  //const RegisteredCourses = req.body.RegisteredCourses;
+  var RegisteredCoursesArr = [];
+  var final = [];
+  var myCourse = req.body.myCourse;
+  Individual.find(
+    {
+      Username: { $eq: req.body.Username },
+    },
+    function (err, result) {
+      if (err) {
+        console.log("err");
+      } else {
+        // console.log(RegisteredCoursesArr);
+        console.log("Done1");
+        //RegisteredCoursesArr = result[0];
+        RegisteredCoursesArr = result;
+        final = RegisteredCoursesArr[0].RegisteredCourses;
+        console.log(final[1]);
+        console.log(final.length);
+
+        for (let i = 0; i < final.length; i++) {
+          if (myCourse == final[i]) {
+            answer = final[i];
+            break;
+          }
+        }
+        Course.find({ Title: answer }, function (err, result1) {
+          if (err) {
+            res.send("err");
+          } else {
+            console.log(result1);
+            res.send({ CourseDetails: result1 });
+            console.log("Done2");
+          }
+        }).select([
+          "Title",
+          "Shortsummary",
+          "Subject",
+          "Price",
+          "Instructor",
+          "Rating",
+        ]);
+      }
     }
-  }).select([
-    "Title",
-    "Subtitle",
-    "Shortsummary",
-    "Subject",
-    "Price",
-    "Instructor",
-    "Rating",
-    "Hours",
-    "Views",
-  ]);
+  ).select("RegisteredCourses");
+  console.log(final.length);
 });
 
 //submit the answers to the exercise after completing it
