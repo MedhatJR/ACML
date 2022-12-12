@@ -57,12 +57,15 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
     Shortsummary: req.body.Shortsummary,
     Subject: req.body.Subject,
     Price: req.body.Price,
+    Price_after_promotion: req.body.Price_after_promotion,
     Instructor: req.body.Instructor,
     Rating: req.body.Rating,
     Hours: req.body.Hours,
     Views: req.body.Views,
     PreviewLink: req.body.PreviewLink,
     SubLink: req.body.SubLink,
+    Promotion: req.body.Promotion,
+    Promotion_valid_for: req.body.Promotion_valid_for,
   });
   try {
     await Course.create(course);
@@ -155,6 +158,8 @@ appRouter.post("/Instructor_add", async (req, res) => {
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
     Courses: req.body.Courses,
+    Rating:req.body.Rating,
+    Biography: req.body.Biography,
   });
   try {
     Instructor.create(newinstructor);
@@ -239,24 +244,94 @@ appRouter.post("/Instructor_editbiography",async(req,res) => {
 appRouter.post("/Instructor_addpromotion",async(req,res) => {
   const Title = req.body.Title;
   const Promotion = req.body.Promotion;
-  const Promotion_valid_for = req.body.Promotionfor;
+  const price = req.body.price;
+  const Promotion_valid_for = req.body.Promotion_valid_for;
+
+  // var m = {$mul: {  : 2 }} 
+  // console.log(m) 
   const p  = (100-Promotion)/100; 
-  Course.findOneAndUpdate(
+
+Course.findOneAndUpdate(
     { Title: Title },
-    { Promotion: Promotion , Promotion_valid_for: Promotion_valid_for , $mul: {price: p }} ,
+    { Promotion: Promotion } ,
     { new: true },
     (error, data) => {
       if (error) {
         console.log(error);  
+      } else {
+        console.log("first")
+    }
+});
+  Course.findOneAndUpdate(
+          { Title: Title },
+          {Promotion_valid_for: Promotion_valid_for } ,
+          { new: true },
+          (error, dataa) => {
+            if (error) {
+              console.log(error);  
+            } else {
+              console.log("second")
+                   
+            }
+      })
+
+
+    Course.findOneAndUpdate(
+      { Title: Title },
+      {  Price_after_promotion : price*p } ,
+      { new: true },
+      (error, dataaa) => {
+        if (error) {
+          console.log(error);  
+        } else {
+          console.log(dataaa)
+      //    console.log(price)
+          res.status(200).send("update done");
+        }
+        })  
+
+           
+
+        
+});
+
+
+appRouter.post("/Instructor_ChangePassword" , async(req,res) => {
+  const OldPassword = req.body.OldPassword;
+  const NewPassword = req.body.NewPassword;
+  Instructor.findOneAndUpdate(
+    { Password : OldPassword },
+    { Password : NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
       } else {
         console.log(data);
         res.status(200).send("update done");
       }
     }
   );
-
+  
 });
 
-
+appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
+  const Username = req.body.Username;
+  const NewPassword = req.body.NewPassword;
+  Instructor.findOneAndUpdate(
+    { Username: Username },
+    { Password : NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+  
+});
 
 module.exports = appRouter;
