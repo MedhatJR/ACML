@@ -222,6 +222,44 @@ appRouter.get("/Individual_retrieveMyCourse", async (req, res) => {
   console.log(final.length);
 });
 
+appRouter.post("/Individual_ChangePassword" , async(req,res) => {
+  const OldPassword = req.body.OldPassword;
+  const NewPassword = req.body.NewPassword;
+  Individual.findOneAndUpdate(
+    { Password : OldPassword },
+    { Password : NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+  
+});
+
+appRouter.post("/Individual_ForgotPassword" , async(req,res) => {
+  const Username = req.body.Username;
+  const NewPassword = req.body.NewPassword;
+  Individual.findOneAndUpdate(
+    { Username: Username },
+    { Password : NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+  
+});
+
 appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];

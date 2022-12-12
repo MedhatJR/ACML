@@ -132,4 +132,41 @@ appRouter.post("/Corporate_filtercourse", async (req, res) => {
   );
 });
 
+appRouter.post("/Corporate_ChangePassword" , async(req,res) => {
+  const OldPassword = req.body.OldPassword;
+  const NewPassword = req.body.NewPassword;
+  Corporate.findOneAndUpdate(
+    { Password : OldPassword },
+    { Password : NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+  
+});
+
+appRouter.post("/Corporate_ForgotPassword" , async(req,res) => {
+  const Username = req.body.Username;
+  const NewPassword = req.body.NewPassword;
+  Corporate.findOneAndUpdate(
+    { Username: Username },
+    { Password : NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+  
+});
 module.exports = appRouter;
