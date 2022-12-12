@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 var arr = [];
 
 const InstructorViewCourse = () => {
-  const Instructor = document.getElementById("Iname").value;
+  //const Instructor = document.getElementById("Iname").value;
   const [users, setData] = useState("");
   const nav = useNavigate();
   // const viewCourses = () => {
   //   Axios.get("http://localhost:8000/instructor_viewMyCourses", {
-  //     Instructor: Instructor,
+  //     Instructor: document.getElementById("Iname").value,
   //   }).then((response) => {
   //     console.log(response);
   //     arr = response.data;
@@ -23,19 +23,22 @@ const InstructorViewCourse = () => {
   const back = () => {
     nav("/");
   };
-  // Axios.get("http://localhost:8000/instructor_viewMyCourses", {
-  //   Instructor: Instructor,
-  // }).then((response) => {
-  //   console.log(response);
-  //   arr = response.data;
-  //   setData(response);
 
-  //   // setData(response.data[1].Title);
-  // });
+  const Instructor = document.getElementById("Iname").value;
+  Axios.get("http://localhost:8000/instructor_viewMyCourses", {
+    Instructor: Instructor,
+  }).then((response) => {
+    console.log(response);
+    arr = response.data;
+    setData(response);
+    console.log(arr);
+
+    // setData(response.data[1].Title);
+  });
 
   return (
     <div className="InstructorViewCourse">
-      <h1>w</h1>
+      <h1>jj</h1>
       {/* <button onClick={back} className="btn">
         {" "}
         back
