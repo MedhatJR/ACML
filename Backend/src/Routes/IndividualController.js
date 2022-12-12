@@ -9,7 +9,6 @@ const cors = require("cors");
 const Instructor = require("../Models/Instructor");
 const IndividualExam = require("../Models/IndividualExam")
 appRouter.use(cors());
-const Instructor = require("../Models/Instructor");
 
 //to display the register page
 appRouter.get("/", async (req, res) => {

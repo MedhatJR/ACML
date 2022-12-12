@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
+import logo from "../Media/Logo.png";
+var pop = "Registration successful"
 
 const Register = () => {
   const [final, setFinal] = useState("");
+  const [popup, setPopUp] = useState("");
   const nav = useNavigate();
   const addData = () => {
     const Username = document.getElementById("user").value;
@@ -25,22 +28,52 @@ const Register = () => {
       Country: Country,
       Firstname: Firstname,
       Lastname: Lastname,
-      Ge8nder: Gender,
+      Gender: Gender,
     }).then((response) => {
-      // console.log(response);
-      // console.log("Okay");
+
       this.setFinal(response.data);
+
     });
+
+    this.setPopUp(pop);
   };
   const forward = () => {
-    nav("/view");
+    nav("/");
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+  function myFunction(element, color) {
+    element.style.color = color;
+  }
+  return (<>
+    <div className="add">
+      <>
+        <nav>
+          <img src={logo} className="logo" alt="" />{" "}
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="#news">News</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
+          </ul>
+        </nav>
+      </>
+      <br />
+      <br />
+    </div>
 
-  return (
     <div className="Register">
-      <button onClick={forward}>Forward</button>
       <h1>Please Register</h1>
-      <form className="form">
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Username</label>
         <input type="text" name="Username" id="user" /> <br />
         <label>Email</label>
@@ -55,10 +88,17 @@ const Register = () => {
         <input type="text" name="Lastname" id="ln" /> <br />
         <label>Gender</label>
         <input type="text" name="Gender" id="g" /> <br />
-        <button onClick={addData}>Submit</button>
+        <button onClick={() => {
+          addData();
+          myFunction(pop, 'green');
+        }} >Submit</button>
+
+        {/* <p> {pop}</p> */}
+
       </form>
       {/* {final.Username} */}
     </div>
+  </>
   );
 };
 export default Register;

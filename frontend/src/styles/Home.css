@@ -1,19 +1,9 @@
-/* body {
+body {
     background-color: white;
     color: black;
     
 }
-input {
-    width: 30%;
-    border-radius: 6px;
-    height: 40px;
-    border: 0;
-    padding: 10px;
-    padding: 20px 0 0 16px;
-    font-size: 0;
-    transition: background .3s ease;
-    color: #ffffff;
-}
+
 
 nav {
 background-color: #131313;
@@ -59,10 +49,12 @@ nav li a {
 .logo {
     width: 40px;
     height: 40px;
+    /* margin-top: 5px; */
     position: relative;
     top: 0px;
 }
 
+/* CSS */
 .button-17{
     margin-left: 20px;
     margin-bottom: 10px;
@@ -134,4 +126,4 @@ button:not(:disabled):active {
 
 button:disabled {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
-} */
+}
