@@ -20,11 +20,7 @@ function App() {
                 path="/InstructorViewCourse"
                 element={<InstructorViewCourse />}
               />
-              <Route
-                path="/InstructorPage"
-                element={<InstructorPage />}
-              />
-              
+              <Route path="/InstructorPage" element={<InstructorPage />} />
             </Routes>
           </div>
         </BrowserRouter>

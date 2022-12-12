@@ -285,6 +285,7 @@ appRouter.post("/Instructor_addpromotion", async (req, res) => {
     }
   );
 });
+
 appRouter.post("/Instructor_create_exams", async (req, res) => {
   const exams = new Exams({
     Question1: req.body.Question1,

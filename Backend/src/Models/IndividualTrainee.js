@@ -28,13 +28,15 @@ const IndividualTraineeSchema = new Schema(
       required: true,
     },
     Gender: {
-      type: Boolean,
+      type: String,
       required: true,
     },
     RegisteredCourses: {
       type: Array,
       required: true,
     },
+    
+
   },
   { timestamps: true }
 );
