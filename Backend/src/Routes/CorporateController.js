@@ -83,6 +83,15 @@ appRouter.post("/Corporate_rateCourse", async (req, res) => {
 appRouter.get("/Corporate_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
+appRouter.post("/Corporate_Login", async (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.Password;
+  Corporate.find({ Email : Email , Password: Password} ,(err,data ) => {
+  if(err){res.send(err);}
+  else { res.send("loged in");}
+  }
+  );
+});
 
 appRouter.get("/Corporate_retrieveAll", async (req, res) => {
   res.send(

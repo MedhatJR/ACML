@@ -371,4 +371,15 @@ appRouter.get("/Individual_correctSolution", async (req, res) => {
 }
 );
 */
+
+
+appRouter.post("/Individual_Login", async (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.Password;
+  Individual.find({ Email : Email , Password: Password} ,(err,data ) => {
+  if(err){res.send(err);}
+  else { res.send("loged in");}
+  }
+  );
+});
 module.exports = appRouter;

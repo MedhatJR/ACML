@@ -344,8 +344,10 @@ appRouter.post("/Instructor_ChangePassword" , async(req,res) => {
 appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
   const Username = req.body.Username;
   const NewPassword = req.body.NewPassword;
+  const CNewPassword = req.body.CNewPassword;
+  if(NewPassword == CNewPassword){
   Instructor.findOneAndUpdate(
-    { Username: Username },
+    { Username: Username  },
     { Password : NewPassword },
     { new: true },
     (error, data) => {
@@ -357,7 +359,8 @@ appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
       }
     }
   );
-  
+  }
+  else{res.send("Passwords Do Not Match ")}
 });
 
 appRouter.post("/Instructor_create_exams", async (req, res) => {
@@ -381,6 +384,16 @@ appRouter.post("/Instructor_create_exams", async (req, res) => {
   } catch (err) {
     res.send("Error");
   }
+});
+
+appRouter.post("/Instructor_Login", async (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.Password;
+  Instructor.find({ Email : Email , Password: Password} ,(err,data ) => {
+  if(err){res.send(err);}
+  else { res.send("loged in");}
+  }
+  );
 });
 
 module.exports = appRouter;
