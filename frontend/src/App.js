@@ -9,6 +9,7 @@ import ResetPassword from "./pages/ResetPassword"
 import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
+import CourseInstructor from "./pages/CourseInstructor";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <div className="pages">
             <Routes>
             
-            
+            <Route path="/CourseInstructor" element={<CourseInstructor />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
             <Route path="/UpdatePassword" element={<UpdatePassword />} />
             <Route path="/UpdateBiography" element={<UpdateBiography />} />
