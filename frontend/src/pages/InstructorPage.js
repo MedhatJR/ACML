@@ -8,7 +8,7 @@ import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 
 const InstructorPage = () => {
-  const [final, setFinal] = useState("");
+  var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
 
@@ -16,7 +16,7 @@ const InstructorPage = () => {
     console.log("Hi");
     Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
       (response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       }
     );
   };
@@ -42,7 +42,7 @@ const InstructorPage = () => {
           <img src={logo} className="logo" alt="" />{" "}
           <ul>
             <li>
-              <a href="">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <a href="#news">News</a>

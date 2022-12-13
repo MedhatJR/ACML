@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const ExamsSchema = new Schema(
   {
+   
     Question1: {
       type: String,
       required: true,
@@ -49,6 +50,10 @@ const ExamsSchema = new Schema(
       required: true,
     },
     Answer2: {
+      type: String,
+      required: true,
+    },
+    Course: {
       type: String,
       required: true,
     },

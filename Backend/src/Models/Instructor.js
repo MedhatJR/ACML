@@ -43,7 +43,6 @@ const InstructorSchema = new Schema(
       type: String,
       required: true,
     }
-
   },
   { timestamps: true }
 );
