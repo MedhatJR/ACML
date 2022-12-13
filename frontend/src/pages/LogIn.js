@@ -5,22 +5,44 @@ import Axios from "axios";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 
 const LogIn = () => {
-
+  const C = document.getElementById("Category").value
+  const Email = document.getElementById("email").value;
+  const Password = document.getElementById("pass").value;  
     const [final, setFinal] = useState("");
     const nav = useNavigate();
+
     const login = () => {
-      const Email = document.getElementById("email").value;
-      const Password = document.getElementById("pass").value;  
+    
       console.log("Hi");
-      Axios.post("http://localhost:8000/createCorporateUser", {
+      if (C == "CorporateTrainee"){
+      Axios.post("http://localhost:8000//Corporate_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
         this.setFinal(response.data);
       });
-    };
+    }
+    else if (C == "IndividualTrainee"){
+      Axios.post("http://localhost:8000/Individual_Login", {
+        Email: Email,
+        Password: Password,
+      }).then((response) => {
+        this.setFinal(response.data);
+      });
+    }
+    else{
+      Axios.post("http://localhost:8000/Instructor_Login", {
+        Email: Email,
+        Password: Password,
+      }).then((response) => {
+        this.setFinal(response.data);
+      });
+    }
+  
+  };
     const forward = () => {
       nav("/");
     };
@@ -58,9 +80,22 @@ const LogIn = () => {
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
+        <br />
+        <br />
         <label>Password</label>
         <input type="password" name="Password" id="pass" /> <br />
-        <button onClick={"login"}>Log in</button>
+        <br />
+        <br />
+       < label> Category </label>
+        <input type="text" name="Category" id="Category" /> <br />
+        <br />
+        <br />
+        <button onClick={login}>Log in</button>
+        <br />
+        <br />
+        <li>
+            <a href="/Emailsent">Forgot my Password</a>
+          </li>
       </form>
       {/* {final.Username} */}
     </div>

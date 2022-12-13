@@ -78,6 +78,12 @@ const Register = () => {
   function myFunction(element, color) {
     element.style.color = color;
   }
+  const forward2 = () => {
+    nav("/Addexam");
+  };
+  const forward3 = () => {
+    nav("/IMCQ");
+  };
   return (<>
     <div className="add">
       <>
@@ -104,6 +110,10 @@ const Register = () => {
     </div>
 
     <div className="Register">
+
+      <button onClick={forward}>Forward</button>
+      <button onClick={forward2}>Forward gedan</button>
+      <button onClick={forward3}>Forward awy ba2a fahem</button>
       <h1>Please Register</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Username</label>

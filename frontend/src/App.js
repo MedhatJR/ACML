@@ -9,11 +9,15 @@ import ResetPassword from "./pages/ResetPassword"
 import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
+import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
 import Contract from "./pages/Contract";
 import CorporatePage from "./pages/CorporatePage";
 import RateCorp from "./pages/RateCorp";
 
+import Emailsent from "./pages/Emailsent";
+import AddExam from "./pages/AddExam";
+import IMCQ from"./pages/IMCQ";
 function App() {
   return (
     <>
@@ -27,8 +31,8 @@ function App() {
             <Route path="/Contract" element={<Contract />} />
             <Route path="/LogIn" element={<LogIn />} />
               <Route path="/Register" element={<Register />} />
-            
-            
+              <Route path="/Emailsent" element={<Emailsent />} />
+            <Route path="/CourseInstructor" element={<CourseInstructor />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
             <Route path="/UpdatePassword" element={<UpdatePassword />} />
             <Route path="/UpdateBiography" element={<UpdateBiography />} />
@@ -40,6 +44,10 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/Addexam" element={<AddExam />} />
+              <Route path="/IMCQ" element={<IMCQ/>} />
+
+
             </Routes>
           </div>
         </BrowserRouter>

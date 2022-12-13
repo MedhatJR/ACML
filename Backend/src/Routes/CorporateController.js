@@ -4,6 +4,7 @@ const Course = require("../Models/Course");
 const Corporate = require("../Models/CorporateTrainee");
 const CorporateTrainee = require("../Models/CorporateTrainee");   ///////Twice????????????
 const cors = require("cors");
+const Exams = require("../Models/Exams");
 appRouter.use(cors());
 const Instructor = require("../Models/Instructor");
 
@@ -83,6 +84,15 @@ appRouter.post("/Corporate_rateCourse", async (req, res) => {
 appRouter.get("/Corporate_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
+appRouter.post("/Corporate_Login", async (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.Password;
+  Corporate.find({ Email : Email , Password: Password} ,(err,data ) => {
+  if(err){res.send(err);}
+  else { res.send("loged in");}
+  }
+  );
+});
 
 appRouter.get("/Corporate_retrieveAll", async (req, res) => {
   res.send(
@@ -135,6 +145,10 @@ appRouter.post("/Corporate_filtercourse", async (req, res) => {
     }
   );
 });
+appRouter.get("/Corporate_view_exam", async (req, res) => {
+  res.send(await Exams.find().select(["Question1", "Choice11", "Choice12","Choice13", "Choice14", "Question2","Choice21", "Choice22", "Choice23","Choice24"]));
+});
+  
 
 appRouter.post("/Corporate_ChangePassword" , async(req,res) => {
   const OldPassword = req.body.OldPassword;
