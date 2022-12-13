@@ -6,6 +6,10 @@ const CorporateTrainee = require("../Models/CorporateTrainee");   ///////Twice??
 const cors = require("cors");
 appRouter.use(cors());
 const Instructor = require("../Models/Instructor");
+const CorporateExam = require("../Models/CorporateExam");
+const mongoose  = require('mongoose');
+const Exam = require("../Models/Exams");
+
 
 appRouter.get("/Corporate_read", async (req, res) => {
   Corporate.find({ Name: req.body.Name }, (error, data) => {
@@ -132,4 +136,105 @@ appRouter.post("/Corporate_filtercourse", async (req, res) => {
   );
 });
 
+//submit the answers to the exercise after completing it
+
+appRouter.post("/Coporate_submitAnswer", async (req, res) => {
+  const newAnswer = new CorporateExam({
+    Question1: req.body.Question1,
+    Answer1: req.body.Answer1,
+    Question2: req.body.Question2,
+    Answer2: req.body.Answer2,
+
+  });
+  try {
+    await CorporateExam.create(newAnswer);
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.status(200).send("Submitted Answer");
+});
+
+//view his/her grade from the exercise
+appRouter.get("/Coporate_Grade", async (req, res) => {
+  var grade = 0;
+  var final = "";
+  var test;
+  const { id } = req.body
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such id'})
+  }
+  
+  const ans1 = await CorporateExam.findById(id).select("Answer1").select("Answer2")
+  const ques1 = await CorporateExam.findById(id).select("Question1").select("Question1")
+  final = ques1.Question1;
+    if (!ans1) {
+    return res.status(400).json({error: 'No such exam'})
+  }
+  
+    Exam.findOne( { Question1 :final} ,(error, data) => { if (error) { console.log(error) } 
+    else {
+    console.log(data);
+  
+     if (data.Answer1==ans1.Answer1){
+      grade+=1;
+     }
+     console.log(data);
+     if(data.Answer2==ans1.Answer2){
+      grade+=1;
+     }
+     res.status(200).send({Grade: grade});
+  } }).select("Answer1").select("Answer2")
+ 
+}
+);
+
+//view the questions with the correct solution to view the incorrect answers
+
+appRouter.get("/Coporate_QuestionAnswers", async (req, res) => {
+  var grade = 0;
+  var final = "";
+  
+  const { id } = req.body
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such id'})
+  }
+  
+  const ans1 = await CorporateExam.findById(id).select("Answer1").select("Answer2")
+  const ques1 = await CorporateExam.findById(id).select("Question1").select("Question2")
+  final = ques1.Question1;
+  
+  if (!ans1) {
+    return res.status(400).json({error: 'No such exam'})
+  }
+  
+    Exam.findOne( { Question1 :final} ,(error, data) => { if (error) { console.log(error) } 
+    else {
+    console.log(data);
+  
+     if ((data.Answer1==ans1.Answer1) & (data.Answer2==ans1.Answer2)){
+      grade=2;
+      res.status(200).send("Question 1: "+ques1.Question1+" --> Correct Solution  "+ ans1.Answer1+ "   Question 2:"+ques1.Question2+
+      " --> Correct Solution  "+ans1.Answer2+" Your Grade:  "+ grade); 
+     }
+     if ((data.Answer1!=ans1.Answer1) & (data.Answer2==ans1.Answer2)){
+      grade=1;
+      res.status(200).send("Question 1: "+ques1.Question1+"--> Wrong Solution : "+ans1.Answer1+ "( The Correct Solution is:  "+data.Answer1 +")     Question 2: "+ques1.Question2+
+      " --> Correct Solution  "+ans1.Answer2+"  Your Grade:  "+ grade); 
+     }
+     if ((data.Answer1==ans1.Answer1) & (data.Answer2!=ans1.Answer2)){
+      grade=1;
+      res.status(200).send("Question 1: " +ques1.Question1+" --> Correct Solution  "+ans1.Answer1+ "  Question 2 :"+ques1.Question2+
+      "--> Wrong Solution  "+ans1.Answer2+ "( The Correct Solution is:  "+ data.Answer2 +" ) Your Grade:  "+ grade); 
+     }
+     if ((data.Answer1!=ans1.Answer1) & (data.Answer2!=ans1.Answer2)){
+      grade=0;
+      res.status(200).send("Question 1: "+ques1.Question1+" --> Wrong Solution : "+ans1.Answer1+ "(The Correct Solution is: "+data.Answer1 + " )   Question 2: "+ques1.Question2+
+      "--> Wrong Solution  "+ans1.Answer2+"(The Correct Solution is: "+ data.Answer2 +")  Your Grade:  "+ grade); 
+     }
+    
+  } }).select("Answer1").select("Answer2")
+ 
+}
+);
 module.exports = appRouter;

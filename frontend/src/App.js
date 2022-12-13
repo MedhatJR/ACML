@@ -5,7 +5,7 @@ import ViewData from "./pages/ViewData";
 import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
-
+import Instructor_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
 function App() {
   return (
     <>
@@ -21,6 +21,7 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/InstructorGradeAndAnswers" element={<Instructor_GradeAndAnswers />} />
             </Routes>
           </div>
         </BrowserRouter>
