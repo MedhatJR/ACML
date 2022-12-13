@@ -11,6 +11,7 @@ import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
 import CourseInstructor from "./pages/CourseInstructor";
 
+import LogIn from "./pages/LogIn";
 function App() {
   return (
     <>
@@ -18,6 +19,9 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/LogIn" element={<LogIn />} />
+              <Route path="/Register" element={<Register />} />
             
             <Route path="/CourseInstructor" element={<CourseInstructor />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
