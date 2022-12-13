@@ -176,7 +176,7 @@ appRouter.post("/addIndividual", async (req, res) => {
   }
 });
 
-appRouter.get("/Individual_retrieveMyCourse", async (req, res) => {
+appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
   var final = [];
@@ -205,25 +205,19 @@ appRouter.get("/Individual_retrieveMyCourse", async (req, res) => {
             res.send({ CourseDetails: result1 });
             console.log("Done2");
           }
-        }).select([
-          "Title",
-          "Shortsummary",
-          "Subject",
-          "Price",
-          "Instructor",
-          "Rating",
-        ]);
+        }).select(["Title", "Shortsummary", "Subject", "Instructor", "Rating"]);
       }
     }
   ).select("RegisteredCourses");
   console.log(final.length);
 });
 
-appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
+appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
   var final = [];
   var myCourse = req.body.myCourse;
+  var answer = "";
   Individual.find(
     {
       Username: { $eq: req.body.Username },
@@ -261,6 +255,10 @@ appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
           "Price",
           "Instructor",
           "Rating",
+          "Hours",
+          "Views",
+          "PreviewLink",
+          "SubLink",
         ]);
       }
     }

@@ -5,6 +5,9 @@ import ViewData from "./pages/ViewData";
 import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
+import IndividualPage from "./pages/IndividualPage";
+import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
+import IndividualCoursePage from "./pages/IndividualCoursePage";
 
 function App() {
   return (
@@ -21,6 +24,15 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/IndividualPage" element={<IndividualPage />} />
+              <Route
+                path="/IndividualViewMyCourses"
+                element={<IndividualViewMyCourses />}
+              />
+              <Route
+                path="/IndividualCoursePage"
+                element={<IndividualCoursePage />}
+              />
             </Routes>
           </div>
         </BrowserRouter>
