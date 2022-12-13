@@ -7,7 +7,7 @@ body {
 
 nav {
 background-color: #131313;
-padding: 20px;
+padding: 50px;
 font-family: Arial, Helvetica, sans-serif;
 margin: 0;
 height: 40px;
@@ -55,11 +55,10 @@ nav li a {
 }
 
 /* CSS */
-.button-17{
+y
+button {
     margin-left: 20px;
     margin-bottom: 10px;
-}
-button {
   align-items: center;
   appearance: none;
   background-color: #fff;

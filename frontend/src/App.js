@@ -10,6 +10,10 @@ import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
 import LogIn from "./pages/LogIn";
+import Contract from "./pages/Contract";
+import CorporatePage from "./pages/CorporatePage";
+import RateCorp from "./pages/RateCorp";
+
 function App() {
   return (
     <>
@@ -18,6 +22,9 @@ function App() {
           <div className="pages">
             <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/RateCorp" element={<RateCorp />} />
+            <Route path="/CorporatePage" element={<CorporatePage />} />
+            <Route path="/Contract" element={<Contract />} />
             <Route path="/LogIn" element={<LogIn />} />
               <Route path="/Register" element={<Register />} />
             
@@ -26,7 +33,6 @@ function App() {
             <Route path="/UpdatePassword" element={<UpdatePassword />} />
             <Route path="/UpdateBiography" element={<UpdateBiography />} />
             <Route path="/UpdateEmail" element={<UpdateEmail />} />
-              <Route path="/" element={<Register />} />
               <Route path="/view" element={<ViewData />} />
               <Route path="/addCourse" element={<AddCourse />} />
               <Route

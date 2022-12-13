@@ -98,6 +98,8 @@ appRouter.get("/Corporate_retrieveAll", async (req, res) => {
   );
 });
 
+
+
 appRouter.post("/createCorporateUser", async (req, res) => {
   const newuser = new Corporate({
     Username: req.body.Username,
@@ -108,11 +110,13 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
   });
+
   try {
     await Corporate.create(newuser);
   } catch (err) {
     console.log(err);
   }
+
   console.log("Hello");
   res.status(200).send("registration successful");
 });

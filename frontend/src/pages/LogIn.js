@@ -24,6 +24,9 @@ const LogIn = () => {
     const forward = () => {
       nav("/");
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      }
 
   return (<>
     <div className="add">
@@ -52,7 +55,7 @@ const LogIn = () => {
     
     <div className="Register">
       <h1>Please Login</h1>
-      <form className="form">
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
         <label>Password</label>
