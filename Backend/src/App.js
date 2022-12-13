@@ -1,7 +1,7 @@
 // External variables
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./src/Routes/IndividualController");
+const router = require("./Routes/IndividualController");
 const cors = require("cors");
 //import Register from "./Register";d
 
@@ -27,15 +27,15 @@ app.use(function (req, res, next) {
 
 const port = process.env.PORT || "8000";
 
-const instructorRouter = require("./src/Routes/InstructorController");
-const adminrouter = require("./src/Routes/AdminstratorController");
+const instructorRouter = require("./Routes/InstructorController");
+const adminrouter = require("./Routes/AdminstratorController");
 app.use(router);
 app.use(instructorRouter);
 app.use(adminrouter);
 app.use(instructorRouter);
 
-const guestRouter = require("./src/Routes/GuestController");
-const corporateRouter = require("./src/Routes/CorporateController");
+const guestRouter = require("./Routes/GuestController");
+const corporateRouter = require("./Routes/CorporateController");
 app.use(corporateRouter);
 app.use(guestRouter);
 

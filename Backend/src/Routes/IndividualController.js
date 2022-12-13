@@ -8,6 +8,7 @@ const Exam = require("../Models/Exams");
 const cors = require("cors");
 const Instructor = require("../Models/Instructor");
 const IndividualExam = require("../Models/IndividualExam")
+const Exams = require("../Models/Exams");
 appRouter.use(cors());
 
 //to display the register page
@@ -327,6 +328,11 @@ appRouter.post("/Instructor_submitAnswer", async (req, res) => {
 
   res.status(200).send("Submitted Answer");
 });
+appRouter.get("/Individual_view_exam", async (req, res) => {
+  res.send(await Exams.find().select(["Question1", "Choice11", "Choice12","Choice13", "Choice14", "Question2","Choice21", "Choice22", "Choice23","Choice24","Course"]));
+});
+
+
 
 //view his/her grade from the exercise
 appRouter.get("/Individual_Grade", async (req, res) => {

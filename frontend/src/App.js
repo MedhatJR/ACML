@@ -12,7 +12,8 @@ import InstructorPage from "./pages/InstructorPage";
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
 import Emailsent from "./pages/Emailsent";
-
+import AddExam from "./pages/AddExam";
+import IMCQ from"./pages/IMCQ";
 function App() {
   return (
     <>
@@ -37,6 +38,10 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/Addexam" element={<AddExam />} />
+              <Route path="/IMCQ" element={<IMCQ/>} />
+
+
             </Routes>
           </div>
         </BrowserRouter>
