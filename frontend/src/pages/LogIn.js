@@ -15,14 +15,14 @@ const LogIn = () => {
     const Email = document.getElementById("email").value;
     const Password = document.getElementById("pass").value;
     console.log("Hi");
-    if (C == "CorporateTrainee") {
+    if (C === "CorporateTrainee") {
       Axios.post("http://localhost:8000//Corporate_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
         setFinal(response.data);
       });
-    } else if (C == "IndividualTrainee") {
+    } else if (C === "IndividualTrainee") {
       Axios.post("http://localhost:8000/Individual_Login", {
         Email: Email,
         Password: Password,
@@ -38,9 +38,9 @@ const LogIn = () => {
       });
     }
   };
-  const forward = () => {
-    nav("/");
-  };
+  // const forward = () => {
+  //   nav("/");
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
   };

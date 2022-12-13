@@ -4,7 +4,6 @@ const Course = require("../Models/Course");
 const Corporate = require("../Models/CorporateTrainee");
 const CorporateTrainee = require("../Models/CorporateTrainee");   ///////Twice????????????
 const cors = require("cors");
-const Exams = require("../Models/Exams");
 appRouter.use(cors());
 const Instructor = require("../Models/Instructor");
 
@@ -84,15 +83,6 @@ appRouter.post("/Corporate_rateCourse", async (req, res) => {
 appRouter.get("/Corporate_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
-appRouter.post("/Corporate_Login", async (req, res) => {
-  const Email = req.body.email;
-  const Password = req.body.Password;
-  Corporate.find({ Email : Email , Password: Password} ,(err,data ) => {
-  if(err){res.send(err);}
-  else { res.send("loged in");}
-  }
-  );
-});
 
 appRouter.get("/Corporate_retrieveAll", async (req, res) => {
   res.send(
@@ -108,8 +98,6 @@ appRouter.get("/Corporate_retrieveAll", async (req, res) => {
   );
 });
 
-
-
 appRouter.post("/createCorporateUser", async (req, res) => {
   const newuser = new Corporate({
     Username: req.body.Username,
@@ -120,13 +108,11 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
   });
-
   try {
     await Corporate.create(newuser);
   } catch (err) {
     console.log(err);
   }
-
   console.log("Hello");
   res.status(200).send("registration successful");
 });
@@ -145,46 +131,5 @@ appRouter.post("/Corporate_filtercourse", async (req, res) => {
     }
   );
 });
-appRouter.get("/Corporate_view_exam", async (req, res) => {
-  res.send(await Exams.find().select(["Question1", "Choice11", "Choice12","Choice13", "Choice14", "Question2","Choice21", "Choice22", "Choice23","Choice24"]));
-});
-  
 
-appRouter.post("/Corporate_ChangePassword" , async(req,res) => {
-  const OldPassword = req.body.OldPassword;
-  const NewPassword = req.body.NewPassword;
-  Corporate.findOneAndUpdate(
-    { Password : OldPassword },
-    { Password : NewPassword },
-    { new: true },
-    (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(data);
-        res.status(200).send("update done");
-      }
-    }
-  );
-  
-});
-
-appRouter.post("/Corporate_ForgotPassword" , async(req,res) => {
-  const Username = req.body.Username;
-  const NewPassword = req.body.NewPassword;
-  Corporate.findOneAndUpdate(
-    { Username: Username },
-    { Password : NewPassword },
-    { new: true },
-    (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(data);
-        res.status(200).send("update done");
-      }
-    }
-  );
-  
-});
 module.exports = appRouter;
