@@ -28,8 +28,15 @@ const IndividualPage = () => {
   //       }
   //     );
   //   };
+
   const forwardAdd = () => {
     nav("/AddCourse");
+  };
+  const RateCourse = () => {
+    nav("/IndiRatecourse");
+  };
+  const Rate = () => {
+    nav("/Rateindividual");
   };
   const forwardViewMyCourses = () => {
     nav("/IndividualViewMyCourses");
@@ -79,6 +86,16 @@ const IndividualPage = () => {
       <br /> */}
       <button class="button-17" role="button" onClick={forwardViewMyCourses}>
         My Courses
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={Rate}>
+        Rate An Instructor
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={RateCourse}>
+        Rate A Course
       </button>
     </div>
   );

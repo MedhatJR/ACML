@@ -67,7 +67,7 @@ appRouter.post("/Corporate_rateInstructor", async (req, res) => {
 
 appRouter.post("/Corporate_rateCourse", async (req, res) => {
   Course.findOneAndUpdate(
-    {Name: req.body.Name},
+    {Title: req.body.Title},
     { Rating: req.body.Rating },
     { new: true },
     (error, data) => {
