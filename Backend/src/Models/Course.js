@@ -23,6 +23,10 @@ const courseSchema = new Schema(
       type: Number,
       required: true,
     },
+    Price_after_promotion: {
+      type: Number,
+      required: true,
+    },
     Instructor: {
       type: String,
       required: true,
@@ -39,6 +43,7 @@ const courseSchema = new Schema(
       type: Number,
       required: true,
     },
+    
 
     PreviewLink: {
       type: String,

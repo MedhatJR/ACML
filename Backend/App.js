@@ -5,18 +5,21 @@ const mongoose = require("mongoose");
 const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
 //import Register from "./Register";d
-
+//JWT
+const authRoutes=require("../frontend/src/Routes/AuthRoutes");
+const cookieParser = require("cookie-parser");
+//------------------
 //App variables
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(router);
+//JWT
+app.use(cookieParser());
+app.use("/",authRoutes);
+//--------------------
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8000"); // update to match the domain you will make the request from
   res.header(
@@ -55,7 +58,6 @@ mongoose
 /*
                                                     Start of your code
 */
-
 /*
                                                     End of your code
 */
