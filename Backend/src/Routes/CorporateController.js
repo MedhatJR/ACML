@@ -2,7 +2,7 @@ const express = require("express");
 const appRouter = express.Router();
 const Course = require("../Models/Course");
 const Corporate = require("../Models/CorporateTrainee");
-const CorporateTrainee = require("../Models/CorporateTrainee");   ///////Twice????????????
+const CorporateTrainee = require("../Models/CorporateTrainee"); ///////Twice????????????
 const cors = require("cors");
 appRouter.use(cors());
 const Instructor = require("../Models/Instructor");
@@ -47,10 +47,9 @@ appRouter.post("/Corporate_SelectCountry", async (req, res) => {
   );
 });
 
-
 appRouter.post("/Corporate_rateInstructor", async (req, res) => {
   Instructor.findOneAndUpdate(
-    {Email: req.body.Email},
+    { Email: req.body.Email },
     { Rating: req.body.Rating },
     { new: true },
     (error, data) => {
@@ -66,7 +65,7 @@ appRouter.post("/Corporate_rateInstructor", async (req, res) => {
 
 appRouter.post("/Corporate_rateCourse", async (req, res) => {
   Course.findOneAndUpdate(
-    {Name: req.body.Name},
+    { Name: req.body.Name },
     { Rating: req.body.Rating },
     { new: true },
     (error, data) => {
