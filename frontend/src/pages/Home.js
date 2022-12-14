@@ -1,20 +1,20 @@
-import React from "react";
 import { useEffect, useState } from "react";
-
+import React from "react";
 import Axios from "axios";
-//import "../styles/register.css";
-import "../styles/Home.css";
-import { useNavigate } from "react-router-dom";
+//import "../styles/viewStyle.css";
 import logo from "../Media/Logo.png";
+import "../styles/IndividualCoursePage.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const nav = useNavigate();
-  const Register = () => {
-    nav("/Register");
-  };
   const LogIn = () => {
-    nav("/LogIn");
-  };
+         nav("/LogIn");
+      };
+    const Register = () => {
+           nav("/Register");
+        };
+
   return (
     <div className="add">
     <>

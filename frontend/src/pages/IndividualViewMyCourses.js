@@ -4,6 +4,7 @@ import Axios from "axios";
 //import "../styles/viewStyle.css";
 import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
+import logo from "../Media/Logo.png";
 var arr = [];
 var arrTitles = [];
 var wantedtitle = "";
@@ -37,6 +38,23 @@ const IndividualViewMyCourses = () => {
 
   return (
     <div className="IndividualViewCourse">
+      <nav>
+        <img src={logo} className="logo" alt="" />{" "}
+        <ul>
+          <li>
+            <a href="">Home</a>
+          </li>
+          <li>
+            <a href="#news">News</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+        </ul>
+      </nav>
       <label>Username</label>
       <input name="myUsername" id="myName" type="text" />
       <br />
@@ -49,13 +67,13 @@ const IndividualViewMyCourses = () => {
         //id  = user.Title
         <div className="MyCourse">
           <>
-            <p key={user} className="Title">
+            <h1 key={user} className="title">
               {user.Title}
-            </p>
+            </h1>
             <p key={user} className="shortsummary">
               {user.Shortsummary}
             </p>
-            <p key={user} className="Instructor">
+            <p key={user} className="instructor">
               By:{user.Instructor}
             </p>
             <p key={user} className="subject">
@@ -63,14 +81,13 @@ const IndividualViewMyCourses = () => {
               {user.Subject}
             </p>
 
-            <p key={user} className="Rating">
-              Rating:{user.Rating}
+            <p key={user} className="rating">
+              Rating: {user.Rating} ⭐'s
             </p>
 
-            <button className="button-17" onClick={go} id={user.Title}>
+            <button className="button-17" id="btn17" onClick={go}>
               Go To Course
             </button>
-            <br />
           </>
         </div>
       ))}

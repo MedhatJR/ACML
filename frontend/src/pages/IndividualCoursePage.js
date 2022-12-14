@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Axios from "axios";
 //import "../styles/viewStyle.css";
-//import "../styles/IndividualViewMyCourses.css";
+import "../styles/IndividualCoursePage.css";
 import { useNavigate } from "react-router-dom";
 
 var array = [];
@@ -47,19 +47,45 @@ const IndividualViewMyCourses = () => {
       <button onClick={viewMyCourses}>View</button>
 
       {array.map((user) => (
-        <div className="courseSection">
+        <div className="MyCourse">
           <>
-            <p key={user}>{user.Title}</p>
-            <p key={user}> Subject: {user.Subject}</p>
-            <p key={user}>{user.Shortsummary}</p>
-            <p key={user}>{user.Rating}</p>
-            <p key={user}>{user.Instructor}</p>
-            <p key={user}>{user.Rating}</p>
-            <p key={user}>{user.Hours}</p>
-            <p key={user}>{user.Views}</p>
-            <p key={user}>{user.PreviewLink}</p>
+            <h1 key={user} id="title">
+              {user.Title}
+            </h1>
+            <iframe
+              width="560"
+              height="315"
+              src={user.PreviewLink}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <p key={user} id="subject">
+              Subject: {user.Subject}
+            </p>
+            <p key={user} id="shortsummary">
+              {user.Shortsummary}
+            </p>
+            <p key={user} id="rating">
+              {user.Rating}
+            </p>
+            <p key={user} id="instructor">
+              {user.Instructor}
+            </p>
+            <p key={user} id="rating">
+              {user.Rating}
+            </p>
+            <p key={user} id="hours">
+              {user.Hours}
+            </p>
+            <p key={user} id="views">
+              {user.Views}
+            </p>
+            {/* <p key={user}>{user.PreviewLink}</p> */}
             <p key={user}>{user.SubLink}</p>
-          
+            {/* <p key={user}>{user.Promotion}</p>
+            <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
         </div>
       ))}
