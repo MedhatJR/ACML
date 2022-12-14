@@ -41,7 +41,7 @@ font-family: Arial, Helvetica, sans-serif;
 .MyCourse .subject {
     font-size: 15px;
     position: absolute;
-    bottom: 150px;
+    top: 190px;
 }
 
 #btn17 {
