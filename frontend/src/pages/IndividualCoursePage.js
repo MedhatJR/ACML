@@ -59,8 +59,7 @@ const IndividualViewMyCourses = () => {
             <p key={user}>{user.Views}</p>
             <p key={user}>{user.PreviewLink}</p>
             <p key={user}>{user.SubLink}</p>
-            <p key={user}>{user.Promotion}</p>
-            <p key={user}>{user.Promotion_valid_for}</p>
+          
           </>
         </div>
       ))}

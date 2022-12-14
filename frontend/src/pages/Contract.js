@@ -16,7 +16,30 @@ const Contract = () => {
         nav("/LogIn");
       };
 
-    return(
+    return(<>
+        <div className="add">
+          <>
+            <nav>
+              <img src={logo} className="logo" alt="" />{" "}
+              <ul>
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="#news">News</a>
+                </li>
+                <li>
+                  <a href="#contact">Contact</a>
+                </li>
+                <li>
+                  <a href="#about">About</a>
+                </li>
+              </ul>
+            </nav>
+          </>
+          <br />
+          <br />
+        </div>
         <div>
             <h1>Contract</h1>
             <div>
@@ -29,6 +52,7 @@ const Contract = () => {
             <button onClick={Home}> Discard</button>
             </div>
         </div>
+        </>
     );
 };
 export default Contract;

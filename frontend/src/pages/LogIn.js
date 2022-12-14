@@ -5,24 +5,24 @@ import Axios from "axios";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
-import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
+//import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 
 const LogIn = () => {
-  const C = document.getElementById("Category").value
-  const Email = document.getElementById("email").value;
-  const Password = document.getElementById("pass").value;  
-    const [final, setFinal] = useState("");
+    var [final, setFinal] = useState("");
     const nav = useNavigate();
 
     const login = () => {
+        const C = document.getElementById("Category").value
+        const Email = document.getElementById("email").value;
+        const Password = document.getElementById("pass").value;  
     
       console.log("Hi");
       if (C == "CorporateTrainee"){
-      Axios.post("http://localhost:8000//Corporate_Login", {
+      Axios.post("http://localhost:8000/Corporate_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
     }
     else if (C == "IndividualTrainee"){
@@ -30,7 +30,7 @@ const LogIn = () => {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
     }
     else{
@@ -38,7 +38,7 @@ const LogIn = () => {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
     }
   

@@ -40,9 +40,7 @@ const Register = () => {
     });
 
   };
-  const forward = () => {
-    nav("/");
-  };
+  
   const contract = () => {
     nav("/Contract");
   };
@@ -111,7 +109,6 @@ const Register = () => {
 
     <div className="Register">
 
-      <button onClick={forward}>Forward</button>
       <button onClick={forward2}>Forward gedan</button>
       <button onClick={forward3}>Forward awy ba2a fahem</button>
       <h1>Please Register</h1>

@@ -20,7 +20,7 @@ const Home = () => {
     <>
       <nav>
         <img src={logo} className="logo" alt="" />{" "}
-        <button type="submit" class="button-16" onClick={LogIn}>Login</button>
+        <button type="submit" class="button-17" onClick={LogIn}>Login</button>
             <button type="submit" class="button-17" onClick={Register} >Sign Up</button>
         <ul>
           <li>
