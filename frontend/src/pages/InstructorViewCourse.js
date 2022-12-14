@@ -1,99 +1,79 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Axios from "axios";
-import "../styles/InstructorPageStyle.css";
+//import "../styles/viewStyle.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../Media/Logo.png"
 var arr = [];
 
 const InstructorViewCourse = () => {
   //const Instructor = document.getElementById("Iname").value;
   const [users, setData] = useState("");
   const nav = useNavigate();
+  // const viewCourses = () => {
+  //   Axios.get("http://localhost:8000/instructor_viewMyCourses", {
+  //     Instructor: document.getElementById("Iname").value,
+  //   }).then((response) => {
+  //     console.log(response);
+  //     arr = response.data;
+  //     setData(response);
 
-  const getData = () => {
-    Axios.post("http://localhost:8000/instructor_viewMyCourses", {
-      Instructor: document.getElementById("LastName").value,
-    }).then((response) => {
-      console.log(response);
-      arr = response.data;
-      setData(response);
-
-      // setData(response.data[1].Title);
-    });
-  };
-
+  //     // setData(response.data[1].Title);
+  //   });
+  // };
   const back = () => {
     nav("/");
   };
 
-  // const Instructor = document.getElementById("Iname").value;
-  // Axios.get("http://localhost:8000/instructor_viewMyCourses", {
-  //   Instructor: Instructor,
-  // }).then((response) => {
-  //   console.log(response);
-  //   arr = response.data;
-  //   setData(response);
-  //   console.log(arr);
+  const Instructor = document.getElementById("Iname").value;
+  Axios.get("http://localhost:8000/instructor_viewMyCourses", {
+    Instructor: Instructor,
+  }).then((response) => {
+    console.log(response);
+    arr = response.data;
+    setData(response);
+    console.log(arr);
 
-  //   // setData(response.data[1].Title);
-  // });
+    // setData(response.data[1].Title);
+  });
 
   return (
     <div className="InstructorViewCourse">
-              <nav>
-          <img src={logo} className="logo" alt="" />{" "}
-          <ul>
-            <li>
-              <a href="">Home</a>
-            </li>
-            <li>
-              <a href="#news">News</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-          </ul>
-        </nav>
-      
-      <h1>Your Courses</h1>
-      <label> Enter Your Lastname </label>
-            <input type="LastName" name="LastName" id="LastName" /> <br />
-            <br />
-      
-       <button onClick={back} className="btn">
+      <h1>jj</h1>
+      {/* <button onClick={back} className="btn">
         {" "}
         back
       </button>
-      <br/>
-      <br/>
-      <label>Click to view Data</label>
-      <br/>
-      <br/>
-      
-      <button onClick={getData} className="btn">Get Data</button>
+      <h1>Click to view Data</h1>
+
       <br />
-      
-     
+      <button className="btn">Get Data</button>
+      <br />
+      <table>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Country</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Gender</th>
+        </tr>
         {arr.map((user) => (
-          <div>
+          <tr>
             <>
-            <a href="/CourseInstructor" id = {user.Title} key={user}>{user.Title} </a>
-              {/* <td key={user}> {user.Email}</td>
+              <td key={user}>{user.Username}</td>
+              <td key={user}> {user.Email}</td>
               <td key={user}>{user.Password}</td>
               <td key={user}>{user.Country}</td>
               <td key={user}>{user.Firstname}</td>
               <td key={user}>{user.Lastname}</td>
-              <td key={user}>{user.Gender}</td> */}
+              <td key={user}>{user.Gender}</td>
             </>
-            
-          </div>
-        ))};
-        
-      
+            ;
+          </tr>
+        ))}
+        ;
+      </table> */}
     </div>
   );
 };

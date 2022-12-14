@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Axios from "axios";
 //import "../styles/viewStyle.css";
-//import "../styles/IndividualViewMyCourses.css";
+import "../styles/IndividualCoursePage.css";
 import { useNavigate } from "react-router-dom";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
@@ -88,6 +88,8 @@ const IndividualViewMyCourses = () => {
             </p>
             {/* <p key={user}>{user.PreviewLink}</p> */}
             <p key={user}>{user.SubLink}</p>
+            {/* <p key={user}>{user.Promotion}</p>
+            <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
         </div>
       ))}
