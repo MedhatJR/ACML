@@ -290,6 +290,7 @@ appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
           }
         }).select([
           "Title",
+          "Subtitle",
           "Shortsummary",
           "Subject",
           "Price",
