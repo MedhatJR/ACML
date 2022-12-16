@@ -13,7 +13,7 @@ const UpdatePassword = () => {
       console.log(Old)
       //nav("/UpdatePassword");
       console.log("Hi");
-      Axios.post("http://localhost:8000/Instructor_ChangePassword" ,{
+      Axios.post("http://localhost:8000/Individual_ChangePassword" ,{
         OldPassword : Old ,
         NewPassword : New,
       }).then(
@@ -24,23 +24,6 @@ const UpdatePassword = () => {
       );
      };
 
-    //  const UpdateBiography = () => {
-   
-    //   const change = () => {
-    //    const Old = document.getElementById("Oldpassword").value
-    //    const New = document.getElementById("Newpassword").value
-    //    console.log(Old)
-    //    //nav("/UpdatePassword");
-    //    console.log("Hi");
-    //    Axios.post("http://localhost:8000/Instructor_ChangePassword" ,{
-    //      OldPassword : Old ,
-    //      NewPassword : New,
-    //    }).then(
-    //      (response) => {
-    //        this.setFinal(response.data);
-    //      }
-    //    );
-    //   };
 
     return (
         <div className="UpdatePassword">

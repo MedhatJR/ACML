@@ -244,6 +244,7 @@ appRouter.post("/Individual_ChangePassword" , async(req,res) => {
 appRouter.post("/Individual_ForgotPassword" , async(req,res) => {
   const Username = req.body.Username;
   const NewPassword = req.body.NewPassword;
+  const CNewPassword = req.body.CNewPassword;
   Individual.findOneAndUpdate(
     { Username: Username },
     { Password : NewPassword },

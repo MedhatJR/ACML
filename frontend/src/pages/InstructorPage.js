@@ -34,7 +34,18 @@ const InstructorPage = () => {
   const forwardView = () => {
     nav("/InstructorViewCourse");
   };
-
+  const Add = () => {
+    nav("/AddPromotion");
+  };
+  const Change = () => {
+    nav("/UpdatePassword");
+  };
+  const Biography = () => {
+    nav("/UpdateBiography");
+  };
+  const email = () => {
+    nav("/UpdateEmail");
+  };
   return (
     <div className="add">
       <>
@@ -79,6 +90,25 @@ const InstructorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={forwardView}>
         View Course
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Add}>
+        Add Promotion
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Change}>
+        Change Password
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Biography}>
+        Change Biography
+      </button>
+      <br />
+      <button class="button-17" role="button" onClick={email}>
+        Change Email
       </button>
     </div>
   );

@@ -250,8 +250,8 @@ appRouter.post("/Instructor_editemail", async (req, res) => {
   res.status(200).send("update done");
 });
 appRouter.post("/Instructor_editbiography", async (req, res) => {
-  const Email = req.body.Emailold;
-  const Biography = req.body.biography;
+  const Email = req.body.Email;
+  const Biography = req.body.Biography;
   Instructor.findOneAndUpdate(
     { Email: Email },
     { Biography: Biography },
@@ -261,19 +261,22 @@ appRouter.post("/Instructor_editbiography", async (req, res) => {
         console.log(error);
       } else {
         console.log(data);
+        res.status(200).send("update done");
       }
     }
   );
-  res.status(200).send("update done");
+  //res.status(200).send("update done");
 });
 
 appRouter.post("/Instructor_addpromotion", async (req, res) => {
   const Title = req.body.Title;
   const Promotion = req.body.Promotion;
   const price = req.body.price;
+  //  var price = Course.findOne({Title:Title},(error,data) => {if(error){console.log("error")} else console.log("done"); }).select("Price")
+   console.log(price);
   const Promotion_valid_for = req.body.Promotion_valid_for;
 
-  // var m = {$mul: {  : 2 }} 
+  // var m = {$mul: {  : 2 }}  
   // console.log(m) 
   const p  = (100-Promotion)/100; 
 

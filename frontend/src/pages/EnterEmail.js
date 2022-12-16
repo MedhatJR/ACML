@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-import Axios from "axios";
-//import "../styles/Login.css";
+import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 
-const LogIn = () => {
+const EnterEmail = () => {
  
     const [final, setFinal] = useState("");
     const nav = useNavigate();
@@ -15,40 +14,19 @@ const LogIn = () => {
     const login = () => {
       const C = document.getElementById("Category").value
         const Email = document.getElementById("email").value;
-           const Password = document.getElementById("pass").value; 
       console.log("Hi");
       if (C === "CorporateTrainee"){
-      Axios.post("http://localhost:8000//Corporate_Login", {
-        Email: Email,
-        Password: Password,
-      }).then((response) => {
-        this.setFinal(response.data);
-      });
-      //Navigation to the corporate page
+        nav("/CorporateResetEmail"); 
     }
     else if (C === "IndividualTrainee"){
-      Axios.post("http://localhost:8000/Individual_Login", {
-        Email: Email,
-        Password: Password,
-      }).then((response) => {
-        this.setFinal(response.data);
-      });
-      //Navigation to the Individual page
+        nav("/IndividualResetEmail");
     }
     else{
-      Axios.post("http://localhost:8000/Instructor_Login", {
-        Email: Email,
-        Password: Password,
-      }).then((response) => {
-        this.setFinal(response.data);
-      });
-      nav("/InstructorPage");
+     
+      nav("/Emailsent");
     }
   
   };
-    const forward = () => {
-      nav("/");
-    };
 
   return (<>
     <div className="add">
@@ -76,14 +54,10 @@ const LogIn = () => {
   </div>
     
     <div className="Register">
-      <h1>Please Login</h1>
+      <h1>Reset Your Password</h1>
       <form className="form">
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
-        <br />
-        <br />
-        <label>Password</label>
-        <input type="password" name="Password" id="pass" /> <br />
         <br />
         <br />
        < label> Category </label>
@@ -91,17 +65,13 @@ const LogIn = () => {
         <br />
         <br />
         <button onClick={login}>Log in</button>
-        <br />
-        <br />
-        <li>
-            <a href="/EnterEmail">Forgot my Password</a>
-          </li>
+
       </form>
-      {/* {final.Username} */}
+      
     </div>
     </>
 
   );
 };
 
-export default LogIn;
+export default EnterEmail;
