@@ -14,6 +14,9 @@ const CorporatePage = () => {
   const forwardAdd = () => {
     nav("/RateCorp");
   };
+  const change = () => {
+    nav("/CorporateUpdate");
+  };
   return (
     <div className="add">
       <>
@@ -38,6 +41,11 @@ const CorporatePage = () => {
       <br />
       <button class="button-17" role="button" onClick={forwardAdd}>
         Rate An Instructor
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={change}>
+        Change Password
       </button>
     </div>
   );

@@ -25,6 +25,7 @@ const LogIn = () => {
         setFinal=response.data;
       });
       //Navigation to the corporate page
+      nav("/CorporatePage");
     }
     else if (C === "IndividualTrainee"){
       Axios.post("http://localhost:8000/Individual_Login", {
@@ -34,6 +35,7 @@ const LogIn = () => {
         setFinal=response.data;
       });
       //Navigation to the Individual page
+      nav("/IndividualPage");
     }
     else{
       Axios.post("http://localhost:8000/Instructor_Login", {

@@ -64,7 +64,7 @@ const EnterEmail = () => {
         <input type="text" name="Category" id="Category" /> <br />
         <br />
         <br />
-        <button onClick={login}>Log in</button>
+        <button onClick={login}>Send Code</button>
 
       </form>
       

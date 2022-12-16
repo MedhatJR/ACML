@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Axios from "axios";
-import "../register/.css";
+import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png"
 
@@ -18,7 +18,7 @@ const AddPromotion = () => {
         Promotion_valid_for: document.getElementById("Promotionvalidfor").value,
     }).then((response) => {
       console.log(response);
-      arr = response.data;
+     
       setData(response);
 
       // setData(response.data[1].Title);
@@ -78,20 +78,7 @@ const AddPromotion = () => {
       <br />
       
      
-        {arr.map((user) => (
-          <div>
-            <>
-            <a href="/CourseInstructor" id = {user.Title} key={user}>{user.Title} </a>
-              {/* <td key={user}> {user.Email}</td>
-              <td key={user}>{user.Password}</td>
-              <td key={user}>{user.Country}</td>
-              <td key={user}>{user.Firstname}</td>
-              <td key={user}>{user.Lastname}</td>
-              <td key={user}>{user.Gender}</td> */}
-            </>
-            
-          </div>
-        ))};
+
         
       
     </div>
