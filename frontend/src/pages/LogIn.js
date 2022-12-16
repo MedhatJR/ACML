@@ -8,21 +8,21 @@ import logo from "../Media/Logo.png";
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 
 const LogIn = () => {
- 
-    const [final, setFinal] = useState("");
+    var [final, setFinal] = useState("");
     const nav = useNavigate();
 
     const login = () => {
-      const C = document.getElementById("Category").value
+        const C = document.getElementById("Category").value
         const Email = document.getElementById("email").value;
-           const Password = document.getElementById("pass").value; 
+        const Password = document.getElementById("pass").value;  
+    
       console.log("Hi");
-      if (C === "CorporateTrainee"){
-      Axios.post("http://localhost:8000//Corporate_Login", {
+      if (C == "CorporateTrainee"){
+      Axios.post("http://localhost:8000/Corporate_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
       //Navigation to the corporate page
     }
@@ -31,7 +31,7 @@ const LogIn = () => {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
       //Navigation to the Individual page
     }
@@ -40,7 +40,7 @@ const LogIn = () => {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
       nav("/InstructorPage");
     }
@@ -49,6 +49,9 @@ const LogIn = () => {
     const forward = () => {
       nav("/");
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      }
 
   return (<>
     <div className="add">
@@ -77,7 +80,7 @@ const LogIn = () => {
     
     <div className="Register">
       <h1>Please Login</h1>
-      <form className="form">
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
         <br />

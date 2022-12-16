@@ -8,6 +8,7 @@ const Instructor = require("../Models/Instructor");
 
 var dbcourses = [];
 
+const Exams = require("../Models/Exams");
 appRouter.get("/Instructor_read", async (req, res) => {
   Instructor.find({ Name: req.body.Name }, (error, data) => {
     if (error) {
@@ -366,8 +367,25 @@ appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
   else{res.send("Passwords Do Not Match ")}
 });
 
+// appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
+//   const Username = req.body.Username;
+//   const NewPassword = req.body.NewPassword;
+//   const CNewPassword = req.body.CNewPassword;
+//   if(NewPassword == CNewPassword){
+//   Instructor.findOneAndUpdate(
+//     { Username: Username  },
+//     { Password : NewPassword },
+//     { Title: Title },
+//     {
+//       Promotion: Promotion,
+//       Promotion_valid_for: Promotion_valid_for,
+//       $mul: { price: p },
+//     },
+
 appRouter.post("/Instructor_create_exams", async (req, res) => {
   const exams = new Exams({
+
+   
     Question1: req.body.Question1,
     Choice11: req.body.Choice11,
     Choice12: req.body.Choice12,
@@ -380,6 +398,9 @@ appRouter.post("/Instructor_create_exams", async (req, res) => {
     Choice23: req.body.Choice23,
     Choice24: req.body.Choice24,
     Answer2: req.body.Answer2,
+    Course:req.body.Course,
+    
+     
   });
   try {
     Exams.create(exams);

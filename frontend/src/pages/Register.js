@@ -1,15 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
 import Axios from "axios";
 import "../styles/register.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, generatePath } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var pop = "Registration successful"
 
 const Register = () => {
-  const [final, setFinal] = useState("");
-  const [popup, setPopUp] = useState("");
+  const [values, setValues] = useState({
+    Email: "",
+    Passwor: "",
+  });
+  var [final, setFinal] = useState("");
   const nav = useNavigate();
   const addData = () => {
     const Username = document.getElementById("user").value;
@@ -20,32 +23,65 @@ const Register = () => {
     const Lastname = document.getElementById("ln").value;
     const Gender = document.getElementById("g").value;
 
-    console.log("Hi");
-    Axios.post("http://localhost:8000/createCorporateUser", {
-      Username: Username,
-      Email: Email,
-      Password: Password,
-      Country: Country,
-      Firstname: Firstname,
-      Lastname: Lastname,
-      Gender: Gender,
-    }).then((response) => {
+    console.log("Hi2");
+    Axios.post("http://localhost:8000/createCorporateUser",  
+    {Username: Username,
+    Email: Email,
+    Password: Password,
+    Country: Country,
+    Firstname: Firstname,
+    Lastname: Lastname,
+    Gender: Gender,}).then((response) => {
 
-      this.setFinal(response.data);
+    console.log(response.data);
+    
+      setFinal = response.data;
 
     });
 
-    this.setPopUp(pop);
   };
-  const forward = () => {
-    nav("/");
+  
+  const contract = () => {
+    nav("/Contract");
   };
-  const handleSubmit = (e) => {
+  //JWT------------------
+  const generateError = (err) => toast.error(err, {
+    position: "bottom-right",
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  }
+    try {
+      const { data } = await Axios.post("http://localhost:3000/Register",
+        { ...values, }, {
+        withCredentials: true,
+      });
+      console.log(data);
+      if (data) {
+        // if (data.errors) {
+        //   const { Email, Password } = data.errors;
+        //   if (Email) generateError(Email);
+        //   else if (Password) generateError(Password);
+        // }
+        // else {
+
+        // }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //------------------------------------
   function myFunction(element, color) {
     element.style.color = color;
   }
+  const forward2 = () => {
+    nav("/Addexam");
+  };
+  const forward3 = () => {
+    nav("/IMCQ");
+  };
   return (<>
     <div className="add">
       <>
@@ -72,6 +108,9 @@ const Register = () => {
     </div>
 
     <div className="Register">
+
+      <button onClick={forward2}>Forward gedan</button>
+      <button onClick={forward3}>Forward awy ba2a fahem</button>
       <h1>Please Register</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Username</label>
@@ -90,7 +129,8 @@ const Register = () => {
         <input type="text" name="Gender" id="g" /> <br />
         <button onClick={() => {
           addData();
-          myFunction(pop, 'green');
+          console.log("Registered!!!");
+          contract();
         }} >Submit</button>
 
         {/* <p> {pop}</p> */}
