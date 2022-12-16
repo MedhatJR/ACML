@@ -65,6 +65,8 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
     Views: req.body.Views,
     PreviewLink: req.body.PreviewLink,
     SubLink: req.body.SubLink,
+    Promotion: req.body.Promotion,
+    Promotion_valid_for: req.body.Promotion_valid_for,
   });
   try {
     await Course.create(course);

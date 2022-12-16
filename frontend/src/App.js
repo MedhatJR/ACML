@@ -7,7 +7,9 @@ import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
 import IndividualPage from "./pages/IndividualPage";
 import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
+import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
+import CorporateCoursePage from "./pages/CorporateCoursePage";
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-              <Route path="/" element={<Register />} />
+              <Route path="/Register" element={<Register />} />
               <Route path="/view" element={<ViewData />} />
               <Route path="/addCourse" element={<AddCourse />} />
               <Route
@@ -32,6 +34,14 @@ function App() {
               <Route
                 path="/IndividualCoursePage"
                 element={<IndividualCoursePage />}
+              />
+              <Route
+                path="/CorporateCoursePage"
+                element={<CorporateCoursePage />}
+              />
+              <Route
+                path="/CorporateViewMyCourses"
+                element={<CorporateViewMyCourses />}
               />
             </Routes>
           </div>
