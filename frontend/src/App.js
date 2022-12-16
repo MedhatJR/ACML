@@ -13,6 +13,8 @@ import IndividualPage from "./pages/IndividualPage";
 import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
 import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
+import CorporateCoursePage from "./pages/CorporateCoursePage";
+
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
 import Contract from "./pages/Contract";
@@ -22,8 +24,6 @@ import Rateindividual from "./pages/Rateindividual";
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
 import IMCQ from "./pages/IMCQ";
-import CorporateCoursePage from "./pages/CorporateCoursePage";
-
 function App() {
   return (
     <>
@@ -31,7 +31,20 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-              <Route path="/" element={<Register />} />
+              <Route path="/Register" element={<Register />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/RateCorp" element={<RateCorp />} />
+              <Route path="/Rateindividual" element={<Rateindividual />} />
+              <Route path="/CorporatePage" element={<CorporatePage />} />
+              <Route path="/Contract" element={<Contract />} />
+              <Route path="/LogIn" element={<LogIn />} />
+              <Route path="/Register" element={<Register />} />
+              <Route path="/Emailsent" element={<Emailsent />} />
+              <Route path="/CourseInstructor" element={<CourseInstructor />} />
+              <Route path="/ResetPassword" element={<ResetPassword />} />
+              <Route path="/UpdatePassword" element={<UpdatePassword />} />
+              <Route path="/UpdateBiography" element={<UpdateBiography />} />
+              <Route path="/UpdateEmail" element={<UpdateEmail />} />
               <Route path="/view" element={<ViewData />} />
               <Route path="/addCourse" element={<AddCourse />} />
               <Route
@@ -48,8 +61,6 @@ function App() {
                 path="/IndividualCoursePage"
                 element={<IndividualCoursePage />}
               />
-              <Route path="/Addexam" element={<AddExam />} />
-              <Route path="/IMCQ" element={<IMCQ />} />
               <Route
                 path="/CorporateCoursePage"
                 element={<CorporateCoursePage />}
@@ -58,6 +69,8 @@ function App() {
                 path="/CorporateViewMyCourses"
                 element={<CorporateViewMyCourses />}
               />
+              <Route path="/Addexam" element={<AddExam />} />
+              <Route path="/IMCQ" element={<IMCQ />} />
             </Routes>
           </div>
         </BrowserRouter>

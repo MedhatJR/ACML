@@ -252,7 +252,7 @@ appRouter.post("/Individual_ForgotPassword", async (req, res) => {
   );
 });
 
-appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
+appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
   var final = [];
