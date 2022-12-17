@@ -11,8 +11,11 @@ const CorporatePage = () => {
   const nav = useNavigate();
   console.log("Hi");
 
-  const forwardAdd = () => {
+  const RateInstructor = () => {
     nav("/RateCorp");
+  };
+  const RateCourse = () => {
+    nav("/CorpRatecourse");
   };
   return (
     <div className="add">
@@ -36,8 +39,13 @@ const CorporatePage = () => {
         </nav>
       </>
       <br />
-      <button class="button-17" role="button" onClick={forwardAdd}>
+      <button class="button-17" role="button" onClick={RateInstructor}>
         Rate An Instructor
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={RateCourse}>
+        Rate A Course
       </button>
     </div>
   );

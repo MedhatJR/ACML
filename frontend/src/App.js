@@ -18,6 +18,7 @@ import Contract from "./pages/Contract";
 import CorporatePage from "./pages/CorporatePage";
 import RateCorp from "./pages/RateCorp";
 import Rateindividual from "./pages/Rateindividual"
+import CorpRatecourse from "./pages/CorpRatecourse"
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
 import IMCQ from "./pages/IMCQ";
@@ -30,6 +31,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/RateCorp" element={<RateCorp />} />
+              <Route path="/CorpRatecourse" element={<CorpRatecourse />} />
               <Route path="/Rateindividual" element={<Rateindividual />} />
               <Route path="/CorporatePage" element={<CorporatePage />} />
               <Route path="/Contract" element={<Contract />} />

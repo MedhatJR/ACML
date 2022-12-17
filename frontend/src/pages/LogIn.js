@@ -10,7 +10,18 @@ import logo from "../Media/Logo.png";
 const LogIn = () => {
     var [final, setFinal] = useState("");
     const nav = useNavigate();
-
+    const forward = () => {
+        nav("/");
+      };
+      const corplogin = () => {
+          nav("/CorporatePage");
+        };
+        const indivilogin = () => {
+          nav("/IndividualPage");
+        };
+        const instlogin = () => {
+          nav("/InstructorPage");
+        };
     const login = () => {
         const C = document.getElementById("Category").value
         const Email = document.getElementById("email").value;
@@ -24,6 +35,7 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
+      corplogin();
     }
     else if (C == "IndividualTrainee"){
       Axios.post("http://localhost:8000/Individual_Login", {
@@ -32,6 +44,7 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
+      indivilogin();
     }
     else{
       Axios.post("http://localhost:8000/Instructor_Login", {
@@ -40,12 +53,11 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
+      instlogin();
     }
   
   };
-    const forward = () => {
-      nav("/");
-    };
+   
     const handleSubmit = (e) => {
         e.preventDefault();
       }

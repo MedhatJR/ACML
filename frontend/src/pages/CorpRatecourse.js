@@ -8,7 +8,7 @@ import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 import "../styles/Star.css";
 
-const IndiRatecourse = () => {
+const CorpRatecourse = () => {
     var [rating, setRating] = useState(0);
     var [hover, setHover] = useState(0);
     var [final, setFinal] = useState("");
@@ -16,7 +16,7 @@ const IndiRatecourse = () => {
 
     const Rate = () => {
         console.log("Hi");
-        Axios.post("http://localhost:8000/Individual_rateCourse", {
+        Axios.post("http://localhost:8000/Corporate_rateCourse", {
             Title: document.getElementById("Title").value,
             Rating: rating,
         }).then(
@@ -49,7 +49,7 @@ return (
         </>
         <br />
         <form className="form">
-            <label>Title of the Course</label>
+            <label>Name of the Course</label>
             <input type="Text" name="Title" id="Title" /> <br />
         </form>
         <br />
@@ -80,4 +80,4 @@ return (
 };
 
 
-export default IndiRatecourse ;
+export default CorpRatecourse ;
