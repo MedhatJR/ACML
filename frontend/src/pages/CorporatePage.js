@@ -16,6 +16,9 @@ const CorporatePage = () => {
   };
   const RateCourse = () => {
     nav("/CorpRatecourse");
+  }
+  const change = () => {
+    nav("/CorporateUpdate");
   };
   return (
     <div className="add">
@@ -46,6 +49,11 @@ const CorporatePage = () => {
       <br/>
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
+        </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={change}>
+        Change Password
       </button>
     </div>
   );

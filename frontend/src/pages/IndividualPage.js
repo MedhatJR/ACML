@@ -41,7 +41,9 @@ const IndividualPage = () => {
   const forwardViewMyCourses = () => {
     nav("/IndividualViewMyCourses");
   };
-
+  const change = () => {
+    nav("/IndividualUpdate");
+  };
   return (
     <div className="add">
       <>
@@ -96,6 +98,11 @@ const IndividualPage = () => {
       <br/>
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={change}>
+        Change Password
       </button>
     </div>
   );

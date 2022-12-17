@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import Axios from "axios";
-import "../styles/Login.css";
+//import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
@@ -35,16 +35,18 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
-      corplogin();
+      //Navigation to the corporate page
+      nav("/CorporatePage");
     }
-    else if (C == "IndividualTrainee"){
+    else if (C === "IndividualTrainee"){
       Axios.post("http://localhost:8000/Individual_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
         setFinal=response.data;
       });
-      indivilogin();
+      //Navigation to the Individual page
+      nav("/IndividualPage");
     }
     else{
       Axios.post("http://localhost:8000/Instructor_Login", {
@@ -53,7 +55,7 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
-      instlogin();
+      nav("/InstructorPage");
     }
   
   };
@@ -106,7 +108,7 @@ const LogIn = () => {
         <br />
         <br />
         <li>
-            <a href="/Emailsent">Forgot my Password</a>
+            <a href="/EnterEmail">Forgot my Password</a>
           </li>
       </form>
       {/* {final.Username} */}
