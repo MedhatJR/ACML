@@ -293,21 +293,21 @@ appRouter.post("/Instructor_submitAnswer", async (req, res) => {
 });
 
 //view his/her grade from the exercise
-appRouter.get("/Individual_Grade", async (req, res) => {
+appRouter.post("/Individual_Grade", async (req, res) => {
   var grade = 0;
   var final = "";
-  var test;
-  const { id } = req.body
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  const  _id  = req.body._id
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).json({error: 'No such id'})
   }
-  
-  const ans1 = await IndividualExam.findById(id).select("Answer1").select("Answer2")
-  const ques1 = await IndividualExam.findById(id).select("Question1").select("Question1")
+  const ans1 = await IndividualExam.findById(_id).select("Answer1").select("Answer2")
+  const ques1 = await IndividualExam.findById(_id).select("Question1").select("Question2")
   final = ques1.Question1;
-    if (!ans1) {
+  console.log(final);
+  if (!ans1) {
     return res.status(400).json({error: 'No such exam'})
   }
+
   console.log(final);
     Exams.find( { Question1 :final} ,(error, data) =>
      { if (error) { console.log(error) } 
@@ -321,7 +321,7 @@ appRouter.get("/Individual_Grade", async (req, res) => {
      if(data[0].Answer2==ans1.Answer2){
       grade+=1;
      }
-     res.status(200).send({Grade: grade});
+     res.status(200).send( "Grade : " +grade);
   } }).select("Answer1").select("Answer2")
  
 }
@@ -331,12 +331,12 @@ appRouter.get("/Individual_Grade", async (req, res) => {
 appRouter.post("/Individual_QuestionAnswers", async (req, res) => {
   var grade = 0;
   var final = "";
-  const  {id}  = req.body
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  const  _id  = req.body._id
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).json({error: 'No such id'})
   }
-  const ans1 = await IndividualExam.findById(id).select("Answer1").select("Answer2")
-  const ques1 = await IndividualExam.findById(id).select("Question1").select("Question2")
+  const ans1 = await IndividualExam.findById(_id).select("Answer1").select("Answer2")
+  const ques1 = await IndividualExam.findById(_id).select("Question1").select("Question2")
   final = ques1.Question1;
   console.log(final);
   if (!ans1) {

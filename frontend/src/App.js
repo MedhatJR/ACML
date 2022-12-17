@@ -6,6 +6,7 @@ import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
 import Instructor_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
+import Coporate_GradeAndAnswers from "./pages/CoporateGradeAndAnswers";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/InstructorGradeAndAnswers" element={<Instructor_GradeAndAnswers />} />
+              <Route path="/CoporateGradeAndAnswers" element={<Coporate_GradeAndAnswers />} />
             </Routes>
           </div>
         </BrowserRouter>
