@@ -8,7 +8,7 @@ import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 
 const InstructorPage = () => {
-  const [final, setFinal] = useState("");
+  var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
 
@@ -16,7 +16,7 @@ const InstructorPage = () => {
     console.log("Hi");
     Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
       (response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       }
     );
   };
@@ -34,7 +34,18 @@ const InstructorPage = () => {
   const forwardView = () => {
     nav("/InstructorViewCourse");
   };
-
+  const Add = () => {
+    nav("/AddPromotion");
+  };
+  const Change = () => {
+    nav("/UpdatePassword");
+  };
+  const Biography = () => {
+    nav("/UpdateBiography");
+  };
+  const email = () => {
+    nav("/UpdateEmail");
+  };
   return (
     <div className="add">
       <>
@@ -42,7 +53,7 @@ const InstructorPage = () => {
           <img src={logo} className="logo" alt="" />{" "}
           <ul>
             <li>
-              <a href="">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <a href="#news">News</a>
@@ -79,6 +90,25 @@ const InstructorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={forwardView}>
         View Course
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Add}>
+        Add Promotion
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Change}>
+        Change Password
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Biography}>
+        Change Biography
+      </button>
+      <br />
+      <button class="button-17" role="button" onClick={email}>
+        Change Email
       </button>
     </div>
   );

@@ -7,7 +7,8 @@ const Individual = require("../Models/IndividualTrainee");
 const Exams = require("../Models/Exams");
 const cors = require("cors");
 const Instructor = require("../Models/Instructor");
-const IndividualExam = require("../Models/IndividualExam")
+const IndividualExam = require("../Models/IndividualExam");
+const Exams = require("../Models/Exams");
 appRouter.use(cors());
 const mongoose  = require('mongoose');
 
@@ -73,7 +74,7 @@ appRouter.post("/Individual_rateInstructor", async (req, res) => {
 
 appRouter.post("/Individual_rateCourse", async (req, res) => {
   Course.findOneAndUpdate(
-    { Name: req.body.Name },
+    { Title: req.body.Title },
     { Rating: req.body.Rating },
     { new: true },
     (error, data) => {
@@ -180,7 +181,7 @@ appRouter.post("/addIndividual", async (req, res) => {
   }
 });
 
-appRouter.get("/Individual_retrieveMyCourse", async (req, res) => {
+appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
   var final = [];
@@ -209,25 +210,56 @@ appRouter.get("/Individual_retrieveMyCourse", async (req, res) => {
             res.send({ CourseDetails: result1 });
             console.log("Done2");
           }
-        }).select([
-          "Title",
-          "Shortsummary",
-          "Subject",
-          "Price",
-          "Instructor",
-          "Rating",
-        ]);
+        }).select(["Title", "Shortsummary", "Subject", "Instructor", "Rating"]);
       }
     }
   ).select("RegisteredCourses");
   console.log(final.length);
 });
 
-appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
+appRouter.post("/Individual_ChangePassword", async (req, res) => {
+  const OldPassword = req.body.OldPassword;
+  const NewPassword = req.body.NewPassword;
+  Individual.findOneAndUpdate(
+    { Password: OldPassword },
+    { Password: NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
+
+appRouter.post("/Individual_ForgotPassword", async (req, res) => {
+  const Username = req.body.Username;
+  const NewPassword = req.body.NewPassword;
+  const CNewPassword = req.body.CNewPassword;
+  Individual.findOneAndUpdate(
+    { Username: Username },
+    { Password: NewPassword },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
+
+appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
   var final = [];
   var myCourse = req.body.myCourse;
+  var answer = "";
   Individual.find(
     {
       Username: { $eq: req.body.Username },
@@ -260,11 +292,16 @@ appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
           }
         }).select([
           "Title",
+          "Subtitle",
           "Shortsummary",
           "Subject",
           "Price",
           "Instructor",
           "Rating",
+          "Hours",
+          "Views",
+          "PreviewLink",
+          "SubLink",
         ]);
       }
     }
@@ -281,7 +318,6 @@ appRouter.post("/Instructor_submitAnswer", async (req, res) => {
     Answer1: req.body.Answer1,
     Question2: req.body.Question2,
     Answer2: req.body.Answer2,
-
   });
   try {
     await IndividualExam.create(newAnswer);
@@ -290,6 +326,23 @@ appRouter.post("/Instructor_submitAnswer", async (req, res) => {
   }
 
   res.status(200).send("Submitted Answer");
+});
+appRouter.get("/Individual_view_exam", async (req, res) => {
+  res.send(
+    await Exams.find().select([
+      "Question1",
+      "Choice11",
+      "Choice12",
+      "Choice13",
+      "Choice14",
+      "Question2",
+      "Choice21",
+      "Choice22",
+      "Choice23",
+      "Choice24",
+      "Course",
+    ])
+  );
 });
 
 //view his/her grade from the exercise
@@ -326,6 +379,37 @@ appRouter.post("/Individual_Grade", async (req, res) => {
  
 }
 );
+//   var ans1 = Exam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done1");
+//   }).select("Answer1");
+//   var ans11 = IndividualExam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done2");
+//   }).select("Answer1");
+//   var ans2 = Exam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done21");
+//   }).select("Answer2");
+//   var ans22 = IndividualExam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done22");
+//   }).select("Answer2");
+
+//   if (ans1[1] == ans11[1]) {
+//     grade += 1;
+//     console.log(grade);
+//   }
+//   if (ans2[1] == ans22[1]) {
+//     grade += 1;
+//   }
+
+//   res.status(200).send({ Grade: grade });
+// });
 
 //view the questions with the correct solution to view the incorrect answers
 appRouter.post("/Individual_QuestionAnswers", async (req, res) => {
@@ -370,4 +454,17 @@ appRouter.post("/Individual_QuestionAnswers", async (req, res) => {
   } }).select("Answer1").select("Answer2")
 }
 );
+
+
+appRouter.post("/Individual_Login", async (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.Password;
+  Individual.find({ Email: Email, Password: Password }, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("loged in");
+    }
+  });
+});
 module.exports = appRouter;

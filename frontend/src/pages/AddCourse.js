@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 
 import Axios from "axios";
 //import "../styles/register.css";
-import "../styles/main.css";
+//import "../styles/main.css";
+import "../styles/addCourse.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 
@@ -67,7 +68,7 @@ const AddCourse = () => {
           <img src={logo} className="logo" alt="" />{" "}
           <ul>
             <li>
-              <a href="">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <a href="#news">News</a>
@@ -111,8 +112,12 @@ const AddCourse = () => {
         <label>Subtitle Video Link</label>
         <br />
         <input type="text" name="SubLink" id="sublink" /> <br />
-        <button onClick={addCourse}>Add Course</button>
-        <button onClick={GoToViewCourses}>View Courses</button>
+        <button className="button-17" onClick={addCourse}>
+          Add Course
+        </button>
+        <button className="button-17" onClick={GoToViewCourses}>
+          View Courses
+        </button>
       </form>
     </div>
   );
