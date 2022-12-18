@@ -8,7 +8,6 @@ const Exams = require("../Models/Exams");
 const cors = require("cors");
 const Instructor = require("../Models/Instructor");
 const IndividualExam = require("../Models/IndividualExam");
-const Exams = require("../Models/Exams");
 appRouter.use(cors());
 const mongoose  = require('mongoose');
 
