@@ -2,50 +2,67 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import Axios from "axios";
-import "../styles/Login.css";
+//import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
-// import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
+//import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 
 const LogIn = () => {
-  const C = document.getElementById("Category").value
-  const Email = document.getElementById("email").value;
-  const Password = document.getElementById("pass").value;  
-    const [final, setFinal] = useState("");
+    var [final, setFinal] = useState("");
     const nav = useNavigate();
-
+    const forward = () => {
+        nav("/");
+      };
+      const corplogin = () => {
+          nav("/CorporatePage");
+        };
+        const indivilogin = () => {
+          nav("/IndividualPage");
+        };
+        const instlogin = () => {
+          nav("/InstructorPage");
+        };
     const login = () => {
+        const C = document.getElementById("Category").value
+        const Email = document.getElementById("email").value;
+        const Password = document.getElementById("pass").value;  
     
       console.log("Hi");
       if (C == "CorporateTrainee"){
-      Axios.post("http://localhost:8000//Corporate_Login", {
+      Axios.post("http://localhost:8000/Corporate_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
+      //Navigation to the corporate page
+      nav("/CorporatePage");
     }
-    else if (C == "IndividualTrainee"){
+    else if (C === "IndividualTrainee"){
       Axios.post("http://localhost:8000/Individual_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
+      //Navigation to the Individual page
+      nav("/IndividualPage");
     }
     else{
       Axios.post("http://localhost:8000/Instructor_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        this.setFinal(response.data);
+        setFinal=response.data;
       });
+      nav("/InstructorPage");
     }
   
   };
-    const forward = () => {
-      nav("/");
-    };
+   
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      }
 
   return (<>
     <div className="add">
@@ -74,7 +91,7 @@ const LogIn = () => {
     
     <div className="Register">
       <h1>Please Login</h1>
-      <form className="form">
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
         <br />
@@ -91,7 +108,7 @@ const LogIn = () => {
         <br />
         <br />
         <li>
-            <a href="/Emailsent">Forgot my Password</a>
+            <a href="/EnterEmail">Forgot my Password</a>
           </li>
       </form>
       {/* {final.Username} */}

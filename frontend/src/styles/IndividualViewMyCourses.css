@@ -1,0 +1,51 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.MyCourse {
+font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    position: relative;
+    width: 50%;
+    height: 350px;
+    /* background-color: ; */
+    border: 1px solid lightgray;
+    background-color:#F1F1F1 ;
+    
+}
+.MyCourse p{
+    margin-left: 10px;
+}
+.MyCourse .title {
+    font-size:35px;
+    font-weight: bold;
+
+}
+
+.MyCourse .shortsummary {
+    font-size: 18px;
+    position: absolute;
+    bottom: 230px;
+   
+}
+.MyCourse .instructor {
+    font-size: 15px;
+    position: absolute;
+    bottom: 210px;
+    color: gray;
+}
+.MyCourse .rating {
+    font-size: 15px;
+    position: absolute;
+    bottom: 180px;
+}
+.MyCourse .subject {
+    font-size: 15px;
+    position: absolute;
+    top: 190px;
+}
+
+#btn17 {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}

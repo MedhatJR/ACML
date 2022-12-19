@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const IndividualExamSchema = new Schema(
-  {
-    
+  {    
     Question1: {
       type: String,
       required: true,

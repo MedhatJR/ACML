@@ -251,8 +251,8 @@ appRouter.post("/Instructor_editemail", async (req, res) => {
   res.status(200).send("update done");
 });
 appRouter.post("/Instructor_editbiography", async (req, res) => {
-  const Email = req.body.Emailold;
-  const Biography = req.body.biography;
+  const Email = req.body.Email;
+  const Biography = req.body.Biography;
   Instructor.findOneAndUpdate(
     { Email: Email },
     { Biography: Biography },
@@ -262,19 +262,22 @@ appRouter.post("/Instructor_editbiography", async (req, res) => {
         console.log(error);
       } else {
         console.log(data);
+        res.status(200).send("update done");
       }
     }
   );
-  res.status(200).send("update done");
+  //res.status(200).send("update done");
 });
 
 appRouter.post("/Instructor_addpromotion", async (req, res) => {
   const Title = req.body.Title;
   const Promotion = req.body.Promotion;
   const price = req.body.price;
+  //  var price = Course.findOne({Title:Title},(error,data) => {if(error){console.log("error")} else console.log("done"); }).select("Price")
+   console.log(price);
   const Promotion_valid_for = req.body.Promotion_valid_for;
 
-  // var m = {$mul: {  : 2 }} 
+  // var m = {$mul: {  : 2 }}  
   // console.log(m) 
   const p  = (100-Promotion)/100; 
 
@@ -363,6 +366,21 @@ appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
   }
   else{res.send("Passwords Do Not Match ")}
 });
+
+// appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
+//   const Username = req.body.Username;
+//   const NewPassword = req.body.NewPassword;
+//   const CNewPassword = req.body.CNewPassword;
+//   if(NewPassword == CNewPassword){
+//   Instructor.findOneAndUpdate(
+//     { Username: Username  },
+//     { Password : NewPassword },
+//     { Title: Title },
+//     {
+//       Promotion: Promotion,
+//       Promotion_valid_for: Promotion_valid_for,
+//       $mul: { price: p },
+//     },
 
 appRouter.post("/Instructor_create_exams", async (req, res) => {
   const exams = new Exams({
