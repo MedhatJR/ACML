@@ -9,7 +9,7 @@ import ResetPassword from "./pages/ResetPassword";
 import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
-import Instructor_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
+import Individual_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
 import Coporate_GradeAndAnswers from "./pages/CoporateGradeAndAnswers";
 import IndividualPage from "./pages/IndividualPage";
 import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
@@ -76,7 +76,7 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
-              <Route path="/InstructorGradeAndAnswers" element={<Instructor_GradeAndAnswers />} />
+              <Route path="/IndividualGradeAndAnswers" element={<Individual_GradeAndAnswers />} />
               <Route path="/CoporateGradeAndAnswers" element={<Coporate_GradeAndAnswers />} />
               <Route path="/IndividualPage" element={<IndividualPage />} />
               <Route

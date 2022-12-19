@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-
+import "../styles/InstructorPageStyle.css";
+import logo from "../Media/Logo.png";
+import teacher from "../Media/teacher.png";
 var answer ="";
 const Individual_GradeAndAnswers = () => {
 
@@ -37,9 +39,29 @@ const Individual_GradeAndAnswers = () => {
 
 
   return (
+    <div className="add">
+    <>
+      <nav>
+        <img src={logo} className="logo" alt="" />{" "}
+        <ul>
+          <li>
+            <a href="">Home</a>
+          </li>
+          <li>
+            <a href="#news">News</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+        </ul>
+      </nav>
+    </>
+    <br />
+    <br />
     <div>
-    
-      <h1>Hi</h1>
 
       <label>
         Exam ID:
@@ -66,7 +88,7 @@ const Individual_GradeAndAnswers = () => {
         </ div> */}
 
       </div>
-    
+      </div>
     </div>
   );
 }
