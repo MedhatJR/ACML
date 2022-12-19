@@ -7,6 +7,7 @@ const cors = require("cors");
 const Exams = require("../Models/Exams");
 appRouter.use(cors());
 const Instructor = require("../Models/Instructor");
+const CorporateExam = require("../Models/CorporateExam")
 
 appRouter.get("/Corporate_read", async (req, res) => {
   Corporate.find({ Name: req.body.Name }, (error, data) => {
@@ -182,5 +183,24 @@ appRouter.post("/Corporate_ForgotPassword" , async(req,res) => {
     }
   );
   
+});
+appRouter.get("/Corporate_view_exam", async (req, res) => {
+  res.send(await Exams.find().select(["Question1", "Choice11", "Choice12","Choice13", "Choice14", "Question2","Choice21", "Choice22", "Choice23","Choice24","Course"]));
+});
+appRouter.post("/Corporate_submitAnswer", async (req, res) => {
+  const newAnswer = new CorporateExam({
+    Question1: req.body.Question1,
+    Answer1: req.body.Answer1,
+    Question2: req.body.Question2,
+    Answer2: req.body.Answer2,
+
+  });
+  try {
+     CorporateExam.create(newAnswer);
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.status(200).send("Submitted Answer");
 });
 module.exports = appRouter;

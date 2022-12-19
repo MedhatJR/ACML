@@ -5,7 +5,7 @@ import Axios from "axios";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
-import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
+// import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 
 const LogIn = () => {
   const C = document.getElementById("Category").value

@@ -52,6 +52,9 @@ const Register = () => {
   const forward3 = () => {
     nav("/IMCQ");
   };
+  const forward4 = () => {
+    nav("/CMCQ");
+  };
   return (<>
     <div className="add">
       <>
@@ -82,6 +85,7 @@ const Register = () => {
       <button onClick={forward}>Forward</button>
       <button onClick={forward2}>Forward gedan</button>
       <button onClick={forward3}>Forward awy ba2a fahem</button>
+      <button onClick={forward4}>خش برجلك اليمين</button>
       <h1>Please Register</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Username</label>

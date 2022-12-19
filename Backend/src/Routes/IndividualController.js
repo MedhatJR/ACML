@@ -312,7 +312,7 @@ appRouter.get("/Individual_retrieveMyCourseData", async (req, res) => {
 
 //submit the answers to the exercise after completing it
 
-appRouter.post("/Instructor_submitAnswer", async (req, res) => {
+appRouter.post("/Individual_submitAnswer", async (req, res) => {
   const newAnswer = new IndividualExam({
     Question1: req.body.Question1,
     Answer1: req.body.Answer1,
@@ -321,7 +321,7 @@ appRouter.post("/Instructor_submitAnswer", async (req, res) => {
 
   });
   try {
-    await IndividualExam.create(newAnswer);
+     IndividualExam.create(newAnswer);
   } catch (err) {
     console.log(err);
   }

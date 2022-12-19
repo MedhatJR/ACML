@@ -14,6 +14,7 @@ import LogIn from "./pages/LogIn";
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
 import IMCQ from"./pages/IMCQ";
+import CMCQ from"./pages/CMCQ";
 function App() {
   return (
     <>
@@ -40,6 +41,8 @@ function App() {
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ/>} />
+              <Route path="/CMCQ" element={<CMCQ/>} />
+
 
 
             </Routes>
