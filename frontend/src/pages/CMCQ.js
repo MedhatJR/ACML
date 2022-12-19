@@ -79,9 +79,11 @@ const CMCQ = () => {
         <label>Answer2</label>
         <br />
         <input type="text" name="Course" id="AAC2" /> <br />
+        <br />
 
 
        <button onClick={SubmitAnswers1}>Submit Answers</button>
+       <br />
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
         ))}

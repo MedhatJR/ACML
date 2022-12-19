@@ -23,6 +23,9 @@ const CorporatePage = () => {
   const grade = () => {
     nav("/CoporateGradeAndAnswers");
   };
+  const forward4 = () => {
+    nav("/CMCQ");
+  };
   return (
     <div className="add">
       <>
@@ -63,6 +66,9 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
+      <br/>
+      <br/>
+      <button onClick={forward4}>View Exam</button>
     </div>
   );
 };
