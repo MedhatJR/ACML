@@ -9,6 +9,8 @@ import ResetPassword from "./pages/ResetPassword";
 import AddCourse from "./pages/AddCourse";
 import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
+import Individual_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
+import Coporate_GradeAndAnswers from "./pages/CoporateGradeAndAnswers";
 import IndividualPage from "./pages/IndividualPage";
 import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
 import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
@@ -24,7 +26,9 @@ import Rateindividual from "./pages/Rateindividual"
 import CorpRatecourse from "./pages/CorpRatecourse"
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
-import IMCQ from "./pages/IMCQ";
+import IMCQ from"./pages/IMCQ";
+import CMCQ from"./pages/CMCQ";
+
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -80,6 +84,8 @@ function App() {
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
               <Route path="/InstrCourseRatings" element={<InstrCourseRatings />} />
+              <Route path="/IndividualGradeAndAnswers" element={<Individual_GradeAndAnswers />} />
+              <Route path="/CoporateGradeAndAnswers" element={<Coporate_GradeAndAnswers />} />
               <Route path="/IndividualPage" element={<IndividualPage />} />
               <Route
                 path="/IndividualViewMyCourses"

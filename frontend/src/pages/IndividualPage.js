@@ -44,6 +44,9 @@ const IndividualPage = () => {
   const change = () => {
     nav("/IndividualUpdate");
   };
+  const grade = () => {
+    nav("/IndividualGradeAndAnswers");
+  };
   return (
     <div className="add">
       <>
@@ -98,6 +101,11 @@ const IndividualPage = () => {
       <br/>
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={grade}>
+        Your grades and check your anwsers
       </button>
       <br/>
       <br/>

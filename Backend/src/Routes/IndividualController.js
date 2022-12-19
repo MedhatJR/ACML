@@ -4,12 +4,12 @@ const express = require("express");
 const Course = require("../Models/Course");
 const appRouter = express.Router();
 const Individual = require("../Models/IndividualTrainee");
-const Exam = require("../Models/Exams");
+const Exams = require("../Models/Exams");
 const cors = require("cors");
 const Instructor = require("../Models/Instructor");
 const IndividualExam = require("../Models/IndividualExam");
-const Exams = require("../Models/Exams");
 appRouter.use(cors());
+const mongoose  = require('mongoose');
 
 //to display the register page
 appRouter.get("/", async (req, res) => {
@@ -310,15 +310,16 @@ appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
 
 //submit the answers to the exercise after completing it
 
-appRouter.post("/Instructor_submitAnswer", async (req, res) => {
+appRouter.post("/Individual_submitAnswer", async (req, res) => {
   const newAnswer = new IndividualExam({
+
     Question1: req.body.Question1,
     Answer1: req.body.Answer1,
     Question2: req.body.Question2,
     Answer2: req.body.Answer2,
   });
   try {
-    await IndividualExam.create(newAnswer);
+     IndividualExam.create(newAnswer);
   } catch (err) {
     console.log(err);
   }
@@ -344,63 +345,115 @@ appRouter.get("/Individual_view_exam", async (req, res) => {
 });
 
 //view his/her grade from the exercise
-appRouter.get("/Individual_Grade", async (req, res) => {
+appRouter.post("/Individual_Grade", async (req, res) => {
   var grade = 0;
-  var ans1 = Exam.findOne({}, (error, data) => {
-    if (error) {
-      console.log("error");
-    } else console.log("done1");
-  }).select("Answer1");
-  var ans11 = IndividualExam.findOne({}, (error, data) => {
-    if (error) {
-      console.log("error");
-    } else console.log("done2");
-  }).select("Answer1");
-  var ans2 = Exam.findOne({}, (error, data) => {
-    if (error) {
-      console.log("error");
-    } else console.log("done21");
-  }).select("Answer2");
-  var ans22 = IndividualExam.findOne({}, (error, data) => {
-    if (error) {
-      console.log("error");
-    } else console.log("done22");
-  }).select("Answer2");
-
-  if (ans1[1] == ans11[1]) {
-    grade += 1;
-    console.log(grade);
+  var final = "";
+  const  _id  = req.body._id
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).json({error: 'No such id'})
   }
-  if (ans2[1] == ans22[1]) {
-    grade += 1;
+  const ans1 = await IndividualExam.findById(_id).select("Answer1").select("Answer2")
+  const ques1 = await IndividualExam.findById(_id).select("Question1").select("Question2")
+  final = ques1.Question1;
+  console.log(final);
+  if (!ans1) {
+    return res.status(400).json({error: 'No such exam'})
   }
 
-  res.status(200).send({ Grade: grade });
-});
-
-//view the questions with the correct solution to view the incorrect answers
-/*
-appRouter.get("/Individual_correctSolution", async (req, res) => {
+  console.log(final);
+    Exams.find( { Question1 :final} ,(error, data) =>
+     { if (error) { console.log(error) } 
+    else {
+    console.log(data);
   
-  var grade = 0;
-  var ans1 = Exam.findOne({}, (error, data) => { if (error) { console.log("error") } else console.log("done1"); }).select("Answer1")
-  var ans11 = IndividualExam.findOne({}, (error, data) => { if (error) { console.log("error") ; } else console.log("done2"); }).select("Answer1")
- var ans2 = Exam.findOne({}, (error, data) => { if (error) { console.log("error")  } else console.log("done21"); }).select("Answer2")
- var ans22 = IndividualExam.findOne({}, (error, data) => { if (error) {console.log("error") } else console.log("done22"); }).select("Answer2")
-  if (ans1[1]==(ans11[1])) {
+     if (data[0].Answer1==ans1.Answer1){
+      grade+=1;
+     }
     
-    
-    grade += 1;
-    console.log(grade);
-  }
-  if (ans2[1]==(ans22[1])) {
-    grade += 1;
-  }
-  res.send(await Course.find().select(["Title", "Hours", "Rating"]));
-  res.status(200).send({Grade: grade});
+     if(data[0].Answer2==ans1.Answer2){
+      grade+=1;
+     }
+     res.status(200).send( "Grade : " +grade);
+  } }).select("Answer1").select("Answer2")
+ 
 }
 );
-*/
+//   var ans1 = Exam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done1");
+//   }).select("Answer1");
+//   var ans11 = IndividualExam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done2");
+//   }).select("Answer1");
+//   var ans2 = Exam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done21");
+//   }).select("Answer2");
+//   var ans22 = IndividualExam.findOne({}, (error, data) => {
+//     if (error) {
+//       console.log("error");
+//     } else console.log("done22");
+//   }).select("Answer2");
+
+//   if (ans1[1] == ans11[1]) {
+//     grade += 1;
+//     console.log(grade);
+//   }
+//   if (ans2[1] == ans22[1]) {
+//     grade += 1;
+//   }
+
+//   res.status(200).send({ Grade: grade });
+// });
+
+//view the questions with the correct solution to view the incorrect answers
+appRouter.post("/Individual_QuestionAnswers", async (req, res) => {
+  var grade = 0;
+  var final = "";
+  const  _id  = req.body._id
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).json({error: 'No such id'})
+  }
+  const ans1 = await IndividualExam.findById(_id).select("Answer1").select("Answer2")
+  const ques1 = await IndividualExam.findById(_id).select("Question1").select("Question2")
+  final = ques1.Question1;
+  console.log(final);
+  if (!ans1) {
+    return res.status(400).json({error: 'No such exam'})
+  }
+
+   Exams.find( { Question1 :final} ,function (error, data) { if (error) { console.log("error") } 
+    else {
+      console.log(data);
+
+     if ((data[0].Answer1==ans1.Answer1) & (data[0].Answer2==ans1.Answer2)){
+      grade=2;
+      res.status(200).send("Question 1: "+ques1.Question1+" --> Correct Solution  "+ ans1.Answer1+ "   Question 2:"+ques1.Question2+
+      " --> Correct Solution  "+ans1.Answer2+" ,Your Grade:  "+ grade); 
+     }
+     if ((data[0].Answer1!=ans1.Answer1) & (data[0].Answer2==ans1.Answer2)){
+      grade=1;
+      res.status(200).send("Question 1: "+ques1.Question1+"--> Wrong Solution : "+ans1.Answer1+ "( The Correct Solution is:  "+data[0].Answer1 +")     Question 2: "+ques1.Question2+
+      " --> Correct Solution  "+ans1.Answer2+" , Your Grade:  "+ grade); 
+     }
+     if ((data[0].Answer1==ans1.Answer1) & (data[0].Answer2!=ans1.Answer2)){
+      grade=1;
+      res.status(200).send("Question 1: " +ques1.Question1+" --> Correct Solution  "+ans1.Answer1+ "  Question 2 :"+ques1.Question2+
+      "--> Wrong Solution "+ans1.Answer2+ "( The Correct Solution is:  "+ data[0].Answer2 +" ), Your Grade:  "+ grade); 
+     }
+     if ((data[0].Answer1!=ans1.Answer1) & (data[0].Answer2!=ans1.Answer2)){
+      grade=0;
+      res.status(200).send("Question 1: "+ques1.Question1+" --> Wrong Solution : "+ans1.Answer1+ "(The Correct Solution is: "+data[0].Answer1 + " )   Question 2: "+ques1.Question2+
+      "--> Wrong Solution  "+ans1.Answer2+"(The Correct Solution is: "+ data[0].Answer2 +") , Your Grade:  "+ grade); 
+     }
+  } }).select("Answer1").select("Answer2")
+}
+);
+
 
 appRouter.post("/Individual_Login", async (req, res) => {
   const Email = req.body.email;
