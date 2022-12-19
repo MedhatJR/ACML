@@ -12,24 +12,30 @@ const InstructorPage = () => {
   const nav = useNavigate();
   console.log("Hi");
 
-  const viewCourseRating = () => {
-    console.log("Hi");
-    Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
-      (response) => {
-        setFinal=response.data;
-      }
-    );
-  };
-  const viewMyRating = () => {
-    console.log("Hi");
-    Axios.post("http://localhost:8000/instructor_viewRatings").then(
-      (response) => {
-        this.setFinal(response.data);
-      }
-    );
-  };
+//   const viewCourseRating = () => {
+//     console.log("Hi");
+//     Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
+//       (response) => {
+//         setFinal=response.data;
+//       }
+//     );
+//   };
+//   const viewMyRating = () => {
+//     console.log("Hi");
+//     Axios.post("http://localhost:8000/instructor_viewRatings").then(
+//       (response) => {
+//         this.setFinal(response.data);
+//       }
+//     );
+//   };
   const forwardAdd = () => {
     nav("/AddCourse");
+  };
+  const viewMyRating = () => {
+    nav("/InstrMyRatings");
+  };
+  const viewCourseRating = () => {
+    nav("/InstrCourseRatings");
   };
   const forwardView = () => {
     nav("/InstructorViewCourse");

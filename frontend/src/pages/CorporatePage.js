@@ -10,6 +10,9 @@ const CorporatePage = () => {
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
+  const forwardViewMyCourses = () => {
+    nav("/CorporateViewMyCourses");
+  };
 
   const RateInstructor = () => {
     nav("/RateCorp");
@@ -41,6 +44,11 @@ const CorporatePage = () => {
           </ul>
         </nav>
       </>
+      <br />
+      <button class="button-17" role="button" onClick={forwardViewMyCourses}>
+        My Courses
+      </button>
+      <br />
       <br />
       <button class="button-17" role="button" onClick={RateInstructor}>
         Rate An Instructor

@@ -11,6 +11,8 @@ var wantedtitle = "";
 // var id = "";
 
 const CorporateViewMyCourses = () => {
+  var [rating, setRating] = useState(0);
+  var [hover, setHover] = useState(0);
   const [users, setData] = useState("");
   const nav = useNavigate();
 
@@ -84,6 +86,24 @@ const CorporateViewMyCourses = () => {
             <p key={user} className="rating">
               Rating: {user.Rating} ⭐'s
             </p>
+            <div className="star-rating">
+              {[...Array(5)].map((star, index) => {
+                if (index <= 5) {
+                  return (
+                    <button
+                      type="button"
+                      key={index}
+                      className={index <= (hover || rating) ? "on" : "off"}
+                      onClick={() => setRating(index + 1)}
+                      onMouseEnter={() => setHover(index)}
+                      onMouseLeave={() => setHover(rating)}
+                    >
+                      <span className="star">&#9733;</span>
+                    </button>
+                  );
+                }
+              })}
+            </div>
 
             <button className="button-17" id="btn17" onClick={go}>
               Go To Course
