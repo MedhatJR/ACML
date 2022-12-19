@@ -55,7 +55,7 @@ const InstrCourseRatings = () => {
           </li>
         </ul>
       </nav>
-      <label>Your Name</label>
+      <label>Your Username</label>
       <input name="myUsername" id="myName" type="text" />
       <br />
       <button onClick={ViewCourseRatings} className="button-17">
@@ -67,27 +67,15 @@ const InstrCourseRatings = () => {
         //id  = user.Title
         <div className="MyCourse">
           <>
-            {/* <h1 key={user} className="title">
+             <h1 key={user} className="title">
               {user.Title}
             </h1>
-            <p key={user} className="shortsummary">
-              {user.Shortsummary}
-            </p>
-            <p key={user} className="instructor">
-              By:{user.Instructor}
-            </p>
-            <p key={user} className="subject">
-              Subject:
-              {user.Subject}
-            </p> */}
+            
 
             <p key={user} className="rating">
               Rating: {user.Rating} ⭐'s
             </p>
 
-            {/* <button className="button-17" id="btn17" onClick={go}>
-              Go To Course
-            </button> */}
           </>
         </div>
       ))}

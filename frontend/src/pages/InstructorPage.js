@@ -113,6 +113,7 @@ const InstructorPage = () => {
         Change Biography
       </button>
       <br />
+      <br />
       <button class="button-17" role="button" onClick={email}>
         Change Email
       </button>

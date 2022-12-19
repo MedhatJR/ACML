@@ -20,15 +20,13 @@ const InstrMyRatings = () => {
       Email: email,
     }).then((response) => {
       console.log(response);
-      arr = response.data.CourseDetails;
+      arr = response.data;
 
       setData(response);
 
       // setData(response.data[1].Title);
     });
   };
-
-
 
   return (
     <div className="IndividualViewCourse">
@@ -52,8 +50,11 @@ const InstrMyRatings = () => {
       <label>Your Email</label>
       <input name="email" id="email" type="email" />
       <br />
+      <br/>
+      <br/>  
       <button onClick={ViewMyRatings}> View My Ratings</button>
-    
+      <br/>
+      <br/>    
       {arr.map((user) => (
         //id  = user.Title
         <div className="MyRating">
