@@ -6,18 +6,18 @@ const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
 //import Register from "./Register";d
 //JWT
-const authRoutes=require("../frontend/src/Routes/AuthRoutes");
+const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
 //------------------
 //App variables
 
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
 //JWT
 app.use(cookieParser());
-app.use("/",authRoutes);
+app.use("/", authRoutes);
 //--------------------
 
 app.use(function (req, res, next) {

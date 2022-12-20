@@ -67,19 +67,20 @@ body{
     .fullCourse .rating {
         font-size: 15px;
         position: absolute;
-        bottom: 180px;
+        top: 140px;
+        left: 250px;
        
     }
     .fullCourse .subject {
         font-size: 15px;
         position: absolute;
-        bottom: 110px;
+        top: 145px;
     }
     .fullCourse .subtitle {
-        font-size: 15px;
+        font-size: 25px;
         position: absolute;
-        bottom: 110px;
-        left:90px;;
+        top: 100px;
+        left:800px;;
     }
     
     #btn17 {
@@ -94,5 +95,13 @@ body{
     height: 200px;
     position: absolute;
     top: 200px;
+
+}
+.videoSub {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    top: 200px;
+    right: 200px;
 
 }
