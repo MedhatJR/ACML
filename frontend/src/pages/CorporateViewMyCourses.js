@@ -5,6 +5,7 @@ import Axios from "axios";
 import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import "../styles/Star.css";
 var arr = [];
 var arrTitles = [];
 var wantedtitle = "";

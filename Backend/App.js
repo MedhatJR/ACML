@@ -12,6 +12,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(router);
 
+
+const authRoutes=require("../frontend/src/Routes/AuthRoutes");
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+app.use("/",authRoutes);
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   next();
