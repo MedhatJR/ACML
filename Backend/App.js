@@ -17,9 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
 
-const authRoutes = require("../frontend/src/Routes/AuthRoutes");
-const cookieParser = require("cookie-parser");
-
 app.use(cookieParser());
 app.use("/", authRoutes);
 //--------------------
