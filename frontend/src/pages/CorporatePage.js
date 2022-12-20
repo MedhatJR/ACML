@@ -13,6 +13,9 @@ const CorporatePage = () => {
   const forwardViewMyCourses = () => {
     nav("/CorporateViewMyCourses");
   };
+  const forward4 = () => {
+    nav("/CMCQ");
+  };
 
   const RateInstructor = () => {
     nav("/RateCorp");
@@ -56,6 +59,9 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={RateInstructor}>
         Rate An Instructor
       </button>
+      <br/>
+      <br/>
+      <button onClick={forward4}>Join the Exam</button> 
       <br/>
       <br/>
       <button class="button-17" role="button" onClick={RateCourse}>
