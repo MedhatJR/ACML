@@ -3,6 +3,7 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
+    margin-left: 5px;
   }
   .on {
     color: #000;

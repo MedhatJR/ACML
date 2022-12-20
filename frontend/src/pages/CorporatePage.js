@@ -10,9 +10,21 @@ const CorporatePage = () => {
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
+  const forwardViewMyCourses = () => {
+    nav("/CorporateViewMyCourses");
+  };
 
-  const forwardAdd = () => {
+  const RateInstructor = () => {
     nav("/RateCorp");
+  };
+  const RateCourse = () => {
+    nav("/CorpRatecourse");
+  }
+  const change = () => {
+    nav("/CorporateUpdate");
+  };
+  const grade = () => {
+    nav("/CoporateGradeAndAnswers");
   };
   return (
     <div className="add">
@@ -36,8 +48,28 @@ const CorporatePage = () => {
         </nav>
       </>
       <br />
-      <button class="button-17" role="button" onClick={forwardAdd}>
+      <button class="button-17" role="button" onClick={forwardViewMyCourses}>
+        My Courses
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={RateInstructor}>
         Rate An Instructor
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={RateCourse}>
+        Rate A Course
+        </button>
+        <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={grade}>
+        Your grades and check your anwsers
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={change}>
+        Change Password
       </button>
     </div>
   );

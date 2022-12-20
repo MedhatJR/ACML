@@ -12,29 +12,46 @@ const InstructorPage = () => {
   const nav = useNavigate();
   console.log("Hi");
 
-  const viewCourseRating = () => {
-    console.log("Hi");
-    Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
-      (response) => {
-        setFinal=response.data;
-      }
-    );
-  };
-  const viewMyRating = () => {
-    console.log("Hi");
-    Axios.post("http://localhost:8000/instructor_viewRatings").then(
-      (response) => {
-        this.setFinal(response.data);
-      }
-    );
-  };
+//   const viewCourseRating = () => {
+//     console.log("Hi");
+//     Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
+//       (response) => {
+//         setFinal=response.data;
+//       }
+//     );
+//   };
+//   const viewMyRating = () => {
+//     console.log("Hi");
+//     Axios.post("http://localhost:8000/instructor_viewRatings").then(
+//       (response) => {
+//         this.setFinal(response.data);
+//       }
+//     );
+//   };
   const forwardAdd = () => {
     nav("/AddCourse");
+  };
+  const viewMyRating = () => {
+    nav("/InstrMyRatings");
+  };
+  const viewCourseRating = () => {
+    nav("/InstrCourseRatings");
   };
   const forwardView = () => {
     nav("/InstructorViewCourse");
   };
-
+  const Add = () => {
+    nav("/AddPromotion");
+  };
+  const Change = () => {
+    nav("/UpdatePassword");
+  };
+  const Biography = () => {
+    nav("/UpdateBiography");
+  };
+  const email = () => {
+    nav("/UpdateEmail");
+  };
   return (
     <div className="add">
       <>
@@ -79,6 +96,26 @@ const InstructorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={forwardView}>
         View Course
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Add}>
+        Add Promotion
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Change}>
+        Change Password
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={Biography}>
+        Change Biography
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={email}>
+        Change Email
       </button>
     </div>
   );

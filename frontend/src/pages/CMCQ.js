@@ -3,29 +3,29 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
-var arr1=[];
-const IMCQ = () => {
+var arr2=[];
+const CMCQ = () => {
     const [users, setData] = useState("");
     const nav = useNavigate();
-    const getExam = () => {
+    const getExam1 = () => {
       
-            Axios.get("http://localhost:8000/Individual_view_exam").then(
+            Axios.get("http://localhost:8000/Corporate_view_exam").then(
         (response) => {
             setData(response);
             console.log(response);
-            arr1 = response.data;
+            arr2 = response.data;
     
-            setData(arr1);
-            console.log(arr1);
+            setData(arr2);
+            console.log(arr2);
         }
       );
     };
-    const SubmitAnswers = () => {
-      const Question1 = document.getElementById("QA1").value;
-      const Answer1 = document.getElementById("AA1").value;
-      const Question2= document.getElementById("QA2").value;
-      const Answer2 = document.getElementById("AA2").value
-      Axios.post("http://localhost:8000/Individual_submitAnswer", {
+    const SubmitAnswers1 = () => {
+      const Question1 = document.getElementById("QAC1").value;
+      const Answer1 = document.getElementById("AAC1").value;
+      const Question2= document.getElementById("QAC2").value;
+      const Answer2 = document.getElementById("AAC2").value
+      Axios.post("http://localhost:8000/Corporate_submitAnswer", {
           Question1:Question1,
           Answer1:Answer1,
           Question2:Question2,
@@ -49,11 +49,11 @@ const IMCQ = () => {
         <h1>Click to view Exam</h1>
   
         <br />
-        <button onClick={getExam} className="btn">
+        <button onClick={getExam1} className="btn">
           Get Exam
         </button>
 
-        {arr1.map((user)=>(
+        {arr2.map((user)=>(
             <>
         <h1>Course:{user.Course}</h1>
        <h1>Question1:{user.Question1}</h1> 
@@ -69,19 +69,19 @@ const IMCQ = () => {
        <h1>Add Your Answers</h1>
        <label>Question1</label>
        <br />
-       <input type="text" name="Choice23" id="QA1" /> <br />
+       <input type="text" name="Choice23" id="QAC1" /> <br />
         <label>Answer1</label>
         <br />
-        <input type="text" name="Choice24" id="AA1" /> <br />
+        <input type="text" name="Choice24" id="AAC1" /> <br />
         <label>Question2</label>
         <br />
-        <input type="text" name="Answer2" id="QA2" /> <br />
+        <input type="text" name="Answer2" id="QAC2" /> <br />
         <label>Answer2</label>
         <br />
-        <input type="text" name="Course" id="AA2" /> <br />
+        <input type="text" name="Course" id="AAC2" /> <br />
 
 
-       <button onClick={SubmitAnswers}>Submit Answers</button>
+       <button onClick={SubmitAnswers1}>Submit Answers</button>
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
         ))}
@@ -91,4 +91,4 @@ const IMCQ = () => {
     );
   };
 
-export default IMCQ
+export default CMCQ

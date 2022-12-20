@@ -1,6 +1,5 @@
 // External variables
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
@@ -11,11 +10,16 @@ const cookieParser = require("cookie-parser");
 //------------------
 //App variables
 
+//App variables
+const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
-//JWT
+
+const authRoutes = require("../frontend/src/Routes/AuthRoutes");
+const cookieParser = require("cookie-parser");
+
 app.use(cookieParser());
 app.use("/", authRoutes);
 //--------------------
@@ -58,6 +62,7 @@ mongoose
 /*
                                                     Start of your code
 */
+
 /*
                                                     End of your code
 */

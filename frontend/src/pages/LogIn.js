@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import Axios from "axios";
-import "../styles/Login.css";
+//import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
@@ -10,7 +10,18 @@ import logo from "../Media/Logo.png";
 const LogIn = () => {
     var [final, setFinal] = useState("");
     const nav = useNavigate();
-
+    const forward = () => {
+        nav("/");
+      };
+      const corplogin = () => {
+          nav("/CorporatePage");
+        };
+        const indivilogin = () => {
+          nav("/IndividualPage");
+        };
+        const instlogin = () => {
+          nav("/InstructorPage");
+        };
     const login = () => {
         const C = document.getElementById("Category").value
         const Email = document.getElementById("email").value;
@@ -24,14 +35,18 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
+      //Navigation to the corporate page
+      nav("/CorporatePage");
     }
-    else if (C == "IndividualTrainee"){
+    else if (C === "IndividualTrainee"){
       Axios.post("http://localhost:8000/Individual_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
         setFinal=response.data;
       });
+      //Navigation to the Individual page
+      nav("/IndividualPage");
     }
     else{
       Axios.post("http://localhost:8000/Instructor_Login", {
@@ -40,12 +55,11 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
+      nav("/InstructorPage");
     }
   
   };
-    const forward = () => {
-      nav("/");
-    };
+   
     const handleSubmit = (e) => {
         e.preventDefault();
       }
@@ -94,7 +108,7 @@ const LogIn = () => {
         <br />
         <br />
         <li>
-            <a href="/Emailsent">Forgot my Password</a>
+            <a href="/EnterEmail">Forgot my Password</a>
           </li>
       </form>
       {/* {final.Username} */}

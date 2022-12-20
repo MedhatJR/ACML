@@ -12,6 +12,7 @@ const RateCorp = () => {
     var [rating, setRating] = useState(0);
     var [hover, setHover] = useState(0);
     var [final, setFinal] = useState("");
+ //   var [liked, setLiked] = useState({ liked: false });
     const nav = useNavigate();
 
     const Rate = () => {
@@ -25,58 +26,65 @@ const RateCorp = () => {
             }
         );
     };
-console.log(rating);
-return (
-    <div className="add">
-        <>
-            <nav>
-                <img src={logo} className="logo" alt="" />{" "}
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="#news">News</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                </ul>
-            </nav>
-        </>
-        <br />
-        <form className="form">
-            <label>Email of the Instructor</label>
-            <input type="email" name="Email" id="email" /> <br />
-        </form>
-        <br />
-        <div className="star-rating">
-            {[...Array(5)].map((star, index) => {
-                if (index <= 5) {
-                    return (
-                        <button
-                            type="button"
-                            key={index}
-                            className={index <= (hover || rating) ? "on" : "off"}
-                            onClick={() => setRating(index + 1)}
-                            onMouseEnter={() => setHover(index)}
-                            onMouseLeave={() => setHover(rating)}
-                        >
-                            <span className="star">&#9733;</span>
-                        </button>
-                    );
-                }
-            })}
+    console.log(rating);
+    return (
+        <div className="add">
+            <>
+                <nav>
+                    <img src={logo} className="logo" alt="" />{" "}
+                    <ul>
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="#news">News</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                    </ul>
+                </nav>
+            </>
+            <br />
+            <form className="form">
+                <label>Email of the Instructor</label>
+                <input type="email" name="Email" id="email" /> <br />
+            </form>
+            <br />
+            <div className="star-rating">
+                {[...Array(5)].map((star, index) => {
+                    // let e = React.createElement;
+                    // var count = 0;
+                    //     if (setLiked.liked) {
+                    //         count++;
+                    //     }
+                        if (index <= 5) {
+                            return (
+                                <button
+                                    type="button"
+                                    key={index}
+                                    className={index <= (hover || rating) ? "on" : "off"}
+                                   // onClick={() => setRating((rating + index + 1) / (count + 1))}
+                                    onClick={() => setRating((index + 1))}
+                                    onMouseEnter={() => setHover(index)}
+                                    onMouseLeave={() => setHover(rating )}
+                                >
+                                    <span className="star">&#9733;</span>
+                                </button>
+                            );
+                        }
+                    
+                })}
+            </div>
+            <br />
+            <button class="button-17" role="button" onClick={Rate}>
+                Submit Rating
+            </button>
         </div>
-        <br />
-        <button class="button-17" role="button" onClick={Rate}>
-            Submit Rating
-        </button>
-    </div>
-);
+    );
 };
 
 

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const IndividualExamSchema = new Schema(
-  {    
+const CorporateExamSchema = new Schema(
+  {
+    
     Question1: {
       type: String,
       required: true,
@@ -26,8 +27,8 @@ const IndividualExamSchema = new Schema(
   { timestamps: true }
 );
 
-const IndividualExam = mongoose.model(
-  "IndividualExam",
-  IndividualExamSchema
+const CorporateExam = mongoose.model(
+  "CorporateExam",
+  CorporateExamSchema
 );
-module.exports = IndividualExam;
+module.exports = CorporateExam;
