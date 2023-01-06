@@ -197,47 +197,88 @@ appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
     }
   );
 
-  appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
-    //const RegisteredCourses = req.body.RegisteredCourses;
-    var RegisteredCoursesArr = [];
-    var final = [];
+  // appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
+  //   //const RegisteredCourses = req.body.RegisteredCourses;
+  //   var RegisteredCoursesArr = [];
+  //   var final = [];
 
-    Corporate.find(
-      {
-        Username: { $eq: req.body.Username },
-      },
-      function (err, result) {
-        if (err) {
-          console.log("err");
-        } else {
-          // console.log(RegisteredCoursesArr);
-          console.log("Done1");
-          //RegisteredCoursesArr = result[0];
-          RegisteredCoursesArr = result;
-          final = RegisteredCoursesArr[0].RegisteredCourses;
-          console.log(final[1]);
-          console.log(final.length);
+  //   Corporate.find(
+  //     {
+  //       Username: { $eq: req.body.Username },
+  //     },
+  //     function (err, result) {
+  //       if (err) {
+  //         console.log("err");
+  //       } else {
+  //         // console.log(RegisteredCoursesArr);
+  //         console.log("Done1");
+  //         //RegisteredCoursesArr = result[0];
+  //         RegisteredCoursesArr = result;
+  //         final = RegisteredCoursesArr[0].RegisteredCourses;
+  //         console.log(final[1]);
+  //         console.log(final.length);
 
-          Course.find({ Title: final }, function (err, result1) {
-            if (err) {
-              res.send("err");
-            } else {
-              console.log(result1);
-              res.send({ CourseDetails: result1 });
-              console.log("Done2");
-            }
-          }).select([
-            "Title",
-            "Shortsummary",
-            "Subject",
-            "Instructor",
-            "Rating",
-          ]);
-        }
-      }
-    ).select("RegisteredCourses");
-    console.log(final.length);
-  });
+  //         Course.find({ Title: final }, function (err, result1) {
+  //           if (err) {
+  //             res.send("err");
+  //           } else {
+  //             console.log(result1);
+  //             res.send({ CourseDetails: result1 });
+  //             console.log("Done2");
+  //           }
+  //         }).select([
+  //           "Title",
+  //           "Shortsummary",
+  //           "Subject",
+  //           "Instructor",
+  //           "Rating",
+  //         ]);
+  //       }
+  //     }
+  //   ).select("RegisteredCourses");
+  //   console.log(final.length);
+  // });
+
+
+  
+appRouter.post("/C_retrieveMyCourse", async (req, res) => {
+  //const RegisteredCourses = req.body.RegisteredCourses;
+  // var RegisteredCoursesArr = [];
+  // var final = [];
+
+  // Corporate.find(
+  //   {
+  //     Username: { $eq: req.body.Username },
+  //   },
+  //   function (err, result) {
+  //     if (err) {
+  //       console.log("err");
+  //     } else {
+  //       // console.log(RegisteredCoursesArr);
+  //       console.log("Done1");
+  //       //RegisteredCoursesArr = result[0];
+  //       RegisteredCoursesArr = result;
+  //       final = RegisteredCoursesArr[0].RegisteredCourses;
+  //       console.log(final[1]);
+  //       console.log(final.length);
+
+  //       Course.find({ Title: final }, function (err, result1) {
+  //         if (err) {
+  //           res.send("err");
+  //         } else {
+  //           console.log(result1);
+  //           res.send({ CourseDetails: result1 });
+  //           console.log("Done2");
+  //         }
+  //       }).select(["Title", "Shortsummary", "Subject", "Instructor", "Rating"]);
+  //     }
+  //   }
+  // ).select("RegisteredCourses");
+  // console.log(final.length);
+  res.send("vsdniovf")
+});
+
+
 
   appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
     //const RegisteredCourses = req.body.RegisteredCourses;
