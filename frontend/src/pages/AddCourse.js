@@ -44,7 +44,7 @@ const AddCourse = () => {
     }).then((response) => {
       // console.log(response);
       // console.log("Okay");
-      this.setFinal(response.data);
+      setFinal(response.data);
     });
   };
 
@@ -84,7 +84,7 @@ const AddCourse = () => {
       </>
 
       <h1>Add Your Course</h1>
-      <form className="CourseForm">
+      <div className="CourseForm">
         <label>Title</label>
         <br />
         <input type="text" name="Title" id="title" /> <br />
@@ -118,7 +118,7 @@ const AddCourse = () => {
         <button className="button-17" onClick={GoToViewCourses}>
           View Courses
         </button>
-      </form>
+      </div>
     </div>
   );
 };

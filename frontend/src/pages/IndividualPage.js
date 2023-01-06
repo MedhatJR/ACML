@@ -44,6 +44,12 @@ const IndividualPage = () => {
   const change = () => {
     nav("/IndividualUpdate");
   };
+  const grade = () => {
+    nav("/IndividualGradeAndAnswers");
+  };
+  const forward3 = () => {
+    nav("/IMCQ");
+  };
   return (
     <div className="add">
       <>
@@ -91,6 +97,9 @@ const IndividualPage = () => {
       </button>
       <br/>
       <br/>
+      <button onClick={forward3}>Join the Exam</button>
+      <br/>
+      <br/>
       <button class="button-17" role="button" onClick={Rate}>
         Rate An Instructor
       </button>
@@ -98,6 +107,11 @@ const IndividualPage = () => {
       <br/>
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={grade}>
+        Your grades and check your anwsers
       </button>
       <br/>
       <br/>

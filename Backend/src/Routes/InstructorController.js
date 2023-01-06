@@ -109,7 +109,7 @@ appRouter.post("/instructor_viewMyCourses", async (req, res) => {
   });
 });
 
-appRouter.get("/instructor_viewRatings", async (req, res) => {
+appRouter.post("/instructor_viewRatings", async (req, res) => {
   Instructor.find({ Email: req.body.Email }, (error, data) => {
     if (error) {
       res.send(error);
@@ -117,7 +117,7 @@ appRouter.get("/instructor_viewRatings", async (req, res) => {
   }).select("Rating");
 });
 
-appRouter.get("/instructor_viewCourseRatings", async (req, res) => {
+appRouter.post("/instructor_viewCourseRatings", async (req, res) => {
   Course.find({ Instructor: req.body.Instructor }, (error, data) => {
     if (error) {
       res.send(error);

@@ -1,23 +1,24 @@
 // External variables
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
 //import Register from "./Register";d
 //JWT
-const authRoutes=require("../frontend/src/Routes/AuthRoutes");
+const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
 //------------------
 //App variables
 
+//App variables
+const app = express();
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
-//JWT
+
 app.use(cookieParser());
-app.use("/",authRoutes);
+app.use("/", authRoutes);
 //--------------------
 
 app.use(function (req, res, next) {
@@ -54,10 +55,11 @@ mongoose
       console.log(`Listening to requests on http://localhost:${port}`);
     });
   })
-   .catch((err) => console.log(err));
+  .catch((err) => console.log(err));
 /*
                                                     Start of your code
 */
+
 /*
                                                     End of your code
 */
