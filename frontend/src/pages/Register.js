@@ -4,6 +4,8 @@ import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate, Link, generatePath } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import { ToastContainer, toast } from "react-toastify";
+
 var pop = "Registration successful"
 
 const Register = () => {
@@ -44,6 +46,9 @@ const Register = () => {
     nav("/Contract");
   };
   //JWT------------------
+  const generateError = (err) => toast.error(err, {
+    position: "bottom-right",
+  });
   // const generateError = (err) => toast.error(err, {
   //   position: "bottom-right",
   // });
@@ -75,15 +80,9 @@ const Register = () => {
   function myFunction(element, color) {
     element.style.color = color;
   }
-  const forward2 = () => {
-    nav("/Addexam");
-  };
-  const forward3 = () => {
-    nav("/IMCQ");
-  };
-  const forward4 = () => {
-    nav("/CMCQ");
-  };
+  
+  
+  
   return (<>
     <div className="add">
       <>
@@ -111,9 +110,9 @@ const Register = () => {
 
     <div className="Register">
 
-      <button onClick={forward2}>Forward gedan</button>
-      <button onClick={forward3}>Forward awy ba2a fahem</button>
-      <button onClick={forward4}>خش برجلك اليمين</button>
+      
+      
+      
       <h1>Please Register</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label>Username</label>

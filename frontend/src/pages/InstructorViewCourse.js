@@ -64,15 +64,9 @@ const InstructorViewCourse = () => {
             <input type="LastName" name="LastName" id="LastName" /> <br />
             <br />
       
-       <button onClick={back} className="btn">
-        {" "}
-        back
-      </button>
+     
       <br/>
-      <br/>
-      <label>Click to view Data</label>
-      <br/>
-      <br/>
+      
       
       <button onClick={getData} className="btn">Get Data</button>
       <br />
@@ -91,7 +85,14 @@ const InstructorViewCourse = () => {
             </>
             
           </div>
-        ))};
+        ))}
+        <br/>
+      <br/>
+
+<button onClick={back} className="btn">
+        {" "}
+        back
+      </button>
         
       
     </div>

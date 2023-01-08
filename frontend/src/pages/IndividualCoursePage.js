@@ -72,7 +72,7 @@ const IndividualViewMyCourses = () => {
               {user.Shortsummary}.
             </p>
             <p key={user} className="rating">
-              {user.Rating}
+              {user.Rating} ⭐'s
             </p>
             <p key={user} className="instructor">
               By: {user.Instructor}
@@ -87,7 +87,16 @@ const IndividualViewMyCourses = () => {
               {user.Views} Views
             </p>
             {/* <p key={user}>{user.PreviewLink}</p> */}
-            <p key={user}>{user.SubLink}</p>
+            <iframe
+              className="videoSub"
+              width="560"
+              height="315"
+              src={user.SubLink}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
             {/* <p key={user}>{user.Promotion}</p>
             <p key={user}>{user.Promotion_valid_for}</p> */}
           </>

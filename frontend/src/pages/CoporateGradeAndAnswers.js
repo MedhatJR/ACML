@@ -66,9 +66,12 @@ const Coporate_GradeAndAnswers = () => {
         Exam ID:
         <input type="text" name="id" id="id" />
       </label>
+      <br />
+        <br />
       <div>
         <button  onClick={getGrade} >Get Your Grade</button>
 
+        <br />
         <br />
         <button onClick={getUser}>Check Your Answers</button>
         <br></br>

@@ -38,6 +38,9 @@ import EnterEmail from "./pages/EnterEmail";
 import IndividualResetEmail from "./pages/IndividualResetEmail";
 import IndividualResetPassword from "./pages/IndividualResetPassword";
 import IndividualUpdate from "./pages/IndividualUpdate";
+import IndiRatecourse from "./pages/IndiRatecourse";
+import InstrMyRatings from "./pages/InstrMyRatings";
+import InstrCourseRatings from "./pages/InstrCourseRatings";
 
 
 function App() {
@@ -49,6 +52,7 @@ function App() {
             <Routes>
             <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
+              <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route path="/IndividualResetPassword" element={<IndividualResetPassword />} />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
@@ -78,6 +82,8 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
+              <Route path="/InstrCourseRatings" element={<InstrCourseRatings />} />
               <Route path="/IndividualGradeAndAnswers" element={<Individual_GradeAndAnswers />} />
               <Route path="/CoporateGradeAndAnswers" element={<Coporate_GradeAndAnswers />} />
               <Route path="/IndividualPage" element={<IndividualPage />} />
@@ -99,6 +105,7 @@ function App() {
               />
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
+              <Route path="/CMCQ" element={<CMCQ />} />
             </Routes>
           </div>
         </BrowserRouter>

@@ -5,7 +5,7 @@ appRouter.use(cors());
 
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
-
+var nodemailer = require('nodemailer');
 var dbcourses = [];
 
 const Exams = require("../Models/Exams");
@@ -109,7 +109,7 @@ appRouter.post("/instructor_viewMyCourses", async (req, res) => {
   });
 });
 
-appRouter.get("/instructor_viewRatings", async (req, res) => {
+appRouter.post("/instructor_viewRatings", async (req, res) => {
   Instructor.find({ Email: req.body.Email }, (error, data) => {
     if (error) {
       res.send(error);
@@ -117,7 +117,7 @@ appRouter.get("/instructor_viewRatings", async (req, res) => {
   }).select("Rating");
 });
 
-appRouter.get("/instructor_viewCourseRatings", async (req, res) => {
+appRouter.post("/instructor_viewCourseRatings", async (req, res) => {
   Course.find({ Instructor: req.body.Instructor }, (error, data) => {
     if (error) {
       res.send(error);
@@ -420,4 +420,31 @@ appRouter.post("/Instructor_Login", async (req, res) => {
   );
 });
 
+appRouter.post("/Instructor_receiveemail", async (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'aminmoataz072@gmail.com',
+      pass: 'hunnwqvdqtpytwib'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'aminmoataz072@gmail.com',
+    to: 'aminmoataz072@gmail.com',
+    subject: 'Sending Email to rest password',
+    text: `This code is so confidential , Please do not share it with anyone else .
+    Your code to reset your password is 12345` ,
+   // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log('error');
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send('emailsent')
+    }
+  });
+});
 module.exports = appRouter;

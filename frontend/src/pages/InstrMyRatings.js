@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Axios from "axios";
 //import "../styles/viewStyle.css";
-import "../styles/IndividualViewMyCourses.css";
+//import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var arr = [];
@@ -10,14 +10,14 @@ var arrTitles = [];
 var wantedtitle = "";
 // var id = "";
 
-const InstrCourseRatings = () => {
+const InstrMyRatings = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
 
-  const ViewCourseRatings = () => {
-    var Username = document.getElementById("myName").value;
-    Axios.post("http://localhost:8000/instructor_viewCourseRatings", {
-      Instructor: Username,
+  const ViewMyRatings = () => {
+    var email = document.getElementById("email").value;
+    Axios.post("http://localhost:8000/instructor_viewRatings", {
+      Email: email,
     }).then((response) => {
       console.log(response);
       arr = response.data;
@@ -28,21 +28,13 @@ const InstrCourseRatings = () => {
     });
   };
 
-  const back = () => {
-    nav("/");
-  };
-
-//   const go = () => {
-//     nav("/IndividualCoursePage");
-//   };
-
   return (
     <div className="IndividualViewCourse">
       <nav>
         <img src={logo} className="logo" alt="" />{" "}
         <ul>
           <li>
-            <a href="">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
             <a href="#news">News</a>
@@ -55,27 +47,21 @@ const InstrCourseRatings = () => {
           </li>
         </ul>
       </nav>
-      <label>Your Username</label>
-      <input name="myUsername" id="myName" type="text" />
+      <label>Your Email</label>
+      <input name="email" id="email" type="email" />
       <br />
-      <button onClick={ViewCourseRatings} className="button-17">
-        View My Courses
-      </button>
-      <br />
-      <br />
+      <br/>
+      <br/>  
+      <button onClick={ViewMyRatings}> View My Ratings</button>
+      <br/>
+      <br/>    
       {arr.map((user) => (
         //id  = user.Title
-        <div className="MyCourse">
+        <div className="MyRating">
           <>
-             <h1 key={user} className="title">
-              {user.Title}
-            </h1>
-            
-
             <p key={user} className="rating">
               Rating: {user.Rating} ⭐'s
             </p>
-
           </>
         </div>
       ))}
@@ -83,4 +69,4 @@ const InstrCourseRatings = () => {
   );
 };
 
-export default InstrCourseRatings;
+export default InstrMyRatings;
