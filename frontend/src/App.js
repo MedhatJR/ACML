@@ -22,13 +22,12 @@ import LogIn from "./pages/LogIn";
 import Contract from "./pages/Contract";
 import CorporatePage from "./pages/CorporatePage";
 import RateCorp from "./pages/RateCorp";
-import Rateindividual from "./pages/Rateindividual"
-import CorpRatecourse from "./pages/CorpRatecourse"
+import Rateindividual from "./pages/Rateindividual";
+import CorpRatecourse from "./pages/CorpRatecourse";
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
-import IMCQ from"./pages/IMCQ";
-import CMCQ from"./pages/CMCQ";
-
+import IMCQ from "./pages/IMCQ";
+import CMCQ from "./pages/CMCQ";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -41,7 +40,7 @@ import IndividualUpdate from "./pages/IndividualUpdate";
 import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
-
+import AllCourses from "./pages/AllCourses";
 
 function App() {
   return (
@@ -50,14 +49,26 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-            <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
-              <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
+              <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route
+                path="/IndividualResetEmail"
+                element={<IndividualResetEmail />}
+              />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
-              <Route path="/IndividualResetPassword" element={<IndividualResetPassword />} />
+              <Route
+                path="/IndividualResetPassword"
+                element={<IndividualResetPassword />}
+              />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
-              <Route path="/CorporateResetPassword" element={<CorporateResetPassword />} />
-              <Route path="/CorporateResetEmail" element={<CorporateResetEmail />} />
+              <Route
+                path="/CorporateResetPassword"
+                element={<CorporateResetPassword />}
+              />
+              <Route
+                path="/CorporateResetEmail"
+                element={<CorporateResetEmail />}
+              />
               <Route path="/AddPromotion" element={<AddPromotion />} />
 
               <Route path="/Register" element={<Register />} />
@@ -83,9 +94,18 @@ function App() {
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
-              <Route path="/InstrCourseRatings" element={<InstrCourseRatings />} />
-              <Route path="/IndividualGradeAndAnswers" element={<Individual_GradeAndAnswers />} />
-              <Route path="/CoporateGradeAndAnswers" element={<Coporate_GradeAndAnswers />} />
+              <Route
+                path="/InstrCourseRatings"
+                element={<InstrCourseRatings />}
+              />
+              <Route
+                path="/IndividualGradeAndAnswers"
+                element={<Individual_GradeAndAnswers />}
+              />
+              <Route
+                path="/CoporateGradeAndAnswers"
+                element={<Coporate_GradeAndAnswers />}
+              />
               <Route path="/IndividualPage" element={<IndividualPage />} />
               <Route
                 path="/IndividualViewMyCourses"
@@ -105,6 +125,7 @@ function App() {
               />
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
+              <Route path="/AllCourses" element={<AllCourses />} />
             </Routes>
           </div>
         </BrowserRouter>

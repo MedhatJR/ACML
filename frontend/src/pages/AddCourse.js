@@ -27,6 +27,13 @@ const AddCourse = () => {
     const Views = 0;
     const PreviewLink = document.getElementById("cplink").value;
     const SubLink = document.getElementById("sublink").value;
+    const Price_after_promotion = document.getElementById(
+      "Price_after_promotion"
+    ).value;
+    const Promotion = document.getElementById("Promotion").value;
+    const Promotion_valid_for = document.getElementById(
+      "Promotion_valid_for"
+    ).value;
 
     console.log("Hi");
     Axios.post("http://localhost:8000/Instructor_addcourse", {
@@ -41,6 +48,9 @@ const AddCourse = () => {
       Views: Views,
       PreviewLink: PreviewLink,
       SubLink: SubLink,
+      Price_after_promotion: Price_after_promotion,
+      Promotion: Promotion,
+      Promotion_valid_for: Promotion_valid_for,
     }).then((response) => {
       // console.log(response);
       // console.log("Okay");
