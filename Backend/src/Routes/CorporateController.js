@@ -367,6 +367,40 @@ appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   );
 });
 
+
+
+  appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
+    //const RegisteredCourses = req.body.RegisteredCourses;
+    var RegisteredCoursesArr = [];
+    var final = [];
+    var myCourse = req.body.myCourse;
+    var answer = "";
+    Corporate.find(
+      {
+        Username: { $eq: req.body.Username },
+      },
+      function (err, result) {
+        if (err) {
+          console.log("err");
+        } else {
+          // console.log(RegisteredCoursesArr);
+          console.log("Done1");
+          //RegisteredCoursesArr = result[0];
+          RegisteredCoursesArr = result;
+          final = RegisteredCoursesArr[0].RegisteredCourses;
+          console.log(final[1]);
+          console.log(final.length);
+
+          for (let i = 0; i < final.length; i++) {
+            if (myCourse == final[i]) {
+              answer = final[i];
+              break;
+            }
+          }
+        }
+      }
+          )
+        });
 appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];

@@ -126,6 +126,7 @@ function App() {
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
               <Route path="/AllCourses" element={<AllCourses />} />
+              <Route path="/CMCQ" element={<CMCQ />} />
             </Routes>
           </div>
         </BrowserRouter>

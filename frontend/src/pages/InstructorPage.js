@@ -52,6 +52,9 @@ const InstructorPage = () => {
   const email = () => {
     nav("/UpdateEmail");
   };
+  const forward2 = () => {
+    nav("/Addexam");
+  };
   return (
     <div className="add">
       <>
@@ -112,6 +115,9 @@ const InstructorPage = () => {
       <button class="button-17" role="button" onClick={Biography}>
         Change Biography
       </button>
+      <br />
+      <br />
+      <button onClick={forward2}>Add Your Exam</button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={email}>
