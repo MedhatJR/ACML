@@ -6,7 +6,7 @@ const cors = require("cors");
 const dote =require("dotenv").config();
 //import Register from "./Register";d
 //JWT
-const authRoutes = require("../frontend/src/Routes/AuthRoutes");
+//const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
 // // if (typeof window !== 'undefined') {
 // //   // Perform localStorage action
@@ -27,8 +27,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
 
+//const authRoutes = require("../frontend/src/Routes/AuthRoutes");
+//const cookieParser = require("cookie-parser");
+
 app.use(cookieParser());
-app.use("/", authRoutes);
+//app.use("/", authRoutes);
 //--------------------
 
 app.use(function (req, res, next) {

@@ -32,7 +32,6 @@ import AddExam from "./pages/AddExam";
 import IMCQ from "./pages/IMCQ";
 import CMCQ from "./pages/CMCQ";
 
-
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
 import CorporateResetPassword from "./pages/CorporateResetPassword";
