@@ -95,30 +95,30 @@ const Register = () => {
   //   position: "bottom-right",
   // });
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { data } = await Axios.post(
-  //       "http://localhost:3000/Register",
-  //       { ...values },
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     console.log(data);
-  //     if (data) {
-  //       // if (data.errors) {
-  //       //   const { Email, Password } = data.errors;
-  //       //   if (Email) generateError(Email);
-  //       //   else if (Password) generateError(Password);
-  //       // }
-  //       // else {
-  //       // }
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await Axios.post(
+        "http://localhost:3000/Register",
+        { ...values },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(data);
+      if (data) {
+        // if (data.errors) {
+        //   const { Email, Password } = data.errors;
+        //   if (Email) generateError(Email);
+        //   else if (Password) generateError(Password);
+        // }
+        // else {
+        // }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   //------------------------------------
   function myFunction(element, color) {
@@ -135,7 +135,7 @@ const Register = () => {
   };
   return (
     <>
-      <div className="add">
+      <div className="add" onSubmit={(e)=>handleSubmit(e)}>
         <>
           <nav>
             <img src={logo} className="logo" alt="" />{" "}
