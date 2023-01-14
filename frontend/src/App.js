@@ -41,6 +41,7 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 import AllCourses from "./pages/AllCourses";
+import Pay from "./pages/Pay";
 
 function App() {
   return (
@@ -127,6 +128,7 @@ function App() {
               <Route path="/IMCQ" element={<IMCQ />} />
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/Pay" element={<Pay />} />
             </Routes>
           </div>
         </BrowserRouter>

@@ -6,30 +6,52 @@ import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import "../styles/Star.css";
+import { useLocation } from "react-router-dom";
+
 var arr = [];
 var arrTitles = [];
-var wantedtitle = "";
-// var id = "";
+var isClickedTitle = "";
 
 const CorporateViewMyCourses = () => {
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
   var [rating, setRating] = useState(0);
   var [hover, setHover] = useState(0);
   const [users, setData] = useState("");
   const nav = useNavigate();
 
-  const viewCourses = () => {
-    var Username = document.getElementById("myName").value;
-    Axios.post("http://localhost:8000/Corporate_retrieveMyCourse", {
-      Username: Username,
-    }).then((response) => {
-      console.log(response);
-      arr = response.data.CourseDetails;
+  Axios.post("http://localhost:8000/Corporate_retrieveMyCourse", {
+    Email: passedEmail,
+  }).then((response) => {
+    console.log(response);
+    arr = response.data.CourseDetails;
+    for (var i = 0; i < arr.length; i++) {
+      arrTitles[i] = arr[i].Title;
+    }
+    setData(response);
 
-      setData(response);
+    // setData(response.data[1].Title);
+  });
 
-      // setData(response.data[1].Title);
-    });
+  const buttonPressed = (e) => {
+    isClickedTitle = e.target.id; // Get ID of Clicked Element
+    console.log(isClickedTitle);
   };
+
+  function reply_click(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressed);
+    }
+    for (var i = 0; i < arrTitles.length; i++) {
+      if (arrTitles[i] === isClickedTitle) {
+        // console.log(arrTitles[i]);
+        nav("/CorporateCoursePage", {
+          state: { passedEmail: passedEmail, isClickedTitle: arrTitles[i] },
+        });
+      }
+    }
+  }
 
   const back = () => {
     nav("/");
@@ -58,12 +80,7 @@ const CorporateViewMyCourses = () => {
           </li>
         </ul>
       </nav>
-      <label>Username</label>
-      <input name="myUsername" id="myName" type="text" />
-      <br />
-      <button onClick={viewCourses} className="button-17">
-        View My Courses
-      </button>
+
       <br />
       <br />
       {arr.map((user) => (
@@ -106,12 +123,13 @@ const CorporateViewMyCourses = () => {
               })}
             </div>
 
-            <button className="button-17" id="btn17" onClick={go}>
+            <button className="button-17" id={user.Title} onClick={reply_click}>
               Go To Course
             </button>
           </>
         </div>
       ))}
+      <div>{location.state.passedEmail}</div>
     </div>
   );
 };

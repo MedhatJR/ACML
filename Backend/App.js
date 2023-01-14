@@ -7,16 +7,14 @@ const cors = require("cors");
 //JWT
 //const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
-//------------------
-//App variables
-
-//App variables
+const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
-
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
 //const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 //const cookieParser = require("cookie-parser");
 
@@ -66,3 +64,26 @@ mongoose
 /*
                                                     End of your code
 */
+app.post("/payment", cors(), async (req, res) => {
+  let { amount, id } = req.body;
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "USD",
+      description: "Spatula company",
+      payment_method: id,
+      confirm: true,
+    });
+    console.log("Payment", payment);
+    res.json({
+      message: "Payment successful",
+      success: true,
+    });
+  } catch (error) {
+    console.log("Error", error);
+    res.json({
+      message: "Payment failed",
+      success: false,
+    });
+  }
+});

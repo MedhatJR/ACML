@@ -6,38 +6,62 @@ import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import "../styles/Star.css";
+import { useLocation } from "react-router-dom";
+
 var arr = [];
 var arrTitles = [];
-var wantedtitle = "";
+var isClickedTitle = "";
+
 // var id = "";
 
 const IndividualViewMyCourses = () => {
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
+
   var [rating, setRating] = useState(0);
   var [hover, setHover] = useState(0);
   const [users, setData] = useState("");
   const nav = useNavigate();
-
-  const viewCourses = () => {
-    var Username = document.getElementById("myName").value;
-    Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
-      Username: Username,
-    }).then((response) => {
-      console.log(response);
-      arr = response.data.CourseDetails;
-
-      setData(response);
-
-      // setData(response.data[1].Title);
-    });
-  };
 
   const back = () => {
     nav("/");
   };
 
   const go = () => {
-    nav("/IndividualCoursePage");
+    nav("/IndividualCoursePage", { state: { passedEmail: passedEmail } });
   };
+
+  // nav("/IndividualCoursePage", { state: { passedEmail: passedEmail } });
+  Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
+    Email: passedEmail,
+  }).then((response) => {
+    console.log(response);
+    arr = response.data.CourseDetails;
+    for (var i = 0; i < arr.length; i++) {
+      arrTitles[i] = arr[i].Title;
+    }
+    setData(response);
+  });
+
+  const buttonPressed = (e) => {
+    isClickedTitle = e.target.id; // Get ID of Clicked Element
+    console.log(isClickedTitle);
+  };
+
+  function reply_click(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressed);
+    }
+    for (var i = 0; i < arrTitles.length; i++) {
+      if (arrTitles[i] === isClickedTitle) {
+        // console.log(arrTitles[i]);
+        nav("/IndividualCoursePage", {
+          state: { passedEmail: passedEmail, isClickedTitle: arrTitles[i] },
+        });
+      }
+    }
+  }
 
   return (
     <div className="IndividualViewCourse">
@@ -58,12 +82,9 @@ const IndividualViewMyCourses = () => {
           </li>
         </ul>
       </nav>
-      <label>Username</label>
-      <input name="myUsername" id="myName" type="text" />
+
       <br />
-      <button onClick={viewCourses} className="button-17">
-        View My Courses
-      </button>
+
       <br />
       <br />
       {arr.map((user) => (
@@ -106,12 +127,14 @@ const IndividualViewMyCourses = () => {
               })}
             </div>
 
-            <button className="button-17" id="btn17" onClick={go}>
+            <button className="button-17" id={user.Title} onClick={reply_click}>
               Go To Course
             </button>
           </>
         </div>
       ))}
+
+      <div>{location.state.passedEmail}</div>
     </div>
   );
 };

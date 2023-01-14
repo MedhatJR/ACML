@@ -34,7 +34,7 @@ const Home = () => {
   //   );
   // };
   const viewCourses = () => {
-    nav("AllCourses");
+    nav("/AllCourses");
   };
 
   // const ExploreCourses = () => {
