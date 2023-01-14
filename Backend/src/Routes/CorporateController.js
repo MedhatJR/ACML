@@ -121,6 +121,7 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    RegisteredCourses: req.body.RegisteredCourses,
   });
 
   try {
