@@ -466,4 +466,45 @@ appRouter.post("/Individual_Login", async (req, res) => {
     }
   });
 });
+
+
+
+// sho8l moataz ==========================================================================================
+
+
+
+appRouter.post("/change_status_to_pending",async(req,res)=>{
+  const Username = req.body.Username;
+  Individual.findOneAndUpdate(
+    { Username: Username },
+    { Gender: 'pending' },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log('error');
+      } else {
+        console.log('data');
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
+
+appRouter.post("/change_status_to_solved",async(req,res)=>{
+  const Username = req.body.Username;
+  Individual.findOneAndUpdate(
+    { Username: Username },
+    { Gender: 'solved' },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log('error');
+      } else {
+        console.log('data');
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
+
 module.exports = appRouter;

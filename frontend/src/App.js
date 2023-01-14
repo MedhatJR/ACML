@@ -41,8 +41,12 @@ import IndividualUpdate from "./pages/IndividualUpdate";
 import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
-
-
+import ViewReportedProblems from "./pages/ViewReportedProblems";
+import AdminstratorPage from "./pages/AdminstratorPage";
+import AdminAddPromoAllcourses from "./pages/AdminAddPromoAllcourses";
+import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
+import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
+import AdminRefund from "./pages/AdminRefund";
 function App() {
   return (
     <>
@@ -82,6 +86,11 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
+              <Route path="/AdminAddPromoAllcourses" element={<AdminAddPromoAllcourses />} />
+              <Route path="/AdminAddPromoSeveralcourses" element={<AdminAddPromoSeveralcourses />} />
+              <Route path="/AdminAddPromoSpecificcourse" element={<AdminAddPromoSpecificcourse />} />
+              <Route path="/AdminRefund" element={<AdminRefund />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
               <Route path="/InstrCourseRatings" element={<InstrCourseRatings />} />
               <Route path="/IndividualGradeAndAnswers" element={<Individual_GradeAndAnswers />} />
@@ -106,6 +115,8 @@ function App() {
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/ViewReportedProblems" element={<ViewReportedProblems />} />
+
             </Routes>
           </div>
         </BrowserRouter>

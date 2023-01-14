@@ -6,12 +6,15 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import { useLocation } from 'react-router-dom';
 const CorporatePage = () => {
+  const location = useLocation();
+  const passedData = location.state.Email;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
   const forwardViewMyCourses = () => {
-    nav("/CorporateViewMyCourses");
+    nav("/CorporateViewMyCourses", {state:{passedEmail:passedData}});
   };
   const forward4 = () => {
     nav("/CMCQ");
@@ -29,7 +32,10 @@ const CorporatePage = () => {
   const grade = () => {
     nav("/CoporateGradeAndAnswers");
   };
+  
+  
   return (
+    
     <div className="add">
       <>
         <nav>
@@ -77,6 +83,7 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
+      <div>{location.state.Email}</div>
     </div>
   );
 };

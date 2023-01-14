@@ -6,21 +6,23 @@ import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import "../styles/Star.css";
+import { useLocation } from 'react-router-dom';
 var arr = [];
 var arrTitles = [];
 var wantedtitle = "";
 // var id = "";
 
 const CorporateViewMyCourses = () => {
+  const location = useLocation();
   var [rating, setRating] = useState(0);
   var [hover, setHover] = useState(0);
   const [users, setData] = useState("");
   const nav = useNavigate();
 
   const viewCourses = () => {
-    var Username = document.getElementById("myName").value;
+    //var Username = document.getElementById("myName").value;
     Axios.post("http://localhost:8000/Corporate_retrieveMyCourse", {
-      Username: Username,
+      Email: location.state.Email,
     }).then((response) => {
       console.log(response);
       arr = response.data.CourseDetails;
@@ -39,6 +41,7 @@ const CorporateViewMyCourses = () => {
     nav("/CorporateCoursePage");
   };
 
+  
   return (
     <div className="IndividualViewCourse">
       <nav>
@@ -58,8 +61,7 @@ const CorporateViewMyCourses = () => {
           </li>
         </ul>
       </nav>
-      <label>Username</label>
-      <input name="myUsername" id="myName" type="text" />
+      
       <br />
       <button onClick={viewCourses} className="button-17">
         View My Courses
