@@ -45,6 +45,12 @@ import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
 //import jwt from ' jsonwebtoken'
+import ViewReportedProblems from "./pages/ViewReportedProblems";
+import AdminstratorPage from "./pages/AdminstratorPage";
+import AdminAddPromoAllcourses from "./pages/AdminAddPromoAllcourses";
+import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
+import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
+import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 
 function App() {
@@ -111,6 +117,11 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
+              <Route path="/AdminAddPromoAllcourses" element={<AdminAddPromoAllcourses />} />
+              <Route path="/AdminAddPromoSeveralcourses" element={<AdminAddPromoSeveralcourses />} />
+              <Route path="/AdminAddPromoSpecificcourse" element={<AdminAddPromoSpecificcourse />} />
+              <Route path="/AdminRefund" element={<AdminRefund />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
               <Route
                 path="/InstrCourseRatings"
@@ -145,6 +156,8 @@ function App() {
               <Route path="/IMCQ" element={<IMCQ />} />
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/ViewReportedProblems" element={<ViewReportedProblems />} />
+
             </Routes>
           </div>
         </BrowserRouter>

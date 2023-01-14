@@ -469,7 +469,7 @@ appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
 
   Corporate.find(
     {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     },
     function (err, result) {
       if (err) {
