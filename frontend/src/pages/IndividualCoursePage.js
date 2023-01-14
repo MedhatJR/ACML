@@ -38,7 +38,7 @@ const IndividualViewMyCourses = () => {
   };
 
   return (
-    <div className="IndividualViewCourse">
+    <div  className="IndividualViewCourse">
       <label>Username</label>
       <br />
       <input type="text" id="user" />

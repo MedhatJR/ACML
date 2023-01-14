@@ -5,6 +5,7 @@ import Axios from "axios";
 import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import LogIn from "./LogIn";
 import "../styles/Star.css";
 var arr = [];
 var arrTitles = [];
@@ -18,9 +19,11 @@ const IndividualViewMyCourses = () => {
   const nav = useNavigate();
 
   const viewCourses = () => {
-    var Username = document.getElementById("myName").value;
+    //var Username = document.getElementById("myName").value;
+    console.log(LogIn());  
     Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
-      Username: Username,
+    
+    //Username: LogIn
     }).then((response) => {
       console.log(response);
       arr = response.data.CourseDetails;

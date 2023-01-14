@@ -10,6 +10,9 @@ const Instructor = require("../Models/Instructor");
 const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
+const jwt = require("jsonwebtoken");
+const dote = require("dotenv").config();
+var popup = require('alert');
 
 appRouter.get("/Corporate_read", async (req, res) => {
   Corporate.find({ Name: req.body.Name }, (error, data) => {
@@ -86,6 +89,7 @@ appRouter.post("/Corporate_rateCourse", async (req, res) => {
 appRouter.get("/Corporate_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
+
 appRouter.post("/Corporate_Login", async (req, res) => {
   const Email = req.body.email;
   const Password = req.body.Password;
@@ -121,16 +125,65 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    RegisteredCourses: req.body.RegisteredCourses
   });
-
+  email = newuser.Email;
   try {
+
+    if (!(newuser.Username && newuser.Email && newuser.Password && newuser.Country && newuser.Firstname && newuser.Lastname && newuser.Gender)) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Corporate.find({ Email: { $eq: req.body.Email } });
+
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      popup.alert({
+        content: 'User Already Exist. Please Login!'
+    });
+
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
     await Corporate.create(newuser);
+
+    // const token = jwt.sign(
+    //   { newuser_id: newuser._id, email },
+    //   process.env.TOKEN_SECRET,
+    //    process.env.JWT_ACCOUNT_ACTIVATION,
+    //   {
+    //     expiresIn: "24h",
+    //   }
+    // );
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      'secret',
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err)
+        console.log(token)
+      })
+
+   // console.log(token + "   toookeeeen");
+  //  console.log(newuser.token + "   user Toookeeen")
+    newuser.token = token;
+  //  console.log(newuser.token + "   user Toookeeen")
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Hello");
+    // res.status(200).send("registration successful");
+
+
   } catch (err) {
     console.log(err);
   }
 
-  console.log("Hello");
-  res.status(200).send("registration successful");
 });
 
 appRouter.post("/Corporate_filtercourse", async (req, res) => {
@@ -254,15 +307,15 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-              ques1.Question1 +
-              " --> Correct Solution  " +
-              ans1.Answer1 +
-              "   Question 2:" +
-              ques1.Question2 +
-              " --> Correct Solution  " +
-              ans1.Answer2 +
-              " Your Grade:  " +
-              grade
+            ques1.Question1 +
+            " --> Correct Solution  " +
+            ans1.Answer1 +
+            "   Question 2:" +
+            ques1.Question2 +
+            " --> Correct Solution  " +
+            ans1.Answer2 +
+            " Your Grade:  " +
+            grade
           );
       }
       if ((data.Answer1 != ans1.Answer1) & (data.Answer2 == ans1.Answer2)) {
@@ -271,17 +324,17 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-              ques1.Question1 +
-              "--> Wrong Solution : " +
-              ans1.Answer1 +
-              "( The Correct Solution is:  " +
-              data.Answer1 +
-              ")     Question 2: " +
-              ques1.Question2 +
-              " --> Correct Solution  " +
-              ans1.Answer2 +
-              "  Your Grade:  " +
-              grade
+            ques1.Question1 +
+            "--> Wrong Solution : " +
+            ans1.Answer1 +
+            "( The Correct Solution is:  " +
+            data.Answer1 +
+            ")     Question 2: " +
+            ques1.Question2 +
+            " --> Correct Solution  " +
+            ans1.Answer2 +
+            "  Your Grade:  " +
+            grade
           );
       }
       if ((data.Answer1 == ans1.Answer1) & (data.Answer2 != ans1.Answer2)) {
@@ -290,17 +343,17 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-              ques1.Question1 +
-              " --> Correct Solution  " +
-              ans1.Answer1 +
-              "  Question 2 :" +
-              ques1.Question2 +
-              "--> Wrong Solution  " +
-              ans1.Answer2 +
-              "( The Correct Solution is:  " +
-              data.Answer2 +
-              " ) Your Grade:  " +
-              grade
+            ques1.Question1 +
+            " --> Correct Solution  " +
+            ans1.Answer1 +
+            "  Question 2 :" +
+            ques1.Question2 +
+            "--> Wrong Solution  " +
+            ans1.Answer2 +
+            "( The Correct Solution is:  " +
+            data.Answer2 +
+            " ) Your Grade:  " +
+            grade
           );
       }
       if ((data.Answer1 != ans1.Answer1) & (data.Answer2 != ans1.Answer2)) {
@@ -309,19 +362,19 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-              ques1.Question1 +
-              " --> Wrong Solution : " +
-              ans1.Answer1 +
-              "(The Correct Solution is: " +
-              data.Answer1 +
-              " )   Question 2: " +
-              ques1.Question2 +
-              "--> Wrong Solution  " +
-              ans1.Answer2 +
-              "(The Correct Solution is: " +
-              data.Answer2 +
-              ")  Your Grade:  " +
-              grade
+            ques1.Question1 +
+            " --> Wrong Solution : " +
+            ans1.Answer1 +
+            "(The Correct Solution is: " +
+            data.Answer1 +
+            " )   Question 2: " +
+            ques1.Question2 +
+            "--> Wrong Solution  " +
+            ans1.Answer2 +
+            "(The Correct Solution is: " +
+            data.Answer2 +
+            ")  Your Grade:  " +
+            grade
           );
       }
     }

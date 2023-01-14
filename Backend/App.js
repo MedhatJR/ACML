@@ -3,13 +3,23 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
+const dote =require("dotenv").config();
 //import Register from "./Register";d
 //JWT
 const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
-//------------------
-//App variables
-
+// // if (typeof window !== 'undefined') {
+// //   // Perform localStorage action
+// //   const token = localStorage.getItem('token')
+// // }
+// useEffect(() => {
+//   // Perform localStorage action
+//   const token = localStorage.getItem('token')
+// }, [])
+// //------------------
+// if(token){
+//   setAuthToken(token);
+// }
 //App variables
 const app = express();
 app.use(cors());
@@ -41,6 +51,7 @@ app.use(instructorRouter);
 
 const guestRouter = require("./src/Routes/GuestController");
 const corporateRouter = require("./src/Routes/CorporateController");
+const { setAuthToken } = require("../frontend/src/Controllers/setAuthToken");
 app.use(corporateRouter);
 app.use(guestRouter);
 

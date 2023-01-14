@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+
 import Home from "./pages/Home";
+
 import Register from "./pages/Register";
 import ViewData from "./pages/ViewData";
 import UpdateEmail from "./pages/UpdateEmaiL";
@@ -26,8 +29,8 @@ import Rateindividual from "./pages/Rateindividual"
 import CorpRatecourse from "./pages/CorpRatecourse"
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
-import IMCQ from"./pages/IMCQ";
-import CMCQ from"./pages/CMCQ";
+import IMCQ from "./pages/IMCQ";
+import CMCQ from "./pages/CMCQ";
 
 
 import AddPromotion from "./pages/AddPromotion";
@@ -42,15 +45,30 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
+//import jwt from ' jsonwebtoken'
 
 function App() {
+
+  var token;
+
+  // if (typeof window !== 'undefined') {
+  //   // Perform localStorage action
+  //    token = localStorage.getItem('token')
+  // }
+  // useEffect(() => {
+  //   // Perform localStorage action
+  //   const token = localStorage.getItem('token')
+  // }, [])
+  //------------------
+
+
   return (
     <>
       <div className="App">
         <BrowserRouter>
           <div className="pages">
             <Routes>
-            <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route path="/IndividualResetPassword" element={<IndividualResetPassword />} />
@@ -61,7 +79,9 @@ function App() {
               <Route path="/AddPromotion" element={<AddPromotion />} />
 
               <Route path="/Register" element={<Register />} />
+
               <Route path="/" element={<Home />} />
+
               <Route path="/RateCorp" element={<RateCorp />} />
               <Route path="/CorpRatecourse" element={<CorpRatecourse />} />
               <Route path="/Rateindividual" element={<Rateindividual />} />
