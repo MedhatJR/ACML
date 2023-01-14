@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+
 import Home from "./pages/Home";
+
 import Register from "./pages/Register";
 import ViewData from "./pages/ViewData";
 import UpdateEmail from "./pages/UpdateEmaiL";
@@ -40,10 +43,30 @@ import IndividualUpdate from "./pages/IndividualUpdate";
 import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
+
+//import jwt from ' jsonwebtoken'
+import ViewReportedProblems from "./pages/ViewReportedProblems";
+import AdminstratorPage from "./pages/AdminstratorPage";
+import AdminAddPromoAllcourses from "./pages/AdminAddPromoAllcourses";
+import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
+import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
+import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
 
 function App() {
+  var token;
+
+  // if (typeof window !== 'undefined') {
+  //   // Perform localStorage action
+  //    token = localStorage.getItem('token')
+  // }
+  // useEffect(() => {
+  //   // Perform localStorage action
+  //   const token = localStorage.getItem('token')
+  // }, [])
+  //------------------
+
   return (
     <>
       <div className="App">
@@ -73,7 +96,9 @@ function App() {
               <Route path="/AddPromotion" element={<AddPromotion />} />
 
               <Route path="/Register" element={<Register />} />
+
               <Route path="/" element={<Home />} />
+
               <Route path="/RateCorp" element={<RateCorp />} />
               <Route path="/CorpRatecourse" element={<CorpRatecourse />} />
               <Route path="/Rateindividual" element={<Rateindividual />} />
@@ -94,6 +119,20 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
+              <Route
+                path="/AdminAddPromoAllcourses"
+                element={<AdminAddPromoAllcourses />}
+              />
+              <Route
+                path="/AdminAddPromoSeveralcourses"
+                element={<AdminAddPromoSeveralcourses />}
+              />
+              <Route
+                path="/AdminAddPromoSpecificcourse"
+                element={<AdminAddPromoSpecificcourse />}
+              />
+              <Route path="/AdminRefund" element={<AdminRefund />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
               <Route
                 path="/InstrCourseRatings"
@@ -129,6 +168,10 @@ function App() {
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
               <Route path="/Pay" element={<Pay />} />
+              <Route
+                path="/ViewReportedProblems"
+                element={<ViewReportedProblems />}
+              />
             </Routes>
           </div>
         </BrowserRouter>

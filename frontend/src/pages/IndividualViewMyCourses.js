@@ -5,6 +5,7 @@ import Axios from "axios";
 import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import LogIn from "./LogIn";
 import "../styles/Star.css";
 import { useLocation } from "react-router-dom";
 

@@ -80,7 +80,6 @@ const CorporateViewMyCourses = () => {
           </li>
         </ul>
       </nav>
-
       <br />
       <br />
       {arr.map((user) => (
