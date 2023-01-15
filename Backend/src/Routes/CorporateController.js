@@ -10,6 +10,10 @@ const Instructor = require("../Models/Instructor");
 const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
+const jwt = require("jsonwebtoken");
+const dote = require("dotenv").config();
+var popup = require("alert");
+const bcrypt = require("bcrypt");
 
 appRouter.get("/Corporate_read", async (req, res) => {
   Corporate.find({ Name: req.body.Name }, (error, data) => {
@@ -86,16 +90,38 @@ appRouter.post("/Corporate_rateCourse", async (req, res) => {
 appRouter.get("/Corporate_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
+
 appRouter.post("/Corporate_Login", async (req, res) => {
-  const Email = req.body.email;
-  const Password = req.body.Password;
-  Corporate.find({ Email: Email, Password: Password }, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send("loged in");
+  try {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+    if (!(Email && Password)) {
+      res.status(400).send("All input is required");
     }
-  });
+
+    const user = await Corporate.findOne({ Email });
+
+    if (user && (await bcrypt.compare(Password, user.Password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, Email },
+        "secret",
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    } else {
+      res.status(400).send("Invalid Credentials");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 appRouter.get("/Corporate_retrieveAll", async (req, res) => {
@@ -121,16 +147,56 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    RegisteredCourses: req.body.RegisteredCourses,
   });
-
+  email = newuser.Email;
   try {
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Corporate.find({ Email: { $eq: req.body.Email } });
+
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
     await Corporate.create(newuser);
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
+
+    newuser.token = token;
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
   } catch (err) {
     console.log(err);
   }
-
-  console.log("Hello");
-  res.status(200).send("registration successful");
 });
 
 appRouter.post("/Corporate_filtercourse", async (req, res) => {
@@ -366,40 +432,6 @@ appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   );
 });
 
-
-
-  appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
-    //const RegisteredCourses = req.body.RegisteredCourses;
-    var RegisteredCoursesArr = [];
-    var final = [];
-    var myCourse = req.body.myCourse;
-    var answer = "";
-    Corporate.find(
-      {
-        Username: { $eq: req.body.Username },
-      },
-      function (err, result) {
-        if (err) {
-          console.log("err");
-        } else {
-          // console.log(RegisteredCoursesArr);
-          console.log("Done1");
-          //RegisteredCoursesArr = result[0];
-          RegisteredCoursesArr = result;
-          final = RegisteredCoursesArr[0].RegisteredCourses;
-          console.log(final[1]);
-          console.log(final.length);
-
-          for (let i = 0; i < final.length; i++) {
-            if (myCourse == final[i]) {
-              answer = final[i];
-              break;
-            }
-          }
-        }
-      }
-          )
-        });
 appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
@@ -407,7 +439,7 @@ appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
 
   Corporate.find(
     {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     },
     function (err, result) {
       if (err) {
@@ -444,7 +476,7 @@ appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
   var answer = "";
   Corporate.find(
     {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     },
     function (err, result) {
       if (err) {

@@ -39,11 +39,10 @@ const InstructorSchema = new Schema(
       type: Number,
       required: true,
     },
-    Biography:{
+    Biography: {
       type: String,
-      required: true,
-    }
-
+      required: false,
+    },
   },
   { timestamps: true }
 );

@@ -53,6 +53,13 @@ nav li a {
     position: relative;
     top: 0px;
 }
+.student {
+  position: absolute;
+  left: 700px;
+  bottom: 40px;
+  width: 600px;
+ 
+}
 
 .teacher {
   width: 50px;

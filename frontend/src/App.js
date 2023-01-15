@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+
 import Home from "./pages/Home";
+
 import Register from "./pages/Register";
 import ViewData from "./pages/ViewData";
 import UpdateEmail from "./pages/UpdateEmaiL";
@@ -22,13 +25,12 @@ import LogIn from "./pages/LogIn";
 import Contract from "./pages/Contract";
 import CorporatePage from "./pages/CorporatePage";
 import RateCorp from "./pages/RateCorp";
-import Rateindividual from "./pages/Rateindividual"
-import CorpRatecourse from "./pages/CorpRatecourse"
+import Rateindividual from "./pages/Rateindividual";
+import CorpRatecourse from "./pages/CorpRatecourse";
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
-import IMCQ from"./pages/IMCQ";
-import CMCQ from"./pages/CMCQ";
-
+import IMCQ from "./pages/IMCQ";
+import CMCQ from "./pages/CMCQ";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -43,7 +45,29 @@ import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
 import Certificates from"./pages/Certificates";
+//import jwt from ' jsonwebtoken'
+import ViewReportedProblems from "./pages/ViewReportedProblems";
+import AdminstratorPage from "./pages/AdminstratorPage";
+import AdminAddPromoAllcourses from "./pages/AdminAddPromoAllcourses";
+import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
+import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
+import AdminRefund from "./pages/AdminRefund";
+import AllCourses from "./pages/AllCourses";
+import Pay from "./pages/Pay";
+
 function App() {
+  var token;
+
+  // if (typeof window !== 'undefined') {
+  //   // Perform localStorage action
+  //    token = localStorage.getItem('token')
+  // }
+  // useEffect(() => {
+  //   // Perform localStorage action
+  //   const token = localStorage.getItem('token')
+  // }, [])
+  //------------------
+
   return (
     <>
       <div className="App">
@@ -54,15 +78,26 @@ function App() {
             <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
-              <Route path="/IndividualResetPassword" element={<IndividualResetPassword />} />
+              <Route
+                path="/IndividualResetPassword"
+                element={<IndividualResetPassword />}
+              />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
-              <Route path="/CorporateResetPassword" element={<CorporateResetPassword />} />
-              <Route path="/CorporateResetEmail" element={<CorporateResetEmail />} />
+              <Route
+                path="/CorporateResetPassword"
+                element={<CorporateResetPassword />}
+              />
+              <Route
+                path="/CorporateResetEmail"
+                element={<CorporateResetEmail />}
+              />
               <Route path="/AddPromotion" element={<AddPromotion />} />
 
               <Route path="/Register" element={<Register />} />
+
               <Route path="/" element={<Home />} />
+
               <Route path="/RateCorp" element={<RateCorp />} />
               <Route path="/CorpRatecourse" element={<CorpRatecourse />} />
               <Route path="/Rateindividual" element={<Rateindividual />} />
@@ -83,10 +118,33 @@ function App() {
                 element={<InstructorViewCourse />}
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
+              <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
+              <Route
+                path="/AdminAddPromoAllcourses"
+                element={<AdminAddPromoAllcourses />}
+              />
+              <Route
+                path="/AdminAddPromoSeveralcourses"
+                element={<AdminAddPromoSeveralcourses />}
+              />
+              <Route
+                path="/AdminAddPromoSpecificcourse"
+                element={<AdminAddPromoSpecificcourse />}
+              />
+              <Route path="/AdminRefund" element={<AdminRefund />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
-              <Route path="/InstrCourseRatings" element={<InstrCourseRatings />} />
-              <Route path="/IndividualGradeAndAnswers" element={<Individual_GradeAndAnswers />} />
-              <Route path="/CoporateGradeAndAnswers" element={<Coporate_GradeAndAnswers />} />
+              <Route
+                path="/InstrCourseRatings"
+                element={<InstrCourseRatings />}
+              />
+              <Route
+                path="/IndividualGradeAndAnswers"
+                element={<Individual_GradeAndAnswers />}
+              />
+              <Route
+                path="/CoporateGradeAndAnswers"
+                element={<Coporate_GradeAndAnswers />}
+              />
               <Route path="/IndividualPage" element={<IndividualPage />} />
               <Route
                 path="/IndividualViewMyCourses"
@@ -106,7 +164,13 @@ function App() {
               />
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
+              <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/Pay" element={<Pay />} />
+              <Route
+                path="/ViewReportedProblems"
+                element={<ViewReportedProblems />}
+              />
             </Routes>
           </div>
         </BrowserRouter>

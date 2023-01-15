@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import Axios from "axios";
 import "../styles/InstructorPageStyle.css";
@@ -8,26 +9,11 @@ import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 
 const IndividualPage = () => {
+  const location = useLocation();
+  const passedData = location.state.Email;
   const [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
-
-  //   const viewMyCourses = () => {
-  //     console.log("Hi");
-  //     Axios.get("http://localhost:8000/Individual_retrieveMyCourse").then(
-  //       (response) => {
-  //         this.setFinal(response.data);
-  //       }
-  //     );
-  //   };
-  //   const viewMyRating = () => {
-  //     console.log("Hi");
-  //     Axios.post("http://localhost:8000/instructor_viewRatings").then(
-  //       (response) => {
-  //         this.setFinal(response.data);
-  //       }
-  //     );
-  //   };
 
   const forwardAdd = () => {
     nav("/AddCourse");
@@ -39,7 +25,7 @@ const IndividualPage = () => {
     nav("/Rateindividual");
   };
   const forwardViewMyCourses = () => {
-    nav("/IndividualViewMyCourses");
+    nav("/IndividualViewMyCourses", { state: { passedEmail: passedData } });
   };
   const change = () => {
     nav("/IndividualUpdate");
@@ -52,6 +38,8 @@ const IndividualPage = () => {
   };
   const certificate = () => {
     nav("/Certificates");
+  const viewCourses = () => {
+    nav("/AllCourses");
   };
   return (
     <div className="add">
@@ -80,44 +68,34 @@ const IndividualPage = () => {
       <img src={teacher} alt="" className="teacher" />
 
       <p>It's time to learn and shine</p>
-      {/* <button class="button-17" role="button" onClick={viewCourseRating}>
-        View Course Ratings
+      <button className="explore-button" onClick={viewCourses}>
+        Explore Courses
       </button>
       <br />
       <br />
-      <button class="button-17" role="button" onClick={viewMyRating}>
-        View My Ratings
-      </button>
-      <br />
-      <br />
-      <button class="button-17" role="button" onClick={forwardAdd}>
-        Add Course
-      </button>
-      <br />
-      <br /> */}
       <button class="button-17" role="button" onClick={forwardViewMyCourses}>
         My Courses
       </button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <button onClick={forward3}>Join the Exam</button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={Rate}>
         Rate An Instructor
       </button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
       </button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={grade}>
         Your grades and check your anwsers
       </button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
@@ -126,8 +104,9 @@ const IndividualPage = () => {
       <button class="button-17" role="button" onClick={certificate}>
        Certificates
       </button>
+      {/* <div>{location.state.Email}</div> */}
     </div>
   );
 };
-
+}
 export default IndividualPage;

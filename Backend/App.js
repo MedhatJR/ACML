@@ -3,22 +3,25 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
+const dote =require("dotenv").config();
+const bcrypt =require("bcrypt");
 //import Register from "./Register";d
 //JWT
-const authRoutes = require("../frontend/src/Routes/AuthRoutes");
+//const authRoutes = require("../frontend/src/Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
-//------------------
-//App variables
-
-//App variables
+const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
+//const authRoutes = require("../frontend/src/Routes/AuthRoutes");
+//const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
-app.use("/", authRoutes);
+//app.use("/", authRoutes);
 //--------------------
 
 app.use(function (req, res, next) {
@@ -41,6 +44,7 @@ app.use(instructorRouter);
 
 const guestRouter = require("./src/Routes/GuestController");
 const corporateRouter = require("./src/Routes/CorporateController");
+const { setAuthToken } = require("../frontend/src/Controllers/setAuthToken");
 app.use(corporateRouter);
 app.use(guestRouter);
 
@@ -63,3 +67,26 @@ mongoose
 /*
                                                     End of your code
 */
+app.post("/payment", cors(), async (req, res) => {
+  let { amount, id } = req.body;
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "USD",
+      description: "Spatula company",
+      payment_method: id,
+      confirm: true,
+    });
+    console.log("Payment", payment);
+    res.json({
+      message: "Payment successful",
+      success: true,
+    });
+  } catch (error) {
+    console.log("Error", error);
+    res.json({
+      message: "Payment failed",
+      success: false,
+    });
+  }
+});
