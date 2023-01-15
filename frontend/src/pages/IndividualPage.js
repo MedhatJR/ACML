@@ -50,6 +50,9 @@ const IndividualPage = () => {
   const forward3 = () => {
     nav("/IMCQ");
   };
+  const certificate = () => {
+    nav("/Certificates");
+  };
   return (
     <div className="add">
       <>
@@ -117,6 +120,11 @@ const IndividualPage = () => {
       <br/>
       <button class="button-17" role="button" onClick={change}>
         Change Password
+      </button>
+      <br/>
+      <br/>
+      <button class="button-17" role="button" onClick={certificate}>
+       Certificates
       </button>
     </div>
   );

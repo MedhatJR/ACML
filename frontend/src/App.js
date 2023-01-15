@@ -42,7 +42,7 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
-
+import Certificates from"./pages/Certificates";
 function App() {
   return (
     <>
@@ -50,6 +50,7 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
+            <Route path="/Certificates" element={<Certificates />} />
             <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
