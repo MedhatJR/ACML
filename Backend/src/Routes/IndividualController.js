@@ -10,6 +10,7 @@ const Instructor = require("../Models/Instructor");
 const IndividualExam = require("../Models/IndividualExam");
 appRouter.use(cors());
 const mongoose = require("mongoose");
+const Problem = require("../Models/Problem");
 
 //to display the register page
 appRouter.get("/", async (req, res) => {
@@ -196,6 +197,43 @@ appRouter.post("/addIndividual", async (req, res) => {
     res.send("Error");
   }
 });
+
+
+appRouter.post("/Individual_ReportAProblem", async (req, res) => {
+  const problem = new Problem({
+     Username : req.body.Username,
+     Category: "IndividualTrainee",
+     Description : req.body.Description,
+     Type : req.body.Type,
+     Course : req.body.Course,
+     Solved : "Not Solved",
+  });
+  try {
+    Problem.create(problem);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(problem);
+  res.status(200).send("Submitted Problem");
+});
+
+appRouter.get("/Individual_AllProblems", async (req, res) => {
+  if(!req.body.Username){
+    console.log("All input is required");
+  };
+res.send(
+  await Problem.find( {
+    Username: { $eq: req.body.Username },
+  }).select([
+    "Description",
+    "Type",
+    "Course",
+    "Solved",
+ 
+  ])
+);
+});
+
 
 appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;

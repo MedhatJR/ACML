@@ -2,7 +2,7 @@ const express = require("express");
 const appRouter = express.Router();
 const cors = require("cors");
 appRouter.use(cors());
-
+const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 var nodemailer = require('nodemailer');
@@ -48,6 +48,42 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
     }
   );
 });
+
+appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
+  const problem = new Problem({
+     Username : req.body.Username,
+     Category: "InstructorTrainee",
+     Description : req.body.Description,
+     Type : req.body.Type,
+     Course : req.body.Course,
+     Solved : "Not Solved",
+  });
+  try {
+    Problem.create(problem);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(problem);
+  res.status(200).send("Submitted Problem");
+});
+
+appRouter.get("/Instructor_AllProblems", async (req, res) => {
+  if(!req.body.Username){
+    console.log("All input is required");
+  };
+res.send(
+  await Problem.find( {
+    Username: { $eq: req.body.Username },
+  }).select([
+    "Description",
+    "Type",
+    "Course",
+    "Solved",
+ 
+  ])
+);
+});
+
 
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));

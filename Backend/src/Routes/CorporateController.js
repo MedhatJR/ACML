@@ -417,6 +417,7 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
 appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
     const problem = new Problem({
        Username : req.body.Username,
+       Category: "CorporateTrainee",
        Description : req.body.Description,
        Type : req.body.Type,
        Course : req.body.Course,
@@ -429,8 +430,30 @@ appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
     }
     console.log(problem);
     res.status(200).send("Submitted Problem");
-  
 });
+
+appRouter.get("/Corporate_AllProblems", async (req, res) => {
+  if(!req.body.Username){
+    console.log("All input is required");
+  };
+  // if(!(Problem.find( {
+  //   Username: { $eq: req.body.Username }
+  // }))){
+  //   console.log("There is no a reported problem with this username");
+  // }
+  res.send(
+    await Problem.find( {
+      Username: { $eq: req.body.Username },
+    }).select([
+      "Description",
+      "Type",
+      "Course",
+      "Solved",
+   
+    ])
+  );
+});
+
 
 appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   const Username = req.body.Username;

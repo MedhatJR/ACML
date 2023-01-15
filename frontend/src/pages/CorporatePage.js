@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
+import CorporateViewMyCourses from "./CorporateViewMyCourses";
 import Axios from "axios";
 import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
@@ -22,9 +22,6 @@ const CorporatePage = () => {
     nav("/CMCQ");
   };
 
-  const ForwardViewMyCourses = () => {
-    nav("/CorporateViewMyCourses");
-  };
   const RateInstructor = () => {
     nav("/RateCorp");
   };
@@ -72,7 +69,7 @@ const CorporatePage = () => {
       <p>It's time to learn and shine</p>
 
       <br />
-      <button className="explore-button" onClick={viewCourses}>
+      <button class="button-17" className="explore-button" onClick={viewCourses}>
         Explore Courses
       </button>
       <br />
@@ -87,7 +84,9 @@ const CorporatePage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward4}>Join the Exam</button>
+      <button class="button-17" onClick={forward4}>
+        Join the Exam
+        </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={RateCourse}>

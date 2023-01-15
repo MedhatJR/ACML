@@ -85,7 +85,7 @@ const InstructorPage = () => {
       <img src={teacher} alt="" className="teacher" />
 
       <p>What would you like to do today ?</p>
-      <button className="explore-button" onClick={viewCourses}>
+      <button class="button-17" className="explore-button" onClick={viewCourses}>
         Explore Courses
       </button>
       <button class="button-17" role="button" onClick={viewCourseRating}>
@@ -123,7 +123,9 @@ const InstructorPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward2}>Add Your Exam</button>
+      <button class="button-17" onClick={forward2}>
+        Add Your Exam
+        </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={email}>

@@ -7,6 +7,10 @@ const problemSchema =new Schema (
             type: String,
             required: true,
         },
+        Category:{
+            type: String,
+            required: true,
+        },
         Description:{
             type: String,
             required: true,
