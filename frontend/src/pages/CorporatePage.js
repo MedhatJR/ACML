@@ -6,10 +6,12 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+
 const CorporatePage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
+
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
@@ -28,17 +30,17 @@ const CorporatePage = () => {
   };
   const RateCourse = () => {
     nav("/CorpRatecourse");
-  }
+  };
   const change = () => {
     nav("/CorporateUpdate");
   };
   const grade = () => {
     nav("/CoporateGradeAndAnswers");
   };
-
-
+  const viewCourses = () => {
+    nav("/AllCourses");
+  };
   return (
-
     <div className="add">
       <>
         <nav>
@@ -60,8 +62,18 @@ const CorporatePage = () => {
         </nav>
       </>
       <br />
-      <button class="button-17" role="button" onClick={ForwardViewMyCourses}>
-        My Courses
+      <div className="title">
+        {" "}
+        <div> Welcome, our beloved </div>
+        <div> Corporate Trainee </div>
+      </div>
+      <img src={teacher} alt="" className="teacher" />
+
+      <p>It's time to learn and shine</p>
+
+      <br />
+      <button className="explore-button" onClick={viewCourses}>
+        Explore Courses
       </button>
       <br />
       <br />
@@ -91,7 +103,7 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
-      {/* <div>{location.state.Email}</div> */}
+      <div>{location.state.passedEmail}</div>
     </div>
   );
 };

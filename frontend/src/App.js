@@ -53,7 +53,9 @@ import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
 import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
 import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
+import Pay from "./pages/Pay";
 import useToken from './useToken';
+
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -69,6 +71,7 @@ function App() {
 
 //  var token;
 
+
 // const { token, setToken } = useToken();
 // //const token = getToken();
 
@@ -83,7 +86,10 @@ function App() {
           <div className="pages">
             <Routes>
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
-              <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
+              <Route
+                path="/IndividualResetEmail"
+                element={<IndividualResetEmail />}
+              />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route
                 path="/IndividualResetPassword"
@@ -126,9 +132,18 @@ function App() {
               />
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
-              <Route path="/AdminAddPromoAllcourses" element={<AdminAddPromoAllcourses />} />
-              <Route path="/AdminAddPromoSeveralcourses" element={<AdminAddPromoSeveralcourses />} />
-              <Route path="/AdminAddPromoSpecificcourse" element={<AdminAddPromoSpecificcourse />} />
+              <Route
+                path="/AdminAddPromoAllcourses"
+                element={<AdminAddPromoAllcourses />}
+              />
+              <Route
+                path="/AdminAddPromoSeveralcourses"
+                element={<AdminAddPromoSeveralcourses />}
+              />
+              <Route
+                path="/AdminAddPromoSpecificcourse"
+                element={<AdminAddPromoSpecificcourse />}
+              />
               <Route path="/AdminRefund" element={<AdminRefund />} />
               <Route path="/InstrMyRatings" element={<InstrMyRatings />} />
               <Route
@@ -164,8 +179,11 @@ function App() {
               <Route path="/IMCQ" element={<IMCQ />} />
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
-              <Route path="/ViewReportedProblems" element={<ViewReportedProblems />} />
-
+              <Route path="/Pay" element={<Pay />} />
+              <Route
+                path="/ViewReportedProblems"
+                element={<ViewReportedProblems />}
+              />
             </Routes>
           </div>
         </BrowserRouter>

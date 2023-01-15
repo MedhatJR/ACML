@@ -13,7 +13,7 @@ const Exam = require("../Models/Exams");
 const Problem = require("../Models/Problem");
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
-var popup = require('alert');
+var popup = require("alert");
 const bcrypt = require("bcrypt");
 
 appRouter.get("/Corporate_read", async (req, res) => {
@@ -106,7 +106,7 @@ appRouter.post("/Corporate_Login", async (req, res) => {
       // Create token
       const token = jwt.sign(
         { user_id: user._id, Email },
-        'secret',
+        "secret",
         process.env.TOKEN_KEY,
         {
           expiresIn: "24h",
@@ -117,13 +117,12 @@ appRouter.post("/Corporate_Login", async (req, res) => {
 
       // user
       res.status(200).json(user);
+    } else {
+      res.status(400).send("Invalid Credentials");
     }
-    else
-   {  res.status(400).send("Invalid Credentials");}
   } catch (err) {
     console.log(err);
-  };
-
+  }
 });
 
 appRouter.get("/Corporate_retrieveAll", async (req, res) => {
@@ -153,8 +152,17 @@ appRouter.post("/createCorporateUser", async (req, res) => {
   });
   email = newuser.Email;
   try {
-
-    if (!(newuser.Username && newuser.Email && newuser.Password && newuser.Country && newuser.Firstname && newuser.Lastname && newuser.Gender)) {
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
       res.status(200).send("All input is required");
     }
     const oldUser = await Corporate.find({ Email: { $eq: req.body.Email } });
@@ -163,24 +171,23 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     console.log(email);
 
     if (oldUser != "") {
-
       return res.status(200).send("User Already Exist. Please Login");
     }
 
     await Corporate.create(newuser);
 
-
     const token = jwt.sign(
       { newuser_id: newuser._id, email },
-      'secret',
+      "secret",
       process.env.JWT_ACCOUNT_ACTIVATION,
       {
         expiresIn: "24h",
       },
       (err, token) => {
-        console.log(err)
-        console.log(token)
-      });
+        console.log(err);
+        console.log(token);
+      }
+    );
 
     newuser.token = token;
 
@@ -188,12 +195,9 @@ appRouter.post("/createCorporateUser", async (req, res) => {
     res.status(200).json(newuser);
     console.log("Registration Successful");
     // res.status(200).send("registration successful");
-
-
   } catch (err) {
     console.log(err);
   }
-
 });
 
 appRouter.post("/Corporate_filtercourse", async (req, res) => {
@@ -317,15 +321,15 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-            ques1.Question1 +
-            " --> Correct Solution  " +
-            ans1.Answer1 +
-            "   Question 2:" +
-            ques1.Question2 +
-            " --> Correct Solution  " +
-            ans1.Answer2 +
-            " Your Grade:  " +
-            grade
+              ques1.Question1 +
+              " --> Correct Solution  " +
+              ans1.Answer1 +
+              "   Question 2:" +
+              ques1.Question2 +
+              " --> Correct Solution  " +
+              ans1.Answer2 +
+              " Your Grade:  " +
+              grade
           );
       }
       if ((data.Answer1 != ans1.Answer1) & (data.Answer2 == ans1.Answer2)) {
@@ -334,17 +338,17 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-            ques1.Question1 +
-            "--> Wrong Solution : " +
-            ans1.Answer1 +
-            "( The Correct Solution is:  " +
-            data.Answer1 +
-            ")     Question 2: " +
-            ques1.Question2 +
-            " --> Correct Solution  " +
-            ans1.Answer2 +
-            "  Your Grade:  " +
-            grade
+              ques1.Question1 +
+              "--> Wrong Solution : " +
+              ans1.Answer1 +
+              "( The Correct Solution is:  " +
+              data.Answer1 +
+              ")     Question 2: " +
+              ques1.Question2 +
+              " --> Correct Solution  " +
+              ans1.Answer2 +
+              "  Your Grade:  " +
+              grade
           );
       }
       if ((data.Answer1 == ans1.Answer1) & (data.Answer2 != ans1.Answer2)) {
@@ -353,17 +357,17 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-            ques1.Question1 +
-            " --> Correct Solution  " +
-            ans1.Answer1 +
-            "  Question 2 :" +
-            ques1.Question2 +
-            "--> Wrong Solution  " +
-            ans1.Answer2 +
-            "( The Correct Solution is:  " +
-            data.Answer2 +
-            " ) Your Grade:  " +
-            grade
+              ques1.Question1 +
+              " --> Correct Solution  " +
+              ans1.Answer1 +
+              "  Question 2 :" +
+              ques1.Question2 +
+              "--> Wrong Solution  " +
+              ans1.Answer2 +
+              "( The Correct Solution is:  " +
+              data.Answer2 +
+              " ) Your Grade:  " +
+              grade
           );
       }
       if ((data.Answer1 != ans1.Answer1) & (data.Answer2 != ans1.Answer2)) {
@@ -372,19 +376,19 @@ appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
           .status(200)
           .send(
             "Question 1: " +
-            ques1.Question1 +
-            " --> Wrong Solution : " +
-            ans1.Answer1 +
-            "(The Correct Solution is: " +
-            data.Answer1 +
-            " )   Question 2: " +
-            ques1.Question2 +
-            "--> Wrong Solution  " +
-            ans1.Answer2 +
-            "(The Correct Solution is: " +
-            data.Answer2 +
-            ")  Your Grade:  " +
-            grade
+              ques1.Question1 +
+              " --> Wrong Solution : " +
+              ans1.Answer1 +
+              "(The Correct Solution is: " +
+              data.Answer1 +
+              " )   Question 2: " +
+              ques1.Question2 +
+              "--> Wrong Solution  " +
+              ans1.Answer2 +
+              "(The Correct Solution is: " +
+              data.Answer2 +
+              ")  Your Grade:  " +
+              grade
           );
       }
     }
@@ -447,40 +451,6 @@ appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   );
 });
 
-
-
-appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
-  //const RegisteredCourses = req.body.RegisteredCourses;
-  var RegisteredCoursesArr = [];
-  var final = [];
-  var myCourse = req.body.myCourse;
-  var answer = "";
-  Corporate.find(
-    {
-      Username: { $eq: req.body.Username },
-    },
-    function (err, result) {
-      if (err) {
-        console.log("err");
-      } else {
-        // console.log(RegisteredCoursesArr);
-        console.log("Done1");
-        //RegisteredCoursesArr = result[0];
-        RegisteredCoursesArr = result;
-        final = RegisteredCoursesArr[0].RegisteredCourses;
-        console.log(final[1]);
-        console.log(final.length);
-
-        for (let i = 0; i < final.length; i++) {
-          if (myCourse == final[i]) {
-            answer = final[i];
-            break;
-          }
-        }
-      }
-    }
-  )
-});
 appRouter.post("/Corporate_retrieveMyCourse", async (req, res) => {
   //const RegisteredCourses = req.body.RegisteredCourses;
   var RegisteredCoursesArr = [];
@@ -525,7 +495,7 @@ appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
   var answer = "";
   Corporate.find(
     {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     },
     function (err, result) {
       if (err) {

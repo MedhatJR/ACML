@@ -5,7 +5,7 @@ import Axios from "axios";
 //import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 //import setAuthToken from "../Controllers/setAuthToken";
 import PropTypes from 'prop-types';   
@@ -74,17 +74,14 @@ const LogIn = ({ setToken }) => {
         setFinal = response.data;
         nav("/InstructorPage", { state: { Email: Email } });
       });
-     
-    }
-    else if  (C === "Adminstrator"){
+    } else if (C === "Adminstrator") {
       Axios.post("http://localhost:8000/Adminstrator_Login", {
         Email: Email,
         Password: Password,
       }).then((response) => {
-        setFinal=response.data;
+        setFinal = response.data;
         nav("/AdminstratorPage");
       });
-     
     }
   };
 

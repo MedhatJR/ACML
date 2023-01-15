@@ -204,7 +204,7 @@ appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
 
   Individual.find(
     {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     },
     function (err, result) {
       if (err) {
@@ -215,7 +215,7 @@ appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
         //RegisteredCoursesArr = result[0];
         RegisteredCoursesArr = result;
         final = RegisteredCoursesArr[0].RegisteredCourses;
-        console.log(final[1]);
+        console.log(final, "final");
         console.log(final.length);
 
         Course.find({ Title: final }, function (err, result1) {
@@ -278,7 +278,7 @@ appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
   var answer = "";
   Individual.find(
     {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     },
     function (err, result) {
       if (err) {
