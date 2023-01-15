@@ -18,6 +18,10 @@ const problemSchema =new Schema (
         Course:{
             type:String,
             required: true,
+        },
+        Solved:{
+            type: String,
+            required: true,
         }
     },
     {timestamps: true}

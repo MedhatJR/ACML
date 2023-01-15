@@ -34,6 +34,12 @@ app.use(router);
 app.use(cookieParser());
 //app.use("/", authRoutes);
 //--------------------
+app.use('/LogIn', (req, res) => {
+  res.send({
+    token: 'test123'
+  });
+});
+
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8000"); // update to match the domain you will make the request from

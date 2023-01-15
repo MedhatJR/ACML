@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
+import React, { useState } from 'react';
 
 import Home from "./pages/Home";
 
@@ -52,21 +53,28 @@ import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
 import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
 import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
+import useToken from './useToken';
+
+// function setToken(userToken) {
+//   sessionStorage.setItem('token', JSON.stringify(userToken));
+// }
+
+// function getToken() {
+//   const tokenString = sessionStorage.getItem('token');
+//   const userToken = JSON.parse(tokenString);
+//   return userToken?.token
+// }
 
 function App() {
 
-  var token;
+//  var token;
 
-  // if (typeof window !== 'undefined') {
-  //   // Perform localStorage action
-  //    token = localStorage.getItem('token')
-  // }
-  // useEffect(() => {
-  //   // Perform localStorage action
-  //   const token = localStorage.getItem('token')
-  // }, [])
-  //------------------
+// const { token, setToken } = useToken();
+// //const token = getToken();
 
+//   if(!token) {
+//     return <LogIn setToken={setToken} />
+//   }
 
   return (
     <>

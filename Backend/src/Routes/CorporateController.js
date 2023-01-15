@@ -10,6 +10,7 @@ const Instructor = require("../Models/Instructor");
 const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
+const Problem = require("../Models/Problem");
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
 var popup = require('alert');
@@ -108,7 +109,7 @@ appRouter.post("/Corporate_Login", async (req, res) => {
         'secret',
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "24h",
         }
       );
       // save user token
@@ -407,6 +408,24 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
       }
     }
   );
+});
+
+appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
+    const problem = new Problem({
+       Username : req.body.Username,
+       Description : req.body.Description,
+       Type : req.body.Type,
+       Course : req.body.Course,
+       Solved : "Not Solved",
+    });
+    try {
+      Problem.create(problem);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(problem);
+    res.status(200).send("Submitted Problem");
+  
 });
 
 appRouter.post("/Corporate_ForgotPassword", async (req, res) => {

@@ -14,7 +14,7 @@ const CorporatePage = () => {
   const nav = useNavigate();
   console.log("Hi");
   const forwardViewMyCourses = () => {
-    nav("/CorporateViewMyCourses", {state:{passedEmail:passedData}});
+    nav("/CorporateViewMyCourses", { state: { passedEmail: passedData } });
   };
   const forward4 = () => {
     nav("/CMCQ");
@@ -35,10 +35,10 @@ const CorporatePage = () => {
   const grade = () => {
     nav("/CoporateGradeAndAnswers");
   };
-  
-  
+
+
   return (
-    
+
     <div className="add">
       <>
         <nav>
@@ -63,7 +63,7 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={ForwardViewMyCourses}>
         My Courses
       </button>
-      <br/>
+      <br />
       <br />
       <button class="button-17" role="button" onClick={forwardViewMyCourses}>
         My Courses
@@ -73,25 +73,25 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={RateInstructor}>
         Rate An Instructor
       </button>
-      <br/>
-      <br/>
-      <button onClick={forward4}>Join the Exam</button> 
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <button onClick={forward4}>Join the Exam</button>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
-        </button>
-        <br/>
-      <br/>
+      </button>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={grade}>
         Your grades and check your anwsers
       </button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
-      <div>{location.state.Email}</div>
+      {/* <div>{location.state.Email}</div> */}
     </div>
   );
 };

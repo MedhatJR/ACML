@@ -7,12 +7,26 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import {Link} from 'react-router-dom';
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
-import setAuthToken from "../Controllers/setAuthToken";
+//import setAuthToken from "../Controllers/setAuthToken";
+import PropTypes from 'prop-types';   
 
+async function loginUser(credentials) {
+  return fetch('http://localhost:8000/Corporate_Login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
 
-const LogIn = () => {
+const LogIn = ({ setToken }) => {
   var [final, setFinal] = useState("");
-  const nav = useNavigate();
+  var [username, setUserName] = useState();
+  var [password, setPassword] = useState();
+
+  var nav = useNavigate();
   const forward = () => {
     nav("/");
   };
@@ -40,18 +54,6 @@ const LogIn = () => {
       });
 
       console.log(setFinal +"   wronggggg");
- // //get toekn from response 
-        // const token = response.data.token;
-
-
-        // //set token to axios common header 
-        // setAuthToken(token);
-
-        // //set JWT token to local 
-        // localStorage.setItem("token", token);
-
-        // //redirect user to home page
-        // window.location.href = '/'
 
       nav("/CorporatePage", { state: { Email: Email } });
       //Navigation to the corporate page
@@ -86,32 +88,15 @@ const LogIn = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
-  };
-
-  // const handleSubmitt = (email, pass) => {
-  //   //reqres registered sample user 
-  //   const loginPayload = {
-  //     Email: document.getElementById("email").value,
-  //     Password: document.getElementById("pass").value,
-  //   }
-  //   Axios.post("http://localhost:8000/Corporate_Login",
-  //     loginPayload).then(response => {
-  //       //get toekn from response 
-  //       const token = response.data.token;
-
-  //       //set JWT token to local 
-  //       localStorage.setItem("token", token);
-
-  //       //set token to axios common header 
-  //       setAuthToken(token);
-  //       //redirect user to home page
-  //       window.location.href = '/'
-  //     }).catch(err => console.log(err));
-
-  // };
-
+    const token = await loginUser({
+      username,
+      password
+    });
+    setToken(token);
+  }
   return (
     <>
       <div className="add">
@@ -142,11 +127,13 @@ const LogIn = () => {
         <h1>Please Login</h1>
         <form className="form" onSubmit={(e) => handleSubmit(e)}>
           <label>Email</label>
-          <input type="email" name="Email" id="email" /> <br />
+          <input type="email" name="Email" id="email" //onChange={e => setUserName(e.target.value)} 
+          /> <br />
           <br />
           <br />
           <label>Password</label>
-          <input type="password" name="Password" id="pass" /> <br />
+          <input type="password" name="Password" id="pass" //onChange={e => setPassword(e.target.value)} 
+          /> <br />
           <br />
           <br />
           <label> Category </label>
@@ -165,5 +152,7 @@ const LogIn = () => {
     </>
   );
 };
-
+LogIn.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
 export default LogIn;
