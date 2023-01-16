@@ -421,7 +421,7 @@ appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
        Description : req.body.Description,
        Type : req.body.Type,
        Course : req.body.Course,
-       Status : req.body.Status
+       Status : req.body.Status,
     });
     try {
       Problem.create(problem);

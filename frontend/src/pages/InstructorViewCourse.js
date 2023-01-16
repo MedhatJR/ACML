@@ -31,7 +31,8 @@ const InstructorViewCourse = () => {
   };
 
   const problemReport = () => {
-    nav("/ReportAProblem", {
+  
+    nav("/ReportAProblem"  , {
       state: { passedEmail: passedEmail, passedCategory: "Instructor" },
     });
   };

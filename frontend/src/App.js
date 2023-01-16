@@ -57,7 +57,7 @@ import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
 import useToken from './useToken';
-import Header from "./pages/Header";
+// import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
 
 // function setToken(userToken) {
