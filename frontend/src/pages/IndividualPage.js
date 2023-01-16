@@ -66,7 +66,7 @@ const IndividualPage = () => {
       <img src={teacher} alt="" className="teacher" />
 
       <p>It's time to learn and shine</p>
-      <button class="button-17" className="explore-button" onClick={viewCourses}>
+      <button className="explore-button" onClick={viewCourses}>
         Explore Courses
       </button>
       <br />
@@ -76,9 +76,7 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button class="button-17" onClick={forward3}>
-        Join the Exam
-        </button>
+      <button onClick={forward3}>Join the Exam</button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={Rate}>

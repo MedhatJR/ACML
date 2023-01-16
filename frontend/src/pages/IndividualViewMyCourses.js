@@ -66,7 +66,8 @@ const IndividualViewMyCourses = () => {
   }
 
   const problemReport = () => {
-    nav("/ReportAProblem", {
+
+    nav("/ReportAProblem"    , {
       state: { passedEmail: passedEmail, passedCategory:"IndividualTrainee"},
     });
   };

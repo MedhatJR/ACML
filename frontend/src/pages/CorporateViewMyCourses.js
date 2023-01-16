@@ -93,9 +93,9 @@ const CorporateViewMyCourses = () => {
   }
 
   const problemReport = () => {
-    nav("/ReportAProblem", {
-      state: { passedEmail: passedEmail, passedCategory : "CorporateTrainee"},
-    });
+
+    nav("/ReportAProblem"    ,{state: { passedEmail: passedEmail, passedCategory : "CorporateTrainee"},
+  });
   };
 
   const go = () => {

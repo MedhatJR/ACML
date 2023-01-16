@@ -49,6 +49,7 @@ import Certificates from"./pages/Certificates";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
 import AdminstratorPage from "./pages/AdminstratorPage";
+import AdminViewProblems from "./pages/AdminViewProblems";
 import AdminAddPromoAllcourses from "./pages/AdminAddPromoAllcourses";
 import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
 import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
@@ -56,7 +57,7 @@ import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
 import useToken from './useToken';
-import Header from "./pages/Header";
+// import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
 
 // function setToken(userToken) {
@@ -147,6 +148,10 @@ function App() {
               <Route
                 path="/AdminAddPromoSeveralcourses"
                 element={<AdminAddPromoSeveralcourses />}
+              />
+               <Route
+                path="/AdminViewProblems"
+                element={<AdminViewProblems />}
               />
               <Route
                 path="/AdminAddPromoSpecificcourse"

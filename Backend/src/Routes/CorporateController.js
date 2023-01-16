@@ -417,11 +417,11 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
 appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
     const problem = new Problem({
        Email : req.body.Email,
-       Category: "",
+       Category: req.body.Category,
        Description : req.body.Description,
        Type : req.body.Type,
        Course : req.body.Course,
-       Status : "",
+       Status : req.body.Status,
     });
     try {
       Problem.create(problem);
