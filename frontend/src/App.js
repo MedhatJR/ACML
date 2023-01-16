@@ -28,6 +28,7 @@ import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
 import IMCQ from"./pages/IMCQ";
 import CMCQ from"./pages/CMCQ";
+import Terms from "./pages/Terms";
 
 
 import AddPromotion from "./pages/AddPromotion";
@@ -100,6 +101,7 @@ function App() {
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/Terms" element={<Terms/>} />
             </Routes>
           </div>
         </BrowserRouter>

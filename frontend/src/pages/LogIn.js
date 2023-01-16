@@ -22,6 +22,13 @@ const LogIn = () => {
         const instlogin = () => {
           nav("/InstructorPage");
         };
+        const Terms = () => {
+          nav("/Terms");
+        };
+        const Contract = () => {
+          nav("/Contract");
+        };
+  
     const login = () => {
         const C = document.getElementById("Category").value
         const Email = document.getElementById("email").value;
@@ -55,7 +62,8 @@ const LogIn = () => {
       }).then((response) => {
         setFinal=response.data;
       });
-      nav("/InstructorPage");
+
+      nav("/Contract");
     }
   
   };

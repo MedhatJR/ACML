@@ -15,6 +15,12 @@ const Contract = () => {
     const login = () => {
         nav("/LogIn");
       };
+      const Terms = () => {
+        nav("/Terms");
+      };
+      const InstructorPage= () => {
+        nav("/InstructorPage");
+      };
 
     return(<>
         <div className="add">
@@ -45,10 +51,19 @@ const Contract = () => {
             <div>
                 <p> I,as an instructor, agree on all the rights to the posted Videos
                     and materials as well as the percentage % taken by the company on each video per registered trainee.
+                    I also agree to the the payment policy,refund policy, terms and conditions 
+
+
+                         
+                    
+                </p>
+                <button onClick={Terms}> View terms and conditions     
+                    </button>
+                    <p> 
                 </p>
             </div>
             <div>
-            <button onClick={login}> Agree</button>
+            <button onClick={InstructorPage}> Agree</button>
             <button onClick={Home}> Discard</button>
             </div>
         </div>

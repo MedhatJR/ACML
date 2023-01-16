@@ -35,6 +35,7 @@ appRouter.post("/Adminstrator_addinstructor", async (req, res) => {
     Gender: req.body.Gender,
     Courses: req.body.Courses,
     Rating: req.body.Rating,
+    Biography:req.body.Biography,
   });
   try {
     Instructor.create(instructor);
@@ -53,6 +54,7 @@ appRouter.post("/Adminstrator_addcorporatetrainee", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    RegisteredCourses:req.body.RegisteredCourses
   });
   try {
     CorporateTrainee.create(corporatetrainee);
