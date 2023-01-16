@@ -5,6 +5,7 @@ const Adminstrator = require("../Models/Adminstrator");
 const Instructor = require("../Models/Instructor");
 const CorporateTrainee = require("../Models/CorporateTrainee");
 const IndividualTrainee = require("../Models/IndividualTrainee");
+const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const { title, send } = require("process");
 const { isBooleanObject } = require("util/types");
@@ -576,6 +577,45 @@ else   if(Category == "Corporate Trainee"){
 
 });
 
+
+
+// sho8l moataz ==========================================================================================
+
+
+
+appRouter.post("/change_status_to_pending",async(req,res)=>{
+  const id = req.body.id;
+  Problem.findOneAndUpdate(
+    { _id : id },
+    { status : 'pending' },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log('error');
+      } else {
+        console.log('data');
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
+
+appRouter.post("/change_status_to_solved",async(req,res)=>{
+  const Username = req.body.Username;
+  Individual.findOneAndUpdate(
+    { Username: Username },
+    { Gender: 'solved' },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log('error');
+      } else {
+        console.log('data');
+        res.status(200).send("update done");
+      }
+    }
+  );
+});
 
 
 module.exports = appRouter;
