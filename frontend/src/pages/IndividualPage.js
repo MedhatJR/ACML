@@ -6,6 +6,7 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import { useLocation } from "react-router-dom";
 
 const IndividualPage = () => {
   const location = useLocation();
@@ -35,8 +36,6 @@ const IndividualPage = () => {
   const forward3 = () => {
     nav("/IMCQ");
   };
-  const certificate = () => {
-    nav("/Certificates");
   const viewCourses = () => {
     nav("/AllCourses");
   };
@@ -100,14 +99,9 @@ const IndividualPage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
-      <br/>
-      <br/>
-      <button class="button-17" role="button" onClick={certificate}>
-       Certificates
-      </button>
       {/* <div>{location.state.Email}</div> */}
     </div>
   );
 };
-}
+
 export default IndividualPage;
