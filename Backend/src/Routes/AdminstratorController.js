@@ -619,7 +619,13 @@ appRouter.post("/change_status_to_solved",async(req,res)=>{
 
 appRouter.get("/view_problems",async(req,res)=>{
  // const  _id = req.body._id;
- Problem.find( {} , (error, data)=>{
+ Problem.find(  {
+  $or: [
+    {  Status: {$eq : "Unseen"} },
+    { Status:  {$eq : "pending"} },
+    { Status:  {$eq : "seen"} },
+  ],
+}, (error, data)=>{
   if(error){
     console.log("error");
   }
