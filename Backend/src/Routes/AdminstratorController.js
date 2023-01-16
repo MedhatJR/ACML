@@ -584,7 +584,7 @@ else   if(Category == "Corporate Trainee"){
 
 
 appRouter.post("/change_status_to_pending",async(req,res)=>{
-  const id = req.body.id;
+  const _id = req.body._id;
   Problem.findOneAndUpdate(
     { _id : id },
     { status : 'pending' },
@@ -594,28 +594,42 @@ appRouter.post("/change_status_to_pending",async(req,res)=>{
         console.log('error');
       } else {
         console.log('data');
-        res.status(200).send("update done");
+        res.status(200).send("problem pending");
       }
     }
   );
 });
 
 appRouter.post("/change_status_to_solved",async(req,res)=>{
-  const Username = req.body.Username;
-  Individual.findOneAndUpdate(
-    { Username: Username },
-    { Gender: 'solved' },
+  const _id = req.body._id;
+  Problem.findOneAndUpdate(
+    { _id : _id },
+    { status : 'solved' },
     { new: true },
     (error, data) => {
       if (error) {
         console.log('error');
       } else {
         console.log('data');
-        res.status(200).send("update done");
+        res.status(200).send("problem solved");
       }
     }
   );
 });
 
+appRouter.get("/view_problems",async(req,res)=>{
+ // const  _id = req.body._id;
+ Problem.find( {} , (error, data)=>{
+  if(error){
+    console.log("error");
+  }
+else{
+
+console.log(data.length);
+res.send(data)
+}
+});
+
+});
 
 module.exports = appRouter;
