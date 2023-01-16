@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const problemSchema =new Schema (
     {
-        Username:{
+        Email:{
             type: String,
             required: true,
         },
@@ -23,7 +23,7 @@ const problemSchema =new Schema (
             type:String,
             required: true,
         },
-        Solved:{
+        Status:{
             type: String,
             required: true,
         }

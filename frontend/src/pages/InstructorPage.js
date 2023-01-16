@@ -6,8 +6,11 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import { useLocation } from "react-router-dom";
 
 const InstructorPage = () => {
+  const location = useLocation();
+  const passedData = location.state.Email;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
@@ -38,7 +41,7 @@ const InstructorPage = () => {
     nav("/InstrCourseRatings");
   };
   const forwardView = () => {
-    nav("/InstructorViewCourse");
+    nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
   };
   const Add = () => {
     nav("/AddPromotion");

@@ -416,12 +416,12 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
 
 appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
     const problem = new Problem({
-       Username : req.body.Username,
-       Category: "CorporateTrainee",
+       Email : req.body.Email,
+       Category: req.body.Category,
        Description : req.body.Description,
        Type : req.body.Type,
        Course : req.body.Course,
-       Solved : "Not Solved",
+       Status : req.body.Status
     });
     try {
       Problem.create(problem);
@@ -433,7 +433,7 @@ appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
 });
 
 appRouter.get("/Corporate_AllProblems", async (req, res) => {
-  if(!req.body.Username){
+  if(!req.body.Email){
     console.log("All input is required");
   };
   // if(!(Problem.find( {
@@ -443,12 +443,12 @@ appRouter.get("/Corporate_AllProblems", async (req, res) => {
   // }
   res.send(
     await Problem.find( {
-      Username: { $eq: req.body.Username },
+      Email: { $eq: req.body.Email },
     }).select([
       "Description",
       "Type",
       "Course",
-      "Solved",
+      "Status",
    
     ])
   );

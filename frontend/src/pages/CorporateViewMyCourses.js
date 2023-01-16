@@ -6,49 +6,108 @@ import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import "../styles/Star.css";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+
+
 var arr = [];
 var arrTitles = [];
-var wantedtitle = "";
-// var id = "";
+var arrTitlesRate = [];
+var isClickedTitle = "";
+var isClickedTitleRate = "";
 
 const CorporateViewMyCourses = () => {
   const location = useLocation();
+  const passedEmail = location.state.passedEmail;
+  //var category="CorporateTrainee";
   var [rating, setRating] = useState(0);
   var [hover, setHover] = useState(0);
   const [users, setData] = useState("");
+  var [final, setFinal] = useState("");
   const nav = useNavigate();
 
-  const viewCourses = () => {
-    //var Username = document.getElementById("myName").value;
-    Axios.post("http://localhost:8000/Corporate_retrieveMyCourse", {
-      Email: location.state.Email,
-    }).then((response) => {
-      console.log(response);
-      arr = response.data.CourseDetails;
+  Axios.post("http://localhost:8000/Corporate_retrieveMyCourse", {
+    Email: passedEmail,
+  }).then((response) => {
+    console.log(response);
+    arr = response.data.CourseDetails;
+    for (var i = 0; i < arr.length; i++) {
+      arrTitles[i] = arr[i].Title;
+      arrTitlesRate[i] = arr[i].Title;
+    }
+    setData(response);
 
-      setData(response);
+    // setData(response.data[1].Title);
+  });
 
-      // setData(response.data[1].Title);
-    });
+  const buttonPressed = (e) => {
+    isClickedTitle = e.target.id; // Get ID of Clicked Element
+    console.log(isClickedTitle);
+  };
+  const buttonPressedRate = (e) => {
+    isClickedTitleRate = e.target.id; // Get ID of Clicked Element
+    console.log(isClickedTitleRate);
   };
 
-  const back = () => {
-    nav("/");
+  const Rate = () => {
+    console.log("Hi");
+    Axios.post("http://localhost:8000/Corporate_rateCourse", {
+      Title: isClickedTitleRate,
+      Rating: rating,
+    }).then(
+      (response) => {
+        setFinal = response.data;
+      }
+    );
+  };
+
+  function rating(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let buttonRate of buttons) {
+      buttonRate.addEventListener("click", buttonPressedRate);
+    }
+
+    for (var i = 0; i < arrTitlesRate.length; i++) {
+      if (arrTitlesRate[i] === isClickedTitle) {
+        isClickedTitleRate = arrTitlesRate[i];
+
+      }
+    }
+
+  }
+
+  function reply_click(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressed);
+    }
+
+    for (var i = 0; i < arrTitles.length; i++) {
+      if (arrTitles[i] === isClickedTitle) {
+        // console.log(arrTitles[i]);
+        nav("/CorporateCoursePage", {
+          state: { passedEmail: passedEmail, isClickedTitle: arrTitles[i] },
+        });
+      }
+    }
+  }
+
+  const problemReport = () => {
+    nav("/ReportAProblem", {
+      state: { passedEmail: passedEmail, passedCategory : "CorporateTrainee"},
+    });
   };
 
   const go = () => {
     nav("/CorporateCoursePage");
   };
 
-  
   return (
     <div className="IndividualViewCourse">
       <nav>
         <img src={logo} className="logo" alt="" />{" "}
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a href="">Home</a>
           </li>
           <li>
             <a href="#news">News</a>
@@ -61,11 +120,6 @@ const CorporateViewMyCourses = () => {
           </li>
         </ul>
       </nav>
-      
-      <br />
-      <button onClick={viewCourses} className="button-17">
-        View My Courses
-      </button>
       <br />
       <br />
       {arr.map((user) => (
@@ -93,11 +147,11 @@ const CorporateViewMyCourses = () => {
               {[...Array(5)].map((star, index) => {
                 if (index <= 5) {
                   return (
-                    <button
+                    <button id={user.Title}
                       type="button"
                       key={index}
                       className={index <= (hover || rating) ? "on" : "off"}
-                      onClick={() => setRating(index + 1)}
+                      onClick={() => { setRating(index + 1); Rate(); rating(); }}
                       onMouseEnter={() => setHover(index)}
                       onMouseLeave={() => setHover(rating)}
                     >
@@ -108,8 +162,13 @@ const CorporateViewMyCourses = () => {
               })}
             </div>
 
-            <button className="button-17" id="btn17" onClick={go}>
+            <button className="button-17" id={user.Title} onClick={reply_click}>
               Go To Course
+            </button>
+            <br/>
+            <br/>
+            <button className="button-17" id={user.Title} onClick={problemReport}>
+              Report a Problem
             </button>
           </>
         </div>

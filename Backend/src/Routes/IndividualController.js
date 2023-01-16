@@ -201,12 +201,12 @@ appRouter.post("/addIndividual", async (req, res) => {
 
 appRouter.post("/Individual_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-     Username : req.body.Username,
+     Emial : req.body.Email,
      Category: "IndividualTrainee",
      Description : req.body.Description,
      Type : req.body.Type,
      Course : req.body.Course,
-     Solved : "Not Solved",
+     Status : "Unseen",
   });
   try {
     Problem.create(problem);
@@ -218,17 +218,17 @@ appRouter.post("/Individual_ReportAProblem", async (req, res) => {
 });
 
 appRouter.get("/Individual_AllProblems", async (req, res) => {
-  if(!req.body.Username){
+  if(!req.body.Email){
     console.log("All input is required");
   };
 res.send(
   await Problem.find( {
-    Username: { $eq: req.body.Username },
+    Email: { $eq: req.body.Email },
   }).select([
     "Description",
     "Type",
     "Course",
-    "Solved",
+    "Status",
  
   ])
 );

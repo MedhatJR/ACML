@@ -51,12 +51,12 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
 
 appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-     Username : req.body.Username,
-     Category: "InstructorTrainee",
+     Email : req.body.Email,
+     Category: "Instructor",
      Description : req.body.Description,
      Type : req.body.Type,
      Course : req.body.Course,
-     Solved : "Not Solved",
+     Status : "Unseen",
   });
   try {
     Problem.create(problem);
@@ -68,17 +68,17 @@ appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
 });
 
 appRouter.get("/Instructor_AllProblems", async (req, res) => {
-  if(!req.body.Username){
+  if(!req.body.Email){
     console.log("All input is required");
   };
 res.send(
   await Problem.find( {
-    Username: { $eq: req.body.Username },
+    Email: { $eq: req.body.Email },
   }).select([
     "Description",
     "Type",
     "Course",
-    "Solved",
+    "Status",
  
   ])
 );

@@ -55,7 +55,8 @@ import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
 import useToken from './useToken';
-
+import Header from "./pages/Header";
+import ReportAProblem from "./pages/ReportAProblem";
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -82,6 +83,13 @@ function App() {
   return (
     <>
       <div className="App">
+      {/* <div className="App">
+        <Header />
+    </div> */}
+    {/* <div className="App">
+      <Dropdown placeHolder="Select..." />
+    </div> */}
+
         <BrowserRouter>
           <div className="pages">
             <Routes>
@@ -96,6 +104,7 @@ function App() {
                 element={<IndividualResetPassword />}
               />
               <Route path="/EnterEmail" element={<EnterEmail />} />
+              <Route path="/ReportAProblem" element={<ReportAProblem />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
               <Route
                 path="/CorporateResetPassword"
