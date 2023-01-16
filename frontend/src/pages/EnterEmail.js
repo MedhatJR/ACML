@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
+import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
@@ -14,6 +14,13 @@ const EnterEmail = () => {
     const login = () => {
       const C = document.getElementById("Category").value
         const Email = document.getElementById("email").value;
+        Axios.post("http://localhost:8000/Instructor_receiveemail", {
+      }).then((response) => {
+
+        setFinal(response);
+  
+        // setData(response.data[1].Title);
+      });
       console.log("Hi");
       if (C === "CorporateTrainee"){
         nav("/CorporateResetEmail"); 
@@ -55,7 +62,7 @@ const EnterEmail = () => {
     
     <div className="Register">
       <h1>Reset Your Password</h1>
-      <form className="form">
+      <form  method="POST"  className="form">
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
         <br />

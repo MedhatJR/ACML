@@ -31,7 +31,7 @@ const CMCQ = () => {
           Question2:Question2,
           Answer2:Answer2,
           }).then((response) =>{
-              this.setFinal(response.data);
+              setData(response.data);
 
           });
 

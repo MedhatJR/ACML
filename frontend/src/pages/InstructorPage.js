@@ -6,33 +6,42 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import { useLocation } from "react-router-dom";
 
 const InstructorPage = () => {
+  const location = useLocation();
+  const passedData = location.state.Email;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
 
-  const viewCourseRating = () => {
-    console.log("Hi");
-    Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
-      (response) => {
-        setFinal=response.data;
-      }
-    );
-  };
-  const viewMyRating = () => {
-    console.log("Hi");
-    Axios.post("http://localhost:8000/instructor_viewRatings").then(
-      (response) => {
-        this.setFinal(response.data);
-      }
-    );
-  };
+  //   const viewCourseRating = () => {
+  //     console.log("Hi");
+  //     Axios.post("http://localhost:8000/instructor_viewCourseRatings").then(
+  //       (response) => {
+  //         setFinal=response.data;
+  //       }
+  //     );
+  //   };
+  //   const viewMyRating = () => {
+  //     console.log("Hi");
+  //     Axios.post("http://localhost:8000/instructor_viewRatings").then(
+  //       (response) => {
+  //         this.setFinal(response.data);
+  //       }
+  //     );
+  //   };
   const forwardAdd = () => {
     nav("/AddCourse");
   };
+  const viewMyRating = () => {
+    nav("/InstrMyRatings");
+  };
+  const viewCourseRating = () => {
+    nav("/InstrCourseRatings");
+  };
   const forwardView = () => {
-    nav("/InstructorViewCourse");
+    nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
   };
   const Add = () => {
     nav("/AddPromotion");
@@ -46,10 +55,14 @@ const InstructorPage = () => {
   const email = () => {
     nav("/UpdateEmail");
   };
-  const forwardexam = () => {
+
+  
+  const forward2 = () => {
     nav("/Addexam");
   };
-  
+  const viewCourses = () => {
+    nav("/AllCourses");
+  };
   return (
     <div className="add">
       <>
@@ -77,6 +90,9 @@ const InstructorPage = () => {
       <img src={teacher} alt="" className="teacher" />
 
       <p>What would you like to do today ?</p>
+      <button class="button-17" className="explore-button" onClick={viewCourses}>
+        Explore Courses
+      </button>
       <button class="button-17" role="button" onClick={viewCourseRating}>
         View Course Ratings
       </button>
@@ -110,6 +126,11 @@ const InstructorPage = () => {
       <button class="button-17" role="button" onClick={Biography}>
         Change Biography
       </button>
+      <br />
+      <br />
+      <button class="button-17" onClick={forward2}>
+        Add Your Exam
+        </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={email}>

@@ -38,10 +38,16 @@ font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     bottom: 180px;
 }
+.MyCourse .star-rating{
+    font-size: 15px;
+    position: absolute;
+    bottom: 130px;
+
+}
 .MyCourse .subject {
     font-size: 15px;
     position: absolute;
-    top: 190px;
+    top: 220px;
 }
 
 #btn17 {

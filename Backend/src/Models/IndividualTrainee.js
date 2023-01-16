@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
 const IndividualTraineeSchema = new Schema(
   {
@@ -38,6 +39,10 @@ const IndividualTraineeSchema = new Schema(
   },
   { timestamps: true }
 );
+IndividualTraineeSchema.pre("save", async function(next){
+  const salt = await bcrypt.genSalt();
+  this.Password= await bcrypt.hash(this.Password,salt);
+});
 
 const IndividualTrainee = mongoose.model(
   "IndividualTrainee",

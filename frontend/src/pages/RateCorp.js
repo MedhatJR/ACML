@@ -12,7 +12,7 @@ const RateCorp = () => {
     var [rating, setRating] = useState(0);
     var [hover, setHover] = useState(0);
     var [final, setFinal] = useState("");
-    var [liked, setLiked] = useState({ liked: false });
+ //   var [liked, setLiked] = useState({ liked: false });
     const nav = useNavigate();
 
     const Rate = () => {
@@ -56,18 +56,19 @@ const RateCorp = () => {
             <br />
             <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
-                    let e = React.createElement;
-                    var count = 0;
-                        if (setLiked.liked) {
-                            count++;
-                        }
+                    // let e = React.createElement;
+                    // var count = 0;
+                    //     if (setLiked.liked) {
+                    //         count++;
+                    //     }
                         if (index <= 5) {
                             return (
                                 <button
                                     type="button"
                                     key={index}
                                     className={index <= (hover || rating) ? "on" : "off"}
-                                    onClick={() => setRating((rating + index + 1) / (count + 1))}
+                                   // onClick={() => setRating((rating + index + 1) / (count + 1))}
+                                    onClick={() => setRating((index + 1))}
                                     onMouseEnter={() => setHover(index)}
                                     onMouseLeave={() => setHover(rating )}
                                 >

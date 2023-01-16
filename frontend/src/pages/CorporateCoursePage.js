@@ -6,13 +6,16 @@ import "../styles/IndividualCoursePage.css";
 import { useNavigate } from "react-router-dom";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
+import { useLocation } from "react-router-dom";
 
 var array = [];
 
 const CorporateViewMyCourses = () => {
   // console.log(wantedtitle[0]);
   //   console.log(array);
-
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
+  var isClickedTitle = location.state.isClickedTitle;
   const [users, setData] = useState("");
   const nav = useNavigate();
 
@@ -20,32 +23,22 @@ const CorporateViewMyCourses = () => {
   //     nav("/");
   //   };
 
-  const viewMyCourses = () => {
-    const Username = document.getElementById("user").value;
-    const myCourse = document.getElementById("course").value;
-    Axios.post("http://localhost:8000/Corporate_retrieveMyCourseData", {
-      Username: Username,
-      myCourse: myCourse,
-    }).then((response) => {
-      console.log(response);
-      console.log(Username);
-      array = response.data.CourseDetails;
+  Axios.post("http://localhost:8000/Corporate_retrieveMyCourseData", {
+    Email: passedEmail,
+    myCourse: isClickedTitle,
+  }).then((response) => {
+    console.log(response);
 
-      setData(response);
+    array = response.data.CourseDetails;
 
-      // setData(response.data[1].Title);
-    });
-  };
+    setData(response);
+
+    // setData(response.data[1].Title);
+  });
 
   return (
     <div className="IndividualViewCourse">
-      <label>Username</label>
-      <br />
-      <input type="text" id="user" />
-      <label>Course</label>
-      <input type="text" id="course" />
-      <br />
-      <button onClick={viewMyCourses}>View</button>
+      {/* <button onClick={viewMyCourses}>View</button> */}
       {array.map((user) => (
         <div className="fullCourse">
           <>
@@ -53,7 +46,7 @@ const CorporateViewMyCourses = () => {
               {user.Title}
             </h1>
             <iframe
-              className="video"
+              className="videoSub"
               width="560"
               height="315"
               src={user.PreviewLink}
@@ -66,13 +59,13 @@ const CorporateViewMyCourses = () => {
               Subject: {user.Subject}
             </p>
             <p key={user} className="subtitle">
-              Subject: {user.Subtitle}
+              Subtitle: {user.Subtitle}
             </p>
             <p key={user} className="shortsummary">
               {user.Shortsummary}.
             </p>
             <p key={user} className="rating">
-              {user.Rating}
+              {user.Rating} ⭐'s
             </p>
             <p key={user} className="instructor">
               By: {user.Instructor}
@@ -86,13 +79,24 @@ const CorporateViewMyCourses = () => {
               <img src={eye} alt="" className="eye" />
               {user.Views} Views
             </p>
+
             {/* <p key={user}>{user.PreviewLink}</p> */}
-            <p key={user}>{user.SubLink}</p>
+            <iframe
+              className="video"
+              width="560"
+              height="315"
+              src={user.SubLink}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
             {/* <p key={user}>{user.Promotion}</p>
             <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
         </div>
       ))}
+      <div>{location.state.Email}</div>
     </div>
   );
 };

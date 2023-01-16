@@ -2,10 +2,10 @@ const express = require("express");
 const appRouter = express.Router();
 const cors = require("cors");
 appRouter.use(cors());
-
+const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
-
+var nodemailer = require('nodemailer');
 var dbcourses = [];
 
 const Exams = require("../Models/Exams");
@@ -48,6 +48,42 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
     }
   );
 });
+
+appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
+  const problem = new Problem({
+     Email : req.body.Email,
+     Category: "Instructor",
+     Description : req.body.Description,
+     Type : req.body.Type,
+     Course : req.body.Course,
+     Status : "Unseen",
+  });
+  try {
+    Problem.create(problem);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(problem);
+  res.status(200).send("Submitted Problem");
+});
+
+appRouter.get("/Instructor_AllProblems", async (req, res) => {
+  if(!req.body.Email){
+    console.log("All input is required");
+  };
+res.send(
+  await Problem.find( {
+    Email: { $eq: req.body.Email },
+  }).select([
+    "Description",
+    "Type",
+    "Course",
+    "Status",
+ 
+  ])
+);
+});
+
 
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
@@ -109,7 +145,7 @@ appRouter.post("/instructor_viewMyCourses", async (req, res) => {
   });
 });
 
-appRouter.get("/instructor_viewRatings", async (req, res) => {
+appRouter.post("/instructor_viewRatings", async (req, res) => {
   Instructor.find({ Email: req.body.Email }, (error, data) => {
     if (error) {
       res.send(error);
@@ -117,7 +153,7 @@ appRouter.get("/instructor_viewRatings", async (req, res) => {
   }).select("Rating");
 });
 
-appRouter.get("/instructor_viewCourseRatings", async (req, res) => {
+appRouter.post("/instructor_viewCourseRatings", async (req, res) => {
   Course.find({ Instructor: req.body.Instructor }, (error, data) => {
     if (error) {
       res.send(error);
@@ -186,7 +222,7 @@ appRouter.post("/Instructor_add", async (req, res) => {
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
     Courses: req.body.Courses,
-    Rating:req.body.Rating,
+    Rating: req.body.Rating,
     Biography: req.body.Biography,
   });
   try {
@@ -274,64 +310,60 @@ appRouter.post("/Instructor_addpromotion", async (req, res) => {
   const Promotion = req.body.Promotion;
   const price = req.body.price;
   //  var price = Course.findOne({Title:Title},(error,data) => {if(error){console.log("error")} else console.log("done"); }).select("Price")
-   console.log(price);
+  console.log(price);
   const Promotion_valid_for = req.body.Promotion_valid_for;
 
-  // var m = {$mul: {  : 2 }}  
-  // console.log(m) 
-  const p  = (100-Promotion)/100; 
+  // var m = {$mul: {  : 2 }}
+  // console.log(m)
+  const p = (100 - Promotion) / 100;
 
-Course.findOneAndUpdate(
+  Course.findOneAndUpdate(
     { Title: Title },
-    { Promotion: Promotion } ,
+    { Promotion: Promotion },
     { new: true },
     (error, data) => {
       if (error) {
         console.log(error);
       } else {
-        console.log("first")
+        console.log("first");
+      }
     }
-});
+  );
   Course.findOneAndUpdate(
-          { Title: Title },
-          {Promotion_valid_for: Promotion_valid_for } ,
-          { new: true },
-          (error, dataa) => {
-            if (error) {
-              console.log(error);  
-            } else {
-              console.log("second")
-                   
-            }
-      })
+    { Title: Title },
+    { Promotion_valid_for: Promotion_valid_for },
+    { new: true },
+    (error, dataa) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("second");
+      }
+    }
+  );
 
-
-    Course.findOneAndUpdate(
-      { Title: Title },
-      {  Price_after_promotion : price*p } ,
-      { new: true },
-      (error, dataaa) => {
-        if (error) {
-          console.log(error);  
-        } else {
-          console.log(dataaa)
-      //    console.log(price)
-          res.status(200).send("update done");
-        }
-        })  
-
-           
-
-        
+  Course.findOneAndUpdate(
+    { Title: Title },
+    { Price_after_promotion: price * p },
+    { new: true },
+    (error, dataaa) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(dataaa);
+        //    console.log(price)
+        res.status(200).send("update done");
+      }
+    }
+  );
 });
 
-
-appRouter.post("/Instructor_ChangePassword" , async(req,res) => {
+appRouter.post("/Instructor_ChangePassword", async (req, res) => {
   const OldPassword = req.body.OldPassword;
   const NewPassword = req.body.NewPassword;
   Instructor.findOneAndUpdate(
-    { Password : OldPassword },
-    { Password : NewPassword },
+    { Password: OldPassword },
+    { Password: NewPassword },
     { new: true },
     (error, data) => {
       if (error) {
@@ -342,29 +374,29 @@ appRouter.post("/Instructor_ChangePassword" , async(req,res) => {
       }
     }
   );
-  
 });
 
-appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
+appRouter.post("/Instructor_ForgotPassword", async (req, res) => {
   const Username = req.body.Username;
   const NewPassword = req.body.NewPassword;
   const CNewPassword = req.body.CNewPassword;
-  if(NewPassword == CNewPassword){
-  Instructor.findOneAndUpdate(
-    { Username: Username  },
-    { Password : NewPassword },
-    { new: true },
-    (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(data);
-        res.status(200).send("update done");
+  if (NewPassword == CNewPassword) {
+    Instructor.findOneAndUpdate(
+      { Username: Username },
+      { Password: NewPassword },
+      { new: true },
+      (error, data) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(data);
+          res.status(200).send("update done");
+        }
       }
-    }
-  );
+    );
+  } else {
+    res.send("Passwords Do Not Match ");
   }
-  else{res.send("Passwords Do Not Match ")}
 });
 
 // appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
@@ -384,8 +416,6 @@ appRouter.post("/Instructor_ForgotPassword" , async(req,res) => {
 
 appRouter.post("/Instructor_create_exams", async (req, res) => {
   const exams = new Exams({
-
-   
     Question1: req.body.Question1,
     Choice11: req.body.Choice11,
     Choice12: req.body.Choice12,
@@ -398,9 +428,7 @@ appRouter.post("/Instructor_create_exams", async (req, res) => {
     Choice23: req.body.Choice23,
     Choice24: req.body.Choice24,
     Answer2: req.body.Answer2,
-    Course:req.body.Course,
-    
-     
+    Course: req.body.Course,
   });
   try {
     Exams.create(exams);
@@ -413,11 +441,61 @@ appRouter.post("/Instructor_create_exams", async (req, res) => {
 appRouter.post("/Instructor_Login", async (req, res) => {
   const Email = req.body.email;
   const Password = req.body.Password;
-  Instructor.find({ Email : Email , Password: Password} ,(err,data ) => {
-  if(err){res.send(err);}
-  else { res.send("loged in");}
-  }
-  );
+  Instructor.find({ Email: Email, Password: Password }, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("loged in");
+    }
+  });
 });
 
+appRouter.post("/Instructor_Register", async (req, res) => {
+  const newinstructor = new Instructor({
+    Username: req.body.Username,
+    Email: req.body.Email,
+    Password: req.body.Password,
+    Country: req.body.Country,
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Gender: req.body.Gender,
+    Courses: req.body.Courses,
+    Rating: req.body.Rating,
+    Biography: req.body.Biography,
+  });
+  try {
+    Instructor.create(newinstructor);
+    res.send("Data Inserted");
+  } catch (err) {
+    res.send("Error");
+  }
+});
+
+appRouter.post("/Instructor_receiveemail", async (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'aminmoataz072@gmail.com',
+      pass: 'hunnwqvdqtpytwib'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'aminmoataz072@gmail.com',
+    to: 'aminmoataz072@gmail.com',
+    subject: 'Sending Email to rest password',
+    text: `This code is so confidential , Please do not share it with anyone else .
+    Your code to reset your password is 12345` ,
+   // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log('error');
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send('emailsent')
+    }
+  });
+});
 module.exports = appRouter;
