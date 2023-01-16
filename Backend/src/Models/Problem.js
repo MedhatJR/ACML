@@ -7,7 +7,7 @@ const problemSchema =new Schema (
             type: String,
             required: true,
         },
-        Category : {
+        Category:{
             type: String,
             required: true,
         },
@@ -23,8 +23,8 @@ const problemSchema =new Schema (
             type:String,
             required: true,
         },
-        Status : {
-            type:String,
+        Status:{
+            type: String,
             required: true,
         }
     },

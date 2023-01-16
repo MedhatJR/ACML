@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
+import React, { useState } from 'react';
 
 import Home from "./pages/Home";
 
@@ -44,6 +45,7 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
+import Certificates from"./pages/Certificates";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
 import AdminstratorPage from "./pages/AdminstratorPage";
@@ -54,37 +56,55 @@ import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
 import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
+import useToken from './useToken';
+import Header from "./pages/Header";
+import ReportAProblem from "./pages/ReportAProblem";
+
+// function setToken(userToken) {
+//   sessionStorage.setItem('token', JSON.stringify(userToken));
+// }
+
+// function getToken() {
+//   const tokenString = sessionStorage.getItem('token');
+//   const userToken = JSON.parse(tokenString);
+//   return userToken?.token
+// }
 
 function App() {
-  var token;
 
-  // if (typeof window !== 'undefined') {
-  //   // Perform localStorage action
-  //    token = localStorage.getItem('token')
-  // }
-  // useEffect(() => {
-  //   // Perform localStorage action
-  //   const token = localStorage.getItem('token')
-  // }, [])
-  //------------------
+//  var token;
+
+
+// const { token, setToken } = useToken();
+// //const token = getToken();
+
+//   if(!token) {
+//     return <LogIn setToken={setToken} />
+//   }
 
   return (
     <>
       <div className="App">
+      {/* <div className="App">
+        <Header />
+    </div> */}
+    {/* <div className="App">
+      <Dropdown placeHolder="Select..." />
+    </div> */}
+
         <BrowserRouter>
           <div className="pages">
             <Routes>
-              <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
-              <Route
-                path="/IndividualResetEmail"
-                element={<IndividualResetEmail />}
-              />
+            <Route path="/Certificates" element={<Certificates />} />
+            <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route
                 path="/IndividualResetPassword"
                 element={<IndividualResetPassword />}
               />
               <Route path="/EnterEmail" element={<EnterEmail />} />
+              <Route path="/ReportAProblem" element={<ReportAProblem />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
               <Route
                 path="/CorporateResetPassword"

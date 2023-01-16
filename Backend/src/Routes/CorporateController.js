@@ -10,6 +10,7 @@ const Instructor = require("../Models/Instructor");
 const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
+const Problem = require("../Models/Problem");
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
 var popup = require("alert");
@@ -108,7 +109,7 @@ appRouter.post("/Corporate_Login", async (req, res) => {
         "secret",
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "24h",
         }
       );
       // save user token
@@ -412,6 +413,47 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
     }
   );
 });
+
+appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
+    const problem = new Problem({
+       Email : req.body.Email,
+       Category: req.body.Category,
+       Description : req.body.Description,
+       Type : req.body.Type,
+       Course : req.body.Course,
+       Status : req.body.Status
+    });
+    try {
+      Problem.create(problem);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(problem);
+    res.status(200).send("Submitted Problem");
+});
+
+appRouter.get("/Corporate_AllProblems", async (req, res) => {
+  if(!req.body.Email){
+    console.log("All input is required");
+  };
+  // if(!(Problem.find( {
+  //   Username: { $eq: req.body.Username }
+  // }))){
+  //   console.log("There is no a reported problem with this username");
+  // }
+  res.send(
+    await Problem.find( {
+      Email: { $eq: req.body.Email },
+    }).select([
+      "Description",
+      "Type",
+      "Course",
+      "Status",
+   
+    ])
+  );
+});
+
 
 appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   const Username = req.body.Username;

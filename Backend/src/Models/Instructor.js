@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
 const InstructorSchema = new Schema(
   {
@@ -46,6 +47,11 @@ const InstructorSchema = new Schema(
   },
   { timestamps: true }
 );
+
+InstructorSchema.pre("save", async function(next){
+  const salt = await bcrypt.genSalt();
+  this.Password= await bcrypt.hash(this.Password,salt);
+});
 
 const Instructor = mongoose.model("Instructor", InstructorSchema);
 module.exports = Instructor;
