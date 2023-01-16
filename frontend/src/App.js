@@ -45,6 +45,7 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
+import Certificates from"./pages/Certificates";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
 import AdminstratorPage from "./pages/AdminstratorPage";
@@ -93,11 +94,9 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-              <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
-              <Route
-                path="/IndividualResetEmail"
-                element={<IndividualResetEmail />}
-              />
+            <Route path="/Certificates" element={<Certificates />} />
+            <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route
                 path="/IndividualResetPassword"

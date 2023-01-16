@@ -1,0 +1,38 @@
+*{
+ box-sizing: border-box;
+}
+ .App{
+    display:flex;
+    padding:15px;
+}
+
+.App .meta{
+    flex-grow:1;
+    padding-right: 15px;
+}
+.App .meta input{
+    padding:5px;
+    width: 100%;
+    box-shadow: 0 02px;
+    border-radius:5px;
+}
+
+.App #certificateWrapper{
+    box-shadow: 0 0 5px #000;
+    border-radius: 10px;
+    overflow:hidden;
+}
+
+.App #certificateWrapper p{
+   
+    margin:0;
+    position:absolute;
+    left: 800px;
+    TOP: 400px;
+    font-size :40pt;
+
+} 
+.App #certificateWrapper image{
+   display:block;
+   
+} 
