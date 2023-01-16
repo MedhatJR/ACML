@@ -16,6 +16,7 @@ const ReportAProblem = () => {
   //const status = "unseen"
   console.log(passedEmail);
   //console.log(passedCategory);
+  
   const report = () => {
     console.log("ama")
     //console.log("Hi");
