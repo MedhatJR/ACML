@@ -67,16 +67,15 @@ const CorporateViewMyCourses = () => {
         <Notes />
       </div>
       <div>
-       
       <p> You completed {count}% of the course    
        <button onClick={() => setCount(count +(100/30)*10)}>
             Click after watching the video
           </button></p>
       
-    </div
+    </div>
      
       <button onClick={GetExam}>Get your exam</button>
-  
+    
     
 
       {/* <button onClick={viewMyCourses}>View</button> */}
