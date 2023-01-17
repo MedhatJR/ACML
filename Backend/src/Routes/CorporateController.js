@@ -11,6 +11,9 @@ const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
 const Problem = require("../Models/Problem");
+const Requests = require("../Models/Requests");
+
+
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
 var popup = require("alert");
@@ -284,6 +287,20 @@ appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
     }
     console.log(problem);
     res.status(200).send("Submitted Problem");
+});
+appRouter.post("/Corporate_Request_Course", async (req, res) => {
+  const requests = new Requests({
+     Email : req.body.Email,
+     Course : req.body.Course,
+     Status : req.body.Status,
+  });
+  try {
+    Requests.create(requests);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(requests);
+  res.status(200).send("Submitted Request");
 });
 
 appRouter.get("/Corporate_AllProblems", async (req, res) => {
@@ -624,7 +641,8 @@ const ques1 = await CorporateExam.findById(_id)
 
 
 //receive a certificate as a PDF after completing the course via email
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+
 let mailTransporter = nodemailer.createTransport({
     service: "gmail",  
     auth: {
