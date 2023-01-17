@@ -48,7 +48,10 @@ const IndividualPage = () => {
     nav("/Certificates");
   };
   const viewCourses = () => {
-    nav("/AllCourses");
+    nav("/AllCourses", { state: { passedEmail: passedData } });
+  };
+  const viewWallet = () => {
+    nav("/IndividualWallet", { state: { passedEmail: passedData } });
   };
 
   Axios.post("http://localhost:8000/Individual_viewPopularCourses", {}).then(
@@ -143,6 +146,11 @@ const IndividualPage = () => {
         Explore Courses
       </button>
       <br />
+      <button className="button-17" onClick={viewWallet}>
+        My Wallet
+      </button>
+      <br />
+      
       <br />
       <button class="button-17" role="button" onClick={forwardViewMyCourses}>
         My Courses

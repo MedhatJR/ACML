@@ -27,6 +27,18 @@ const AdminstratorPage = () => {
   const viewproblem = () => {
     nav("/AdminViewProblems");
   };
+  const AdminAddAdmin = () => {
+    nav("/AdminAddAdmin");
+  };
+  const AdminAddCorp = () => {
+    nav("/AdminAddCORP");
+  };
+  const AdminAddI = () => {
+    nav("/AdminAddI");
+  };
+  const ViewRequests = () => {
+    nav("/AdminViewRequests");
+  };
 //   const Add = () => {
 //     nav("/AddPromotion");
 //   };
@@ -43,6 +55,7 @@ const AdminstratorPage = () => {
 //     nav("/Addexam");
 //   };
   return (
+    
     <div className="add">
       <>
         <nav>
@@ -93,6 +106,26 @@ const AdminstratorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={viewproblem}>
        View Reported Problems
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={AdminAddCorp}>
+       Add corporate trainee
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={AdminAddAdmin}>
+       Add another Admin
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={AdminAddI}>
+       Add instructor
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={ViewRequests}>
+       View Requests
       </button>
       <br />
       <br />

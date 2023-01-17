@@ -4,12 +4,26 @@ import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate, Link, generatePath } from "react-router-dom";
 import logo from "../Media/Logo.png";
+
 import { ToastContainer, toast } from "react-toastify";
 
 var pop = "Registration successful";
 var type = "";
-
+// const Checkbox = ({ label }) => {
+//   const [isChecked, setIsChecked] = useState(false);
+//   return (
+//     <div className="checkbox-wrapper">
+//       <label>
+//         <input type="checkbox" checked={isChecked} />
+//         <span>{label}</span>
+//       </label>
+//     </div>
+//   );
+// };
 const Register = () => {
+  const Terms = () => {
+    nav("/Terms");
+  };
   const [values, setValues] = useState({
     Email: "",
     Passwor: "",
@@ -162,6 +176,8 @@ const Register = () => {
         <label>Type</label>
         <br />
         <select name="type" id="type">
+        <br />
+        <br />
           <option value="Individual" id="Individual">
             Individual Trainee
           </option>
@@ -170,6 +186,15 @@ const Register = () => {
           </option>
         </select>
         <br />
+        <br />
+
+        
+        <button onClick={Terms}> View terms and conditions     
+                    </button><br />
+                    <h3> I hereby agree to the terms and conditions</h3>
+                    
+  
+
         <button
           onClick={
             addData}
@@ -179,6 +204,7 @@ const Register = () => {
         {/* <p> {pop}</p> */}
         {/* {final.Username} */}
       </div>
+      
     </>
   );
 };

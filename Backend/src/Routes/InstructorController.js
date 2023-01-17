@@ -126,12 +126,12 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
 
 appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-     Email : req.body.Email,
-     Category: "Instructor",
-     Description : req.body.Description,
-     Type : req.body.Type,
-     Course : req.body.Course,
-     Status : "Unseen",
+    Email: req.body.Email,
+    Category: "Instructor",
+    Description: req.body.Description,
+    Type: req.body.Type,
+    Course: req.body.Course,
+    Status: "Unseen",
   });
   try {
     Problem.create(problem);
@@ -160,8 +160,6 @@ res.send(
 );
 });
 
-
-
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
@@ -169,8 +167,19 @@ appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
+
 
 appRouter.post("/Instructor_addcourse", async (req, res) => {
+ 
+
+     Instructor.find({ Email : req.body.Email }, async(error, data) => {
+      if (error) {
+        res.send(error);
+      } else{ 
+      //res.send(data[0].Username);
+      console.log("gegrhi")
+      }
+ 
   const course = new Course({
     Title: req.body.Title,
     Subtitle: req.body.Subtitle,
@@ -180,36 +189,40 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
     Subject: req.body.Subject,
     Price: req.body.Price,
     Price_after_promotion: req.body.Price_after_promotion,
-    Instructor: req.body.Instructor,
+    Instructor: data[0].Username,
     Rating: req.body.Rating,
     Hours: req.body.Hours,
     Views: req.body.Views,
     PreviewLink: req.body.PreviewLink,
     SubLink: req.body.SubLink,
-    SubLink: req.body.SubLink1,
-    SubLink: req.body.SubLink2,
+    Description :  req.body.Description,
+    SubLink1: req.body.SubLink1,
+    Description1 :  req.body.Description1,
+    SubLink2: req.body.SubLink2,
+    Description2 :  req.body.Description2,
     Promotion: req.body.Promotion,
     Promotion_valid_for: req.body.Promotion_valid_for,
   });
   try {
     await Course.create(course);
-
+console.log("dfkjbhs")
     //const title = req.body.Title;
     Instructor.findOneAndUpdate(
-      { Lastname: { $eq: req.body.Instructor } },
+      { Username: { $eq: data[0].Username } },
       { $push: { Courses: req.body.Title } },
       function (error, doc) {
         if (error) {
-          res.send("update_Error");
+         res.send("update_Error");
         } else {
-          res.send("Data Inserted");
-          // res.send(doc);
+          //res.send("Data Inserted");
+          res.send(doc);
         }
       }
     );
   } catch (error) {
     res.send("Error");
   }
+})
 });
 
 appRouter.get("/instructor_viewCourses", async (req, res) => {
@@ -342,17 +355,27 @@ appRouter.post("/instructor_filter", async (req, res) => {
   });
 });
 
-
-appRouter.post("/Instructor_filtercourse", async (req, res) => {
-  const minrating = req.body.minrating;
-  const maxrating = req.body.maxrating;
-  const Subject = req.body.Subject;
+appRouter.post("/instructor_filter_allcourses", async (req, res) => {
+  const minRating = req.body.minRating;
+  const maxRating = req.body.maxRating;
+  const requiredSubj = req.body.requiredSubj;
   Course.find(
     {
-      $or: [
-        { Rating: { $gte: minrating, $lte: maxrating } },
-        { Subject: Subject },
-      ],
+     
+        
+          $or: [
+            {
+              $and: [
+                { Rating: { $gte: minRating, $lte: maxRating } },
+
+                { Subject: { $eq: requiredSubj } },
+              ],
+            },
+            { Rating: { $gte: minRating, $lte: maxRating } },
+            { Subject: { $eq: requiredSubj } },
+          ],
+        
+     
     },
     function (err, result) {
       if (err) {
@@ -363,7 +386,6 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
     }
   );
 });
-
 
 //********************************************MENNAAAA*************************************************************** */
 //view the price of each course
@@ -389,8 +411,6 @@ appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
 });
 //choose a course from the results and view (but not open) its details including course subtitles, excercises ,
 // total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
-
-
 
 //*************************************************************MENNA'S END PART*********************************************************** */
 appRouter.post("/Instructor_editemail", async (req, res) => {
@@ -654,5 +674,20 @@ appRouter.post("/Instructor_receiveemail", async (req, res) => {
       res.send("emailsent");
     }
   });
+});
+
+appRouter.post("/Instructor_viewMyWallet", async (req, res) => {
+  //data = req.body.Courses;
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else {
+      console.log(data);
+      // username = data[0].Username;
+      //console.log(username);
+      res.send(data);
+    }
+  }).select("Wallet");
 });
 module.exports = appRouter;

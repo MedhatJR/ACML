@@ -215,7 +215,7 @@ const AllCourses = () => {
               {user.PreviewLink}
             </p> */}
             <iframe
-              className="previewVideo"
+              className="previewVideofilter"
               width="560"
               height="315"
               src={user.PreviewLink}
@@ -261,7 +261,7 @@ const AllCourses = () => {
               {user.PreviewLink}
             </p> */}
             <iframe
-              className="previewVideo"
+              className="previewVideofilter"
               width="560"
               height="315"
               src={user.PreviewLink}

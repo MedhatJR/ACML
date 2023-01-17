@@ -35,6 +35,9 @@ export default function PaymentForm() {
   const nav = useNavigate();
   const location = useLocation();
   const isClickedTitle = location.state.isClickedTitle;
+  const isClickedPrice = location.state.isClickedPrice;
+  const isClickedUsername = location.state.isClickedUsername;
+  console.log(isClickedUsername);
 
   const GoToCreditCard = () => {
     nav("/Pay");
@@ -70,8 +73,10 @@ export default function PaymentForm() {
       try {
         const { id } = paymentMethod;
         const response = await axios.post("http://localhost:8000/payment", {
-          amount: 10000,
+          amount: isClickedPrice * 100,
           id,
+          Username: isClickedUsername,
+          Wallet: isClickedPrice,
         });
 
         if (response.data.success) {

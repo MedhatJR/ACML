@@ -796,6 +796,11 @@ appRouter.post("/individual_Notes", async (req, res) => {
 //download the notes as a PDF
 
 //*************************************************************MENNA'S END PART*********************************************************** */
-
-
+appRouter.post("/Individual_Wallet", async (req, res) => {
+  Individual.find({ Email:req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  }).select("Wallet")
+});
 module.exports = appRouter;

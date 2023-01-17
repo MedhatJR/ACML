@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 
 var arr = [];
 var arrTitles = [];
-var passedCategory="";
+var passedCategory = "";
 var isClickedTitle = "";
 var arrReportedTitles = [];
 var isClickedReportTitle = "";

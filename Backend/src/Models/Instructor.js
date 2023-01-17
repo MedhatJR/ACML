@@ -44,13 +44,17 @@ const InstructorSchema = new Schema(
       type: String,
       required: false,
     },
+    Wallet: {
+      type: Number,
+      required: false,
+    },
   },
   { timestamps: true }
 );
 
-InstructorSchema.pre("save", async function(next){
+InstructorSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
-  this.Password= await bcrypt.hash(this.Password,salt);
+  this.Password = await bcrypt.hash(this.Password, salt);
 });
 
 const Instructor = mongoose.model("Instructor", InstructorSchema);

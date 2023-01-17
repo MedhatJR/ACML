@@ -102,7 +102,7 @@ font-family: Arial, Helvetica, sans-serif;
 
 .MyCourse .previewVideo {
     position: absolute;
-    right: 730px;
+    right: 850px;
     bottom: 50px;
     height: 320px;
     width: 430px;
@@ -174,4 +174,13 @@ font-family: Arial, Helvetica, sans-serif;
 .filterBar .filterButton {
     margin-left: 150px;
     margin-top: 20px;
+}
+
+.MyCourse .previewVideofilter {
+    position: absolute;
+    right: 730px;
+    bottom: 50px;
+    height: 320px;
+    width: 360px;
+    margin-right: 190px;
 }

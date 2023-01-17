@@ -20,6 +20,9 @@ import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
 import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
 import CorporateCoursePage from "./pages/CorporateCoursePage";
+import Allfilterall from "./pages/Allfilterall";
+import CorpRequest from "./pages/CorpRequest";
+import AdminViewRequests from "./pages/AdminViewRequests";
 
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
@@ -33,6 +36,8 @@ import AddExam from "./pages/AddExam";
 import IMCQ from "./pages/IMCQ";
 import CMCQ from "./pages/CMCQ";
 import Terms from "./pages/Terms";
+import AdminAddAdmin from "./pages/AdminAddAdmin";
+import Searchtitlesubject from "./pages/Searchtitlesubject";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -45,8 +50,11 @@ import IndividualUpdate from "./pages/IndividualUpdate";
 import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
-
+import AdminOpenProblem from "./pages/AdminOpenProblem";
+import AdminAddCORP from "./pages/AdminAddCORP";
+import AdminAddI from "./pages/AdminAddI";
 import Certificates from "./pages/Certificates";
+import CorpAllCourses from "./pages/CorpAllCourses";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
 import AdminstratorPage from "./pages/AdminstratorPage";
@@ -62,6 +70,8 @@ import useToken from "./useToken";
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
 import PrevProblems from "./pages/PrevProblems";
+import InstructorWallet from "./pages/InstructorWallet";
+import IndividualWallet from "./pages/IndividualWallet";
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -96,17 +106,39 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-              <Route path="/Certificates" element={<Certificates />} />
+              <Route path="/AdminOpenProblem" element={<AdminOpenProblem />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route
                 path="/IndividualResetEmail"
                 element={<IndividualResetEmail />}
               />
+              <Route path="/Certificates" element={<Certificates />} />
+              <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route
+                path="/AdminViewRequests"
+                element={<AdminViewRequests />}
+              />
+              <Route
+                path="/Searchtitlesubject"
+                element={<Searchtitlesubject />}
+              />
+              <Route
+                path="/IndividualResetEmail"
+                element={<IndividualResetEmail />}
+              />
+              <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
+              <Route path="/Allfilterall" element={<Allfilterall />} />
+
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route
                 path="/IndividualResetPassword"
                 element={<IndividualResetPassword />}
               />
+              <Route path="/AdminAddAdmin" element={<AdminAddAdmin />} />
+              <Route path="/AdminAddCORP" element={<AdminAddCORP />} />
+              <Route path="/AdminAddI" element={<AdminAddI />} />
+
+              <Route path="/CorpAllCourses" element={<CorpAllCourses />} />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
               <Route path="/PrevProblems" element={<PrevProblems />} />
@@ -199,11 +231,14 @@ function App() {
               <Route path="/Terms" element={<Terms />} />
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/Pay" element={<Pay />} />
+              <Route path="/CorpRequest" element={<CorpRequest />} />
               <Route
                 path="/ViewReportedProblems"
                 element={<ViewReportedProblems />}
               />
+              <Route path="/IndividualWallet" element={<IndividualWallet />} />
               <Route path="/InstMyCourses" element={<InstMyCourses />} />
+              <Route path="/InstructorWallet" element={<InstructorWallet />} />
             </Routes>
           </div>
         </BrowserRouter>

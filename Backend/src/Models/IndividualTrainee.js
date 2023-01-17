@@ -32,6 +32,10 @@ const IndividualTraineeSchema = new Schema(
       type: String,
       required: true,
     },
+    Wallet: {
+      type: Number ,
+      required: true,
+    },
     RegisteredCourses: {
       type: Array,
       required: false,

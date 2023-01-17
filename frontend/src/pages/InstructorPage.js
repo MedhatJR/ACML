@@ -6,6 +6,7 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import wallet from "../Media/wallet.png";
 import { useLocation } from "react-router-dom";
 var category="Instructor";
 const InstructorPage = () => {
@@ -33,7 +34,7 @@ const InstructorPage = () => {
   //   };
 
   const forwardAdd = () => {
-    nav("/AddCourse");
+    nav("/AddCourse", { state: { passedEmail: passedData } });
   };
   const viewMyRating = () => {
     nav("/InstrMyRatings");
@@ -60,7 +61,6 @@ const InstructorPage = () => {
     nav("/UpdateEmail");
   };
 
-  
   const forward2 = () => {
     nav("/Addexam");
   };
@@ -70,11 +70,15 @@ const InstructorPage = () => {
   const MyCourses = () => {
     nav("/InstMyCourses", { state: { passedEmail: passedData } });
   };
+  const MyWallet = () => {
+    nav("/InstructorWallet", { state: { passedEmail: passedData } });
+  };
   return (
     <div className="add">
       <>
         <nav>
           <img src={logo} className="logo" alt="" />{" "}
+          <img src={wallet} className="wallet" alt="" onClick={MyWallet} />
           <ul>
             <li>
               <a href="/">Home</a>
@@ -97,13 +101,19 @@ const InstructorPage = () => {
       <img src={teacher} alt="" className="teacher" />
 
       <p>What would you like to do today ?</p>
-      <button class="button-17" className="explore-button" onClick={viewCourses}>
+      <button
+        class="button-17"
+        className="explore-button"
+        onClick={viewCourses}
+      >
         Explore Courses
       </button>
+      <br />
       <br />
       <button class="button-17" role="button" onClick={MyCourses}>
         My Courses
       </button>
+      <br />
       <br />
       <button class="button-17" role="button" onClick={viewCourseRating}>
         View Course Ratings
@@ -147,7 +157,7 @@ const InstructorPage = () => {
       <br />
       <button class="button-17" onClick={forward2}>
         Add Your Exam
-        </button>
+      </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={email}>

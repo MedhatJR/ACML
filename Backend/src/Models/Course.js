@@ -11,7 +11,7 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
-    Subtitl1: {
+    Subtitle1: {
       type: String,
       required: true,
     },
@@ -61,11 +61,24 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+    Description: {
+      type: String,
+      required: true,
+    },
     SubLink1: {
       type: String,
       required: true,
     },
+  
+    Description1: {
+      type: String,
+      required: true,
+    },
     SubLink2: {
+      type: String,
+      required: true,
+    },
+    Description2: {
       type: String,
       required: true,
     },

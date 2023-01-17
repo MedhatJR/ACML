@@ -1,0 +1,108 @@
+import React from "react";
+import { useEffect, useState } from "react";
+
+import Axios from "axios";
+import "../styles/InstructorPageStyle.css";
+import { useNavigate } from "react-router-dom";
+import logo from "../Media/Logo.png";
+import teacher from "../Media/teacher.png";
+
+const AdminAddAdmin = () => {
+  var [final, setFinal] = useState("");
+  const nav = useNavigate();
+  console.log("Hi");
+
+  const Add = () => {
+    const  Username= document.getElementById("U").value;
+    const  Password = document.getElementById("P").value;
+    const Email = document.getElementById("E").value; 
+    const Country=document.getElementById("C").value; 
+    const Firstname= document.getElementById("F").value; 
+    const Lastname=document.getElementById("L").value; 
+    const Gender=document.getElementById("G").value; 
+    Axios.post("http://localhost:8000/Adminstrator_addadminstrator", {
+        Username: Username,
+        Password: Password,
+        Email:Email,
+        Country: Country,
+        Firstname:Firstname,
+        Lastname:Lastname,
+        Gender:Gender,
+      }).then((response) => {
+        setFinal=response.data;
+        nav("/AdminstratorPage");
+      });
+
+
+  };
+
+
+  return (
+    <div className="add">
+      <>
+        <nav>
+          <img src={logo} className="logo" alt="" />{" "}
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="#news">News</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
+          </ul>
+        </nav>
+      </>
+      <br />
+      <br />
+      <div className="title">Welcome, our beloved Adminstrator</div>
+      <img src={teacher} alt="" className="teacher" />
+      <br />
+      <br />
+      <div className="title">Adding another adminstrator</div>
+      <br />
+      <br />
+      <label>Username</label>
+        <input type="text" name="Username" id="U" /> <br />
+        <br />
+        <br />
+      <label>Password</label>
+        <input type="text" name="Password" id="P" /> <br />
+        <br />
+        <br />
+        <label>Email</label>
+        <input type="text" name="Email" id="E" /> <br />
+        <br />
+        <br />
+        <label>Country</label>
+        <input type="text" name="Country" id="C" /> <br />
+        <br />
+        <br />
+        <label>Firstname</label>
+        <input type="text" name="Firstname" id="F" /> <br />
+        <br />
+        <br />
+        <label>Lastname</label>
+        <input type="text" name="Lastname" id="L" /> <br />
+        <br />
+        <br />
+        <label>Gender</label>
+        <input type="text" name="Gender" id="G" /> <br />
+        <br />
+        <br />
+      <button class="button-17" role="button" onClick={Add}>
+        Add another Admin
+      </button>
+      <br />
+      <br />
+    </div>
+  );
+};
+
+export default AdminAddAdmin;
+
