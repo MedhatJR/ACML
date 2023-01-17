@@ -11,7 +11,7 @@ import UpdateBiography from "./pages/UpdateBiography";
 import UpdatePassword from "./pages/UpdatePassword";
 import ResetPassword from "./pages/ResetPassword";
 import AddCourse from "./pages/AddCourse";
-import InstructorViewCourse from "./pages/InstructorViewCourse";
+// import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
 import Individual_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
 import Coporate_GradeAndAnswers from "./pages/CoporateGradeAndAnswers";
@@ -69,6 +69,7 @@ import InstMyCourses from "./pages/InstMyCourses";
 import useToken from "./useToken";
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
+import PrevProblems from "./pages/PrevProblems";
 import InstructorWallet from "./pages/InstructorWallet";
 import IndividualWallet from "./pages/IndividualWallet";
 
@@ -140,6 +141,7 @@ function App() {
               <Route path="/CorpAllCourses" element={<CorpAllCourses />} />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
+              <Route path="/PrevProblems" element={<PrevProblems />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
               <Route
                 path="/CorporateResetPassword"
@@ -170,10 +172,10 @@ function App() {
               <Route path="/UpdateEmail" element={<UpdateEmail />} />
               <Route path="/view" element={<ViewData />} />
               <Route path="/addCourse" element={<AddCourse />} />
-              <Route
+              {/* <Route
                 path="/InstructorViewCourse"
                 element={<InstructorViewCourse />}
-              />
+              /> */}
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
               <Route

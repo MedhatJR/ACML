@@ -34,11 +34,11 @@ const InstructorSchema = new Schema(
     },
     Courses: {
       type: Array,
-      required: true,
+      required: false,
     },
     Rating: {
       type: Number,
-      required: true,
+      required: false,
     },
     Biography: {
       type: String,

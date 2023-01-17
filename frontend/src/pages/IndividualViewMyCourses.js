@@ -13,6 +13,8 @@ var arr = [];
 var arrTitles = [];
 var passedCategory = "";
 var isClickedTitle = "";
+var arrReportedTitles = [];
+var isClickedReportTitle = "";
 
 // var id = "";
 
@@ -41,6 +43,7 @@ const IndividualViewMyCourses = () => {
     arr = response.data.CourseDetails;
     for (var i = 0; i < arr.length; i++) {
       arrTitles[i] = arr[i].Title;
+      arrReportedTitles[i] = arr[i].Title;
     }
     setData(response);
   });
@@ -49,7 +52,10 @@ const IndividualViewMyCourses = () => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
   };
-
+  const buttonPressedReport = (e) => {
+    isClickedReportTitle = e.target.name; // Get ID of Clicked Element
+    console.log(isClickedReportTitle);
+  };
   function reply_click(clicked_id) {
     const buttons = document.getElementsByTagName("button");
     for (let button of buttons) {
@@ -65,11 +71,22 @@ const IndividualViewMyCourses = () => {
     }
   }
 
-  const problemReport = () => {
-    nav("/ReportAProblem", {
-      state: { passedEmail: passedEmail, passedCategory: "IndividualTrainee" },
-    });
-  };
+  function reply_click1(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressedReport);
+    }
+
+    for (var i = 0; i < arrReportedTitles.length; i++) {
+      if (arrReportedTitles[i] === isClickedReportTitle) {
+        // console.log(arrTitles[i]);
+        nav("/ReportAProblem",{state: { passedEmail: passedEmail, passedCategory : "IndividualTrainee", isClickedReportTitle: arrReportedTitles[i]},
+      });
+      }
+    }
+  }
+
+
 
   return (
     <div className="IndividualViewCourse">
@@ -138,13 +155,9 @@ const IndividualViewMyCourses = () => {
             <button className="button-17" id={user.Title} onClick={reply_click}>
               Go To Course
             </button>
-            <br />
-            <br />
-            <button
-              className="button-17"
-              id={user.Title}
-              onClick={problemReport}
-            >
+            <br/>
+            <br/>
+            <button className="button-17" name={user.Title} onClick={reply_click1}>
               Report a Problem
             </button>
           </>

@@ -8,7 +8,7 @@ import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 import wallet from "../Media/wallet.png";
 import { useLocation } from "react-router-dom";
-
+var category="Instructor";
 const InstructorPage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
@@ -42,11 +42,14 @@ const InstructorPage = () => {
   const viewCourseRating = () => {
     nav("/InstrCourseRatings");
   };
-  const forwardView = () => {
-    nav("/InstructorViewCourse", { state: { passedEmail: passedData } });
-  };
+  // const forwardView = () => {
+  //   nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
+  // };
   const Add = () => {
     nav("/AddPromotion");
+  };
+  const reports = () => {
+    nav("/PrevProblems",{state:{Category: category,passedEmail: passedData}});
   };
   const Change = () => {
     nav("/UpdatePassword");
@@ -122,14 +125,19 @@ const InstructorPage = () => {
       </button>
       <br />
       <br />
+      <button class="button-17" role="button" onClick={reports}>
+        ALL Reports
+      </button>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={forwardAdd}>
         Add Course
       </button>
-      <br />
+      {/* <br />
       <br />
       <button class="button-17" role="button" onClick={forwardView}>
         View Course
-      </button>
+      </button> */}
       <br />
       <br />
       <button class="button-17" role="button" onClick={Add}>
@@ -155,8 +163,8 @@ const InstructorPage = () => {
       <button class="button-17" role="button" onClick={email}>
         Change Email
       </button>
-      <br />
-      <br />
+      
+      
     </div>
   );
 };

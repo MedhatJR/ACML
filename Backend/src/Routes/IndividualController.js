@@ -19,27 +19,64 @@ appRouter.get("/", async (req, res) => {
   res.status(200).send("Home");
 });
 
-appRouter.get("/createUser", (req, res) => {
-  res.status(200).send("Welcome to registration page");
-});
-appRouter.post("/createUser", async (req, res) => {
-  const newuser = new Individual({
-    Name: req.body.Name,
+appRouter.post("/Individual_Register", async (req, res) => {
+  const newuser = {
+    Username: req.body.Username,
     Email: req.body.Email,
-    Age: req.body.Age,
-    BornIn: req.body.BornIn,
-    LivesIn: req.body.LivesIn,
-    MartialStatus: req.body.MartialStatus,
-    PhoneNumber: req.body.PhoneNumber,
-    Job: req.body.Job,
-  });
+    Password: req.body.Password,
+    Country: req.body.Country,
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Gender: req.body.Gender,
+  };
+  email = newuser.Email;
   try {
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Individual.find({ Email: { $eq: req.body.Email } });
+
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
     await Individual.create(newuser);
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
+
+    newuser.token = token;
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
   } catch (err) {
     console.log(err);
   }
-  console.log("Hello");
-  res.status(200).send("registration successful");
 });
 
 appRouter.post("/update", async (req, res) => {
@@ -196,33 +233,14 @@ appRouter.post("/Individual_retrieveCourses", async (req, res) => {
   );
 });
 
-appRouter.post("/addIndividual", async (req, res) => {
-  const newIndividual = new Individual({
-    Username: req.body.Username,
-    Email: req.body.Email,
-    Password: req.body.Password,
-    Country: req.body.Country,
-    Firstname: req.body.Firstname,
-    Lastname: req.body.Lastname,
-    Gender: req.body.Gender,
-    RegisteredCourses: req.body.RegisteredCourses,
-  });
-  try {
-    Individual.create(newIndividual);
-    res.send("Data Inserted");
-  } catch (err) {
-    res.send("Error");
-  }
-});
-
 appRouter.post("/Individual_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-    Emial: req.body.Email,
-    Category: "IndividualTrainee",
+    Email: req.body.Email,
+    Category: req.body.Category,
     Description: req.body.Description,
     Type: req.body.Type,
     Course: req.body.Course,
-    Status: "Unseen",
+    Status: req.body.Status,
   });
   try {
     Problem.create(problem);
@@ -233,15 +251,43 @@ appRouter.post("/Individual_ReportAProblem", async (req, res) => {
   res.status(200).send("Submitted Problem");
 });
 
-appRouter.get("/Individual_AllProblems", async (req, res) => {
+appRouter.post("/Individual_AllProblems", async (req, res) => {
   if (!req.body.Email) {
     console.log("All input is required");
   }
   res.send(
     await Problem.find({
       Email: { $eq: req.body.Email },
+      Category: { $eq: "IndividualTrainee" },
     }).select(["Description", "Type", "Course", "Status"])
   );
+});
+
+appRouter.post("/Individual_FollowUP", async (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "aminmoataz072@gmail.com",
+      pass: "hunnwqvdqtpytwib",
+    },
+  });
+
+  var mailOptions = {
+    from: "aminmoataz072@gmail.com",
+    to: "aminmoataz072@gmail.com",
+    subject: "Sending Email to rest password",
+    text: `Please Check my report!`,
+    // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log("error");
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send("emailsent");
+    }
+  });
 });
 
 appRouter.post("/Individual_retrieveMyCourse", async (req, res) => {
@@ -415,15 +461,40 @@ appRouter.get("/Individual_view_exam", async (req, res) => {
 });
 
 appRouter.post("/Individual_Login", async (req, res) => {
-  const Email = req.body.email;
-  const Password = req.body.Password;
-  Individual.find({ Email: Email, Password: Password }, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send("loged in");
+  try {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+    if (!(Email && Password)) {
+      res.status(400).send("All input is required");
     }
-  });
+
+    const user = await Individual.findOne({ Email });
+    console.log(Email);
+    console.log(Password);
+    console.log(user.Email);
+    console.log(user.Password);
+
+    if (user && (await bcrypt.compare(Password, user.Password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, Email },
+        "secret",
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "24h",
+        }
+      );
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    } else {
+      res.status(400).send("Invalid Credentials");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 //****************************************************MENNAAAAAAAAAAAAAAA****************************** */
 
