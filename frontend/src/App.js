@@ -70,6 +70,7 @@ import useToken from "./useToken";
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
 import InstructorWallet from "./pages/InstructorWallet";
+import IndividualWallet from "./pages/IndividualWallet";
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
