@@ -47,7 +47,7 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 import AdminAddCORP from "./pages/AdminAddCORP";
-
+import AdminAddI from "./pages/AdminAddI";
 import Certificates from "./pages/Certificates";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
@@ -117,6 +117,11 @@ function App() {
                 element={<AdminAddCORP />}
               
               />
+              <Route path="/AdminAddI"
+                element={<AdminAddI />}
+              
+              />
+              
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />

@@ -52,6 +52,7 @@ const AdminstratorPage = () => {
 //     nav("/Addexam");
 //   };
   return (
+    
     <div className="add">
       <>
         <nav>
@@ -112,6 +113,11 @@ const AdminstratorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={AdminAddAdmin}>
        Add another Admin
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={AdminAddI}>
+       Add instructor
       </button>
       <br />
       <br />
