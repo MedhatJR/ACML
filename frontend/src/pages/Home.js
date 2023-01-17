@@ -66,6 +66,7 @@ const Home = () => {
               <a href="#about">About</a>
             </li>
           </ul>
+          
         </nav>
 
         <div className="Slogan">

@@ -39,8 +39,8 @@ const Register = () => {
     const Lastname = document.getElementById("ln").value;
     const Gender = document.getElementById("g").value;
     type = document.getElementById("type").value;
-    var RegisteredCourses = "";
-    var Courses = "";
+    var RegisteredCourses = [];
+    var Courses = [];
     var Rating = 0;
     var Biography = "";
 
@@ -63,7 +63,7 @@ const Register = () => {
       });
     } else if (type === "Instructor") {
       console.log("ana instructor");
-      Axios.post("http://localhost:8000/Instructor_Register", {
+      Axios.post("http://localhost:8000/Adminstrator_addinstructor", {
         Username: Username,
         Email: Email,
         Password: Password,
@@ -71,7 +71,7 @@ const Register = () => {
         Firstname: Firstname,
         Lastname: Lastname,
         Gender: Gender,
-        //  Courses: Courses,
+        Courses: Courses,
         Rating: Rating,
         //Biography: Biography,
       }).then((response) => {
@@ -80,7 +80,7 @@ const Register = () => {
         setFinal = response.data;
       });
     } else {
-      Axios.post("http://localhost:8000/createCorporateUser", {
+      Axios.post("http://localhost:8000/Adminstrator_addcorporatetrainee", {
         Username: Username,
         Email: Email,
         Password: Password,
@@ -149,7 +149,7 @@ const Register = () => {
   };
   return (
     <>
-      <div className="add" onSubmit={(e)=>handleSubmit(e)}>
+      <div className="add" onSubmit={(e) => handleSubmit(e)}>
         <>
           <nav>
             <img src={logo} className="logo" alt="" />{" "}

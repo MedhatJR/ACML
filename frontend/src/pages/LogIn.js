@@ -8,7 +8,7 @@ import logo from "../Media/Logo.png";
 import { Link } from "react-router-dom";
 //import CorporateTrainee from "../../../Backend/src/Models/CorporateTrainee";
 //import setAuthToken from "../Controllers/setAuthToken";
-import PropTypes from 'prop-types';   
+//import PropTypes from 'prop-types';   
 
 const LogIn = () => {
     var [final, setFinal] = useState("");
@@ -36,16 +36,16 @@ const LogIn = () => {
           nav("/Contract");
         };
 
-async function loginUser(credentials) {
-  return fetch('http://localhost:8000/Corporate_Login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
+// async function loginUser(credentials) {
+//   return fetch('http://localhost:8000/Corporate_Login', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(credentials)
+//   })
+//     .then(data => data.json())
+//  }
 
 
 
@@ -102,10 +102,10 @@ async function loginUser(credentials) {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
-      username,
-      password
-    });
+    // const token = await loginUser({
+    //   username,
+    //   password
+    // });
     // setToken(token);
   }
   return (
@@ -113,6 +113,7 @@ async function loginUser(credentials) {
       <div className="add">
         <>
           <nav>
+            
             <img src={logo} className="logo" alt="" />{" "}
             <ul>
               <li>
@@ -163,7 +164,7 @@ async function loginUser(credentials) {
     </>
   );
 };
-LogIn.propTypes = {
-  setToken: PropTypes.func.isRequired
-};
+// LogIn.propTypes = {
+//   setToken: PropTypes.func.isRequired
+// };
 export default LogIn;

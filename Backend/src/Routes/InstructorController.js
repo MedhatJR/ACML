@@ -5,7 +5,7 @@ appRouter.use(cors());
 const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
 var dbcourses = [];
 
 const Exams = require("../Models/Exams");
@@ -17,21 +17,36 @@ appRouter.get("/Instructor_read", async (req, res) => {
   });
 });
 
-appRouter.get("/Instructor_searchCourse", async (req, res) => {
-  Course.find(
-    {
-      $or: [
-        { Title: req.body.Title },
-        { Subject: req.body.Subject },
-        { Instructor: req.body.Instructor },
-      ],
-    },
-    (error, data) => {
-      if (error) {
-        res.send(error);
-      } else res.send(data);
+appRouter.post("/Instructor_searchCourse", async (req, res) => {
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+      username = data[0].Username;
+      console.log(username);
     }
-  );
+    Course.find(
+      {
+        $and: [
+          { Instructor: { $eq: username } },
+          {
+            $or: [
+              { Title: req.body.Title },
+              { Subject: req.body.Subject },
+              { Instructor: req.body.Instructor },
+            ],
+          },
+        ],
+      },
+      (error, data) => {
+        if (error) {
+          res.send(error);
+        } else res.send(data);
+      }
+    );
+  });
 });
 
 appRouter.post("/Instructor_SelectCountry", async (req, res) => {
@@ -85,6 +100,11 @@ res.send(
 });
 
 
+
+appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
+  res.send(await Course.find().select(["Title", "Hours", "Rating"]));
+});
+
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
@@ -93,6 +113,8 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
   const course = new Course({
     Title: req.body.Title,
     Subtitle: req.body.Subtitle,
+    Subtitle1: req.body.Subtitle1,
+    Subtitle2: req.body.Subtitle2,
     Shortsummary: req.body.Shortsummary,
     Subject: req.body.Subject,
     Price: req.body.Price,
@@ -103,16 +125,18 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
     Views: req.body.Views,
     PreviewLink: req.body.PreviewLink,
     SubLink: req.body.SubLink,
+    SubLink: req.body.SubLink1,
+    SubLink: req.body.SubLink2,
     Promotion: req.body.Promotion,
     Promotion_valid_for: req.body.Promotion_valid_for,
   });
   try {
     await Course.create(course);
 
-    const title = req.body.Title;
+    //const title = req.body.Title;
     Instructor.findOneAndUpdate(
       { Lastname: { $eq: req.body.Instructor } },
-      { $push: { Courses: { title } } },
+      { $push: { Courses: req.body.Title } },
       function (error, doc) {
         if (error) {
           res.send("update_Error");
@@ -142,6 +166,41 @@ appRouter.post("/instructor_viewMyCourses", async (req, res) => {
     if (error) {
       res.send(error);
     } else res.send(data);
+  }).select(
+    "Title",
+    "Shortsummary",
+    "Subject",
+    "Price",
+    "Rating",
+    "Hours",
+    "Views"
+  );
+});
+appRouter.post("/instructor_viewMyCourses2", async (req, res) => {
+  //data = req.body.Courses;
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else {
+      console.log(data);
+      username = data[0].Username;
+      console.log(username);
+    }
+    Course.find({ Instructor: username }, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else res.send(data);
+    }).select([
+      "Title",
+      "Shortsummary",
+      "Subject",
+      "Price",
+      "Rating",
+      "Hours",
+      "Views",
+      "PreviewLink",
+    ]);
   });
 });
 
@@ -183,33 +242,43 @@ appRouter.post("/instructor_filter", async (req, res) => {
   const minPrice = req.body.minPrice;
   const maxPrice = req.body.maxPrice;
   const requiredSubj = req.body.requiredSubj;
-  Course.find(
-    {
-      $and: [
-        { Instructor: { $eq: req.body.Instructor } },
-        {
-          $or: [
-            {
-              $and: [
-                { Price: { $gte: minPrice, $lte: maxPrice } },
-
-                { Subject: { $eq: requiredSubj } },
-              ],
-            },
-            { Price: { $gte: minPrice, $lte: maxPrice } },
-            { Subject: { $eq: requiredSubj } },
-          ],
-        },
-      ],
-    },
-    function (err, result) {
-      if (err) {
-        res.send("Error");
-      } else {
-        res.send(result);
-      }
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+      username = data[0].Username;
+      console.log(username);
     }
-  );
+    Course.find(
+      {
+        $and: [
+          { Instructor: { $eq: username } },
+          {
+            $or: [
+              {
+                $and: [
+                  { Price: { $gte: minPrice, $lte: maxPrice } },
+
+                  { Subject: { $eq: requiredSubj } },
+                ],
+              },
+              { Price: { $gte: minPrice, $lte: maxPrice } },
+              { Subject: { $eq: requiredSubj } },
+            ],
+          },
+        ],
+      },
+      function (err, result) {
+        if (err) {
+          res.send("Error");
+        } else {
+          res.send(result);
+        }
+      }
+    );
+  });
 });
 
 appRouter.post("/Instructor_add", async (req, res) => {
@@ -253,6 +322,14 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
   );
 });
 
+
+//********************************************MENNAAAA*************************************************************** */
+//view the price of each course
+appRouter.get("/Instructor_course_price", async (req, res) => {
+  res.send(await Course.find().select(["Price"]));
+});
+
+//filter the courses based on price (price can be FREE)
 appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
   //const Price1 = req.body.Price;
   Course.find(
@@ -268,7 +345,12 @@ appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
     }
   );
 });
+//choose a course from the results and view (but not open) its details including course subtitles, excercises ,
+// total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
 
+
+
+//*************************************************************MENNA'S END PART*********************************************************** */
 appRouter.post("/Instructor_editemail", async (req, res) => {
   const Emailold = req.body.Emailold;
   const Emailnew = req.body.Emailnew;
@@ -473,28 +555,28 @@ appRouter.post("/Instructor_Register", async (req, res) => {
 
 appRouter.post("/Instructor_receiveemail", async (req, res) => {
   var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-      user: 'aminmoataz072@gmail.com',
-      pass: 'hunnwqvdqtpytwib'
-    }
+      user: "aminmoataz072@gmail.com",
+      pass: "hunnwqvdqtpytwib",
+    },
   });
-  
+
   var mailOptions = {
-    from: 'aminmoataz072@gmail.com',
-    to: 'aminmoataz072@gmail.com',
-    subject: 'Sending Email to rest password',
+    from: "aminmoataz072@gmail.com",
+    to: "aminmoataz072@gmail.com",
+    subject: "Sending Email to rest password",
     text: `This code is so confidential , Please do not share it with anyone else .
-    Your code to reset your password is 12345` ,
-   // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
+    Your code to reset your password is 12345`,
+    // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
   };
-  
-  transporter.sendMail(mailOptions, function(error, info){
+
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log('error');
+      console.log("error");
     } else {
-      console.log('Email sent: ' + info.response);
-      res.send('emailsent')
+      console.log("Email sent: " + info.response);
+      res.send("emailsent");
     }
   });
 });
