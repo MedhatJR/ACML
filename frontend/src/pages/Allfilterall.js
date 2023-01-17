@@ -13,12 +13,15 @@ var isClickedTitle = "";
 
 const Allfilterall = () => {
   const [final, setFinal] = useState("");
+  const [price, setPrice] = useState("");
   const nav = useNavigate();
 
  const filter = () => {
       const minRating = document.getElementById("minRating").value;
   const maxRating = document.getElementById("minRating").value
   const requiredSubj = document.getElementById("requiredSubj").value
+  const Price = document.getElementById("Price").value
+  
        Axios.post("http://localhost:8000/instructor_filter_allcourses", {
         maxRating : maxRating,
         minRating : minRating,
@@ -31,7 +34,36 @@ const Allfilterall = () => {
 
       // setData(response.data[1].Title);
     });
+
+    Axios.post("http://localhost:8000/Individual_filtercourse_price", {
+      
+      Price  :Price,
+  }).then((response) => {
+    console.log(response);
+    arr = response.data;
+    console.log(arr)
+    setPrice(response);
+
+    // setData(response.data[1].Title);
+  });
    };
+
+   
+ const filterPrice = () => {
+ 
+const Price = document.getElementById("Price").value
+Axios.post("http://localhost:8000/Individual_filtercourse_price", {
+  
+  Price  :Price,
+}).then((response) => {
+console.log(response);
+arr = response.data;
+console.log(arr)
+setPrice(response);
+
+// setData(response.data[1].Title);
+});
+};
    const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
@@ -84,11 +116,22 @@ const Allfilterall = () => {
         <br />
         <label>Max Rating : </label>
         <input type="text" name="Rating" id="maxRating" /> <br />
-        <br />
-        <br />
+       
+
         <button className="button-17" onClick={filter}>
           Filter Courses
         </button>
+        <br />
+     <br />
+     
+      <label>Price : </label>
+        <input type="text" name="Price" id="Price" /> <br />
+        <br />
+        <br />
+        <button className="button-17" onClick={filterPrice}>
+          Filter Price
+        </button>
+
       </div>
 
       
@@ -123,6 +166,10 @@ const Allfilterall = () => {
             </p>
             <p key={user} className="Hours">
               {user.Hours} Total Hours
+            </p>
+            {/*MENNAAA*******************/ }
+            <p key={user} className="Subtitles">
+             Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
             </p>
             <p key={user} className="Price">
               {user.Price}$

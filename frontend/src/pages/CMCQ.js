@@ -61,7 +61,7 @@ const CMCQ = () => {
     };
 
     
-    
+  
     return (
       <div>
         <button onClick={back} className="btn">
@@ -110,17 +110,16 @@ const CMCQ = () => {
 
 
        <button onClick={SubmitAnswers1}>Submit Answers</button>
-       <br /> 
-       <button onClick={Yourgrade} className="btn">
-          Get Grade
-        </button>
+       <br />
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
         ))}
-              
+               <button onClick={Yourgrade} className="btn">
+          Get Grade
+        </button>
             
       </div>
     );
   };
 
-export default CMCQ
+export default CMCQ;

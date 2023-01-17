@@ -148,6 +148,16 @@
         top: 110px;
         
     }
+    .MyCoursefilter .Subtitles {
+      font-size: 15px;
+      position: absolute;
+      top: 220px;
+      color: gray;
+      margin-left: 800px;
+     
+      
+  }
+  
     
     .MyCoursefilter .Price {
         font-family:Verdana, Geneva, Tahoma, sans-serif ;
