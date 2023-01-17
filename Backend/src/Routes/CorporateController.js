@@ -507,6 +507,8 @@ appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
         }).select([
           "Title",
           "Subtitle",
+          "Subtitle1",
+          "Subtitle2",
           "Shortsummary",
           "Subject",
           "Price",
@@ -516,6 +518,8 @@ appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
           "Views",
           "PreviewLink",
           "SubLink",
+          "SubLink1",
+          "SubLink2",
         ]);
       }
     }
@@ -574,5 +578,20 @@ appRouter.post("/Corporate_submitAnswer", async (req, res) => {
   }
 
   res.status(200).send("Submitted Answer");
+});
+
+appRouter.post("/Corporate_viewPopularCourses", async (req, res) => {
+  const minrating = 4;
+  const maxrating = 5;
+  Course.find(
+    { Rating: { $gte: minrating, $lte: maxrating } },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 module.exports = appRouter;

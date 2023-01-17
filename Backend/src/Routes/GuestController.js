@@ -17,4 +17,19 @@ appRouter.post("/Guest_filtercourse", async (req, res) => {
   );
 });
 
+appRouter.post("/Guest_viewPopularCourses", async (req, res) => {
+  const minrating = 4;
+  const maxrating = 5;
+  Course.find(
+    { Rating: { $gte: minrating, $lte: maxrating } },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 module.exports = appRouter;

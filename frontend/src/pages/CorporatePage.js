@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 import { useLocation } from "react-router-dom";
+import video from "../Media/tv.png";
+import eye from "../Media/views.png";
+var array = [];
 
 const CorporatePage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
 
-  var [final, setFinal] = useState("");
+  var [data, setData] = useState("");
   const nav = useNavigate();
   console.log("Hi");
   const forwardViewMyCourses = () => {
@@ -40,6 +43,14 @@ const CorporatePage = () => {
   const viewCourses = () => {
     nav("/AllCourses");
   };
+
+  Axios.post("http://localhost:8000/Individual_viewPopularCourses", {}).then(
+    (response) => {
+      console.log(response);
+      array = response.data;
+      setData(response);
+    }
+  );
   return (
     <div className="add">
       <>
@@ -64,13 +75,58 @@ const CorporatePage = () => {
       <br />
       <div className="title">
         {" "}
-        <div> Welcome, our beloved </div>
-        <div> Corporate Trainee </div>
+        <div className="welcome"> Welcome, our beloved </div>
+        <div className="welcome"> Corporate Trainee </div>
       </div>
       <img src={teacher} alt="" className="teacher" />
 
-      <p>It's time to learn and shine</p>
+      <p className="moto">It's time to learn and shine</p>
+      <br />
+      <br />
+      <h2 className="ourTopPicks">Our Top Picks for you</h2>
+      {array.map((user) => (
+        <div className="MyCourse">
+          <>
+            <h1 key={user} className="title">
+              {user.Title}
+            </h1>
+            <iframe
+              className="videoPreview"
+              width="560"
+              height="315"
+              src={user.PreviewLink}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
 
+            <p key={user} className="subject">
+              {user.Subject}
+            </p>
+
+            <p key={user} className="shortsummary">
+              {user.Shortsummary}.
+            </p>
+            <p key={user} className="rating">
+              {user.Rating} ⭐'s
+            </p>
+            <p key={user} className="instructor">
+              By: {user.Instructor}
+            </p>
+
+            <p key={user} className="hours">
+              <img src={video} alt="" className="tv" />
+              {user.Hours} hours on-demand video
+            </p>
+            <p key={user} className="views">
+              <img src={eye} alt="" className="eye" />
+              {user.Views} Views
+            </p>
+          </>
+        </div>
+      ))}
+      <br />
       <br />
       <button className="explore-button" onClick={viewCourses}>
         Explore Courses

@@ -1,6 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+var arr = [];
 
 const CARD_OPTIONS = {
   iconStyle: "solid",
@@ -25,8 +29,35 @@ const CARD_OPTIONS = {
 
 export default function PaymentForm() {
   const [success, setSuccess] = useState(false);
+  const [users, setData] = useState("");
   const stripe = useStripe();
   const elements = useElements();
+  const nav = useNavigate();
+  const location = useLocation();
+  const isClickedTitle = location.state.isClickedTitle;
+
+  const GoToCreditCard = () => {
+    nav("/Pay");
+  };
+
+  const GoToCourses = () => {
+    nav("/IndividualViewMyCourses", {
+      state: { passedEmail: document.getElementById("email").value },
+    });
+  };
+
+  const CompleteRegister = () => {
+    axios
+      .post("http://localhost:8000/Individual_addPaidCourse", {
+        Email: document.getElementById("email").value,
+        Title: isClickedTitle,
+      })
+      .then((response) => {
+        console.log(response);
+        arr = response.data.CourseDetails;
+        setData(response);
+      });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +70,7 @@ export default function PaymentForm() {
       try {
         const { id } = paymentMethod;
         const response = await axios.post("http://localhost:8000/payment", {
-          amount: 1000,
+          amount: 10000,
           id,
         });
 
@@ -57,6 +88,10 @@ export default function PaymentForm() {
 
   return (
     <>
+      <div>
+        <label>Email</label>
+        <input type="email" name="Email" id="email" /> <br />
+      </div>
       {!success ? (
         <form onSubmit={handleSubmit}>
           <fieldset className="FormGroup">
@@ -64,14 +99,13 @@ export default function PaymentForm() {
               <CardElement options={CARD_OPTIONS} />
             </div>
           </fieldset>
-          <button>Pay</button>
+          <br />
+          <button onClick={CompleteRegister}>Pay</button>
         </form>
       ) : (
         <div>
-          <h2>
-            You just bought a sweet spatula congrats this is the best decision
-            of you're life
-          </h2>
+          <h2>Payment successful</h2>
+          <button onClick={GoToCourses}>Go To Course</button>
         </div>
       )}
     </>

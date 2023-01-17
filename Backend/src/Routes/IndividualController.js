@@ -157,6 +157,21 @@ appRouter.post("/Individual_filtercourse", async (req, res) => {
   );
 });
 
+appRouter.post("/Individual_viewPopularCourses", async (req, res) => {
+  const minrating = 5;
+  const maxrating = 5;
+  Course.find(
+    { Rating: { $gte: minrating, $lte: maxrating } },
+    function (err, result) {
+      if (err) {
+        res.send("Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 appRouter.post("/Individual_retrieveCourses", async (req, res) => {
   res.send(
     await Course.find().select([
@@ -309,6 +324,8 @@ appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
         }).select([
           "Title",
           "Subtitle",
+          "Subtitle1",
+          "Subtitle2",
           "Shortsummary",
           "Subject",
           "Price",
@@ -318,6 +335,8 @@ appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
           "Views",
           "PreviewLink",
           "SubLink",
+          "SubLink1",
+          "SubLink2",
         ]);
       }
     }
@@ -564,63 +583,56 @@ appRouter.post("/Individual_Login", async (req, res) => {
   });
 });
 
-
+appRouter.post("/Individual_addPaidCourse", async (req, res) => {
+  const Email = req.body.Email;
+  //const title = req.body.Title;
+  Individual.findOneAndUpdate(
+    { Email: { $eq: req.body.Email } },
+    { $push: { RegisteredCourses: req.body.Title } },
+    function (error, doc) {
+      if (error) {
+        res.send("update_Error");
+      } else {
+        res.send("Data Inserted");
+        // res.send(doc);
+      }
+    }
+  );
+});
 
 // sho8l moataz ==========================================================================================
 
-
-
-appRouter.post("/change_status_to_pending",async(req,res)=>{
+appRouter.post("/change_status_to_pending", async (req, res) => {
   const Username = req.body.Username;
   Individual.findOneAndUpdate(
     { Username: Username },
-    { Gender: 'pending' },
+    { Gender: "pending" },
     { new: true },
     (error, data) => {
       if (error) {
-        console.log('error');
+        console.log("error");
       } else {
-        console.log('data');
+        console.log("data");
         res.status(200).send("update done");
       }
     }
   );
 });
 
-appRouter.post("/change_status_to_solved",async(req,res)=>{
+appRouter.post("/change_status_to_solved", async (req, res) => {
   const Username = req.body.Username;
   Individual.findOneAndUpdate(
     { Username: Username },
-    { Gender: 'solved' },
+    { Gender: "solved" },
     { new: true },
     (error, data) => {
       if (error) {
-        console.log('error');
+        console.log("error");
       } else {
-        console.log('data');
+        console.log("data");
         res.status(200).send("update done");
       }
     }
   );
-});
-
-appRouter.post("/Individual_Register", async (req, res) => {
-  const newIndividual = new Individual({
-    Username: req.body.Username,
-    Email: req.body.Email,
-    Password: req.body.Password,
-    Country: req.body.Country,
-    Firstname: req.body.Firstname,
-    Lastname: req.body.Lastname,
-    Gender: req.body.Gender,
-    RegisteredCourses: req.body.RegisteredCourses,
-  });
-
-  try {
-    Individual.create(newIndividual);
-    res.send("Data Inserted");
-  } catch (err) {
-    res.send("Error");
-  }
 });
 module.exports = appRouter;

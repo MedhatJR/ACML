@@ -53,6 +53,7 @@ import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
 import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
+import InstMyCourses from "./pages/InstMyCourses";
 
 function App() {
   var token;
@@ -172,6 +173,7 @@ function App() {
                 path="/ViewReportedProblems"
                 element={<ViewReportedProblems />}
               />
+              <Route path="/InstMyCourses" element={<InstMyCourses />} />
             </Routes>
           </div>
         </BrowserRouter>

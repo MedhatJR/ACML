@@ -11,6 +11,15 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+    Subtitl1: {
+      type: String,
+      required: true,
+    },
+    Subtitle2: {
+      type: String,
+      required: true,
+    },
+
     Shortsummary: {
       type: String,
       required: true,
@@ -43,7 +52,6 @@ const courseSchema = new Schema(
       type: Number,
       required: true,
     },
-    
 
     PreviewLink: {
       type: String,
@@ -53,15 +61,21 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+    SubLink1: {
+      type: String,
+      required: true,
+    },
+    SubLink2: {
+      type: String,
+      required: true,
+    },
     Promotion: {
       type: Number,
       required: true,
-      
     },
     Promotion_valid_for: {
       type: String,
       required: true,
-      
     },
   },
   { timestamps: true }

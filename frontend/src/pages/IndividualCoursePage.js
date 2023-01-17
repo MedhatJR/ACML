@@ -50,7 +50,7 @@ const IndividualViewMyCourses = () => {
               {user.Title}
             </h1>
             <iframe
-              className="video"
+              className="videoPreview"
               width="560"
               height="315"
               src={user.PreviewLink}
@@ -59,11 +59,18 @@ const IndividualViewMyCourses = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
+
             <p key={user} className="subject">
               Subject: {user.Subject}
             </p>
             <p key={user} className="subtitle">
-              Subject: {user.Subtitle}
+              {user.Subtitle}
+            </p>
+            <p key={user} className="subtitle1">
+              {user.Subtitle1}
+            </p>
+            <p key={user} className="subtitle2">
+              {user.Subtitle2}
             </p>
             <p key={user} className="shortsummary">
               {user.Shortsummary}.
@@ -89,6 +96,26 @@ const IndividualViewMyCourses = () => {
               width="560"
               height="315"
               src={user.SubLink}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <iframe
+              className="videoSub1"
+              width="560"
+              height="315"
+              src={user.SubLink1}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <iframe
+              className="videoSub2"
+              width="560"
+              height="315"
+              src={user.SubLink2}
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

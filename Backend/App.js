@@ -3,8 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = require("./src/Routes/IndividualController");
 const cors = require("cors");
-const dote =require("dotenv").config();
-const bcrypt =require("bcrypt");
+const dote = require("dotenv").config();
+const bcrypt = require("bcrypt");
 //import Register from "./Register";d
 //JWT
 //const authRoutes = require("../frontend/src/Routes/AuthRoutes");

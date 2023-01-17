@@ -128,7 +128,6 @@ const CorporateViewMyCourses = () => {
           </>
         </div>
       ))}
-      <div>{location.state.passedEmail}</div>
     </div>
   );
 };

@@ -6,10 +6,13 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import { useLocation } from "react-router-dom";
 
 const InstructorPage = () => {
   var [final, setFinal] = useState("");
   const nav = useNavigate();
+  const location = useLocation();
+  const passedData = location.state.Email;
   console.log("Hi");
 
   //   const viewCourseRating = () => {
@@ -28,6 +31,7 @@ const InstructorPage = () => {
   //       }
   //     );
   //   };
+
   const forwardAdd = () => {
     nav("/AddCourse");
   };
@@ -57,6 +61,9 @@ const InstructorPage = () => {
   };
   const viewCourses = () => {
     nav("/AllCourses");
+  };
+  const MyCourses = () => {
+    nav("/InstMyCourses", { state: { passedEmail: passedData } });
   };
   return (
     <div className="add">
@@ -88,6 +95,11 @@ const InstructorPage = () => {
       <button className="explore-button" onClick={viewCourses}>
         Explore Courses
       </button>
+      <br />
+      <button class="button-17" role="button" onClick={MyCourses}>
+        My Courses
+      </button>
+      <br />
       <button class="button-17" role="button" onClick={viewCourseRating}>
         View Course Ratings
       </button>

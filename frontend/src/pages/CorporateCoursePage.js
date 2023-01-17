@@ -46,7 +46,7 @@ const CorporateViewMyCourses = () => {
               {user.Title}
             </h1>
             <iframe
-              className="videoSub"
+              className="videoPreview"
               width="560"
               height="315"
               src={user.PreviewLink}
@@ -59,7 +59,13 @@ const CorporateViewMyCourses = () => {
               Subject: {user.Subject}
             </p>
             <p key={user} className="subtitle">
-              Subtitle: {user.Subtitle}
+              {user.Subtitle}
+            </p>
+            <p key={user} className="subtitle1">
+              {user.Subtitle1}
+            </p>
+            <p key={user} className="subtitle2">
+              {user.Subtitle2}
             </p>
             <p key={user} className="shortsummary">
               {user.Shortsummary}.
@@ -82,10 +88,30 @@ const CorporateViewMyCourses = () => {
 
             {/* <p key={user}>{user.PreviewLink}</p> */}
             <iframe
-              className="video"
+              className="videoSub"
               width="560"
               height="315"
               src={user.SubLink}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <iframe
+              className="videoSub1"
+              width="560"
+              height="315"
+              src={user.SubLink1}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <iframe
+              className="videoSub2"
+              width="560"
+              height="315"
+              src={user.SubLink2}
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
