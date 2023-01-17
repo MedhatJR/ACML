@@ -504,6 +504,14 @@ appRouter.post("/Coporate_Grade", async (req, res) => {
 
 
 //view the questions with the correct solution to view the incorrect answers
+appRouter .post("/Corporate_getExamId" , async (req,res)=>{
+
+const ans = await CorporateExam.find({}).sort({ _id: -1 }).limit(1) ;
+const data = ans[0]._id;
+//console.log(ans);
+res.send(data);
+
+}) ;
 
 appRouter.post("/Corporate_QuestionAnswers", async (req, res) => {
   var grade = 0;
@@ -633,11 +641,12 @@ let mailTransporter = nodemailer.createTransport({
     }
 })
 appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
-  const { Email } = req.body
+//  const { Email } = req.body
 
   let details = {
       from: "mennaabdullahh@gmail.com",
-      to: Email,
+     to: "mennaabdullahh@gmail.com",
+      // to: Email,
       subject: "completing the course",
       cc: "mennaabdullahh@gmail.com",
       bcc: "mennaabdullahh@gmail.com",
@@ -655,8 +664,8 @@ appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
       }
 
   })
-  res.json({ message: "email is sent" })
-})
+  res.status(200).send( "email is sent" );
+});
 
 //download the certificate as a PDF from the website
 

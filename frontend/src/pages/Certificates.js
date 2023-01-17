@@ -11,23 +11,29 @@ import  jsPDF  from 'jspdf';
 import PdfContainer from './PdfContainer';
 import {exportComponentAsPNG ,exportComponentAsPDF}from "react-component-export-image";
 import emailjs from '@emailjs/browser';
+const getGrade = () => {
+    
+  Axios.post("http://localhost:8000/Corporate_Recieve_Certificate_Via_Email").then(
+    (response) => {
+      // answer = response.data;
+      console.log(response.data);
+      this.setState({Emailsent:response.data});
+      //console.log(userData);
+    })
 
+};
 
 class Certificates extends Component {
   certificateWrapper=React.createRef();
   
 //    this.componentRef = React.createRef();
 state={
-    Name:" "
+    Name:" ",
+    Emailsent:" "
 };
 
-// pdfGenerate=()=>{
-//   var doc= new jsPDF('landscape','px','a4','false');
-//   doc.addImage(this.certificateWrapper,'PNG',65,20,500,400);
-//   doc.save('certificate.pdf');
-// }
 
-//exportComponentAsPDF(node, {fileName, html2CanvasOptions, pdfOptions})
+
 render(){
   console.log(this.state);
     return(
@@ -41,10 +47,10 @@ render(){
                    {this.setState({Name:e.target.value});}} />
                  
                <button onClick={e => {e.preventDefault();
-            exportComponentAsPNG(this.certificateWrapper,{ html2CanvasOptions: { backgroundColor: null  } });
+            exportComponentAsPDF(this.certificateWrapper,{ html2CanvasOptions: { backgroundColor: null  } });
               }}> Download </button>
 
-                 
+<button onclick={getGrade}> Send via email  </button>
 
 
             </div>
@@ -56,7 +62,7 @@ render(){
               
                 {/* <a href="mailto:`{email}`?subject={subject}&body={body}">Click to Send an Email</a> */}
             </div>
-
+ <p>{this.state.Emailsent}</p>
             
       {/* <a href="mailto:mennaabdallah77@yahoo.com?subject='certificate!'&body=this.certificateWrapper ">Click to Send an Email</a> */}
         </div>        
