@@ -436,14 +436,10 @@ appRouter.get("/Corporate_AllProblems", async (req, res) => {
   if(!req.body.Email){
     console.log("All input is required");
   };
-  // if(!(Problem.find( {
-  //   Username: { $eq: req.body.Username }
-  // }))){
-  //   console.log("There is no a reported problem with this username");
-  // }
   res.send(
     await Problem.find( {
       Email: { $eq: req.body.Email },
+      Category:{ $eq: "CorporateTrainee"}
     }).select([
       "Description",
       "Type",

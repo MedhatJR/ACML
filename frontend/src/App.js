@@ -59,6 +59,7 @@ import Pay from "./pages/Pay";
 import useToken from './useToken';
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
+import PrevProblems from "./pages/PrevProblems";
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -105,6 +106,7 @@ function App() {
               />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
+              <Route path="/PrevProblems" element={<PrevProblems />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
               <Route
                 path="/CorporateResetPassword"

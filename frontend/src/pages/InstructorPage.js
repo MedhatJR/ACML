@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 import { useLocation } from "react-router-dom";
-
+var category="Instructor";
 const InstructorPage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
@@ -45,6 +45,9 @@ const InstructorPage = () => {
   };
   const Add = () => {
     nav("/AddPromotion");
+  };
+  const reports = () => {
+    nav("/PrevProblems",{state:{Category: category,passedEmail: passedData}});
   };
   const Change = () => {
     nav("/UpdatePassword");
@@ -98,6 +101,11 @@ const InstructorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={viewMyRating}>
         View My Ratings
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={reports}>
+        ALL Reports
       </button>
       <br />
       <br />

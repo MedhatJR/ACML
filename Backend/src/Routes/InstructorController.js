@@ -74,6 +74,7 @@ appRouter.get("/Instructor_AllProblems", async (req, res) => {
 res.send(
   await Problem.find( {
     Email: { $eq: req.body.Email },
+    Category:{ $eq: "Instructor"},
   }).select([
     "Description",
     "Type",

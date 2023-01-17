@@ -201,12 +201,12 @@ appRouter.post("/addIndividual", async (req, res) => {
 
 appRouter.post("/Individual_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-     Emial : req.body.Email,
-     Category: "IndividualTrainee",
-     Description : req.body.Description,
-     Type : req.body.Type,
-     Course : req.body.Course,
-     Status : "Unseen",
+    Email : req.body.Email,
+    Category: req.body.Category,
+    Description : req.body.Description,
+    Type : req.body.Type,
+    Course : req.body.Course,
+    Status : req.body.Status,
   });
   try {
     Problem.create(problem);
@@ -224,6 +224,7 @@ appRouter.get("/Individual_AllProblems", async (req, res) => {
 res.send(
   await Problem.find( {
     Email: { $eq: req.body.Email },
+    Category:{ $eq: "IndividualTrainee"},
   }).select([
     "Description",
     "Type",

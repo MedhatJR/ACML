@@ -12,9 +12,11 @@ import { useLocation } from "react-router-dom";
 var arr = [];
 var arrTitles = [];
 var arrTitlesRate = [];
+var arrReportedTitles = [];
 var isClickedTitle = "";
 var passedCategory="";
 var isClickedTitleRate = "";
+var isClickedReportTitle = "";
 
 const CorporateViewMyCourses = () => {
   const location = useLocation();
@@ -33,7 +35,8 @@ const CorporateViewMyCourses = () => {
     arr = response.data.CourseDetails;
     for (var i = 0; i < arr.length; i++) {
       arrTitles[i] = arr[i].Title;
-      arrTitlesRate[i] = arr[i].Title;
+      arrTitlesRate[i] = arr[i].Rating;
+      arrReportedTitles[i] = arr[i].Title;
     }
     setData(response);
 
@@ -45,8 +48,13 @@ const CorporateViewMyCourses = () => {
     console.log(isClickedTitle);
   };
   const buttonPressedRate = (e) => {
-    isClickedTitleRate = e.target.id; // Get ID of Clicked Element
+    isClickedTitleRate = e.target.name; // Get Name of Clicked Element ???????
     console.log(isClickedTitleRate);
+  };
+
+  const buttonPressedReport = (e) => {
+    isClickedReportTitle = e.target.name; // Get ID of Clicked Element
+    console.log(isClickedReportTitle);
   };
 
   const Rate = () => {
@@ -83,11 +91,26 @@ const CorporateViewMyCourses = () => {
     }
 
     for (var i = 0; i < arrTitles.length; i++) {
-      if (arrTitles[i] === isClickedTitle) {
+      if ((arrTitles[i]+"k") === isClickedTitle) {
         // console.log(arrTitles[i]);
         nav("/CorporateCoursePage", {
           state: { passedEmail: passedEmail, isClickedTitle: arrTitles[i] },
         });
+      }
+    }
+  }
+
+  function reply_click1(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressedReport);
+    }
+
+    for (var i = 0; i < arrReportedTitles.length; i++) {
+      if (arrReportedTitles[i] === isClickedReportTitle) {
+        // console.log(arrTitles[i]);
+        nav("/ReportAProblem",{state: { passedEmail: passedEmail, passedCategory : "CorporateTrainee", isClickedReportTitle: arrReportedTitles[i]},
+      });
       }
     }
   }
@@ -148,9 +171,10 @@ const CorporateViewMyCourses = () => {
               {[...Array(5)].map((star, index) => {
                 if (index <= 5) {
                   return (
-                    <button id={user.Title}
+                    <button 
                       type="button"
                       key={index}
+                      name={user.Title} 
                       className={index <= (hover || rating) ? "on" : "off"}
                       onClick={() => { setRating(index + 1); Rate(); rating(); }}
                       onMouseEnter={() => setHover(index)}
@@ -168,7 +192,7 @@ const CorporateViewMyCourses = () => {
             </button>
             <br/>
             <br/>
-            <button className="button-17" id={user.Title} onClick={problemReport}>
+            <button className="button-17" name={user.Title}  onClick={reply_click1}>
               Report a Problem
             </button>
           </>
