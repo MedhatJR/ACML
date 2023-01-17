@@ -1,7 +1,7 @@
 const express = require("express");
 const appRouter = express.Router();
 const Course = require("../Models/Course");
- const Corporate = require("../Models/CorporateTrainee");
+const Corporate = require("../Models/CorporateTrainee");
 const CorporateTrainee = require("../Models/CorporateTrainee"); ///////Twice????????????
 const cors = require("cors");
 const Exams = require("../Models/Exams");
@@ -12,7 +12,6 @@ const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
 const Problem = require("../Models/Problem");
 const Requests = require("../Models/Requests");
-
 
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
@@ -252,7 +251,6 @@ appRouter.post("/Coporate_submitAnswer", async (req, res) => {
   res.status(200).send("Submitted Answer");
 });
 
-
 appRouter.post("/Corporate_ChangePassword", async (req, res) => {
   const OldPassword = req.body.OldPassword;
   const NewPassword = req.body.NewPassword;
@@ -272,27 +270,27 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
 });
 
 appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
-    const problem = new Problem({
-       Email : req.body.Email,
-       Category: req.body.Category,
-       Description : req.body.Description,
-       Type : req.body.Type,
-       Course : req.body.Course,
-       Status : req.body.Status,
-    });
-    try {
-      Problem.create(problem);
-    } catch (err) {
-      console.log(err);
-    }
-    console.log(problem);
-    res.status(200).send("Submitted Problem");
+  const problem = new Problem({
+    Email: req.body.Email,
+    Category: req.body.Category,
+    Description: req.body.Description,
+    Type: req.body.Type,
+    Course: req.body.Course,
+    Status: req.body.Status,
+  });
+  try {
+    Problem.create(problem);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(problem);
+  res.status(200).send("Submitted Problem");
 });
 appRouter.post("/Corporate_Request_Course", async (req, res) => {
   const requests = new Requests({
-     Email : req.body.Email,
-     Course : req.body.Course,
-     Status : req.body.Status,
+    Email: req.body.Email,
+    Course: req.body.Course,
+    Status: req.body.Status,
   });
   try {
     Requests.create(requests);
@@ -304,27 +302,20 @@ appRouter.post("/Corporate_Request_Course", async (req, res) => {
 });
 
 appRouter.get("/Corporate_AllProblems", async (req, res) => {
-  if(!req.body.Email){
+  if (!req.body.Email) {
     console.log("All input is required");
-  };
+  }
   // if(!(Problem.find( {
   //   Username: { $eq: req.body.Username }
   // }))){
   //   console.log("There is no a reported problem with this username");
   // }
   res.send(
-    await Problem.find( {
+    await Problem.find({
       Email: { $eq: req.body.Email },
-    }).select([
-      "Description",
-      "Type",
-      "Course",
-      "Status",
-   
-    ])
+    }).select(["Description", "Type", "Course", "Status"])
   );
 });
-
 
 appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   const Username = req.body.Username;
@@ -433,6 +424,9 @@ appRouter.post("/Corporate_retrieveMyCourseData", async (req, res) => {
           "SubLink",
           "SubLink1",
           "SubLink2",
+          "Description",
+          "Description1",
+          "Description2",
         ]);
       }
     }
@@ -484,9 +478,9 @@ appRouter.post("/Coporate_Grade", async (req, res) => {
   var grade = 0;
   var final = "";
   const _id = req.body._id;
-    if (!mongoose.Types.ObjectId.isValid(_id)) {
-      return res.status(404).json({ error: "No such id" });
-   }
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).json({ error: "No such id" });
+  }
   const ans1 = await CorporateExam.findById(_id)
     .select("Answer1")
     .select("Answer2");
@@ -519,16 +513,13 @@ appRouter.post("/Coporate_Grade", async (req, res) => {
     .select("Answer2");
 });
 
-
 //view the questions with the correct solution to view the incorrect answers
-appRouter .post("/Corporate_getExamId" , async (req,res)=>{
-
-const ans = await CorporateExam.find({}).sort({ _id: -1 }).limit(1) ;
-const data = ans[0]._id;
-//console.log(ans);
-res.send(data);
-
-}) ;
+appRouter.post("/Corporate_getExamId", async (req, res) => {
+  const ans = await CorporateExam.find({}).sort({ _id: -1 }).limit(1);
+  const data = ans[0]._id;
+  //console.log(ans);
+  res.send(data);
+});
 
 appRouter.post("/Corporate_QuestionAnswers", async (req, res) => {
   var grade = 0;
@@ -538,11 +529,11 @@ appRouter.post("/Corporate_QuestionAnswers", async (req, res) => {
     return res.status(404).json({ error: "No such id" });
   }
   const ans1 = await CorporateExam.findById(_id)
-  .select("Answer1")
-  .select("Answer2");
-const ques1 = await CorporateExam.findById(_id)
-  .select("Question1")
-  .select("Question2");
+    .select("Answer1")
+    .select("Answer2");
+  const ques1 = await CorporateExam.findById(_id)
+    .select("Question1")
+    .select("Question2");
   final = ques1.Question1;
   //console.log(final);
   if (!ans1) {
@@ -563,7 +554,7 @@ const ques1 = await CorporateExam.findById(_id)
         res
           .status(200)
           .send(
-            "1. Question 1 is : " + 
+            "1. Question 1 is : " +
               ques1.Question1 +
               " The Correct Solution is: ( " +
               ans1.Answer1 +
@@ -583,7 +574,7 @@ const ques1 = await CorporateExam.findById(_id)
         res
           .status(200)
           .send(
-            "1. Question 1 is : " + 
+            "1. Question 1 is : " +
               ques1.Question1 +
               "<--> Your answer is Wrong   : " +
               ans1.Answer1 +
@@ -597,10 +588,14 @@ const ques1 = await CorporateExam.findById(_id)
               grade
           );
       }
-      if ((data[0].Answer1 == ans1.Answer1) & (data[0].Answer2 != ans1.Answer2)
+      if (
+        (data[0].Answer1 == ans1.Answer1) &
+        (data[0].Answer2 != ans1.Answer2)
       ) {
         grade = 1;
-        res.status(200) .send(
+        res
+          .status(200)
+          .send(
             "1. Question 1 is : " +
               ques1.Question1 +
               " <--> Your answer is Correct. ( " +
@@ -647,42 +642,37 @@ const ques1 = await CorporateExam.findById(_id)
 
 //see his/her progress in the course as a percentage of how much of the course has been completed so far
 
-
 //receive a certificate as a PDF after completing the course via email
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 let mailTransporter = nodemailer.createTransport({
-    service: "gmail",  
-    auth: {
-      user: "mennaabdullahh@gmail.com",
-      pass: process.env.EMAIL_TEST_APP_PSWO
-    }
-})
-appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
-//  const { Email } = req.body
+  service: "gmail",
+  auth: {
+    user: "mennaabdullahh@gmail.com",
+    pass: process.env.EMAIL_TEST_APP_PSWO,
+  },
+});
+appRouter.post("/Corporate_Recieve_Certificate_Via_Email", async (req, res) => {
+  //  const { Email } = req.body
 
   let details = {
-      from: "mennaabdullahh@gmail.com",
-     to: "mennaabdullahh@gmail.com",
-      // to: Email,
-      subject: "completing the course",
-      cc: "mennaabdullahh@gmail.com",
-      bcc: "mennaabdullahh@gmail.com",
-      text: "congrats...... here is an attachment of the certificate ",
-      attachments: [
-          { filename: 'certificate.jpg', path: './picture.png' }
-      ]
-  }
+    from: "mennaabdullahh@gmail.com",
+    to: "mennaabdullahh@gmail.com",
+    // to: Email,
+    subject: "completing the course",
+    cc: "mennaabdullahh@gmail.com",
+    bcc: "mennaabdullahh@gmail.com",
+    text: "congrats...... here is an attachment of the certificate ",
+    attachments: [{ filename: "certificate.jpg", path: "./picture.png" }],
+  };
   mailTransporter.sendMail(details, (err) => {
-      if (err) {
-          console.log(err)
-      }
-      else {
-          console.log("email is sent")
-      }
-
-  })
-  res.status(200).send( "email is sent" );
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("email is sent");
+    }
+  });
+  res.status(200).send("email is sent");
 });
 
 //download the certificate as a PDF from the website
@@ -690,13 +680,13 @@ appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
 //DONE FRONTEND
 
 //write notes while watching the video
-appRouter.post('/corporate_Notes', async (req, res) => {
-  const id = req.body.id
+appRouter.post("/corporate_Notes", async (req, res) => {
+  const id = req.body.id;
 
-  const corporate = await Corporate.findById(id)
+  const corporate = await Corporate.findById(id);
 
-  res.json({ message: corporate.notes })
-})
+  res.json({ message: corporate.notes });
+});
 //download the notes as a PDF
 
 //*************************************************************MENNA'S END PART*********************************************************** */

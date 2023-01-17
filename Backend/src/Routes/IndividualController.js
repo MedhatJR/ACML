@@ -369,6 +369,9 @@ appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
           "SubLink",
           "SubLink1",
           "SubLink2",
+          "Description",
+          "Description1",
+          "Description2",
         ]);
       }
     }
@@ -729,7 +732,7 @@ appRouter.post("/Individual_Register", async (req, res) => {
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
     RegisteredCourses: req.body.RegisteredCourses,
-    Wallet:0,
+    Wallet: 0,
   });
 
   try {
@@ -740,10 +743,10 @@ appRouter.post("/Individual_Register", async (req, res) => {
   }
 });
 appRouter.post("/Individual_Wallet", async (req, res) => {
-  Individual.find({ Email:req.body.Email }, (error, data) => {
+  Individual.find({ Email: req.body.Email }, (error, data) => {
     if (error) {
       res.send(error);
     } else res.send(data);
-  }).select("Wallet")
+  }).select("Wallet");
 });
 module.exports = appRouter;

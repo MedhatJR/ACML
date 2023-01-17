@@ -24,28 +24,22 @@ const CorporateViewMyCourses = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
 
-    // const back = () => {
-    //   nav("/");
-    // };
+  // const back = () => {
+  //   nav("/");
+  // };
 
-    
-    const Exam = () => {
-      nav("/CMCQ");
-    };
+  const Exam = () => {
+    nav("/CMCQ");
+  };
   const GetExam = () => {
     nav("/CMCQ");
   };
-<div>
-        You finished {count}% of the course.
-        <button onClick={() => setCount( count +(100 /3) )}>
-          Click after watching the video
-        </button>
-
-        
-      </div>
-
-
-
+  <div>
+    You finished {count}% of the course.
+    <button onClick={() => setCount(count + 100 / 3)}>
+      Click after watching the video
+    </button>
+  </div>;
 
   Axios.post("http://localhost:8000/Corporate_retrieveMyCourseData", {
     Email: passedEmail,
@@ -62,21 +56,20 @@ const CorporateViewMyCourses = () => {
 
   return (
     <div className="IndividualViewCourse">
-
       <div>
         <Notes />
       </div>
       <div>
-      <p> You completed {count}% of the course    
-       <button onClick={() => setCount(count +(100/30)*10)}>
+        <p>
+          {" "}
+          You completed {count}% of the course
+          <button onClick={() => setCount(count + (100 / 30) * 10)}>
             Click after watching the video
-          </button></p>
-      
-    </div>
-     
+          </button>
+        </p>
+      </div>
+
       <button onClick={GetExam}>Get your exam</button>
-    
-    
 
       {/* <button onClick={viewMyCourses}>View</button> */}
 
@@ -103,11 +96,20 @@ const CorporateViewMyCourses = () => {
           <p key={user} className="subtitle">
             {user.Subtitle}
           </p>
+          <p key={user} className="description">
+            {user.Description}
+          </p>
           <p key={user} className="subtitle1">
             {user.Subtitle1}
           </p>
+          <p key={user} className="description1">
+            {user.Description1}
+          </p>
           <p key={user} className="subtitle2">
             {user.Subtitle2}
+          </p>
+          <p key={user} className="description2">
+            {user.Description2}
           </p>
           <p key={user} className="shortsummary">
             {user.Shortsummary}.
@@ -140,8 +142,6 @@ const CorporateViewMyCourses = () => {
             allowfullscreen
           ></iframe>
 
-
-
           <iframe
             className="videoSub1"
             width="560"
@@ -166,8 +166,6 @@ const CorporateViewMyCourses = () => {
             <p key={user}>{user.Promotion_valid_for}</p> */}
         </div>
       ))}
-
-      
     </div>
   );
 };
