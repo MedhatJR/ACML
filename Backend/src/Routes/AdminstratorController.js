@@ -42,6 +42,9 @@ appRouter.post("/Adminstrator_addinstructor", async (req, res) => {
     Courses: req.body.Courses,
     Rating: req.body.Rating,
     Biography: req.body.Biography,
+     Wallet:req.body.Wallet, 
+      
+    
   });
   try {
     Instructor.create(instructor);

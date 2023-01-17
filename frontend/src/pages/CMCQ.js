@@ -3,23 +3,40 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 var arr2=[];
 const CMCQ = () => {
+
     const [users, setData] = useState("");
+    const [exam, getExam] = useState("");
+    const [userGrade, setGrade] = useState("");
     const nav = useNavigate();
+    
+   
+
     const getExam1 = () => {
-      
             Axios.get("http://localhost:8000/Corporate_view_exam").then(
         (response) => {
             setData(response);
             console.log(response);
             arr2 = response.data;
-    
             setData(arr2);
             console.log(arr2);
         }
       );
     };
+    // const getGrade = () => {
+    
+    //   Axios.post("http://localhost:8000/Coporate_Grade", { _id: arr2 }).then(
+    //     (response) => {
+    //       // answer = response.data;
+    //       console.log(response.data);
+    //       setGrade(response.data);
+    //       //console.log(userData);
+    //     })
+    
+    // };
     const SubmitAnswers1 = () => {
       const Question1 = document.getElementById("QAC1").value;
       const Answer1 = document.getElementById("AAC1").value;
@@ -39,7 +56,12 @@ const CMCQ = () => {
     const back = () => {
       nav("/");
     };
-  
+    const Yourgrade = () => {
+      nav("/CoporateGradeAndAnswers");
+    };
+
+    
+    
     return (
       <div>
         <button onClick={back} className="btn">
@@ -52,6 +74,11 @@ const CMCQ = () => {
         <button onClick={getExam1} className="btn">
           Get Exam
         </button>
+
+        {/* <button onClick={getResult} className="btn">
+          Get Grade
+        </button> */}
+      
 
         {arr2.map((user)=>(
             <>
@@ -83,12 +110,15 @@ const CMCQ = () => {
 
 
        <button onClick={SubmitAnswers1}>Submit Answers</button>
-       <br />
+       <br /> 
+       <button onClick={Yourgrade} className="btn">
+          Get Grade
+        </button>
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
         ))}
-             
-             
+              
+            
       </div>
     );
   };

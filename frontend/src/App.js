@@ -21,6 +21,7 @@ import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
 import CorporateCoursePage from "./pages/CorporateCoursePage";
 import Allfilterall from "./pages/Allfilterall";
+import CorpRequest from "./CorpRequest";
 
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
@@ -49,8 +50,9 @@ import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 import AdminOpenProblem from "./pages/AdminOpenProblem";
 import AdminAddCORP from "./pages/AdminAddCORP";
-
+import AdminAddI from "./pages/AdminAddI";
 import Certificates from "./pages/Certificates";
+import CorpAllCourses from "./pages/CorpAllCourses";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
 import AdminstratorPage from "./pages/AdminstratorPage";
@@ -125,6 +127,12 @@ function App() {
                 element={<AdminAddCORP />}
               
               />
+              <Route path="/AdminAddI"
+                element={<AdminAddI />}
+              
+              />
+              
+              <Route path="/CorpAllCourses" element={<CorpAllCourses />} />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
@@ -216,6 +224,7 @@ function App() {
               <Route path="/Terms" element={<Terms />} />
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/Pay" element={<Pay />} />
+              <Route path="/CorpRequest" element={<CorpRequest />} />
               <Route
                 path="/ViewReportedProblems"
                 element={<ViewReportedProblems />}

@@ -13,7 +13,7 @@ const InstructorPage = () => {
   const passedData = location.state.Email;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
-
+  
   console.log("Hi");
 
   //   const viewCourseRating = () => {
