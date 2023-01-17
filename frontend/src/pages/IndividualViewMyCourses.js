@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 
 var arr = [];
 var arrTitles = [];
-var passedCategory="";
+var passedCategory = "";
 var isClickedTitle = "";
 
 // var id = "";
@@ -66,9 +66,8 @@ const IndividualViewMyCourses = () => {
   }
 
   const problemReport = () => {
-
-    nav("/ReportAProblem"    , {
-      state: { passedEmail: passedEmail, passedCategory:"IndividualTrainee"},
+    nav("/ReportAProblem", {
+      state: { passedEmail: passedEmail, passedCategory: "IndividualTrainee" },
     });
   };
 
@@ -139,9 +138,13 @@ const IndividualViewMyCourses = () => {
             <button className="button-17" id={user.Title} onClick={reply_click}>
               Go To Course
             </button>
-            <br/>
-            <br/>
-            <button className="button-17" id={user.Title} onClick={problemReport}>
+            <br />
+            <br />
+            <button
+              className="button-17"
+              id={user.Title}
+              onClick={problemReport}
+            >
               Report a Problem
             </button>
           </>

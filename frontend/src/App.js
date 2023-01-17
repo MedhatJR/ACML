@@ -61,6 +61,7 @@ import InstMyCourses from "./pages/InstMyCourses";
 import useToken from "./useToken";
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
+import InstructorWallet from "./pages/InstructorWallet";
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -202,6 +203,7 @@ function App() {
                 element={<ViewReportedProblems />}
               />
               <Route path="/InstMyCourses" element={<InstMyCourses />} />
+              <Route path="/InstructorWallet" element={<InstructorWallet />} />
             </Routes>
           </div>
         </BrowserRouter>

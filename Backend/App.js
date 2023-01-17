@@ -23,12 +23,11 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
 app.use(cookieParser());
 //app.use("/", authRoutes);
 //--------------------
-app.use('/LogIn', (req, res) => {
+app.use("/LogIn", (req, res) => {
   res.send({
-    token: 'test123'
+    token: "test123",
   });
 });
-
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8000"); // update to match the domain you will make the request from
@@ -51,6 +50,7 @@ app.use(instructorRouter);
 const guestRouter = require("./src/Routes/GuestController");
 const corporateRouter = require("./src/Routes/CorporateController");
 const { setAuthToken } = require("../frontend/src/Controllers/setAuthToken");
+const Instructor = require("./src/Models/Instructor");
 app.use(corporateRouter);
 app.use(guestRouter);
 
@@ -74,14 +74,13 @@ mongoose
                                                     End of your code
 */
 
-
 app.post("/payment", cors(), async (req, res) => {
   let { amount, id } = req.body;
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
-      description: "Spatula company",
+      description: "Courses",
       payment_method: id,
       confirm: true,
     });
@@ -90,6 +89,19 @@ app.post("/payment", cors(), async (req, res) => {
       message: "Payment successful",
       success: true,
     });
+    Instructor.findOneAndUpdate(
+      { Username: req.body.Username },
+
+      { $inc: { Wallet: req.body.Wallet } },
+      { new: true },
+      (error, data) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(data);
+        }
+      }
+    );
   } catch (error) {
     console.log("Error", error);
     res.json({

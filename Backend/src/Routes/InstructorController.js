@@ -66,12 +66,12 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
 
 appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-     Email : req.body.Email,
-     Category: "Instructor",
-     Description : req.body.Description,
-     Type : req.body.Type,
-     Course : req.body.Course,
-     Status : "Unseen",
+    Email: req.body.Email,
+    Category: "Instructor",
+    Description: req.body.Description,
+    Type: req.body.Type,
+    Course: req.body.Course,
+    Status: "Unseen",
   });
   try {
     Problem.create(problem);
@@ -83,23 +83,15 @@ appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
 });
 
 appRouter.get("/Instructor_AllProblems", async (req, res) => {
-  if(!req.body.Email){
+  if (!req.body.Email) {
     console.log("All input is required");
-  };
-res.send(
-  await Problem.find( {
-    Email: { $eq: req.body.Email },
-  }).select([
-    "Description",
-    "Type",
-    "Course",
-    "Status",
- 
-  ])
-);
+  }
+  res.send(
+    await Problem.find({
+      Email: { $eq: req.body.Email },
+    }).select(["Description", "Type", "Course", "Status"])
+  );
 });
-
-
 
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
@@ -322,7 +314,6 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
   );
 });
 
-
 //********************************************MENNAAAA*************************************************************** */
 //view the price of each course
 appRouter.get("/Instructor_course_price", async (req, res) => {
@@ -347,8 +338,6 @@ appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
 });
 //choose a course from the results and view (but not open) its details including course subtitles, excercises ,
 // total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
-
-
 
 //*************************************************************MENNA'S END PART*********************************************************** */
 appRouter.post("/Instructor_editemail", async (req, res) => {
@@ -579,5 +568,20 @@ appRouter.post("/Instructor_receiveemail", async (req, res) => {
       res.send("emailsent");
     }
   });
+});
+
+appRouter.post("/Instructor_viewMyWallet", async (req, res) => {
+  //data = req.body.Courses;
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else {
+      console.log(data);
+      // username = data[0].Username;
+      //console.log(username);
+      res.send(data);
+    }
+  }).select("Wallet");
 });
 module.exports = appRouter;

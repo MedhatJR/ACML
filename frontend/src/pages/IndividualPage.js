@@ -44,7 +44,7 @@ const IndividualPage = () => {
     nav("/Certificates");
   };
   const viewCourses = () => {
-    nav("/AllCourses");
+    nav("/AllCourses", { state: { passedEmail: passedData } });
   };
 
   Axios.post("http://localhost:8000/Individual_viewPopularCourses", {}).then(
