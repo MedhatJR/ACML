@@ -115,12 +115,6 @@ const CorporateViewMyCourses = () => {
     }
   }
 
-  const problemReport = () => {
-
-    nav("/ReportAProblem"    ,{state: { passedEmail: passedEmail, passedCategory : "CorporateTrainee"},
-  });
-  };
-
   const go = () => {
     nav("/CorporateCoursePage");
   };

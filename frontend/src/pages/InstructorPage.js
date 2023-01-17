@@ -13,8 +13,6 @@ const InstructorPage = () => {
   const passedData = location.state.Email;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
-  const location = useLocation();
-  const passedData = location.state.Email;
   console.log("Hi");
 
   //   const viewCourseRating = () => {
@@ -43,9 +41,9 @@ const InstructorPage = () => {
   const viewCourseRating = () => {
     nav("/InstrCourseRatings");
   };
-  const forwardView = () => {
-    nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
-  };
+  // const forwardView = () => {
+  //   nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
+  // };
   const Add = () => {
     nav("/AddPromotion");
   };
@@ -125,11 +123,11 @@ const InstructorPage = () => {
       <button class="button-17" role="button" onClick={forwardAdd}>
         Add Course
       </button>
-      <br />
+      {/* <br />
       <br />
       <button class="button-17" role="button" onClick={forwardView}>
         View Course
-      </button>
+      </button> */}
       <br />
       <br />
       <button class="button-17" role="button" onClick={Add}>
@@ -155,9 +153,7 @@ const InstructorPage = () => {
       <button class="button-17" role="button" onClick={email}>
         Change Email
       </button>
-      <br />
-      <br />
-      <button onClick={forwardexam}>Add new exam</button>
+      
       
     </div>
   );

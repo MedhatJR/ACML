@@ -9,6 +9,7 @@ import teacher from "../Media/teacher.png";
 import { useLocation } from "react-router-dom";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
+
 var category="CorporateTrainee";
 var array = [];
 

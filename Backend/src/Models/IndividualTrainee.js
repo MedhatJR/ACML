@@ -34,7 +34,7 @@ const IndividualTraineeSchema = new Schema(
     },
     RegisteredCourses: {
       type: Array,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }

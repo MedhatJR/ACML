@@ -27,30 +27,30 @@ const ReportAProblem = () => {
   const report = () => {
     console.log("ama")
     //console.log("Hi");
-     if (passedCategory === "CorporateTrainee") {
-    Axios.post("http://localhost:8000/Corporate_ReportAProblem", {
-      Email: passedEmail,
-      Category: passedCategory,
-      Description: document.getElementById("description").value,
-      Type: document.getElementById("type").value,
-      Course: passedTitle,
-      Status: "Unseen",
-    }).then((response) => {
-      console.log(response);
+    if (passedCategory === "CorporateTrainee") {
+      Axios.post("http://localhost:8000/Corporate_ReportAProblem", {
+        Email: passedEmail,
+        Category: passedCategory,
+        Description: document.getElementById("description").value,
+        Type: document.getElementById("typePro").value,
+        Course: passedTitle,
+        Status: "Unseen",
+      }).then((response) => {
+        console.log(response);
 
-      setFinal(response);
+        setFinal(response);
 
-      // setData(response.data[1].Title);
-    });
-    console.log("ewgeron")
-     }
+        // setData(response.data[1].Title);
+      });
+      console.log("ewgeron")
+    }
     else if (passedCategory === "IndividualTrainee") {
       Axios.post("http://localhost:8000/Individual_ReportAProblem", {
         Email: passedEmail,
         Category: passedCategory,
         Description: document.getElementById("description").value,
         Type: document.getElementById("type").value,
-        Course: document.getElementById("course").value,
+        Course: passedTitle,
         Status: "Unseen",
       }).then((response) => {
         console.log(response);
@@ -65,11 +65,11 @@ const ReportAProblem = () => {
       if (passedCategory === "Instructor") {
         Axios.post("http://localhost:8000/Instructor_ReportAProblem", {
           Email: passedEmail,
-          Category: passedCategory,
-          Description: document.getElementById("description").value,
-          Type: document.getElementById("type").value,
-          Course: document.getElementById("course").value,
-          Status: "Unseen",
+        Category: passedCategory,
+        Description: document.getElementById("description").value,
+        Type: document.getElementById("type").value,
+        Course: passedTitle,
+        Status: "Unseen",
         }).then((response) => {
           console.log(response);
 
@@ -96,6 +96,7 @@ const ReportAProblem = () => {
   //   };
 
   // }
+  
 
   return (
     <div className="ReportProblem">
@@ -106,8 +107,22 @@ const ReportAProblem = () => {
       <input type="text" name="description" id="description" /> <br />
       <br />
       <br />
-      <label>Type: </label>
-      <input type="text" name="type" id="type" /> <br />
+      <label>Type of Problem: </label>
+      <br />
+      <br />
+      {/* <div class="custom-select" style="width:200px;"> */}
+        <select name="typePro" id="typePro">
+          <option value="Technical" id="Technical">
+            Technical
+          </option>
+          <option value="Financial" id="Financial">
+            Financial
+          </option>
+          <option value="Other" id="Other">
+            Other
+          </option>
+        </select>
+        {/* </div> */}
       <br />
       <br />
 

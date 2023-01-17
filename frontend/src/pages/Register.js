@@ -30,7 +30,6 @@ const Register = () => {
     var Rating = 0;
     var Biography = "";
 
-    console.log("Hi2");
     if (type === "Individual Trainee") {
       console.log("ana individual");
       Axios.post("http://localhost:8000/Individual_Register", {
@@ -41,45 +40,30 @@ const Register = () => {
         Firstname: Firstname,
         Lastname: Lastname,
         Gender: Gender,
-        RegisteredCourses: RegisteredCourses,
       }).then((response) => {
         console.log(response.data);
-
-        setFinal = response.data;
-      });
-    } else if (type === "Instructor") {
-      console.log("ana instructor");
-      Axios.post("http://localhost:8000/Adminstrator_addinstructor", {
-        Username: Username,
-        Email: Email,
-        Password: Password,
-        Country: Country,
-        Firstname: Firstname,
-        Lastname: Lastname,
-        Gender: Gender,
-        Courses: Courses,
-        Rating: Rating,
-        //Biography: Biography,
-      }).then((response) => {
-        console.log(response.data);
-        console.log("added fel db");
+        console.log(response);
         setFinal = response.data;
       });
     } else {
-      Axios.post("http://localhost:8000/Adminstrator_addcorporatetrainee", {
-        Username: Username,
-        Email: Email,
-        Password: Password,
-        Country: Country,
-        Firstname: Firstname,
-        Lastname: Lastname,
-        Gender: Gender,
-        RegisteredCourses: RegisteredCourses,
-      }).then((response) => {
-        console.log(response.data);
-
-        setFinal = response.data;
-      });
+      if (type === "Instructor") {
+        console.log("ana instructor");
+        Axios.post("http://localhost:8000/Instructor_Register", {
+          Username: Username,
+          Email: Email,
+          Password: Password,
+          Country: Country,
+          Firstname: Firstname,
+          Lastname: Lastname,
+          Gender: Gender,
+          //Biography: Biography,
+        }).then((response) => {
+          console.log(response.data);
+          console.log("added fel db");
+          setFinal = response.data;
+          contract();
+        });
+      }
     }
   };
 
@@ -181,25 +165,14 @@ const Register = () => {
           <option value="Individual" id="Individual">
             Individual Trainee
           </option>
-          <option value="Corporate" id="Corporate">
-            Corporate Trainee
-          </option>
           <option value="Instructor" id="Instructor">
             Instructor
           </option>
         </select>
         <br />
         <button
-          onClick={() => {
-            if (type === "Instructor") {
-              console.log("hu");
-              contract();
-
-              console.log("Registered!!!");
-            } else {
-              addData();
-            }
-          }}
+          onClick={
+            addData}
         >
           Submit
         </button>
