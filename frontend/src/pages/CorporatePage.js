@@ -40,7 +40,7 @@ const CorporatePage = () => {
     nav("/CoporateGradeAndAnswers");
   };
   const viewCourses = () => {
-    nav("/AllCourses");
+    nav("/CorpAllCourses", {state: {passedEmail: passedData}});
   };
 
   Axios.post("http://localhost:8000/Individual_viewPopularCourses", {}).then(

@@ -729,6 +729,7 @@ appRouter.post("/Individual_Register", async (req, res) => {
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
     RegisteredCourses: req.body.RegisteredCourses,
+    Wallet:0,
   });
 
   try {
@@ -737,5 +738,12 @@ appRouter.post("/Individual_Register", async (req, res) => {
   } catch (err) {
     res.send("Error");
   }
+});
+appRouter.post("/Individual_Wallet", async (req, res) => {
+  Individual.find({ Email:req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else res.send(data);
+  }).select("Wallet")
 });
 module.exports = appRouter;

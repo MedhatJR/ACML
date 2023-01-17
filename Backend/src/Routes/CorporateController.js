@@ -11,6 +11,9 @@ const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
 const Problem = require("../Models/Problem");
+const Requests = require("../Models/Requests");
+
+
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
 var popup = require("alert");
@@ -24,7 +27,7 @@ appRouter.get("/Corporate_read", async (req, res) => {
   });
 });
 
-appRouter.get("/Corporate_searchCourse", async (req, res) => {
+appRouter.post("/Corporate_searchCourse", async (req, res) => {
   Course.find(
     {
       $or: [
@@ -285,6 +288,20 @@ appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
     console.log(problem);
     res.status(200).send("Submitted Problem");
 });
+appRouter.post("/Corporate_Request_Course", async (req, res) => {
+  const requests = new Requests({
+     Email : req.body.Email,
+     Course : req.body.Course,
+     Status : req.body.Status,
+  });
+  try {
+    Requests.create(requests);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(requests);
+  res.status(200).send("Submitted Request");
+});
 
 appRouter.get("/Corporate_AllProblems", async (req, res) => {
   if(!req.body.Email){
@@ -504,6 +521,14 @@ appRouter.post("/Coporate_Grade", async (req, res) => {
 
 
 //view the questions with the correct solution to view the incorrect answers
+appRouter .post("/Corporate_getExamId" , async (req,res)=>{
+
+const ans = await CorporateExam.find({}).sort({ _id: -1 }).limit(1) ;
+const data = ans[0]._id;
+//console.log(ans);
+res.send(data);
+
+}) ;
 
 appRouter.post("/Corporate_QuestionAnswers", async (req, res) => {
   var grade = 0;
@@ -624,7 +649,8 @@ const ques1 = await CorporateExam.findById(_id)
 
 
 //receive a certificate as a PDF after completing the course via email
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+
 let mailTransporter = nodemailer.createTransport({
     service: "gmail",  
     auth: {
@@ -633,11 +659,12 @@ let mailTransporter = nodemailer.createTransport({
     }
 })
 appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
-  const { Email } = req.body
+//  const { Email } = req.body
 
   let details = {
       from: "mennaabdullahh@gmail.com",
-      to: Email,
+     to: "mennaabdullahh@gmail.com",
+      // to: Email,
       subject: "completing the course",
       cc: "mennaabdullahh@gmail.com",
       bcc: "mennaabdullahh@gmail.com",
@@ -655,8 +682,8 @@ appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
       }
 
   })
-  res.json({ message: "email is sent" })
-})
+  res.status(200).send( "email is sent" );
+});
 
 //download the certificate as a PDF from the website
 

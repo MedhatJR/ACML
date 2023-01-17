@@ -4,28 +4,25 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 //import "../styles/register.css";
 import "../styles/AllCourses.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import { useLocation } from "react-router-dom";
 var arr = [];
-var arrRegistered = [];
-var arrRegisteredTitles = [];
 var arrTitles = [];
 var isClickedTitle = "";
 
-const AllCourses = () => {
+
+const CorpAllCourses = () => {
+    
   const [users, setData] = useState("");
   const nav = useNavigate();
   const location = useLocation();
   const passedEmail = location.state.passedEmail;
-  const passedReg = location.state.passedReg;
   const Register = () => {
     nav("/Register");
   };
-  const filter = () => {
-    nav("/Allfilterall");
-  };
-  const search = () => {
-    nav("/searchtitlesubject");
+  const LogIn = () => {
+    nav("/LogIn");
   };
 
   // const GoToCreditCard = () => {
@@ -43,22 +40,8 @@ const AllCourses = () => {
       setData(arr);
     }
   );
-  const reg = () => {
-    Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
-      Email: passedEmail,
-    }).then((response) => {
-      console.log(response);
-      arrRegistered = response.data;
-      for (var i = 0; i < arrRegistered.length; i++) {
-        arrRegisteredTitles[i] = arrRegistered[i].Title;
-      }
-      console.log(arrRegistered + " !!!!!!!!!!!!!!!!!!!!!!!!");
-
-      console.log(arrRegisteredTitles + " !!!!!!!!?????????!!!!!!!");
-      setData(response + " ????????????????");
-    });
-    return arrRegistered;
-  };
+  
+  
   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
@@ -72,12 +55,8 @@ const AllCourses = () => {
     for (var i = 0; i < arrTitles.length; i++) {
       if (arrTitles[i] === isClickedTitle) {
         // console.log(arrTitles[i]);
-        nav("/Pay", {
-          state: {
-            isClickedTitle: isClickedTitle,
-            isClickedPrice: arr[i].Price_after_promotion,
-            isClickedUsername: arr[i].Instructor,
-          },
+        nav("/CorpRequest", {
+          state: { passedEmail: passedEmail, isClickedTitle: isClickedTitle },
         });
       }
     }
@@ -104,13 +83,6 @@ const AllCourses = () => {
           </ul>
         </nav>
       </>
-      <button   onClick={filter}>
-              Filter Courses
-            </button>
-
-            <button   onClick={search}>
-              Search for a course
-            </button>
       {arr.map((user) => (
         //id  = user.Title
         <div className="MyCourse">
@@ -125,8 +97,8 @@ const AllCourses = () => {
               {user.PreviewLink}
             </p> */}
             <iframe
-              className="previewVideofilter"
-              width="360"
+              className="previewVideo"
+              width="560"
               height="315"
               src={user.PreviewLink}
               title="YouTube video player"
@@ -139,8 +111,7 @@ const AllCourses = () => {
             </p>
             <p key={user} className="subject">
               Subject: {user.Subject}
-            </p><br>
-            </br>
+            </p>
             <p key={user} className="Hours">
               {user.Hours} Total Hours
             </p>
@@ -161,24 +132,9 @@ const AllCourses = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
-
             <button className="pay-btn" id={user.Title} onClick={reply_click}>
-              Pay and Enroll
+              Request Access
             </button>
-
-            {/* {arrRegisteredTitles.map((i) => (
-              <>
-                {user.Title === i ? null : (
-                  <button
-                    className="pay-btn"
-                    id={user.Title}
-                    onClick={reply_click}
-                  >
-                    Pay and Enroll
-                  </button>
-                )}
-              </>
-            ))} */}
           </>
         </div>
       ))}
@@ -188,4 +144,4 @@ const AllCourses = () => {
   );
 };
 
-export default AllCourses;
+export default CorpAllCourses;

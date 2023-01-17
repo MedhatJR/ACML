@@ -10,11 +10,18 @@ import { useLocation } from "react-router-dom";
 import Notes from "./Notes";
 import PdfContainer from './PdfContainer';
 
+
+
 var array = [];
 
 
 
 const IndividualViewMyCourses = () => {
+
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
   // console.log(wantedtitle[0]);
   //   console.log(array);
   const location = useLocation();
@@ -26,6 +33,21 @@ const IndividualViewMyCourses = () => {
   //   const back = () => {
   //     nav("/");
   //   };
+  // const Exam = () => {
+  //   nav("ICMCQ");
+  // };
+const GetExam = () => {
+  nav("/IMCQ");
+};
+      <div>
+        You finished {count}% of the course.
+        <button onClick={() => setCount( count +(100 /3) )}>
+          Click after watching the video
+        </button>
+
+        
+      </div>
+
 
   Axios.post("http://localhost:8000/Individual_retrieveMyCourseData", {
     Email: passedEmail,
@@ -46,6 +68,20 @@ const IndividualViewMyCourses = () => {
 
   return (
     <div className="IndividualViewCourse">
+      <div>
+        <Notes />
+      </div>
+      <div>
+      <p> You completed {count}% of the course    
+       <button onClick={() => setCount(count +(100/30)*10)}>
+            Click after watching the video
+          </button></p>
+      
+    </div>
+     
+      <button onClick={GetExam}>Get your exam</button>
+    
+    
       <br />
       {/* <button onClick={viewMyCourses}>View</button> */}
       {array.map((user) => (
@@ -129,7 +165,7 @@ const IndividualViewMyCourses = () => {
             {/* <p key={user}>{user.Promotion}</p>
             <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
-          <Notes/>
+        
         </div>
 
         

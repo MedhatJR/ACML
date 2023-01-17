@@ -24,13 +24,29 @@ const CorporateViewMyCourses = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
 
-  //   const back = () => {
-  //     nav("/");
-  //   };
+    // const back = () => {
+    //   nav("/");
+    // };
 
+    
+    const Exam = () => {
+      nav("/CMCQ");
+    };
   const GetExam = () => {
     nav("/CMCQ");
   };
+<div>
+        You finished {count}% of the course.
+        <button onClick={() => setCount( count +(100 /3) )}>
+          Click after watching the video
+        </button>
+
+        
+      </div>
+
+
+
+
   Axios.post("http://localhost:8000/Corporate_retrieveMyCourseData", {
     Email: passedEmail,
     myCourse: isClickedTitle,
@@ -46,22 +62,22 @@ const CorporateViewMyCourses = () => {
 
   return (
     <div className="IndividualViewCourse">
+
       <div>
         <Notes />
       </div>
-      {/* <div>
+      <div>
       <p> You completed {count}% of the course    
-       <button onClick={() => setCount(count *30)}>
+       <button onClick={() => setCount(count +(100/30)*10)}>
             Click after watching the video
           </button></p>
       
-    </div> */}
-      <div>
-        You finished {count}% of the course.
-        <button onClick={() => setCount(count + 30)}>
-          Click after watching the video
-        </button>
-      </div>
+    </div>
+     
+      <button onClick={GetExam}>Get your exam</button>
+    
+    
+
       {/* <button onClick={viewMyCourses}>View</button> */}
 
       {array.map((user) => (
@@ -123,6 +139,9 @@ const CorporateViewMyCourses = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
+
+
+
           <iframe
             className="videoSub1"
             width="560"
@@ -148,7 +167,7 @@ const CorporateViewMyCourses = () => {
         </div>
       ))}
 
-      <div>{location.state.Email}</div>
+      
     </div>
   );
 };

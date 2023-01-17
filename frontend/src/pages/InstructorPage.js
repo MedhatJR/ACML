@@ -34,7 +34,7 @@ const InstructorPage = () => {
   //   };
 
   const forwardAdd = () => {
-    nav("/AddCourse");
+    nav("/AddCourse", { state: { passedEmail: passedData } });
   };
   const viewMyRating = () => {
     nav("/InstrMyRatings");
@@ -106,9 +106,11 @@ const InstructorPage = () => {
         Explore Courses
       </button>
       <br />
+      <br />
       <button class="button-17" role="button" onClick={MyCourses}>
         My Courses
       </button>
+      <br />
       <br />
       <button class="button-17" role="button" onClick={viewCourseRating}>
         View Course Ratings

@@ -14,7 +14,7 @@ var passed_id = "";
 
 // var id = "";
 
-const AdminViewProblems = () => {
+const AdminViewRequests = () => {
   //const passedEmail = location.state.passedEmail;
   const [users, setData] = useState("");
   const nav = useNavigate();
@@ -27,7 +27,7 @@ const AdminViewProblems = () => {
 
 
   // nav("/IndividualCoursePage", { state: { passedEmail: passedEmail } });
-  Axios.get("http://localhost:8000/view_problems", {
+  Axios.get("http://localhost:8000/view_requests", {
   }).then((response) => {
    // console.log(response);
     arr = response.data;
@@ -46,14 +46,38 @@ const AdminViewProblems = () => {
     }
     for (var i = 0; i < arr.length; i++) {
       if (arr[i]._id === passed_id) {
-        // console.log(arrTitles[i]);
-        Axios.post("http://localhost:8000/change_status_to_seen", { _id :passed_id
-     }).then((response) => {
-       // console.log(response);
-      //arr = response.data;
-    setData(response);
+        
+        Axios.post("http://localhost:8000/accept_requests", {
+            _id : passed_id
+        }).then((response) => {
+         // console.log(response);
+          arr = response.data;
+          setData(response);
         });
-        nav("/AdminOpenProblem" , {state: { passed_id : arr[i]._id } } );
+
+      }
+    }
+  }
+
+  function reply_click1(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressed);
+    }
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i]._id === passed_id) {
+       
+
+        Axios.post("http://localhost:8000/reject_requests", {
+            _id : passed_id
+        }).then((response) => {
+         // console.log(response);
+          arr = response.data;
+          setData(response);
+        });
+
+
+
       }
     }
   }
@@ -79,25 +103,25 @@ const AdminViewProblems = () => {
       </nav>
 
       <br />
-
+      <button className="button-17"  onClick={back}>Back  </button>
       <br />
       <br />
       {arr.map((user) => (
         //id  = user.Title
-        <div className="MyCourse">
+        <div className="MyCourserequest">
           <>
-            <h1 key={user} className="title">
-              {user.Type}
+            <h1 key={user} className="Emailrequest">
+             Email : {user.Email}
             </h1>
-            <p key={user} className="shortsummary">
-              {user.Course}
+            <p key={user} className="Courserequest">
+             Course :  {user.Course}
             </p>
-            <p key={user} className="instructor">
-              {user.Status}
+            <p key={user} className="Statusrequest">
+             Status : {user.Status}
             </p>
-<div className="buttonProblem"> <button  className="button-17" id={user._id} onClick={reply_click}>
-               View Problem            </button></div>
-            
+              <div > <button className="Accept"  id={user._id} onClick={reply_click}>
+               Accept </button></div>
+               <div > <button className="Reject" id={user._id} onClick={reply_click1}> Reject  </button></div>
           </>
           
         </div>
@@ -108,4 +132,4 @@ const AdminViewProblems = () => {
   );
 };
 
-export default AdminViewProblems;
+export default AdminViewRequests;
