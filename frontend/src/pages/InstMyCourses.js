@@ -13,6 +13,8 @@ var arrTitles = [];
 var isClickedTitle = "";
 var searchResults = [];
 var filterResults = [];
+var arrReportedTitles = [];
+var isClickedReportTitle = "";
 
 const AllCourses = () => {
   const [users, setData] = useState("");
@@ -32,6 +34,7 @@ const AllCourses = () => {
       arr = response.data;
       for (var i = 0; i < arr.length; i++) {
         arrTitles[i] = arr[i].Title;
+        arrReportedTitles[i] = arr[i].Title;
       }
       console.log(arr);
       setData(arr);
@@ -48,6 +51,9 @@ const AllCourses = () => {
       }).then((response) => {
         console.log(response);
         searchResults = response.data;
+        for (var i = 0; i < searchResults.length; i++) {
+          arrReportedTitles[i] = arr[i].Title;
+        }
         console.log(arr);
         setData(searchResults);
       });
@@ -63,10 +69,33 @@ const AllCourses = () => {
     }).then((response) => {
       console.log(response);
       filterResults = response.data;
+      for (var i = 0; i < filterResults.length; i++) {
+        arrReportedTitles[i] = arr[i].Title;
+      }
       console.log(arr);
       setData(filterResults);
     });
   };
+
+  const buttonPressedReport = (e) => {
+    isClickedReportTitle = e.target.name; // Get ID of Clicked Element
+    console.log(isClickedReportTitle);
+  };
+
+  function reply_click1(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressedReport);
+    }
+
+    for (var i = 0; i < arrReportedTitles.length; i++) {
+      if (arrReportedTitles[i] === isClickedReportTitle) {
+        // console.log(arrTitles[i]);
+        nav("/ReportAProblem",{state: { passedEmail: passedEmail, passedCategory : "Instructor", isClickedReportTitle: arrReportedTitles[i]},
+      });
+      }
+    }
+  }
 
   return (
     <div className="add">
@@ -164,6 +193,11 @@ const AllCourses = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
+            <br/>
+            <br/>
+            <button className="button-17" name={user.Title}  onClick={reply_click1}>
+              Report a Problem
+            </button>
           </>
         </div>
       ))}
@@ -205,6 +239,11 @@ const AllCourses = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
+            <br/>
+            <br/>
+            <button className="button-17"name={user.Title}  onClick={reply_click1} >
+              Report a Problem
+            </button>
           </>
         </div>
       ))}
@@ -246,6 +285,11 @@ const AllCourses = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
+            <br/>
+            <br/>
+            <button className="button-17" name={user.Title}  onClick={reply_click1} >
+              Report a Problem
+            </button>
           </>
         </div>
       ))}

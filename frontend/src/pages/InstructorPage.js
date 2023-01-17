@@ -6,14 +6,14 @@ import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
+import wallet from "../Media/wallet.png";
 import { useLocation } from "react-router-dom";
-
+var category="Instructor";
 const InstructorPage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
-  
   console.log("Hi");
 
   //   const viewCourseRating = () => {
@@ -34,7 +34,7 @@ const InstructorPage = () => {
   //   };
 
   const forwardAdd = () => {
-    nav("/AddCourse",{state: { passedEmail: passedData }});
+    nav("/AddCourse", { state: { passedEmail: passedData } });
   };
   const viewMyRating = () => {
     nav("/InstrMyRatings");
@@ -42,11 +42,14 @@ const InstructorPage = () => {
   const viewCourseRating = () => {
     nav("/InstrCourseRatings");
   };
-  const forwardView = () => {
-    nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
-  };
+  // const forwardView = () => {
+  //   nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
+  // };
   const Add = () => {
     nav("/AddPromotion");
+  };
+  const reports = () => {
+    nav("/PrevProblems",{state:{Category: category,passedEmail: passedData}});
   };
   const Change = () => {
     nav("/UpdatePassword");
@@ -67,11 +70,15 @@ const InstructorPage = () => {
   const MyCourses = () => {
     nav("/InstMyCourses", { state: { passedEmail: passedData } });
   };
+  const MyWallet = () => {
+    nav("/InstructorWallet", { state: { passedEmail: passedData } });
+  };
   return (
     <div className="add">
       <>
         <nav>
           <img src={logo} className="logo" alt="" />{" "}
+          <img src={wallet} className="wallet" alt="" onClick={MyWallet} />
           <ul>
             <li>
               <a href="/">Home</a>
@@ -94,7 +101,11 @@ const InstructorPage = () => {
       <img src={teacher} alt="" className="teacher" />
 
       <p>What would you like to do today ?</p>
-      <button class="button-17" className="explore-button" onClick={viewCourses}>
+      <button
+        class="button-17"
+        className="explore-button"
+        onClick={viewCourses}
+      >
         Explore Courses
       </button>
       <br />
@@ -114,14 +125,19 @@ const InstructorPage = () => {
       </button>
       <br />
       <br />
+      <button class="button-17" role="button" onClick={reports}>
+        ALL Reports
+      </button>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={forwardAdd}>
         Add Course
       </button>
-      <br />
+      {/* <br />
       <br />
       <button class="button-17" role="button" onClick={forwardView}>
         View Course
-      </button>
+      </button> */}
       <br />
       <br />
       <button class="button-17" role="button" onClick={Add}>
@@ -141,14 +157,12 @@ const InstructorPage = () => {
       <br />
       <button class="button-17" onClick={forward2}>
         Add Your Exam
-        </button>
+      </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={email}>
         Change Email
       </button>
-      <br />
-      <br />
       
       
     </div>

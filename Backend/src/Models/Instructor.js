@@ -34,27 +34,27 @@ const InstructorSchema = new Schema(
     },
     Courses: {
       type: Array,
-      required: true,
+      required: false,
     },
     Rating: {
       type: Number,
-      required: true,
+      required: false,
     },
     Biography: {
       type: String,
       required: false,
     },
     Wallet: {
-      type: Number ,
+      type: Number,
       required: false,
     },
   },
   { timestamps: true }
 );
 
-InstructorSchema.pre("save", async function(next){
+InstructorSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
-  this.Password= await bcrypt.hash(this.Password,salt);
+  this.Password = await bcrypt.hash(this.Password, salt);
 });
 
 const Instructor = mongoose.model("Instructor", InstructorSchema);

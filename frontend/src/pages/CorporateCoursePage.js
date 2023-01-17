@@ -73,10 +73,10 @@ const CorporateViewMyCourses = () => {
             Click after watching the video
           </button></p>
       
-    </div>
+    </div
      
       <button onClick={GetExam}>Get your exam</button>
-    
+  
     
 
       {/* <button onClick={viewMyCourses}>View</button> */}
