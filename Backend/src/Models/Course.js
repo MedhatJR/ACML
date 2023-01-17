@@ -69,6 +69,7 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+  
     Description1: {
       type: String,
       required: true,
