@@ -1,0 +1,39 @@
+
+.certificate *{
+ box-sizing: border-box;
+}
+ .certificate{
+    display:flex;
+    padding:15px;
+}
+
+.certificate .meta{
+    flex-grow:1;
+    padding-right: 15px;
+}
+.certificate .meta input{
+    padding:5px;
+    width: 100%;
+    box-shadow: 0 02px;
+    border-radius:5px;
+}
+
+.certificate #certificateWrapper{
+    box-shadow: 0 0 5px #000;
+    border-radius: 10px;
+    overflow:hidden;
+}
+
+.certificate #certificateWrapper p{
+   
+    margin:0;
+    position:absolute;
+    left: 800px;
+    TOP: 400px;
+    font-size :40pt;
+
+} 
+.certificate #certificateWrapper image{
+   display:block;
+   
+} 

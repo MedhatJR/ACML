@@ -24,6 +24,9 @@ const AdminstratorPage = () => {
   const refund = () => {
     nav("/AdminRefund");
   };
+  const viewproblem = () => {
+    nav("/AdminViewProblems");
+  };
 //   const Add = () => {
 //     nav("/AddPromotion");
 //   };
@@ -62,7 +65,7 @@ const AdminstratorPage = () => {
       </>
       <br />
       <br />
-      <div className="title">Welcome, our beloved Instructor</div>
+      <div className="title">Welcome, our beloved Admin</div>
       <img src={teacher} alt="" className="teacher" />
       <br />
       <br />
@@ -85,6 +88,11 @@ const AdminstratorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={refund}>
         Refund Money
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={viewproblem}>
+       View Reported Problems
       </button>
       <br />
       <br />

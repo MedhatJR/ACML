@@ -1,7 +1,7 @@
 const express = require("express");
 const appRouter = express.Router();
 const Course = require("../Models/Course");
-const Corporate = require("../Models/CorporateTrainee");
+ const Corporate = require("../Models/CorporateTrainee");
 const CorporateTrainee = require("../Models/CorporateTrainee"); ///////Twice????????????
 const cors = require("cors");
 const Exams = require("../Models/Exams");
@@ -10,6 +10,7 @@ const Instructor = require("../Models/Instructor");
 const CorporateExam = require("../Models/CorporateExam");
 const mongoose = require("mongoose");
 const Exam = require("../Models/Exams");
+const Problem = require("../Models/Problem");
 const jwt = require("jsonwebtoken");
 const dote = require("dotenv").config();
 var popup = require("alert");
@@ -108,7 +109,7 @@ appRouter.post("/Corporate_Login", async (req, res) => {
         "secret",
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "24h",
         }
       );
       // save user token
@@ -248,153 +249,7 @@ appRouter.post("/Coporate_submitAnswer", async (req, res) => {
   res.status(200).send("Submitted Answer");
 });
 
-//view his/her grade from the exercise
-appRouter.post("/Coporate_Grade", async (req, res) => {
-  var grade = 0;
-  var final = "";
-  const _id = req.body._id;
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(404).json({ error: "No such id" });
-  }
-  const ans1 = await CorporateExam.findById(_id)
-    .select("Answer1")
-    .select("Answer2");
-  const ques1 = await CorporateExam.findById(_id)
-    .select("Question1")
-    .select("Question2");
-  final = ques1.Question1;
-  console.log(final);
-  if (!ans1) {
-    return res.status(400).json({ error: "No such exam" });
-  }
 
-  Exam.findOne({ Question1: final }, (error, data) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(data);
-
-      if (data.Answer1 == ans1.Answer1) {
-        grade += 1;
-      }
-      console.log(data);
-      if (data.Answer2 == ans1.Answer2) {
-        grade += 1;
-      }
-      res.status(200).send("Grade :" + grade);
-    }
-  })
-    .select("Answer1")
-    .select("Answer2");
-});
-
-//view the questions with the correct solution to view the incorrect answers
-
-appRouter.post("/Coporate_QuestionAnswers", async (req, res) => {
-  var grade = 0;
-  var final = "";
-  const _id = req.body._id;
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(404).json({ error: "No such id" });
-  }
-  const ans1 = await CorporateExam.findById(_id)
-    .select("Answer1")
-    .select("Answer2");
-  const ques1 = await CorporateExam.findById(_id)
-    .select("Question1")
-    .select("Question2");
-  final = ques1.Question1;
-  console.log(final);
-  if (!ans1) {
-    return res.status(400).json({ error: "No such exam" });
-  }
-  Exam.findOne({ Question1: final }, (error, data) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(data);
-
-      if ((data.Answer1 == ans1.Answer1) & (data.Answer2 == ans1.Answer2)) {
-        grade = 2;
-        res
-          .status(200)
-          .send(
-            "Question 1: " +
-              ques1.Question1 +
-              " --> Correct Solution  " +
-              ans1.Answer1 +
-              "   Question 2:" +
-              ques1.Question2 +
-              " --> Correct Solution  " +
-              ans1.Answer2 +
-              " Your Grade:  " +
-              grade
-          );
-      }
-      if ((data.Answer1 != ans1.Answer1) & (data.Answer2 == ans1.Answer2)) {
-        grade = 1;
-        res
-          .status(200)
-          .send(
-            "Question 1: " +
-              ques1.Question1 +
-              "--> Wrong Solution : " +
-              ans1.Answer1 +
-              "( The Correct Solution is:  " +
-              data.Answer1 +
-              ")     Question 2: " +
-              ques1.Question2 +
-              " --> Correct Solution  " +
-              ans1.Answer2 +
-              "  Your Grade:  " +
-              grade
-          );
-      }
-      if ((data.Answer1 == ans1.Answer1) & (data.Answer2 != ans1.Answer2)) {
-        grade = 1;
-        res
-          .status(200)
-          .send(
-            "Question 1: " +
-              ques1.Question1 +
-              " --> Correct Solution  " +
-              ans1.Answer1 +
-              "  Question 2 :" +
-              ques1.Question2 +
-              "--> Wrong Solution  " +
-              ans1.Answer2 +
-              "( The Correct Solution is:  " +
-              data.Answer2 +
-              " ) Your Grade:  " +
-              grade
-          );
-      }
-      if ((data.Answer1 != ans1.Answer1) & (data.Answer2 != ans1.Answer2)) {
-        grade = 0;
-        res
-          .status(200)
-          .send(
-            "Question 1: " +
-              ques1.Question1 +
-              " --> Wrong Solution : " +
-              ans1.Answer1 +
-              "(The Correct Solution is: " +
-              data.Answer1 +
-              " )   Question 2: " +
-              ques1.Question2 +
-              "--> Wrong Solution  " +
-              ans1.Answer2 +
-              "(The Correct Solution is: " +
-              data.Answer2 +
-              ")  Your Grade:  " +
-              grade
-          );
-      }
-    }
-  })
-    .select("Answer1")
-    .select("Answer2");
-});
 appRouter.post("/Corporate_ChangePassword", async (req, res) => {
   const OldPassword = req.body.OldPassword;
   const NewPassword = req.body.NewPassword;
@@ -412,6 +267,47 @@ appRouter.post("/Corporate_ChangePassword", async (req, res) => {
     }
   );
 });
+
+appRouter.post("/Corporate_ReportAProblem", async (req, res) => {
+    const problem = new Problem({
+       Email : req.body.Email,
+       Category: req.body.Category,
+       Description : req.body.Description,
+       Type : req.body.Type,
+       Course : req.body.Course,
+       Status : req.body.Status,
+    });
+    try {
+      Problem.create(problem);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(problem);
+    res.status(200).send("Submitted Problem");
+});
+
+appRouter.get("/Corporate_AllProblems", async (req, res) => {
+  if(!req.body.Email){
+    console.log("All input is required");
+  };
+  // if(!(Problem.find( {
+  //   Username: { $eq: req.body.Username }
+  // }))){
+  //   console.log("There is no a reported problem with this username");
+  // }
+  res.send(
+    await Problem.find( {
+      Email: { $eq: req.body.Email },
+    }).select([
+      "Description",
+      "Type",
+      "Course",
+      "Status",
+   
+    ])
+  );
+});
+
 
 appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   const Username = req.body.Username;
@@ -564,6 +460,220 @@ appRouter.get("/Corporate_view_exam", async (req, res) => {
     ])
   );
 });
+
+//****************************************************MENNAAAAAAAAAAAAAAA****************************** */
+//view his/her grade from the exercise
+appRouter.post("/Coporate_Grade", async (req, res) => {
+  var grade = 0;
+  var final = "";
+  const _id = req.body._id;
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      return res.status(404).json({ error: "No such id" });
+   }
+  const ans1 = await CorporateExam.findById(_id)
+    .select("Answer1")
+    .select("Answer2");
+  const ques1 = await CorporateExam.findById(_id)
+    .select("Question1")
+    .select("Question2");
+  final = ques1.Question1;
+  console.log(final);
+  if (!ans1) {
+    return res.status(400).json({ error: "No such exam" });
+  }
+
+  Exam.findOne({ Question1: final }, (error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+
+      if (data.Answer1 == ans1.Answer1) {
+        grade += 1;
+      }
+      console.log(data);
+      if (data.Answer2 == ans1.Answer2) {
+        grade += 1;
+      }
+      res.status(200).send("Grade :" + grade);
+    }
+  })
+    .select("Answer1")
+    .select("Answer2");
+});
+
+
+//view the questions with the correct solution to view the incorrect answers
+
+appRouter.post("/Corporate_QuestionAnswers", async (req, res) => {
+  var grade = 0;
+  var final = "";
+  const _id = req.body._id;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).json({ error: "No such id" });
+  }
+  const ans1 = await CorporateExam.findById(_id)
+  .select("Answer1")
+  .select("Answer2");
+const ques1 = await CorporateExam.findById(_id)
+  .select("Question1")
+  .select("Question2");
+  final = ques1.Question1;
+  //console.log(final);
+  if (!ans1) {
+    return res.status(400).json({ error: "No such exam" });
+  }
+
+  Exams.find({ Question1: final }, function (error, data) {
+    if (error) {
+      console.log("error");
+    } else {
+      console.log(data);
+
+      if (
+        (data[0].Answer1 == ans1.Answer1) &
+        (data[0].Answer2 == ans1.Answer2)
+      ) {
+        grade = 2;
+        res
+          .status(200)
+          .send(
+            "1. Question 1 is : " + 
+              ques1.Question1 +
+              " The Correct Solution is: ( " +
+              ans1.Answer1 +
+              ")     2. Question 2 is : " +
+              ques1.Question2 +
+              " The Correct Solution is: ( " +
+              ans1.Answer2 +
+              " ),Your Grade:  " +
+              grade
+          );
+      }
+      if (
+        (data[0].Answer1 != ans1.Answer1) &
+        (data[0].Answer2 == ans1.Answer2)
+      ) {
+        grade = 1;
+        res
+          .status(200)
+          .send(
+            "1. Question 1 is : " + 
+              ques1.Question1 +
+              "<--> Your answer is Wrong   : " +
+              ans1.Answer1 +
+              " The Correct Solution is: ( " +
+              data[0].Answer1 +
+              ")     2. Question 2 is : " +
+              ques1.Question2 +
+              " <--> Your answer is Correct.  (" +
+              ans1.Answer2 +
+              " ) , Your Grade in this quiz is :  " +
+              grade
+          );
+      }
+      if ((data[0].Answer1 == ans1.Answer1) & (data[0].Answer2 != ans1.Answer2)
+      ) {
+        grade = 1;
+        res.status(200) .send(
+            "1. Question 1 is : " +
+              ques1.Question1 +
+              " <--> Your answer is Correct. ( " +
+              ans1.Answer1 +
+              ")     2. Question 2 is : " +
+              ques1.Question2 +
+              "<--> Your answer is Wrong   : " +
+              ans1.Answer2 +
+              "( The Correct Solution is:  " +
+              data[0].Answer2 +
+              " ), Your Grade in this quiz is :  " +
+              grade
+          );
+      }
+      if (
+        (data[0].Answer1 != ans1.Answer1) &
+        (data[0].Answer2 != ans1.Answer2)
+      ) {
+        grade = 0;
+        res
+          .status(200)
+          .send(
+            "Question 1: " +
+              ques1.Question1 +
+              "<--> Your answer is Wrong   : " +
+              ans1.Answer1 +
+              "(The Correct Solution is: " +
+              data[0].Answer1 +
+              ")     2. Question 2 is : " +
+              ques1.Question2 +
+              "<--> Your answer is Wrong   : " +
+              ans1.Answer2 +
+              "(The Correct Solution is: (" +
+              data[0].Answer2 +
+              " ), Your Grade in this quiz is :  " +
+              grade
+          );
+      }
+    }
+  })
+    .select("Answer1")
+    .select("Answer2");
+});
+
+//see his/her progress in the course as a percentage of how much of the course has been completed so far
+
+
+//receive a certificate as a PDF after completing the course via email
+const nodemailer = require('nodemailer')
+let mailTransporter = nodemailer.createTransport({
+    service: "gmail",  
+    auth: {
+      user: "mennaabdullahh@gmail.com",
+      pass: process.env.EMAIL_TEST_APP_PSWO
+    }
+})
+appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
+  const { Email } = req.body
+
+  let details = {
+      from: "mennaabdullahh@gmail.com",
+      to: Email,
+      subject: "completing the course",
+      cc: "mennaabdullahh@gmail.com",
+      bcc: "mennaabdullahh@gmail.com",
+      text: "congrats...... here is an attachment of the certificate ",
+      attachments: [
+          { filename: 'certificate.jpg', path: './picture.png' }
+      ]
+  }
+  mailTransporter.sendMail(details, (err) => {
+      if (err) {
+          console.log(err)
+      }
+      else {
+          console.log("email is sent")
+      }
+
+  })
+  res.json({ message: "email is sent" })
+})
+
+//download the certificate as a PDF from the website
+
+//DONE FRONTEND
+
+//write notes while watching the video
+appRouter.post('/corporate_Notes', async (req, res) => {
+  const id = req.body.id
+
+  const corporate = await Corporate.findById(id)
+
+  res.json({ message: corporate.notes })
+})
+//download the notes as a PDF
+
+//*************************************************************MENNA'S END PART*********************************************************** */
+
 appRouter.post("/Corporate_submitAnswer", async (req, res) => {
   const newAnswer = new CorporateExam({
     Question1: req.body.Question1,

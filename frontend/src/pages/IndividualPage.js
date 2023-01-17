@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 import Axios from "axios";
 import "../styles/InstructorPageStyle.css";
@@ -9,11 +8,14 @@ import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
+import { useLocation } from "react-router-dom";
+
 var array = [];
 const IndividualPage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
   const [data, setData] = useState("");
+  // const [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
 
@@ -37,6 +39,9 @@ const IndividualPage = () => {
   };
   const forward3 = () => {
     nav("/IMCQ");
+  };
+  const certificate = () => {
+    nav("/Certificates");
   };
   const viewCourses = () => {
     nav("/AllCourses");
@@ -161,7 +166,13 @@ const IndividualPage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
+      <br />
+      <br />
+      <button onClick={forward3}>View Exam</button>
       {/* <div>{location.state.Email}</div> */}
+      <button class="button-17" role="button" onClick={certificate}>
+        Certificates
+      </button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
+import React, { useState } from "react";
 
 import Home from "./pages/Home";
 
@@ -31,6 +32,7 @@ import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
 import IMCQ from "./pages/IMCQ";
 import CMCQ from "./pages/CMCQ";
+import Terms from "./pages/Terms";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -44,9 +46,11 @@ import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
 
+import Certificates from "./pages/Certificates";
 //import jwt from ' jsonwebtoken'
 import ViewReportedProblems from "./pages/ViewReportedProblems";
 import AdminstratorPage from "./pages/AdminstratorPage";
+import AdminViewProblems from "./pages/AdminViewProblems";
 import AdminAddPromoAllcourses from "./pages/AdminAddPromoAllcourses";
 import AdminAddPromoSeveralcourses from "./pages/AdminAddPromoSeveralcourses";
 import AdminAddPromoSpecificcourse from "./pages/AdminAddPromoSpecificcourse";
@@ -54,26 +58,44 @@ import AdminRefund from "./pages/AdminRefund";
 import AllCourses from "./pages/AllCourses";
 import Pay from "./pages/Pay";
 import InstMyCourses from "./pages/InstMyCourses";
+import useToken from "./useToken";
+// import Header from "./pages/Header";
+import ReportAProblem from "./pages/ReportAProblem";
+
+// function setToken(userToken) {
+//   sessionStorage.setItem('token', JSON.stringify(userToken));
+// }
+
+// function getToken() {
+//   const tokenString = sessionStorage.getItem('token');
+//   const userToken = JSON.parse(tokenString);
+//   return userToken?.token
+// }
 
 function App() {
-  var token;
+  //  var token;
 
-  // if (typeof window !== 'undefined') {
-  //   // Perform localStorage action
-  //    token = localStorage.getItem('token')
-  // }
-  // useEffect(() => {
-  //   // Perform localStorage action
-  //   const token = localStorage.getItem('token')
-  // }, [])
-  //------------------
+  // const { token, setToken } = useToken();
+  // //const token = getToken();
+
+  //   if(!token) {
+  //     return <LogIn setToken={setToken} />
+  //   }
 
   return (
     <>
       <div className="App">
+        {/* <div className="App">
+        <Header />
+    </div> */}
+        {/* <div className="App">
+      <Dropdown placeHolder="Select..." />
+    </div> */}
+
         <BrowserRouter>
           <div className="pages">
             <Routes>
+              <Route path="/Certificates" element={<Certificates />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route
                 path="/IndividualResetEmail"
@@ -85,6 +107,7 @@ function App() {
                 element={<IndividualResetPassword />}
               />
               <Route path="/EnterEmail" element={<EnterEmail />} />
+              <Route path="/ReportAProblem" element={<ReportAProblem />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
               <Route
                 path="/CorporateResetPassword"
@@ -130,6 +153,10 @@ function App() {
                 element={<AdminAddPromoSeveralcourses />}
               />
               <Route
+                path="/AdminViewProblems"
+                element={<AdminViewProblems />}
+              />
+              <Route
                 path="/AdminAddPromoSpecificcourse"
                 element={<AdminAddPromoSpecificcourse />}
               />
@@ -166,8 +193,9 @@ function App() {
               />
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
-              <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/Terms" element={<Terms />} />
+              <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/Pay" element={<Pay />} />
               <Route
                 path="/ViewReportedProblems"

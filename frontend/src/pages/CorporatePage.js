@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
+import CorporateViewMyCourses from "./CorporateViewMyCourses";
 import Axios from "axios";
 import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
@@ -19,15 +19,14 @@ const CorporatePage = () => {
   const nav = useNavigate();
   console.log("Hi");
   const forwardViewMyCourses = () => {
-    nav("/CorporateViewMyCourses", { state: { passedEmail: passedData } });
+    
+     nav("/CorporateViewMyCourses" 
+     , { state: { passedEmail: passedData } });
   };
   const forward4 = () => {
     nav("/CMCQ");
   };
 
-  const ForwardViewMyCourses = () => {
-    nav("/CorporateViewMyCourses");
-  };
   const RateInstructor = () => {
     nav("/RateCorp");
   };
@@ -128,7 +127,7 @@ const CorporatePage = () => {
       ))}
       <br />
       <br />
-      <button className="explore-button" onClick={viewCourses}>
+      <button class="button-17" className="explore-button" onClick={viewCourses}>
         Explore Courses
       </button>
       <br />
@@ -143,7 +142,9 @@ const CorporatePage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward4}>Join the Exam</button>
+      <button class="button-17" onClick={forward4}>
+        Join the Exam
+        </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={RateCourse}>
@@ -159,9 +160,14 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
+      <br/>
+      <br/>
+      <button onClick={forward4}>View Exam</button>
       <div>{location.state.passedEmail}</div>
+      {/* <div>{location.state.passedEmail}</div> */}
     </div>
-  );
-};
+
+  )};
+
 
 export default CorporatePage;

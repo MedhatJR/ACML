@@ -7,8 +7,12 @@ import { useNavigate } from "react-router-dom";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
 import { useLocation } from "react-router-dom";
+import Notes from "./Notes";
+import PdfContainer from './PdfContainer';
 
 var array = [];
+
+
 
 const IndividualViewMyCourses = () => {
   // console.log(wantedtitle[0]);
@@ -38,6 +42,7 @@ const IndividualViewMyCourses = () => {
 
     // setData(response.data[1].Title);
   });
+   
 
   return (
     <div className="IndividualViewCourse">
@@ -124,9 +129,16 @@ const IndividualViewMyCourses = () => {
             {/* <p key={user}>{user.Promotion}</p>
             <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
+          <Notes/>
         </div>
+
+        
       ))}
+
+    
     </div>
+
+    
   );
 };
 

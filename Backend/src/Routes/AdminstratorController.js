@@ -5,6 +5,7 @@ const Adminstrator = require("../Models/Adminstrator");
 const Instructor = require("../Models/Instructor");
 const CorporateTrainee = require("../Models/CorporateTrainee");
 const IndividualTrainee = require("../Models/IndividualTrainee");
+const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const { title, send } = require("process");
 const { isBooleanObject } = require("util/types");
@@ -39,6 +40,7 @@ appRouter.post("/Adminstrator_addinstructor", async (req, res) => {
     Gender: req.body.Gender,
     Courses: req.body.Courses,
     Rating: req.body.Rating,
+    Biography: req.body.Biography,
   });
   try {
     Instructor.create(instructor);
@@ -519,6 +521,54 @@ appRouter.post("/Adminstrator_Refund", async (req, res) => {
       );
     });
   }
+});
+
+// sho8l moataz ==========================================================================================
+
+appRouter.post("/change_status_to_pending", async (req, res) => {
+  const _id = req.body._id;
+  Problem.findOneAndUpdate(
+    { _id: id },
+    { status: "pending" },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log("error");
+      } else {
+        console.log("data");
+        res.status(200).send("problem pending");
+      }
+    }
+  );
+});
+
+appRouter.post("/change_status_to_solved", async (req, res) => {
+  const _id = req.body._id;
+  Problem.findOneAndUpdate(
+    { _id: _id },
+    { status: "solved" },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log("error");
+      } else {
+        console.log("data");
+        res.status(200).send("problem solved");
+      }
+    }
+  );
+});
+
+appRouter.get("/view_problems", async (req, res) => {
+  // const  _id = req.body._id;
+  Problem.find({}, (error, data) => {
+    if (error) {
+      console.log("error");
+    } else {
+      console.log(data.length);
+      res.send(data);
+    }
+  });
 });
 
 module.exports = appRouter;

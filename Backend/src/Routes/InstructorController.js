@@ -2,7 +2,7 @@ const express = require("express");
 const appRouter = express.Router();
 const cors = require("cors");
 appRouter.use(cors());
-
+const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 var nodemailer = require("nodemailer");
@@ -62,6 +62,47 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
       }
     }
   );
+});
+
+appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
+  const problem = new Problem({
+     Email : req.body.Email,
+     Category: "Instructor",
+     Description : req.body.Description,
+     Type : req.body.Type,
+     Course : req.body.Course,
+     Status : "Unseen",
+  });
+  try {
+    Problem.create(problem);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(problem);
+  res.status(200).send("Submitted Problem");
+});
+
+appRouter.get("/Instructor_AllProblems", async (req, res) => {
+  if(!req.body.Email){
+    console.log("All input is required");
+  };
+res.send(
+  await Problem.find( {
+    Email: { $eq: req.body.Email },
+  }).select([
+    "Description",
+    "Type",
+    "Course",
+    "Status",
+ 
+  ])
+);
+});
+
+
+
+appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
+  res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
 
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
@@ -281,6 +322,14 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
   );
 });
 
+
+//********************************************MENNAAAA*************************************************************** */
+//view the price of each course
+appRouter.get("/Instructor_course_price", async (req, res) => {
+  res.send(await Course.find().select(["Price"]));
+});
+
+//filter the courses based on price (price can be FREE)
 appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
   //const Price1 = req.body.Price;
   Course.find(
@@ -296,7 +345,12 @@ appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
     }
   );
 });
+//choose a course from the results and view (but not open) its details including course subtitles, excercises ,
+// total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
 
+
+
+//*************************************************************MENNA'S END PART*********************************************************** */
 appRouter.post("/Instructor_editemail", async (req, res) => {
   const Emailold = req.body.Emailold;
   const Emailnew = req.body.Emailnew;
