@@ -84,6 +84,7 @@ async function loginUser(credentials) {
       }).then((response) => {
         setFinal = response.data;
         nav("/InstructorPage", { state: { Email: Email } });
+        // nav("/Contract", { state: { Email: Email } });
       });
     } else if (C === "Adminstrator") {
       Axios.post("http://localhost:8000/Adminstrator_Login", {
@@ -94,6 +95,7 @@ async function loginUser(credentials) {
         nav("/AdminstratorPage");
       });
 
+      
     }
   };
 
@@ -104,7 +106,7 @@ async function loginUser(credentials) {
       username,
       password
     });
-    setToken(token);
+    // setToken(token);
   }
   return (
     <>

@@ -56,13 +56,13 @@ const InstructorPage = () => {
     nav("/UpdateEmail");
   };
 
-  
   const forward2 = () => {
     nav("/Addexam");
   };
   const viewCourses = () => {
     nav("/AllCourses");
   };
+ 
   return (
     <div className="add">
       <>
@@ -97,6 +97,9 @@ const InstructorPage = () => {
         View Course Ratings
       </button>
       <br />
+      
+      <br />
+      
       <br />
       <button class="button-17" role="button" onClick={viewMyRating}>
         View My Ratings
@@ -138,7 +141,7 @@ const InstructorPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forwardexam}>Add new exam</button>
+      
       
     </div>
   );

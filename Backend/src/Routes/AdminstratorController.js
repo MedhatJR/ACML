@@ -20,6 +20,7 @@ appRouter.post("/Adminstrator_addadminstrator", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    RegisteredCourses:req.body.RegisteredCourses,
   });
   try {
     Adminstrator.create(adminstrator);

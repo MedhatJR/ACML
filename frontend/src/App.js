@@ -33,6 +33,7 @@ import AddExam from "./pages/AddExam";
 import IMCQ from"./pages/IMCQ";
 import CMCQ from"./pages/CMCQ";
 import Terms from "./pages/Terms";
+import AdminAddAdmin from "./pages/AdminAddAdmin";
 
 
 import AddPromotion from "./pages/AddPromotion";
@@ -46,6 +47,7 @@ import IndividualUpdate from "./pages/IndividualUpdate";
 import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
+import AdminAddCORP from "./pages/AdminAddCORP";
 
 import Certificates from"./pages/Certificates";
 //import jwt from ' jsonwebtoken'
@@ -61,6 +63,7 @@ import Pay from "./pages/Pay";
 import useToken from './useToken';
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
+import IndividualWallet from "./pages/IndividualWallet";
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -104,6 +107,14 @@ function App() {
               <Route
                 path="/IndividualResetPassword"
                 element={<IndividualResetPassword />}
+              />
+              <Route path="/AdminAddAdmin"
+                element={<AdminAddAdmin />}
+
+              />
+              <Route path="/AdminAddCORP"
+                element={<AdminAddCORP />}
+              
               />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
@@ -199,6 +210,10 @@ function App() {
               <Route
                 path="/ViewReportedProblems"
                 element={<ViewReportedProblems />}
+              />
+              <Route
+                path="/IndividualWallet"
+                element={<IndividualWallet />}
               />
             </Routes>
           </div>

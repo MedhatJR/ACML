@@ -39,6 +39,9 @@ const IndividualPage = () => {
   const viewCourses = () => {
     nav("/AllCourses");
   };
+  const viewWallet = () => {
+    nav("/IndividualWallet", { state: { passedEmail: passedData } });
+  };
   return (
     <div className="add">
       <>
@@ -70,6 +73,11 @@ const IndividualPage = () => {
         Explore Courses
       </button>
       <br />
+      <button className="button-17" onClick={viewWallet}>
+        My Wallet
+      </button>
+      <br />
+      
       <br />
       <button class="button-17" role="button" onClick={forwardViewMyCourses}>
         My Courses
