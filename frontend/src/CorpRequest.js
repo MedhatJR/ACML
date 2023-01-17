@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 // const category = "CorporateTrainee"
 
 const CorpRequest = () => {
+    const nav = useNavigate();
   var [final, setFinal] = useState("");
   const location = useLocation();
   const passedEmail = location.state.passedEmail;
@@ -27,6 +28,8 @@ const CorpRequest = () => {
       Course: isClickedTitle,
       Status: "pending",
     }).then((response) => {
+        
+        nav("/CorpAllCourses");
       console.log(response);
 
       setFinal(response);
