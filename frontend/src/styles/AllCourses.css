@@ -176,6 +176,44 @@ font-family: Arial, Helvetica, sans-serif;
     margin-top: 20px;
 }
 
+.MyCourse .Subtitles {
+    font-size: 15px;
+    position: absolute;
+    top: 220px;
+    color: gray;
+    margin-left: 850px;
+    padding-left: 10px; 
+    
+}
+
+.MyCourse .exer {
+  font-size: 15px;
+  position: absolute;
+  top: 240px;
+  color: gray;
+  margin-left: 850px;
+  padding-left: 10px;
+}
+
+.MyCourse .HPS {
+font-size: 15px;
+position: absolute;
+top: 260px;
+color: gray;
+margin-left: 850px;
+padding-left: 10px;
+}
+  .MyCourse .Price {
+      font-family:Verdana, Geneva, Tahoma, sans-serif ;
+      text-decoration: line-through;
+      font-weight: bold;
+      position: absolute;
+      left: 490px;
+      bottom: 50px;
+      color: gray;
+  }
+      
+
 .MyCourse .previewVideofilter {
     position: absolute;
     right: 730px;

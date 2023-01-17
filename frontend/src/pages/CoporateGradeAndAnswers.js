@@ -94,7 +94,7 @@ const Certificate = () => {
         <br />
       <div>
         <button  onClick={getGrade} >Get Your Grade</button>
-<p>{userGrade}</p>
+        <p>{userGrade}</p>
         <br />
         <br />
         <button onClick={getUser}>Check Your Answers</button>
@@ -106,8 +106,10 @@ const Certificate = () => {
         <br />
         <button onClick={Certificate}>Get your certificate</button>
         <br></br>
-       
-        <button onClick={certificateEmail}>send certificate via email</button>
+        <br />
+        <br />
+        <br />
+        <button onClick={certificateEmail}>Send your certificate via email</button>
         <br></br>
         <p>{userCer}</p>
 

@@ -8,24 +8,27 @@ import "../styles/addCourse.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var arr = [];
+var arr2 = [];
 var isClickedTitle = "";
 
 
 const Allfilterall = () => {
   const [final, setFinal] = useState("");
   const [price, setPrice] = useState("");
+  const [exercise, setex] = useState("");
   const nav = useNavigate();
 
- const filter = () => {
-      const minRating = document.getElementById("minRating").value;
-  const maxRating = document.getElementById("minRating").value
-  const requiredSubj = document.getElementById("requiredSubj").value
-  const Price = document.getElementById("Price").value
-  
-       Axios.post("http://localhost:8000/instructor_filter_allcourses", {
-        maxRating : maxRating,
-        minRating : minRating,
-        requiredSubj  :requiredSubj,
+
+  const filter = () => {
+    const minRating = document.getElementById("minRating").value;
+    const maxRating = document.getElementById("minRating").value
+    const requiredSubj = document.getElementById("requiredSubj").value
+
+    // setData(response.data[1].Title);
+    Axios.post("http://localhost:8000/instructor_filter_allcourses", {
+      maxRating: maxRating,
+      minRating: minRating,
+      requiredSubj: requiredSubj,
     }).then((response) => {
       console.log(response);
       arr = response.data;
@@ -34,37 +37,42 @@ const Allfilterall = () => {
 
       // setData(response.data[1].Title);
     });
+  };
+
+
+  const filterPrice = () => {
+
+    const Price = document.getElementById("Price").value
 
     Axios.post("http://localhost:8000/Individual_filtercourse_price", {
-      
-      Price  :Price,
-  }).then((response) => {
-    console.log(response);
-    arr = response.data;
-    console.log(arr)
-    setPrice(response);
 
-    // setData(response.data[1].Title);
-  });
-   };
+      Price: Price,
+    }).then((response) => {
+      console.log(response);
+      arr = response.data;
+      console.log(arr)
+      setPrice(response);
 
-   
- const filterPrice = () => {
- 
-const Price = document.getElementById("Price").value
-Axios.post("http://localhost:8000/Individual_filtercourse_price", {
-  
-  Price  :Price,
-}).then((response) => {
-console.log(response);
-arr = response.data;
-console.log(arr)
-setPrice(response);
+      // setData(response.data[1].Title);
+    });
 
-// setData(response.data[1].Title);
-});
-};
-   const buttonPressed = (e) => {
+  };
+
+  // const getexer = () => {
+  //   Axios.post("http://localhost:8000/courses_ex", {
+  //     Course:arr[0].Title,
+  //     }).then((response) => {
+  //        console.log(response.data);
+  //       console.log(arr[0].Title);
+
+  //     arr2 = response.data;
+  //     //console.log(arr)  
+  //     setex(response.data);
+
+  //     // setData(response.data[1].Title);
+  //     });
+  //   };
+  const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
   };
@@ -116,25 +124,25 @@ setPrice(response);
         <br />
         <label>Max Rating : </label>
         <input type="text" name="Rating" id="maxRating" /> <br />
-       
+
 
         <button className="button-17" onClick={filter}>
           Filter Courses
         </button>
         <br />
-     <br />
-     
-      <label>Price : </label>
+        <br />
+
+        <label>Price : </label>
         <input type="text" name="Price" id="Price" /> <br />
         <br />
         <br />
+
         <button className="button-17" onClick={filterPrice}>
           Filter Price
         </button>
-
       </div>
 
-      
+
       {arr.map((user) => (
         //id  = user.Title
         <div className="MyCoursefilter">
@@ -167,10 +175,19 @@ setPrice(response);
             <p key={user} className="Hours">
               {user.Hours} Total Hours
             </p>
-            {/*MENNAAA*******************/ }
+            {/*MENNAAA*******************/}
             <p key={user} className="Subtitles">
-             Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
+              Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
             </p>
+            <p key={user} className="exer">
+
+              Exercise: {user.Exercises}
+            </p>
+            <p key={user} className="HPS">
+
+              Hours per subtitle: {(user.Hours) / 3}
+            </p>
+            {/*MENNAAA*******************/}
             <p key={user} className="Price">
               {user.Price}$
             </p>
@@ -188,7 +205,7 @@ setPrice(response);
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
-            <button className="pay-btn" onClick={reply_click} id = {user.Title}>
+            <button className="pay-btn" onClick={reply_click} id={user.Title}>
               Pay and Enroll
             </button>
           </>

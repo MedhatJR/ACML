@@ -67,6 +67,7 @@ const CorporateViewMyCourses = () => {
         <Notes />
       </div>
       <div>
+       
       <p> You completed {count}% of the course    
        <button onClick={() => setCount(count +(100/30)*10)}>
             Click after watching the video

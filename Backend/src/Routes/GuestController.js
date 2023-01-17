@@ -57,7 +57,7 @@ appRouter.post("/Guest_filtercourse_price", async (req, res) => {
 
 
 //       let location = await fetchJson('https://api.ipdata.co?api-key=ec72d2a2d822f9832a689fbcacdb34e349a0aaeeac84487fb0fd6f80&fields=currency');
-//       let exchange = await fetchJson('https://openexchangerates.org/api/latest.json?app_id=7cc454a028cf40d28802f444280976ec');
+//       let exchange = await fetchJson('https://github.com/samayo/country-json/blob/master/src/country-by-currency-code.json);
 //       console.log("loc", location);
 //       console.log("exc", exchange);
 //       fx.base = exchange.base;

@@ -612,6 +612,15 @@ appRouter.post("/Individual_QuestionAnswers", async (req, res) => {
     .select("Answer2");
 });
 
+//view the questions with the correct solution to view the incorrect answers
+appRouter .post("/Individual_getExamId" , async (req,res)=>{
+
+  const ans = await IndividualExam.find({}).sort({ _id: -1 }).limit(1) ;
+  const data = ans[0]._id;
+  //console.log(ans);
+  res.send(data);
+  
+  }) ;
 //see his/her progress in the course as a percentage of how much of the course has been completed so far
 
 appRouter.post("/Individual_addPaidCourse", async (req, res) => {
@@ -698,7 +707,7 @@ appRouter.post(
         console.log("email is sent");
       }
     });
-    res.json({ message: "email is sent" });
+    res.status(200).send( "email is sent" );
   }
 );
 

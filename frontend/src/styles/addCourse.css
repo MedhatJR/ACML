@@ -153,12 +153,28 @@
       position: absolute;
       top: 220px;
       color: gray;
-      margin-left: 800px;
-     
+      margin-left: 850px;
+      padding-left: 10px; 
       
   }
   
-    
+  .MyCoursefilter .exer {
+    font-size: 15px;
+    position: absolute;
+    top: 240px;
+    color: gray;
+    margin-left: 850px;
+    padding-left: 10px;
+}
+
+.MyCoursefilter .HPS {
+  font-size: 15px;
+  position: absolute;
+  top: 260px;
+  color: gray;
+  margin-left: 850px;
+  padding-left: 10px;
+}
     .MyCoursefilter .Price {
         font-family:Verdana, Geneva, Tahoma, sans-serif ;
         text-decoration: line-through;
@@ -168,6 +184,8 @@
         bottom: 50px;
         color: gray;
     }
+        
+ 
     .MyCoursefilter .Promotion {
         font-size: 13px;
         position: absolute;

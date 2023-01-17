@@ -143,18 +143,14 @@ const CorporatePage = () => {
       <br />
       <br />
       <button class="button-17" onClick={forward4}>
-        Join the Exam
+        Exercises
         </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
       </button>
-      <br />
-      <br />
-      <button class="button-17" role="button" onClick={grade}>
-        Your grades and check your anwsers
-      </button>
+     
       <br />
       <br />
       <button class="button-17" role="button" onClick={change}>
@@ -162,7 +158,6 @@ const CorporatePage = () => {
       </button>
       <br/>
       <br/>
-      <button onClick={forward4}>View Exam</button>
       <div>{location.state.passedEmail}</div>
       {/* <div>{location.state.passedEmail}</div> */}
     </div>

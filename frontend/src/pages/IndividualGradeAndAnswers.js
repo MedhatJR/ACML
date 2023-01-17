@@ -5,15 +5,26 @@ import "../styles/InstructorPageStyle.css";
 import logo from "../Media/Logo.png";
 import teacher from "../Media/teacher.png";
 var answer ="";
+var arr2=[];
 const Individual_GradeAndAnswers = () => {
-
+  const nav = useNavigate();
 
   const [userGrade, setGrade] = useState("");
+  const [userCer, setCer] = useState("");
+ const [userData, setData] = useState("");
   
+const Certificate = () => {
+  nav("/Certificates");
+};
   const getGrade = () => {
     
-    const _id =  document.getElementById("id").value;
-    Axios.post("http://localhost:8000/Individual_Grade", { _id: _id }).then(
+    Axios.post("http://localhost:8000/Individual_getExamId").then( (response) => {
+    
+    arr2 = response.data;
+   
+   } );
+   console.log(arr2);
+    Axios.post("http://localhost:8000/Individual_Grade", { _id: arr2 }).then(
       (response) => {
         // answer = response.data;
         console.log(response.data);
@@ -22,12 +33,14 @@ const Individual_GradeAndAnswers = () => {
       })
 
   };
-  const [userData, setData] = useState("");
+ 
   //console.log("Hello");
   const getUser = () => {
     
-    const _id =  document.getElementById("id").value;
-    Axios.post("http://localhost:8000/Individual_QuestionAnswers", { _id: _id }).then(
+   
+   console.log(arr2);
+
+    Axios.post("http://localhost:8000/Individual_QuestionAnswers", { _id:arr2 }).then(
       (response) => {
         // answer = response.data;
         console.log(response.data);
@@ -37,7 +50,18 @@ const Individual_GradeAndAnswers = () => {
 
   };
 
-
+ 
+  const certificateEmail = () => {
+    
+    Axios.post("http://localhost:8000/Individual_Recieve_Certificate_Via_Email").then(
+      (response) => {
+        // answer = response.data;
+        console.log(response.data);
+        setCer(response.data);
+        //console.log(userData);
+      })
+  
+  };
   return (
     <div className="add">
     <>
@@ -62,22 +86,28 @@ const Individual_GradeAndAnswers = () => {
     <br />
     <br />
     <div>
-
-      <label>
-        Exam ID:
-        <input type="text" name="id" id="id" />
-      </label>
       <br />
         <br />
       <div>
         <button  onClick={getGrade} >Get Your Grade</button>
-
+        <p>{userGrade}</p>
         <br />
         <br />
         <button onClick={getUser}>Check Your Answers</button>
         <br></br>
-        <p>{userGrade}</p>
+        
         <p>{userData}</p>
+
+        <br />
+        <br />
+        <button onClick={Certificate}>Get your certificate</button>
+        <br></br>
+        <br />
+        <br />
+        <br />
+        <button onClick={certificateEmail}>Send your certificate via email</button>
+        <br></br>
+        <p>{userCer}</p>
 
         {/* <div className="return" >
         {answer.map((val) => {
@@ -90,7 +120,7 @@ const Individual_GradeAndAnswers = () => {
 
         </ div> */}
 
-      </div>
+</div>
       </div>
     </div>
   );

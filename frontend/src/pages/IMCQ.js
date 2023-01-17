@@ -20,6 +20,9 @@ const IMCQ = () => {
         }
       );
     };
+    const Yourgrade = () => {
+      nav("/IndividualGradeAndAnswers");
+    };
     const SubmitAnswers = () => {
       const Question1 = document.getElementById("QA1").value;
       const Answer1 = document.getElementById("AA1").value;
@@ -84,6 +87,10 @@ const IMCQ = () => {
 
 
        <button onClick={SubmitAnswers}>Submit Answers</button>
+       <button onClick={Yourgrade} className="btn">
+          Get Grade
+        </button>
+      
        <br />
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
