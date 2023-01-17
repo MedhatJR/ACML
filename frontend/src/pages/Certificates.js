@@ -10,7 +10,7 @@ import  jsPDF  from 'jspdf';
 
 import PdfContainer from './PdfContainer';
 import {exportComponentAsPNG ,exportComponentAsPDF}from "react-component-export-image";
-import emailjs from '@emailjs/browser';
+//import emailjs from '@emailjs/browser';
 
 
 class Certificates extends Component {

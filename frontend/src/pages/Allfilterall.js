@@ -8,6 +8,8 @@ import "../styles/addCourse.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var arr = [];
+var isClickedTitle = "";
+
 
 const Allfilterall = () => {
   const [final, setFinal] = useState("");
@@ -24,14 +26,31 @@ const Allfilterall = () => {
     }).then((response) => {
       console.log(response);
       arr = response.data;
+      console.log(arr)
       setFinal(response);
 
       // setData(response.data[1].Title);
     });
    };
-   const GoToCreditCard = () => {
-    nav("/CreditCardPage");
+   const buttonPressed = (e) => {
+    isClickedTitle = e.target.id; // Get ID of Clicked Element
+    console.log(isClickedTitle);
   };
+
+  function reply_click(clicked_id) {
+    const buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressed);
+    }
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].Title === isClickedTitle) {
+        console.log(arr[i])
+        nav("/Pay", {
+          state: { isClickedTitle: isClickedTitle },
+        });
+      }
+    }
+  }
   return (
     <div className="add">
       <>
@@ -122,7 +141,7 @@ const Allfilterall = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
-            <button className="pay-btn" onClick={GoToCreditCard}>
+            <button className="pay-btn" onClick={reply_click} id = {user.Title}>
               Pay and Enroll
             </button>
           </>

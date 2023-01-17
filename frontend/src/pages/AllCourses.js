@@ -16,8 +16,8 @@ const AllCourses = () => {
   const Register = () => {
     nav("/Register");
   };
-  const LogIn = () => {
-    nav("/LogIn");
+  const filter = () => {
+    nav("/Allfilterall");
   };
 
   // const GoToCreditCard = () => {
@@ -77,6 +77,9 @@ const AllCourses = () => {
           </ul>
         </nav>
       </>
+      <button   onClick={filter}>
+              Filter Courses
+            </button>
       {arr.map((user) => (
         //id  = user.Title
         <div className="MyCourse">
@@ -91,8 +94,8 @@ const AllCourses = () => {
               {user.PreviewLink}
             </p> */}
             <iframe
-              className="previewVideo"
-              width="560"
+              className="previewVideofilter"
+              width="360"
               height="315"
               src={user.PreviewLink}
               title="YouTube video player"
@@ -105,7 +108,8 @@ const AllCourses = () => {
             </p>
             <p key={user} className="subject">
               Subject: {user.Subject}
-            </p>
+            </p><br>
+            </br>
             <p key={user} className="Hours">
               {user.Hours} Total Hours
             </p>

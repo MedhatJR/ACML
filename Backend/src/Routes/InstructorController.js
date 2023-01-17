@@ -109,7 +109,18 @@ appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
 
+
 appRouter.post("/Instructor_addcourse", async (req, res) => {
+ 
+
+     Instructor.find({ Email : req.body.Email }, async(error, data) => {
+      if (error) {
+        res.send(error);
+      } else{ 
+      //res.send(data[0].Username);
+      console.log("gegrhi")
+      }
+ 
   const course = new Course({
     Title: req.body.Title,
     Subtitle: req.body.Subtitle,
@@ -119,36 +130,40 @@ appRouter.post("/Instructor_addcourse", async (req, res) => {
     Subject: req.body.Subject,
     Price: req.body.Price,
     Price_after_promotion: req.body.Price_after_promotion,
-    Instructor: req.body.Instructor,
+    Instructor: data[0].Username,
     Rating: req.body.Rating,
     Hours: req.body.Hours,
     Views: req.body.Views,
     PreviewLink: req.body.PreviewLink,
     SubLink: req.body.SubLink,
-    SubLink: req.body.SubLink1,
-    SubLink: req.body.SubLink2,
+    Description :  req.body.Description,
+    SubLink1: req.body.SubLink1,
+    Description1 :  req.body.Description1,
+    SubLink2: req.body.SubLink2,
+    Description2 :  req.body.Description2,
     Promotion: req.body.Promotion,
     Promotion_valid_for: req.body.Promotion_valid_for,
   });
   try {
     await Course.create(course);
-
+console.log("dfkjbhs")
     //const title = req.body.Title;
     Instructor.findOneAndUpdate(
-      { Lastname: { $eq: req.body.Instructor } },
+      { Username: { $eq: data[0].Username } },
       { $push: { Courses: req.body.Title } },
       function (error, doc) {
         if (error) {
-          res.send("update_Error");
+         res.send("update_Error");
         } else {
-          res.send("Data Inserted");
-          // res.send(doc);
+          //res.send("Data Inserted");
+          res.send(doc);
         }
       }
     );
   } catch (error) {
     res.send("Error");
   }
+})
 });
 
 appRouter.get("/instructor_viewCourses", async (req, res) => {
