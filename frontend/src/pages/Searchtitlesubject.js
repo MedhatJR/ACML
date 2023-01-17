@@ -3,43 +3,40 @@ import { useEffect, useState } from "react";
 
 import Axios from "axios";
 //import "../styles/register.css";
-import "../styles/AllCourses.css";
+//import "../styles/main.css";
+import "../styles/addCourse.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var arr = [];
-var arrTitles = [];
 var isClickedTitle = "";
 
-const AllCourses = () => {
-  const [users, setData] = useState("");
+
+const Searchtitlesubject = () => {
+  const [final, setFinal] = useState("");
+  const [price, setPrice] = useState("");
   const nav = useNavigate();
-  const Register = () => {
-    nav("/Register");
-  };
-  const filter = () => {
-    nav("/Allfilterall");
-  };
-  const search = () => {
-    nav("/searchtitlesubject");
-  };
 
-  // const GoToCreditCard = () => {
-  //   nav("/Pay", { state: { passedTitle: passedTitle } });
-  // };
+ const search = () => {
+      const Title = document.getElementById("title").value;
+      const Subject = document.getElementById("subject").value
+      const Instructor = document.getElementById("instructor").value
+      
 
-  Axios.post("http://localhost:8000/Individual_retrieveCourses").then(
-    (response) => {
+       Axios.post("http://localhost:8000/Corporate_searchCourse", {
+        Title : Title,
+        Subject : Subject,
+        Instructor  :Instructor,
+    }).then((response) => {
       console.log(response);
       arr = response.data;
-      for (var i = 0; i < arr.length; i++) {
-        arrTitles[i] = arr[i].Title;
-      }
-      console.log(arr);
-      setData(arr);
-    }
-  );
+      console.log(arr)
+      setFinal(response);
 
-  const buttonPressed = (e) => {
+      // setData(response.data[1].Title);
+    });
+}
+ 
+   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
   };
@@ -49,16 +46,15 @@ const AllCourses = () => {
     for (let button of buttons) {
       button.addEventListener("click", buttonPressed);
     }
-    for (var i = 0; i < arrTitles.length; i++) {
-      if (arrTitles[i] === isClickedTitle) {
-        // console.log(arrTitles[i]);
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].Title === isClickedTitle) {
+        console.log(arr[i])
         nav("/Pay", {
           state: { isClickedTitle: isClickedTitle },
         });
       }
     }
   }
-
   return (
     <div className="add">
       <>
@@ -80,16 +76,33 @@ const AllCourses = () => {
           </ul>
         </nav>
       </>
-      <button   onClick={filter}>
-              Filter Courses
-            </button>
 
-            <button   onClick={search}>
-              Search for a course
-            </button>
+      <h1></h1>
+      <div className="filterall">
+        <label>Title : </label>
+        <input type="text" name="Subject" id="title" /> <br />
+        <br />
+        <br />
+        <label> Subject : </label>
+        <input type="text" name="Rating" id="subject" /> <br />
+        <br />
+        <label>Instructor : </label>
+        <input type="text" name="Rating" id="instructor" /> <br />
+       
+
+        <button className="button-17" onClick={search}>
+          Search
+        </button>   
+        <br />
+     <br />
+     
+
+      </div>
+
+      
       {arr.map((user) => (
         //id  = user.Title
-        <div className="MyCourse">
+        <div className="MyCoursefilter">
           <>
             <h1 key={user} className="title">
               {user.Title}
@@ -101,8 +114,8 @@ const AllCourses = () => {
               {user.PreviewLink}
             </p> */}
             <iframe
-              className="previewVideofilter"
-              width="360"
+              className="previewVideo"
+              width="350"
               height="315"
               src={user.PreviewLink}
               title="YouTube video player"
@@ -115,10 +128,13 @@ const AllCourses = () => {
             </p>
             <p key={user} className="subject">
               Subject: {user.Subject}
-            </p><br>
-            </br>
+            </p>
             <p key={user} className="Hours">
               {user.Hours} Total Hours
+            </p>
+            {/*MENNAAA*******************/ }
+            <p key={user} className="Subtitles">
+             Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
             </p>
             <p key={user} className="Price">
               {user.Price}$
@@ -137,16 +153,15 @@ const AllCourses = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
-            <button className="pay-btn" id={user.Title} onClick={reply_click}>
+            <button className="pay-btn" onClick={reply_click} id = {user.Title}>
               Pay and Enroll
             </button>
           </>
         </div>
       ))}
-      <br />
-      <br />
+
     </div>
   );
 };
 
-export default AllCourses;
+export default Searchtitlesubject;

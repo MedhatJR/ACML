@@ -38,6 +38,7 @@ import IMCQ from "./pages/IMCQ";
 import CMCQ from "./pages/CMCQ";
 import Terms from "./pages/Terms";
 import AdminAddAdmin from "./pages/AdminAddAdmin";
+import Searchtitlesubject from "./pages/Searchtitlesubject";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -110,6 +111,7 @@ function App() {
               <Route path="/Certificates" element={<Certificates />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route path="/AdminViewRequests" element={<AdminViewRequests />} />
+              <Route path="/Searchtitlesubject" element={<Searchtitlesubject />} />
               <Route
                 path="/IndividualResetEmail"
                 element={<IndividualResetEmail />}
