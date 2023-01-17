@@ -13,6 +13,7 @@ var arr = [];
 var arrTitles = [];
 var arrTitlesRate = [];
 var isClickedTitle = "";
+var passedCategory="";
 var isClickedTitleRate = "";
 
 const CorporateViewMyCourses = () => {

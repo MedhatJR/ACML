@@ -102,6 +102,9 @@ const CorporatePage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
+      <br/>
+      <br/>
+      <button onClick={forward4}>View Exam</button>
       <div>{location.state.passedEmail}</div>
     </div>
   );

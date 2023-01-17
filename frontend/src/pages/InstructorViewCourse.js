@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png"
 import { useLocation } from "react-router-dom";
 var arr = [];
-
+var passedCategory="";
 const InstructorViewCourse = () => {
   //const Instructor = document.getElementById("Iname").value;
   const [users, setData] = useState("");

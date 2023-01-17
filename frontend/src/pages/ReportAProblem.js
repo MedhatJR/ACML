@@ -1,9 +1,9 @@
-import React from "react";
 import { useEffect, useState } from "react";
-
+import React from "react";
 import Axios from "axios";
-import "../styles/register.css";
+import "../styles/InstructorPageStyle.css";
 import { useNavigate } from "react-router-dom";
+import logo from "../Media/Logo.png"
 import { useLocation } from "react-router-dom";
 // import "./Dropdown.css";
 // const category = "CorporateTrainee"
@@ -15,55 +15,54 @@ const ReportAProblem = () => {
   const passedCategory = location.state.passedCategory;
   //const status = "unseen"
   console.log(passedEmail);
-  console.log(passedCategory);
-
-
+  //console.log(passedCategory);
+  
   const report = () => {
     console.log("ama")
     //console.log("Hi");
     // if (passedCategory === "CorporateTrainee") {
-         Axios.post("http://localhost:8000/Corporate_ReportAProblem", {
-          Email: passedEmail,
-          Category: passedCategory,
-          Description: document.getElementById("description").value,
-          Type: document.getElementById("type").value,
-          Course: document.getElementById("course").value,
-          Status: "Unseen",
+    Axios.post("http://localhost:8000/Corporate_ReportAProblem", {
+      Email: passedEmail,
+      Category: passedCategory,
+      Description: document.getElementById("description").value,
+      Type: document.getElementById("type").value,
+      Course: document.getElementById("course").value,
+      Status: "Unseen",
     }).then((response) => {
       console.log(response);
-     
+
       setFinal(response);
 
       // setData(response.data[1].Title);
     });
-      console.log("ewgeron")
-    }
-    // else if (passedCategory === "IndividualTrainee") {
-    //   Axios.post("http://localhost:8000/Individual_ReportAProblem", {
-    //     Email: passedEmail,
-    //     Description: document.getElementById("description"),
-    //     Type: document.getElementById("type"),
-    //     Course: document.getElementById("course"),
-    //   }).then(
-    //     (response) => {
-    //       console.log("hi")
-    //       setFinal=response.data;        }
-    //   );
-    // }
-    // else {
-    //   if (passedCategory === "Instructor") {
-    //     Axios.post("http://localhost:8000/Instructor_ReportAProblem", {
-    //       Email: passedEmail,
-    //       Description: document.getElementById("description"),
-    //       Type: document.getElementById("type"),
-    //       Course: document.getElementById("course"),
-    //     }).then(
-    //       (response) => {
-    //         console.log("hi")
-    //         setFinal=response.data;          }
-    //     );
-    //   }
-    // }
+    console.log("ewgeron")
+  }
+  // else if (passedCategory === "IndividualTrainee") {
+  //   Axios.post("http://localhost:8000/Individual_ReportAProblem", {
+  //     Email: passedEmail,
+  //     Description: document.getElementById("description"),
+  //     Type: document.getElementById("type"),
+  //     Course: document.getElementById("course"),
+  //   }).then(
+  //     (response) => {
+  //       console.log("hi")
+  //       setFinal=response.data;        }
+  //   );
+  // }
+  // else {
+  //   if (passedCategory === "Instructor") {
+  //     Axios.post("http://localhost:8000/Instructor_ReportAProblem", {
+  //       Email: passedEmail,
+  //       Description: document.getElementById("description"),
+  //       Type: document.getElementById("type"),
+  //       Course: document.getElementById("course"),
+  //     }).then(
+  //       (response) => {
+  //         console.log("hi")
+  //         setFinal=response.data;          }
+  //     );
+  //   }
+  // }
   //};
 
 
@@ -86,25 +85,25 @@ const ReportAProblem = () => {
     <div className="ReportProblem">
 
       <h1 class="report">Report a Problem</h1>
-      
-        
-        <label>Type: </label>
-        <input type="text"name="type" id="type" /> <br />
-        <br />
-        <br />
-        <label>Describe the Problem: </label>
-        <input type="text" name="description"  id="description" /> <br />
-        <br />
-        <br />
-        <label>Course: </label>
-        <input type="text" name="course " id="course" /> <br />
-        <br />
-        <br />
-       
-        <button onClick={report}>Submit</button>
-      </div>
-     
-    
+
+      <label>Describe the Problem: </label>
+      <input type="text" name="description" id="description" /> <br />
+      <br />
+      <br />
+      <label>Type: </label>
+      <input type="text" name="type" id="type" /> <br />
+      <br />
+      <br />
+      <label>Course: </label>
+      <input type="text" name="course " id="course" /> <br />
+      <br />
+      <br />
+
+      <button onClick={report}>Submit</button>
+    </div>
+
+
   );
-}
+
+};
 export default ReportAProblem;

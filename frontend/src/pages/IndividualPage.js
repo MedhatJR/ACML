@@ -97,6 +97,9 @@ const IndividualPage = () => {
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
+      <br/>
+      <br/>
+      <button onClick={forward3}>View Exam</button>
       {/* <div>{location.state.Email}</div> */}
     </div>
   );

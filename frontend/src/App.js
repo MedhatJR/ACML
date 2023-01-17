@@ -30,8 +30,10 @@ import Rateindividual from "./pages/Rateindividual";
 import CorpRatecourse from "./pages/CorpRatecourse";
 import Emailsent from "./pages/Emailsent";
 import AddExam from "./pages/AddExam";
-import IMCQ from "./pages/IMCQ";
-import CMCQ from "./pages/CMCQ";
+import IMCQ from"./pages/IMCQ";
+import CMCQ from"./pages/CMCQ";
+import Terms from "./pages/Terms";
+
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -190,8 +192,9 @@ function App() {
               />
               <Route path="/Addexam" element={<AddExam />} />
               <Route path="/IMCQ" element={<IMCQ />} />
-              <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/CMCQ" element={<CMCQ />} />
+              <Route path="/Terms" element={<Terms/>} />
+              <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/Pay" element={<Pay />} />
               <Route
                 path="/ViewReportedProblems"

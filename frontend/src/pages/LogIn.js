@@ -22,24 +22,34 @@ import { Link } from "react-router-dom";
 //  }
 
 const LogIn = () => {
+  const nav = useNavigate();
   //{ setToken }
   var [final, setFinal] = useState("");
   var [username, setUserName] = useState();
   var [password, setPassword] = useState();
+    const forward = () => {
+        nav("/");
+      };
+      const corplogin = () => {
+          nav("/CorporatePage");
+        };
+        const indivilogin = () => {
+          nav("/IndividualPage");
+        };
+        const instlogin = () => {
+          nav("/InstructorPage");
+        };
+        const Terms = () => {
+          nav("/Terms");
+        };
+        const Contract = () => {
+          nav("/Contract");
+        };
 
-  var nav = useNavigate();
-  const forward = () => {
-    nav("/");
-  };
-  const corplogin = () => {
-    nav("/CorporatePage");
-  };
-  const indivilogin = () => {
-    nav("/IndividualPage");
-  };
-  const instlogin = () => {
-    nav("/InstructorPage");
-  };
+
+
+
+
   const login = () => {
     const C = document.getElementById("Category").value;
     const Email = document.getElementById("email").value;
@@ -83,6 +93,7 @@ const LogIn = () => {
         setFinal = response.data;
         nav("/AdminstratorPage");
       });
+
     }
   };
 

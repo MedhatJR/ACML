@@ -34,6 +34,7 @@ const IMCQ = () => {
               this.setFinal(response.data);
 
           });
+          
 
 };
     const back = () => {
@@ -79,9 +80,11 @@ const IMCQ = () => {
         <label>Answer2</label>
         <br />
         <input type="text" name="Course" id="AA2" /> <br />
+        <br />
 
 
        <button onClick={SubmitAnswers}>Submit Answers</button>
+       <br />
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
         ))}

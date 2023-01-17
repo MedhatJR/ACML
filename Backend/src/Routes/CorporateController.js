@@ -1,7 +1,7 @@
 const express = require("express");
 const appRouter = express.Router();
 const Course = require("../Models/Course");
-const Corporate = require("../Models/CorporateTrainee");
+ const Corporate = require("../Models/CorporateTrainee");
 const CorporateTrainee = require("../Models/CorporateTrainee"); ///////Twice????????????
 const cors = require("cors");
 const Exams = require("../Models/Exams");
