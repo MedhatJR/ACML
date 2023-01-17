@@ -10,10 +10,20 @@ import { Link } from "react-router-dom";
 //import setAuthToken from "../Controllers/setAuthToken";
 //import PropTypes from 'prop-types';   
 
+// async function loginUser(credentials) {
+//   return fetch('http://localhost:8000/Corporate_Login', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(credentials)
+//   })
+//     .then(data => data.json())
+//  }
+
 const LogIn = () => {
-    var [final, setFinal] = useState("");
-    const nav = useNavigate();
-    
+  const nav = useNavigate();
+  //{ setToken }
   var [final, setFinal] = useState("");
   var [username, setUserName] = useState();
   var [password, setPassword] = useState();
@@ -137,7 +147,8 @@ const LogIn = () => {
 
       <div className="Register">
         <h1>Please Login</h1>
-        <form className="form" onSubmit={(e) => handleSubmit(e)}>
+        <form className="form" onSubmit={(e) => handleSubmit(e)}
+        >
           <label>Email</label>
           <input type="email" name="Email" id="email" //onChange={e => setUserName(e.target.value)} 
           /> <br />

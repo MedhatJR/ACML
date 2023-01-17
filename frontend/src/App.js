@@ -20,6 +20,7 @@ import IndividualViewMyCourses from "./pages/IndividualViewMyCourses";
 import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
 import CorporateCoursePage from "./pages/CorporateCoursePage";
+import Allfilterall from "./pages/Allfilterall";
 
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
@@ -46,6 +47,7 @@ import IndividualUpdate from "./pages/IndividualUpdate";
 import IndiRatecourse from "./pages/IndiRatecourse";
 import InstrMyRatings from "./pages/InstrMyRatings";
 import InstrCourseRatings from "./pages/InstrCourseRatings";
+import AdminOpenProblem from "./pages/AdminOpenProblem";
 import AdminAddCORP from "./pages/AdminAddCORP";
 import AdminAddI from "./pages/AdminAddI";
 import Certificates from "./pages/Certificates";
@@ -98,12 +100,18 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
+            <Route path="/AdminOpenProblem" element={<AdminOpenProblem />} />
+            <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/Certificates" element={<Certificates />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route
                 path="/IndividualResetEmail"
                 element={<IndividualResetEmail />}
               />
+              <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
+              <Route path="/Allfilterall" element={<Allfilterall />} />
+    
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route
                 path="/IndividualResetPassword"

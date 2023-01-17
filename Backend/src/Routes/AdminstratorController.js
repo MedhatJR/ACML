@@ -511,29 +511,35 @@ appRouter.post("/Adminstrator_Refund", async (req, res) => {
         console.log(y);
       }
 
-      CorporateTrainee.findOneAndUpdate(
-        { Email: Email, Wallet: W },
-        { Wallet: Number(W) + Number(amount) },
-        { new: true },
-        (error, dataaa) => {
-          if (error) {
-            console.log(error);
-          } else {
-            res.send("amount added to this corporate trainee");
-          }
-        }
-      );
-    });
-  }
+
+})
+}
 });
 
 // sho8l moataz ==========================================================================================
-
-appRouter.post("/change_status_to_pending", async (req, res) => {
+appRouter.post("/change_status_to_seen",async(req,res)=>{
   const _id = req.body._id;
   Problem.findOneAndUpdate(
-    { _id: id },
-    { status: "pending" },
+    { _id : _id , Status : "Unseen"},
+    { Status : "seen" },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log('error');
+      } else {
+        console.log('data');
+        res.status(200).send(data);
+      }
+    }
+  );
+});
+
+
+appRouter.post("/change_status_to_pending",async(req,res)=>{
+  const _id = req.body._id;
+  Problem.findOneAndUpdate(
+    { _id : _id },
+    { Status : 'pending' },
     { new: true },
     (error, data) => {
       if (error) {
@@ -563,16 +569,39 @@ appRouter.post("/change_status_to_solved", async (req, res) => {
   );
 });
 
-appRouter.get("/view_problems", async (req, res) => {
-  // const  _id = req.body._id;
-  Problem.find({}, (error, data) => {
-    if (error) {
-      console.log("error");
-    } else {
-      console.log(data.length);
-      res.send(data);
-    }
-  });
+appRouter.get("/view_problems",async(req,res)=>{
+ // const  _id = req.body._id;
+ Problem.find(  {
+  $or: [
+    {  Status: {$eq : "Unseen"} },
+    { Status:  {$eq : "pending"} },
+    { Status:  {$eq : "seen"} },
+  ],
+}, (error, data)=>{
+  if(error){
+    console.log("error");
+  }
+else{
+
+console.log(data.length);
+res.send(data)
+}
+});
+});
+
+appRouter.post("/view_problem",async(req,res)=>{
+   const  _id = req.body._id;
+  Problem.find(  { _id : _id },(error, data)=>{
+   if(error){
+     console.log("error");
+   }
+ else{
+ 
+ console.log(data.length);
+ res.send(data)
+ }
+ });
+
 });
 
 module.exports = appRouter;
