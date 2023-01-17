@@ -21,7 +21,9 @@ import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
 import CorporateCoursePage from "./pages/CorporateCoursePage";
 import Allfilterall from "./pages/Allfilterall";
-import CorpRequest from "./CorpRequest";
+import CorpRequest from "./pages/CorpRequest";
+import AdminViewRequests from "./pages/AdminViewRequests";
+
 
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
@@ -107,6 +109,7 @@ function App() {
               <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
               <Route path="/Certificates" element={<Certificates />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route path="/AdminViewRequests" element={<AdminViewRequests />} />
               <Route
                 path="/IndividualResetEmail"
                 element={<IndividualResetEmail />}

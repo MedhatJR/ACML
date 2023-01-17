@@ -6,6 +6,7 @@ const Instructor = require("../Models/Instructor");
 const CorporateTrainee = require("../Models/CorporateTrainee");
 const IndividualTrainee = require("../Models/IndividualTrainee");
 const Problem = require("../Models/Problem");
+const Requests = require("../Models/Requests");
 const Course = require("../Models/Course");
 const { title, send } = require("process");
 const { isBooleanObject } = require("util/types");
@@ -604,4 +605,55 @@ appRouter.post("/view_problem",async(req,res)=>{
 
 });
 
+appRouter.get("/view_requests",async(req,res)=>{
+  // const  _id = req.body._id;
+  Requests.find(  {
+   $or: [
+     {  Status: {$eq : "pending"} },
+   ],
+ }, (error, data)=>{
+   if(error){
+     console.log("error");
+   }
+ else{
+ 
+ console.log(data.length);
+ res.send(data)
+ }
+ });
+ });
+
+ appRouter.post("/accept_requests",async(req,res)=>{
+  const _id = req.body._id;
+  Requests.findOneAndUpdate(
+    { _id: _id },
+    { Status: "accepted"  , Status : "pending"  },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log("error");
+      } else {
+        console.log(data);
+        res.status(200).send("request accepted");
+      }
+    }
+  );
+ });
+
+ appRouter.post("/reject_requests",async(req,res)=>{
+  const _id = req.body._id;
+  Requests.findOneAndUpdate(
+    { _id: _id , Status : "pending"  },
+    { Status: "rejected" },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log("error");
+      } else { 
+        console.log(data);
+        res.status(200).send("request rejected");
+      }
+    }
+  );
+ });
 module.exports = appRouter;

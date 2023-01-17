@@ -89,3 +89,39 @@ font-family: Arial, Helvetica, sans-serif;
     color: black;
 }
 
+.MyCourserequest .Accept {
+    background-color: rgb(38, 166, 77);
+    color: beige;
+    margin-left: 190px;
+    margin-top: 80px ;
+    margin-left: 600PX;
+}
+.MyCourserequest .Reject  {
+    background-color: rgb(161, 161, 161);
+    color: black;
+    margin-left: 60px;
+    /* margin-bottom: 50px; */
+    position: absolute;
+    left: 350px;
+    top: 265px;
+}
+.MyCourserequest {
+    font-family: Arial, Helvetica, sans-serif;
+        color: black;
+        position: relative;
+        width: 50%;
+        height: 350px;
+        /* background-color: ; */
+        border: 1px solid lightgray;
+        background-color:#F1F1F1 ;
+        
+    }
+    .MyCourserequest .Emailrequest {
+        margin-left: 255PX;
+    }   
+    .MyCourserequest .Courserequest {
+        margin-left: 180PX;
+    }   
+    .MyCourserequest .Statusrequest {
+        margin-left: 180PX;
+    }   
