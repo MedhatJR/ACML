@@ -7,8 +7,12 @@ import { useNavigate } from "react-router-dom";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
 import { useLocation } from "react-router-dom";
+import Notes from "./Notes";
+import PdfContainer from './PdfContainer';
 
 var array = [];
+
+
 
 const IndividualViewMyCourses = () => {
   // console.log(wantedtitle[0]);
@@ -38,6 +42,7 @@ const IndividualViewMyCourses = () => {
 
     // setData(response.data[1].Title);
   });
+   
 
   return (
     <div className="IndividualViewCourse">
@@ -50,7 +55,7 @@ const IndividualViewMyCourses = () => {
               {user.Title}
             </h1>
             <iframe
-              className="video"
+              className="videoPreview"
               width="560"
               height="315"
               src={user.PreviewLink}
@@ -59,11 +64,18 @@ const IndividualViewMyCourses = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
+
             <p key={user} className="subject">
               Subject: {user.Subject}
             </p>
             <p key={user} className="subtitle">
-              Subject: {user.Subtitle}
+              {user.Subtitle}
+            </p>
+            <p key={user} className="subtitle1">
+              {user.Subtitle1}
+            </p>
+            <p key={user} className="subtitle2">
+              {user.Subtitle2}
             </p>
             <p key={user} className="shortsummary">
               {user.Shortsummary}.
@@ -94,12 +106,39 @@ const IndividualViewMyCourses = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
+            <iframe
+              className="videoSub1"
+              width="560"
+              height="315"
+              src={user.SubLink1}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <iframe
+              className="videoSub2"
+              width="560"
+              height="315"
+              src={user.SubLink2}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
             {/* <p key={user}>{user.Promotion}</p>
             <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
+          <Notes/>
         </div>
+
+        
       ))}
+
+    
     </div>
+
+    
   );
 };
 

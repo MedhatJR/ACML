@@ -46,6 +46,16 @@ const LogIn = () => {
           nav("/Contract");
         };
 
+// async function loginUser(credentials) {
+//   return fetch('http://localhost:8000/Corporate_Login', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(credentials)
+//   })
+//     .then(data => data.json())
+//  }
 
 
 
@@ -84,6 +94,7 @@ const LogIn = () => {
       }).then((response) => {
         setFinal = response.data;
         nav("/InstructorPage", { state: { Email: Email } });
+        // nav("/Contract", { state: { Email: Email } });
       });
     } else if (C === "Adminstrator") {
       Axios.post("http://localhost:8000/Adminstrator_Login", {
@@ -94,6 +105,7 @@ const LogIn = () => {
         nav("/AdminstratorPage");
       });
 
+      
     }
   };
 
@@ -111,6 +123,7 @@ const LogIn = () => {
       <div className="add">
         <>
           <nav>
+            
             <img src={logo} className="logo" alt="" />{" "}
             <ul>
               <li>
