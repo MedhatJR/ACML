@@ -1,29 +1,30 @@
-/* *{
+
+.certificate *{
  box-sizing: border-box;
 }
- .App{
+ .certificate{
     display:flex;
     padding:15px;
 }
 
-.App .meta{
+.certificate .meta{
     flex-grow:1;
     padding-right: 15px;
 }
-.App .meta input{
+.certificate .meta input{
     padding:5px;
     width: 100%;
     box-shadow: 0 02px;
     border-radius:5px;
 }
 
-.App #certificateWrapper{
+.certificate #certificateWrapper{
     box-shadow: 0 0 5px #000;
     border-radius: 10px;
     overflow:hidden;
 }
 
-.App #certificateWrapper p{
+.certificate #certificateWrapper p{
    
     margin:0;
     position:absolute;
@@ -32,7 +33,7 @@
     font-size :40pt;
 
 } 
-.App #certificateWrapper image{
+.certificate #certificateWrapper image{
    display:block;
    
-}  */
+} 

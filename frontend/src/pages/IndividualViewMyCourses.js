@@ -147,8 +147,6 @@ const IndividualViewMyCourses = () => {
           </>
         </div>
       ))}
-
-      <div>{location.state.passedEmail}</div>
     </div>
   );
 };
