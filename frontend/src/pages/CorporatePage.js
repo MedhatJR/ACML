@@ -16,7 +16,9 @@ const CorporatePage = () => {
   const nav = useNavigate();
   console.log("Hi");
   const forwardViewMyCourses = () => {
-    nav("/CorporateViewMyCourses", { state: { passedEmail: passedData } });
+    
+     nav("/CorporateViewMyCourses" 
+     , { state: { passedEmail: passedData } });
   };
   const forward4 = () => {
     nav("/CMCQ");
@@ -106,8 +108,10 @@ const CorporatePage = () => {
       <br/>
       <button onClick={forward4}>View Exam</button>
       <div>{location.state.passedEmail}</div>
+      {/* <div>{location.state.passedEmail}</div> */}
     </div>
-  );
-};
+
+  )};
+
 
 export default CorporatePage;

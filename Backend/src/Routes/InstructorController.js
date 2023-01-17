@@ -85,6 +85,11 @@ res.send(
 });
 
 
+
+appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
+  res.send(await Course.find().select(["Title", "Hours", "Rating"]));
+});
+
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
 });
@@ -253,6 +258,14 @@ appRouter.post("/Instructor_filtercourse", async (req, res) => {
   );
 });
 
+
+//********************************************MENNAAAA*************************************************************** */
+//view the price of each course
+appRouter.get("/Instructor_course_price", async (req, res) => {
+  res.send(await Course.find().select(["Price"]));
+});
+
+//filter the courses based on price (price can be FREE)
 appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
   //const Price1 = req.body.Price;
   Course.find(
@@ -268,7 +281,12 @@ appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
     }
   );
 });
+//choose a course from the results and view (but not open) its details including course subtitles, excercises ,
+// total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
 
+
+
+//*************************************************************MENNA'S END PART*********************************************************** */
 appRouter.post("/Instructor_editemail", async (req, res) => {
   const Emailold = req.body.Emailold;
   const Emailnew = req.body.Emailnew;

@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 const IndividualPage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
-  const [final, setFinal] = useState("");
+ // const [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
 
@@ -36,6 +36,8 @@ const IndividualPage = () => {
   const forward3 = () => {
     nav("/IMCQ");
   };
+  const certificate = () => {
+    nav("/Certificates")};
   const viewCourses = () => {
     nav("/AllCourses");
   };
@@ -59,7 +61,7 @@ const IndividualPage = () => {
             </li>
           </ul>
         </nav>
-      </>
+      </> 
       <br />
       <br />
       <div className="title">Welcome, our beloved Trainee</div>
@@ -101,6 +103,10 @@ const IndividualPage = () => {
       <br/>
       <button onClick={forward3}>View Exam</button>
       {/* <div>{location.state.Email}</div> */}
+      <button class="button-17" role="button" onClick={certificate}>
+       Certificates
+      </button>
+      
     </div>
   );
 };
