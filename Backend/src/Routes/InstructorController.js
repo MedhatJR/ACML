@@ -232,16 +232,27 @@ appRouter.post("/Instructor_add", async (req, res) => {
     res.send("Error");
   }
 });
-appRouter.post("/Instructor_filtercourse", async (req, res) => {
-  const minrating = req.body.minrating;
-  const maxrating = req.body.maxrating;
-  const Subject = req.body.Subject;
+appRouter.post("/instructor_filter_allcourses", async (req, res) => {
+  const minRating = req.body.minRating;
+  const maxRating = req.body.maxRating;
+  const requiredSubj = req.body.requiredSubj;
   Course.find(
     {
-      $or: [
-        { Rating: { $gte: minrating, $lte: maxrating } },
-        { Subject: Subject },
-      ],
+     
+        
+          $or: [
+            {
+              $and: [
+                { Rating: { $gte: minRating, $lte: maxRating } },
+
+                { Subject: { $eq: requiredSubj } },
+              ],
+            },
+            { Rating: { $gte: minRating, $lte: maxRating } },
+            { Subject: { $eq: requiredSubj } },
+          ],
+        
+     
     },
     function (err, result) {
       if (err) {

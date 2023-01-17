@@ -6,11 +6,11 @@ import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import LogIn from "./LogIn";
-import "../styles/Star.css";
+//import "../styles/Star.css";
 import { useLocation } from "react-router-dom";
 
 var arr = [];
-var isClickedTitle = "";
+var passed_id = "";
 
 // var id = "";
 
@@ -29,15 +29,14 @@ const AdminViewProblems = () => {
   // nav("/IndividualCoursePage", { state: { passedEmail: passedEmail } });
   Axios.get("http://localhost:8000/view_problems", {
   }).then((response) => {
-    console.log(response);
+   // console.log(response);
     arr = response.data;
     setData(response);
-    console.log(arr);
   });
 
   const buttonPressed = (e) => {
-    isClickedTitle = e.target.id; // Get ID of Clicked Element
-    console.log(isClickedTitle);
+    passed_id = e.target.id; // Get ID of Clicked Element
+    console.log(passed_id);
   };
 
   function reply_click(clicked_id) {
@@ -46,9 +45,15 @@ const AdminViewProblems = () => {
       button.addEventListener("click", buttonPressed);
     }
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i]._id === isClickedTitle) {
+      if (arr[i]._id === passed_id) {
         // console.log(arrTitles[i]);
-        nav("/AdminstratorPage");
+        Axios.post("http://localhost:8000/change_status_to_seen", { _id :passed_id
+     }).then((response) => {
+       // console.log(response);
+      //arr = response.data;
+    setData(response);
+        });
+        nav("/AdminOpenProblem" , {state: { passed_id : arr[i]._id } } );
       }
     }
   }
@@ -90,10 +95,11 @@ const AdminViewProblems = () => {
             <p key={user} className="instructor">
               {user.Status}
             </p>
-
-            <button className="button-17" id={user._id} onClick={reply_click}>
-               View Problem            </button>
+<div className="buttonProblem"> <button  className="button-17" id={user._id} onClick={reply_click}>
+               View Problem            </button></div>
+            
           </>
+          
         </div>
       ))}
 

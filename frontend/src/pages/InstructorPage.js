@@ -136,9 +136,7 @@ const InstructorPage = () => {
       <button class="button-17" role="button" onClick={email}>
         Change Email
       </button>
-      <br />
-      <br />
-      <button onClick={forwardexam}>Add new exam</button>
+      
       
     </div>
   );

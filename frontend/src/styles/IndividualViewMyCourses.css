@@ -15,6 +15,29 @@ font-family: Arial, Helvetica, sans-serif;
 .MyCourse p{
     margin-left: 10px;
 }
+
+
+
+.adminopenproblem {
+    margin-left: 400px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    position: relative;
+    width: 60%;
+    height: 750px;
+    /* background-color: ; */
+    border: 1px solid lightgray;
+    background-color:#F1F1F1 ;
+}
+.adminopenproblem p{
+    margin-left: 40px;
+}
+.adminopenproblem h1{
+    margin-left: 80px;
+}
+
+
+
 .MyCourse .title {
     font-size:35px;
     font-weight: bold;
@@ -55,3 +78,14 @@ font-family: Arial, Helvetica, sans-serif;
     bottom: 20px;
     right: 50px;
 }
+
+.buttonProblem .button-18 {
+    background-color: rgb(38, 166, 77);
+    color: beige;
+    margin-left: 100px;
+}
+.buttonProblem .button-19 {
+    background-color: rgb(161, 161, 161);
+    color: black;
+}
+
