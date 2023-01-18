@@ -6,6 +6,7 @@ const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 var nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 var dbcourses = [];
 
 const Exams = require("../Models/Exams");
@@ -15,6 +16,67 @@ appRouter.get("/Instructor_read", async (req, res) => {
       res.send(error);
     } else res.send(data);
   });
+});
+
+appRouter.post("/Instructor_Register", async (req, res) => {
+  const newuser = ({
+    Username: req.body.Username,
+    Email: req.body.Email,
+    Password: req.body.Password,
+    Country: req.body.Country,
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Gender: req.body.Gender,
+    Wallet: req.body.Wallet,
+  });
+  email = newuser.Email;
+  try {
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Instructor.find({ Email: { $eq: req.body.Email } });
+
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
+    await Instructor.create(newuser);
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
+
+    newuser.token = token;
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 appRouter.post("/Instructor_searchCourse", async (req, res) => {
@@ -66,12 +128,12 @@ appRouter.post("/Instructor_SelectCountry", async (req, res) => {
 
 appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-     Email : req.body.Email,
-     Category: "Instructor",
-     Description : req.body.Description,
-     Type : req.body.Type,
-     Course : req.body.Course,
-     Status : "Unseen",
+    Email: req.body.Email,
+    Category: "Instructor",
+    Description: req.body.Description,
+    Type: req.body.Type,
+    Course: req.body.Course,
+    Status: "Unseen",
   });
   try {
     Problem.create(problem);
@@ -82,13 +144,14 @@ appRouter.post("/Instructor_ReportAProblem", async (req, res) => {
   res.status(200).send("Submitted Problem");
 });
 
-appRouter.get("/Instructor_AllProblems", async (req, res) => {
+appRouter.post("/Instructor_AllProblems", async (req, res) => {
   if(!req.body.Email){
     console.log("All input is required");
   };
 res.send(
   await Problem.find( {
     Email: { $eq: req.body.Email },
+    Category:{ $eq: "Instructor"},
   }).select([
     "Description",
     "Type",
@@ -98,8 +161,6 @@ res.send(
   ])
 );
 });
-
-
 
 appRouter.get("/Instructor_retrieveCourses", async (req, res) => {
   res.send(await Course.find().select(["Title", "Hours", "Rating"]));
@@ -296,26 +357,6 @@ appRouter.post("/instructor_filter", async (req, res) => {
   });
 });
 
-appRouter.post("/Instructor_add", async (req, res) => {
-  const newinstructor = new Instructor({
-    Username: req.body.Username,
-    Email: req.body.Email,
-    Password: req.body.Password,
-    Country: req.body.Country,
-    Firstname: req.body.Firstname,
-    Lastname: req.body.Lastname,
-    Gender: req.body.Gender,
-    Courses: req.body.Courses,
-    Rating: req.body.Rating,
-    Biography: req.body.Biography,
-  });
-  try {
-    Instructor.create(newinstructor);
-    res.send("Data Inserted");
-  } catch (err) {
-    res.send("Error");
-  }
-});
 appRouter.post("/instructor_filter_allcourses", async (req, res) => {
   const minRating = req.body.minRating;
   const maxRating = req.body.maxRating;
@@ -348,7 +389,6 @@ appRouter.post("/instructor_filter_allcourses", async (req, res) => {
   );
 });
 
-
 //********************************************MENNAAAA*************************************************************** */
 //view the price of each course
 appRouter.get("/Instructor_course_price", async (req, res) => {
@@ -373,8 +413,6 @@ appRouter.post("/Instructor_filtercourse_price", async (req, res) => {
 });
 //choose a course from the results and view (but not open) its details including course subtitles, excercises ,
 // total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
-
-
 
 //*************************************************************MENNA'S END PART*********************************************************** */
 appRouter.post("/Instructor_editemail", async (req, res) => {
@@ -547,36 +585,69 @@ appRouter.post("/Instructor_create_exams", async (req, res) => {
 });
 
 appRouter.post("/Instructor_Login", async (req, res) => {
-  const Email = req.body.email;
-  const Password = req.body.Password;
-  Instructor.find({ Email: Email, Password: Password }, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send("loged in");
+  try {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+    if (!(Email && Password)) {
+      res.status(400).send("All input is required");
     }
-  });
+
+    const user = await Instructor.findOne({ Email });
+    console.log(Email);
+    console.log(Password);
+    console.log(user.Email);
+    console.log(user.Password);
+
+    if (user && (await bcrypt.compare(Password, user.Password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, Email },
+        "secret",
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "24h",
+        }
+      );
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    } else {
+      res.status(400).send("Invalid Credentials");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-appRouter.post("/Instructor_Register", async (req, res) => {
-  const newinstructor = new Instructor({
-    Username: req.body.Username,
-    Email: req.body.Email,
-    Password: req.body.Password,
-    Country: req.body.Country,
-    Firstname: req.body.Firstname,
-    Lastname: req.body.Lastname,
-    Gender: req.body.Gender,
-    Courses: req.body.Courses,
-    Rating: req.body.Rating,
-    Biography: req.body.Biography,
+
+
+appRouter.post("/Instructor_FollowUP", async (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "aminmoataz072@gmail.com",
+      pass: "hunnwqvdqtpytwib",
+    },
   });
-  try {
-    Instructor.create(newinstructor);
-    res.send("Data Inserted");
-  } catch (err) {
-    res.send("Error");
-  }
+
+  var mailOptions = {
+    from: "aminmoataz072@gmail.com",
+    to: "aminmoataz072@gmail.com",
+    subject: "Sending Email to rest password",
+    text: `Please Check my report!`,
+    // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log("error");
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send("emailsent");
+    }
+  });
 });
 
 appRouter.post("/Instructor_receiveemail", async (req, res) => {
@@ -605,5 +676,20 @@ appRouter.post("/Instructor_receiveemail", async (req, res) => {
       res.send("emailsent");
     }
   });
+});
+
+appRouter.post("/Instructor_viewMyWallet", async (req, res) => {
+  //data = req.body.Courses;
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
+    if (error) {
+      res.send(error);
+    } else {
+      console.log(data);
+      // username = data[0].Username;
+      //console.log(username);
+      res.send(data);
+    }
+  }).select("Wallet");
 });
 module.exports = appRouter;

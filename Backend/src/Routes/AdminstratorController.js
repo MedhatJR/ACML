@@ -6,35 +6,78 @@ const Instructor = require("../Models/Instructor");
 const CorporateTrainee = require("../Models/CorporateTrainee");
 const IndividualTrainee = require("../Models/IndividualTrainee");
 const Problem = require("../Models/Problem");
+const Requests = require("../Models/Requests");
 const Course = require("../Models/Course");
 const { title, send } = require("process");
 const { isBooleanObject } = require("util/types");
 appRouter.use(cors());
 
 appRouter.post("/Adminstrator_addadminstrator", async (req, res) => {
-  const adminstrator = new Adminstrator({
+  const newuser = ({
     Username: req.body.Username,
-    Password: req.body.Password,
     Email: req.body.Email,
+    Password: req.body.Password,
     Country: req.body.Country,
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
     RegisteredCourses:req.body.RegisteredCourses,
   });
+  email = newuser.Email;
   try {
-    Adminstrator.create(adminstrator);
-    res.send("Data Inserted");
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Adminstrator.find({ Email: { $eq: req.body.Email } });
+
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
+    await Adminstrator.create(newuser);
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
+
+    newuser.token = token;
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
   } catch (err) {
-    res.send("Error");
+    console.log(err);
   }
 });
 
 appRouter.post("/Adminstrator_addinstructor", async (req, res) => {
-  const instructor = new Instructor({
+  const newuser = ({
     Username: req.body.Username,
-    Password: req.body.Password,
     Email: req.body.Email,
+    Password: req.body.Password,
     Country: req.body.Country,
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
@@ -46,16 +89,58 @@ appRouter.post("/Adminstrator_addinstructor", async (req, res) => {
       
     
   });
+  email = newuser.Email;
   try {
-    Instructor.create(instructor);
-    res.send("Instructor Data Inserted");
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Instructor.find({ Email: { $eq: req.body.Email } });
+
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
+    await Instructor.create(newuser);
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
+
+    newuser.token = token;
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
   } catch (err) {
-    res.send("Error");
+    console.log(err);
   }
 });
 
 appRouter.post("/Adminstrator_addcorporatetrainee", async (req, res) => {
-  const corporatetrainee = new CorporateTrainee({
+  const newuser = ({
     Username: req.body.Username,
     Email: req.body.Email,
     Password: req.body.Password,
@@ -63,45 +148,92 @@ appRouter.post("/Adminstrator_addcorporatetrainee", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
-    RegisteredCourses: req.body.RegisteredCourses,
   });
+  email = newuser.Email;
   try {
-    CorporateTrainee.create(corporatetrainee);
-    res.send("Corporate Trainee Data is successfully Inserted");
-  } catch (err) {
-    res.send("Error");
-  }
-});
-appRouter.post("/Individual_Register", async (req, res) => {
-  const newIndividual = new IndividualTrainee({
-    Username: req.body.Username,
-    Email: req.body.Email,
-    Password: req.body.Password,
-    Country: req.body.Country,
-    Firstname: req.body.Firstname,
-    Lastname: req.body.Lastname,
-    Gender: req.body.Gender,
-    RegisteredCourses: req.body.RegisteredCourses,
-  });
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await CorporateTrainee.find({ Email: { $eq: req.body.Email } });
 
-  try {
-    IndividualTrainee.create(newIndividual);
-    res.send("Data Inserted");
+    console.log(oldUser);
+    console.log(email);
+
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
+
+    await CorporateTrainee.create(newuser);
+
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
+
+    newuser.token = token;
+
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
   } catch (err) {
-    res.send("Error");
+    console.log(err);
   }
 });
 
 appRouter.post("/Adminstrator_Login", async (req, res) => {
-  const Email = req.body.email;
-  const Password = req.body.Password;
-  Adminstrator.find({ Email: Email, Password: Password }, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send("loged in");
+  try {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+    if (!(Email && Password)) {
+      res.status(400).send("All input is required");
     }
-  });
+
+    const user = await Corporate.findOne({ Email });
+    console.log(Email);
+    console.log(Password);
+    console.log(user.Email);
+    console.log(user.Password);
+
+    if (user && (await bcrypt.compare(Password, user.Password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, Email },
+        "secret",
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "24h",
+        }
+      );
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    } else {
+      res.status(400).send("Invalid Credentials");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 appRouter.post("/Adminstrator_addpromotion", async (req, res) => {
   const Title = req.body.Title;
@@ -604,4 +736,55 @@ appRouter.post("/view_problem",async(req,res)=>{
 
 });
 
+appRouter.get("/view_requests",async(req,res)=>{
+  // const  _id = req.body._id;
+  Requests.find(  {
+   $or: [
+     {  Status: {$eq : "pending"} },
+   ],
+ }, (error, data)=>{
+   if(error){
+     console.log("error");
+   }
+ else{
+ 
+ console.log(data.length);
+ res.send(data)
+ }
+ });
+ });
+
+ appRouter.post("/accept_requests",async(req,res)=>{
+  const _id = req.body._id;
+  Requests.findOneAndUpdate(
+    { _id: _id },
+    { Status: "accepted"  , Status : "pending"  },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log("error");
+      } else {
+        console.log(data);
+        res.status(200).send("request accepted");
+      }
+    }
+  );
+ });
+
+ appRouter.post("/reject_requests",async(req,res)=>{
+  const _id = req.body._id;
+  Requests.findOneAndUpdate(
+    { _id: _id , Status : "pending"  },
+    { Status: "rejected" },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        console.log("error");
+      } else { 
+        console.log(data);
+        res.status(200).send("request rejected");
+      }
+    }
+  );
+ });
 module.exports = appRouter;

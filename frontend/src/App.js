@@ -11,7 +11,7 @@ import UpdateBiography from "./pages/UpdateBiography";
 import UpdatePassword from "./pages/UpdatePassword";
 import ResetPassword from "./pages/ResetPassword";
 import AddCourse from "./pages/AddCourse";
-import InstructorViewCourse from "./pages/InstructorViewCourse";
+// import InstructorViewCourse from "./pages/InstructorViewCourse";
 import InstructorPage from "./pages/InstructorPage";
 import Individual_GradeAndAnswers from "./pages/IndividualGradeAndAnswers";
 import Coporate_GradeAndAnswers from "./pages/CoporateGradeAndAnswers";
@@ -21,7 +21,8 @@ import CorporateViewMyCourses from "./pages/CorporateViewMyCourses";
 import IndividualCoursePage from "./pages/IndividualCoursePage";
 import CorporateCoursePage from "./pages/CorporateCoursePage";
 import Allfilterall from "./pages/Allfilterall";
-import CorpRequest from "./CorpRequest";
+import CorpRequest from "./pages/CorpRequest";
+import AdminViewRequests from "./pages/AdminViewRequests";
 
 import CourseInstructor from "./pages/CourseInstructor";
 import LogIn from "./pages/LogIn";
@@ -37,6 +38,7 @@ import CMCQ from "./pages/CMCQ";
 import Terms from "./pages/Terms";
 import AdminAddAdmin from "./pages/AdminAddAdmin";
 import IndRequest from "./pages/IndRequest";
+import Searchtitlesubject from "./pages/Searchtitlesubject";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -68,6 +70,8 @@ import InstMyCourses from "./pages/InstMyCourses";
 import useToken from "./useToken";
 // import Header from "./pages/Header";
 import ReportAProblem from "./pages/ReportAProblem";
+import PrevProblems from "./pages/PrevProblems";
+import InstructorWallet from "./pages/InstructorWallet";
 import IndividualWallet from "./pages/IndividualWallet";
 
 // function setToken(userToken) {
@@ -103,25 +107,37 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-            <Route path="/AdminOpenProblem" element={<AdminOpenProblem />} />
-            <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
-              <Route path="/IndividualResetEmail" element={<IndividualResetEmail />} />
+              <Route path="/AdminOpenProblem" element={<AdminOpenProblem />} />
+              <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route
+                path="/IndividualResetEmail"
+                element={<IndividualResetEmail />}
+              />
               <Route path="/Certificates" element={<Certificates />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
+              <Route
+                path="/AdminViewRequests"
+                element={<AdminViewRequests />}
+              />
+              <Route
+                path="/Searchtitlesubject"
+                element={<Searchtitlesubject />}
+              />
               <Route
                 path="/IndividualResetEmail"
                 element={<IndividualResetEmail />}
               />
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route path="/Allfilterall" element={<Allfilterall />} />
-    
+
               <Route path="/IndiRatecourse" element={<IndiRatecourse />} />
               <Route
                 path="/IndividualResetPassword"
                 element={<IndividualResetPassword />}
               />
-              <Route path="/AdminAddAdmin"
-                element={<AdminAddAdmin />}
+              <Route path="/AdminAddAdmin" element={<AdminAddAdmin />} />
+              <Route path="/AdminAddCORP" element={<AdminAddCORP />} />
+              <Route path="/AdminAddI" element={<AdminAddI />} />
 
               />
               <Route path="/AdminAddCORP"
@@ -141,6 +157,7 @@ function App() {
               <Route path="/CorpAllCourses" element={<CorpAllCourses />} />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />
+              <Route path="/PrevProblems" element={<PrevProblems />} />
               <Route path="/CorporateUpdate" element={<CorporateUpdate />} />
               <Route
                 path="/CorporateResetPassword"
@@ -171,10 +188,10 @@ function App() {
               <Route path="/UpdateEmail" element={<UpdateEmail />} />
               <Route path="/view" element={<ViewData />} />
               <Route path="/addCourse" element={<AddCourse />} />
-              <Route
+              {/* <Route
                 path="/InstructorViewCourse"
                 element={<InstructorViewCourse />}
-              />
+              /> */}
               <Route path="/InstructorPage" element={<InstructorPage />} />
               <Route path="/AdminstratorPage" element={<AdminstratorPage />} />
               <Route
@@ -235,11 +252,9 @@ function App() {
                 path="/ViewReportedProblems"
                 element={<ViewReportedProblems />}
               />
-              <Route
-                path="/IndividualWallet"
-                element={<IndividualWallet />}
-              />
+              <Route path="/IndividualWallet" element={<IndividualWallet />} />
               <Route path="/InstMyCourses" element={<InstMyCourses />} />
+              <Route path="/InstructorWallet" element={<InstructorWallet />} />
             </Routes>
           </div>
         </BrowserRouter>

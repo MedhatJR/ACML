@@ -4,20 +4,28 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 //import "../styles/register.css";
 import "../styles/AllCourses.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var arr = [];
+var arrRegistered = [];
+var arrRegisteredTitles = [];
 var arrTitles = [];
 var isClickedTitle = "";
 
 const AllCourses = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
+  const passedReg = location.state.passedReg;
   const Register = () => {
     nav("/Register");
   };
   const filter = () => {
     nav("/Allfilterall");
+  };
+  const search = () => {
+    nav("/searchtitlesubject");
   };
 
   // const GoToCreditCard = () => {
@@ -35,7 +43,22 @@ const AllCourses = () => {
       setData(arr);
     }
   );
+  const reg = () => {
+    Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
+      Email: passedEmail,
+    }).then((response) => {
+      console.log(response);
+      arrRegistered = response.data;
+      for (var i = 0; i < arrRegistered.length; i++) {
+        arrRegisteredTitles[i] = arrRegistered[i].Title;
+      }
+      console.log(arrRegistered + " !!!!!!!!!!!!!!!!!!!!!!!!");
 
+      console.log(arrRegisteredTitles + " !!!!!!!!?????????!!!!!!!");
+      setData(response + " ????????????????");
+    });
+    return arrRegistered;
+  };
   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
@@ -50,7 +73,11 @@ const AllCourses = () => {
       if (arrTitles[i] === isClickedTitle) {
         // console.log(arrTitles[i]);
         nav("/Pay", {
-          state: { isClickedTitle: isClickedTitle },
+          state: {
+            isClickedTitle: isClickedTitle,
+            isClickedPrice: arr[i].Price_after_promotion,
+            isClickedUsername: arr[i].Instructor,
+          },
         });
       }
     }
@@ -79,6 +106,10 @@ const AllCourses = () => {
       </>
       <button   onClick={filter}>
               Filter Courses
+            </button>
+
+            <button   onClick={search}>
+              Search for a course
             </button>
       {arr.map((user) => (
         //id  = user.Title
@@ -113,9 +144,24 @@ const AllCourses = () => {
             <p key={user} className="Hours">
               {user.Hours} Total Hours
             </p>
+                  {/*MENNAAA*******************/}
+                  <p key={user} className="Subtitles">
+              Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
+            </p>
+            <p key={user} className="exer">
+
+              Exercise: {user.Exercises}
+            </p>
+            <p key={user} className="HPS">
+
+              Hours per subtitle: {(user.Hours) / 3}
+            </p>
+            {/*MENNAAA*******************/}
             <p key={user} className="Price">
               {user.Price}$
             </p>
+
+        
             <p key={user} className="Promotion">
               ({user.Promotion}%) OFF
             </p>
@@ -130,9 +176,24 @@ const AllCourses = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
+
             <button className="pay-btn" id={user.Title} onClick={reply_click}>
               Pay and Enroll
             </button>
+
+            {/* {arrRegisteredTitles.map((i) => (
+              <>
+                {user.Title === i ? null : (
+                  <button
+                    className="pay-btn"
+                    id={user.Title}
+                    onClick={reply_click}
+                  >
+                    Pay and Enroll
+                  </button>
+                )}
+              </>
+            ))} */}
           </>
         </div>
       ))}

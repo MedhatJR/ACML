@@ -9,6 +9,7 @@ import teacher from "../Media/teacher.png";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
 import { useLocation } from "react-router-dom";
+var category="IndividualTrainee";
 
 var array = [];
 const IndividualPage = () => {
@@ -34,6 +35,9 @@ const IndividualPage = () => {
   const change = () => {
     nav("/IndividualUpdate");
   };
+  const reports = () => {
+    nav("/PrevProblems", {state:{Category: category, passedEmail: passedData }});
+  };
   const grade = () => {
     nav("/IndividualGradeAndAnswers");
   };
@@ -44,7 +48,7 @@ const IndividualPage = () => {
     nav("/Certificates");
   };
   const viewCourses = () => {
-    nav("/AllCourses");
+    nav("/AllCourses", { state: { passedEmail: passedData } });
   };
   const viewWallet = () => {
     nav("/IndividualWallet", { state: { passedEmail: passedData } });
@@ -153,7 +157,7 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward3}>Join the Exam</button>
+      <button onClick={forward3}>Exercises</button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={Rate}>
@@ -164,11 +168,7 @@ const IndividualPage = () => {
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
       </button>
-      <br />
-      <br />
-      <button class="button-17" role="button" onClick={grade}>
-        Your grades and check your anwsers
-      </button>
+      
       <br />
       <br />
       <button class="button-17" role="button" onClick={change}>
@@ -176,11 +176,9 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward3}>View Exam</button>
+     
       {/* <div>{location.state.Email}</div> */}
-      <button class="button-17" role="button" onClick={certificate}>
-        Certificates
-      </button>
+    
     </div>
   );
 };

@@ -9,6 +9,8 @@ import teacher from "../Media/teacher.png";
 import { useLocation } from "react-router-dom";
 import video from "../Media/tv.png";
 import eye from "../Media/views.png";
+
+var category="CorporateTrainee";
 var array = [];
 
 const CorporatePage = () => {
@@ -35,6 +37,9 @@ const CorporatePage = () => {
   };
   const change = () => {
     nav("/CorporateUpdate");
+  };
+  const reports = () => {
+    nav("/PrevProblems", {state:{Category: category, passedEmail: passedData }});
   };
   const grade = () => {
     nav("/CoporateGradeAndAnswers");
@@ -137,24 +142,25 @@ const CorporatePage = () => {
       </button>
       <br />
       <br />
+      <button class="button-17" role="button" onClick={reports}>
+        ALL Reports
+      </button>
+      <br />
+      <br />
       <button class="button-17" role="button" onClick={RateInstructor}>
         Rate An Instructor
       </button>
       <br />
       <br />
       <button class="button-17" onClick={forward4}>
-        Join the Exam
+        Exercises
         </button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
       </button>
-      <br />
-      <br />
-      <button class="button-17" role="button" onClick={grade}>
-        Your grades and check your anwsers
-      </button>
+     
       <br />
       <br />
       <button class="button-17" role="button" onClick={change}>
@@ -162,7 +168,6 @@ const CorporatePage = () => {
       </button>
       <br/>
       <br/>
-      <button onClick={forward4}>View Exam</button>
       <div>{location.state.passedEmail}</div>
       {/* <div>{location.state.passedEmail}</div> */}
     </div>

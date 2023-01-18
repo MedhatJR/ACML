@@ -8,27 +8,24 @@ import "../styles/addCourse.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 var arr = [];
-var arr2 = [];
 var isClickedTitle = "";
 
 
-const Allfilterall = () => {
+const Searchtitlesubject = () => {
   const [final, setFinal] = useState("");
   const [price, setPrice] = useState("");
-  const [exercise, setex] = useState("");
   const nav = useNavigate();
 
+ const search = () => {
+      const Title = document.getElementById("title").value;
+      const Subject = document.getElementById("subject").value
+      const Instructor = document.getElementById("instructor").value
+      
 
-  const filter = () => {
-    const minRating = document.getElementById("minRating").value;
-    const maxRating = document.getElementById("minRating").value
-    const requiredSubj = document.getElementById("requiredSubj").value
-
-    // setData(response.data[1].Title);
-    Axios.post("http://localhost:8000/instructor_filter_allcourses", {
-      maxRating: maxRating,
-      minRating: minRating,
-      requiredSubj: requiredSubj,
+       Axios.post("http://localhost:8000/Corporate_searchCourse", {
+        Title : Title,
+        Subject : Subject,
+        Instructor  :Instructor,
     }).then((response) => {
       console.log(response);
       arr = response.data;
@@ -37,42 +34,9 @@ const Allfilterall = () => {
 
       // setData(response.data[1].Title);
     });
-  };
-
-
-  const filterPrice = () => {
-
-    const Price = document.getElementById("Price").value
-
-    Axios.post("http://localhost:8000/Individual_filtercourse_price", {
-
-      Price: Price,
-    }).then((response) => {
-      console.log(response);
-      arr = response.data;
-      console.log(arr)
-      setPrice(response);
-
-      // setData(response.data[1].Title);
-    });
-
-  };
-
-  // const getexer = () => {
-  //   Axios.post("http://localhost:8000/courses_ex", {
-  //     Course:arr[0].Title,
-  //     }).then((response) => {
-  //        console.log(response.data);
-  //       console.log(arr[0].Title);
-
-  //     arr2 = response.data;
-  //     //console.log(arr)  
-  //     setex(response.data);
-
-  //     // setData(response.data[1].Title);
-  //     });
-  //   };
-  const buttonPressed = (e) => {
+}
+ 
+   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);
   };
@@ -115,34 +79,27 @@ const Allfilterall = () => {
 
       <h1></h1>
       <div className="filterall">
-        <label>Subject : </label>
-        <input type="text" name="Subject" id="requiredSubj" /> <br />
+        <label>Title : </label>
+        <input type="text" name="Subject" id="title" /> <br />
         <br />
         <br />
-        <label>Min Rating : </label>
-        <input type="text" name="Rating" id="minRating" /> <br />
+        <label> Subject : </label>
+        <input type="text" name="Rating" id="subject" /> <br />
         <br />
-        <label>Max Rating : </label>
-        <input type="text" name="Rating" id="maxRating" /> <br />
+        <label>Instructor : </label>
+        <input type="text" name="Rating" id="instructor" /> <br />
+       
 
+        <button className="button-17" onClick={search}>
+          Search
+        </button>   
+        <br />
+     <br />
+     
 
-        <button className="button-17" onClick={filter}>
-          Filter Courses
-        </button>
-        <br />
-        <br />
-
-        <label>Price : </label>
-        <input type="text" name="Price" id="Price" /> <br />
-        <br />
-        <br />
-
-        <button className="button-17" onClick={filterPrice}>
-          Filter Price
-        </button>
       </div>
 
-
+      
       {arr.map((user) => (
         //id  = user.Title
         <div className="MyCoursefilter">
@@ -175,19 +132,10 @@ const Allfilterall = () => {
             <p key={user} className="Hours">
               {user.Hours} Total Hours
             </p>
-            {/*MENNAAA*******************/}
+            {/*MENNAAA*******************/ }
             <p key={user} className="Subtitles">
-              Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
+             Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
             </p>
-            <p key={user} className="exer">
-
-              Exercise: {user.Exercises}
-            </p>
-            <p key={user} className="HPS">
-
-              Hours per subtitle: {(user.Hours) / 3}
-            </p>
-            {/*MENNAAA*******************/}
             <p key={user} className="Price">
               {user.Price}$
             </p>
@@ -205,7 +153,7 @@ const Allfilterall = () => {
             <p key={user} className="Rating">
               {user.Rating}⭐'s
             </p>
-            <button className="pay-btn" onClick={reply_click} id={user.Title}>
+            <button className="pay-btn" onClick={reply_click} id = {user.Title}>
               Pay and Enroll
             </button>
           </>
@@ -216,4 +164,4 @@ const Allfilterall = () => {
   );
 };
 
-export default Allfilterall;
+export default Searchtitlesubject;

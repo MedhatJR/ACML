@@ -8,7 +8,6 @@ import logo from "../Media/Logo.png";
 import { ToastContainer, toast } from "react-toastify";
 
 var pop = "Registration successful";
-var type = "";
 // const Checkbox = ({ label }) => {
 //   const [isChecked, setIsChecked] = useState(false);
 //   return (
@@ -48,14 +47,13 @@ const Register = () => {
     const Firstname = document.getElementById("fn").value;
     const Lastname = document.getElementById("ln").value;
     const Gender = document.getElementById("g").value;
-    type = document.getElementById("type").value;
+    const type = document.getElementById("type").value;
     var RegisteredCourses = [];
     var Courses = [];
     var Rating = 0;
     var Biography = "";
 
-    console.log("Hi2");
-    if (type === "Individual Trainee") {
+    if (type === "IndividualTrainee") {
       console.log("ana individual");
       Axios.post("http://localhost:8000/Individual_Register", {
         Username: Username,
@@ -65,45 +63,32 @@ const Register = () => {
         Firstname: Firstname,
         Lastname: Lastname,
         Gender: Gender,
-        RegisteredCourses: RegisteredCourses,
+        Wallet: 0,
       }).then((response) => {
         console.log(response.data);
-
-        setFinal = response.data;
-      });
-    } else if (type === "Instructor") {
-      console.log("ana instructor");
-      Axios.post("http://localhost:8000/Adminstrator_addinstructor", {
-        Username: Username,
-        Email: Email,
-        Password: Password,
-        Country: Country,
-        Firstname: Firstname,
-        Lastname: Lastname,
-        Gender: Gender,
-        Courses: Courses,
-        Rating: Rating,
-        //Biography: Biography,
-      }).then((response) => {
-        console.log(response.data);
-        console.log("added fel db");
+        console.log(response);
         setFinal = response.data;
       });
     } else {
-      Axios.post("http://localhost:8000/Adminstrator_addcorporatetrainee", {
-        Username: Username,
-        Email: Email,
-        Password: Password,
-        Country: Country,
-        Firstname: Firstname,
-        Lastname: Lastname,
-        Gender: Gender,
-        RegisteredCourses: RegisteredCourses,
-      }).then((response) => {
-        console.log(response.data);
-
-        setFinal = response.data;
-      });
+      if (type === "Instructor") {
+        console.log("ana instructor");
+        Axios.post("http://localhost:8000/Instructor_Register", {
+          Username: Username,
+          Email: Email,
+          Password: Password,
+          Country: Country,
+          Firstname: Firstname,
+          Lastname: Lastname,
+          Gender: Gender,
+          Wallet: 0,
+          //Biography: Biography,
+        }).then((response) => {
+          console.log(response.data);
+          console.log("added fel db");
+          setFinal = response.data;
+          contract();
+        });
+      }
     }
   };
 
@@ -201,7 +186,7 @@ const Register = () => {
         <input type="text" name="Gender" id="g" /> <br />
         <label>Type</label>
         <br />
-        <select name="type" id="type">
+        <input type="text" name="type" id="type" /> <br />
         <br />
         <br />
           <option value="Individual" id="Individual">
@@ -232,17 +217,13 @@ const Register = () => {
   
     <br></br>
      
+        <br /> 
+                    <a href="/Terms">I hereby agree to the terms and conditions</a>
+<br/>
+<br/>
         <button
-          onClick={() => {
-            if (type === "Instructor") {
-              console.log("hu");
-              contract();
-
-              console.log("Registered!!!");
-            } else {
-              addData();
-            }
-          }}
+          onClick={
+            addData}
         >
            
          

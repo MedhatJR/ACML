@@ -479,6 +479,16 @@ appRouter.get("/Corporate_view_exam", async (req, res) => {
 });
 
 //****************************************************MENNAAAAAAAAAAAAAAA****************************** */
+
+//
+appRouter.post("/courses_ex",async(req,res)=>{
+  const course = await Exam.find({ Course: { $eq: req.body.Course } }).select("Question1").select("Question2");
+  console.log(course);
+res.status(200).send("Exercise 1 :" +course[0].Question1 +"     " +
+"Exercise 2: " + course[0].Question2 )
+
+  
+});
 //view his/her grade from the exercise
 appRouter.post("/Coporate_Grade", async (req, res) => {
   var grade = 0;
@@ -670,7 +680,7 @@ appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
       bcc: "mennaabdullahh@gmail.com",
       text: "congrats...... here is an attachment of the certificate ",
       attachments: [
-          { filename: 'certificate.jpg', path: './picture.png' }
+          { filename: 'certificate.pdf', path: './Certificate .pdf' }
       ]
   }
   mailTransporter.sendMail(details, (err) => {

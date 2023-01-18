@@ -36,6 +36,9 @@ const AdminstratorPage = () => {
   const AdminAddI = () => {
     nav("/AdminAddI");
   };
+  const ViewRequests = () => {
+    nav("/AdminViewRequests");
+  };
 //   const Add = () => {
 //     nav("/AddPromotion");
 //   };
@@ -118,6 +121,11 @@ const AdminstratorPage = () => {
       <br />
       <button class="button-17" role="button" onClick={AdminAddI}>
        Add instructor
+      </button>
+      <br />
+      <br />
+      <button class="button-17" role="button" onClick={ViewRequests}>
+       View Requests
       </button>
       <br />
       <br />

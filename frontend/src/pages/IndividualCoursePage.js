@@ -8,13 +8,9 @@ import video from "../Media/tv.png";
 import eye from "../Media/views.png";
 import { useLocation } from "react-router-dom";
 import Notes from "./Notes";
-import PdfContainer from './PdfContainer';
-
-
+import PdfContainer from "./PdfContainer";
 
 var array = [];
-
-
 
 const IndividualViewMyCourses = () => {
  
@@ -47,19 +43,15 @@ const IndividualViewMyCourses = () => {
   // const Exam = () => {
   //   nav("ICMCQ");
   // };
-  
-const GetExam = () => {
-  nav("/IMCQ");
-};
-      <div>
-        You finished {count}% of the course.
-        <button onClick={() => setCount( count +(100 /3) )}>
-          Click after watching the video
-        </button>
-
-        
-      </div>
-
+  const GetExam = () => {
+    nav("/IMCQ");
+  };
+  <div>
+    You finished {count}% of the course.
+    <button onClick={() => setCount(count + 100 / 3)}>
+      Click after watching the video
+    </button>
+  </div>;
 
   Axios.post("http://localhost:8000/Individual_retrieveMyCourseData", {
     Email: passedEmail,
@@ -76,7 +68,6 @@ const GetExam = () => {
 
     // setData(response.data[1].Title);
   });
-   
 
   return (
     <div className="IndividualViewCourse">
@@ -84,17 +75,17 @@ const GetExam = () => {
         <Notes />
       </div>
       <div>
-      <p> You completed {count}% of the course    
-       <button onClick={() => setCount(count +(100/30)*10)}>
+        <p>
+          {" "}
+          You completed {count}% of the course
+          <button onClick={() => setCount(count + (100 / 30) * 10)}>
             Click after watching the video
-          </button></p>
-         
-      
-    </div>
-     
+          </button>
+        </p>
+      </div>
+
       <button onClick={GetExam}>Get your exam</button>
-    
-    
+
       <br />
       <br />
       
@@ -125,11 +116,20 @@ const GetExam = () => {
             <p key={user} className="subtitle">
               {user.Subtitle}
             </p>
+            <p key={user} className="description">
+              {user.Description}
+            </p>
             <p key={user} className="subtitle1">
               {user.Subtitle1}
             </p>
+            <p key={user} className="description1">
+              {user.Description1}
+            </p>
             <p key={user} className="subtitle2">
               {user.Subtitle2}
+            </p>
+            <p key={user} className="description2">
+              {user.Description2}
             </p>
             <p key={user} className="shortsummary">
               {user.Shortsummary}.
@@ -183,16 +183,9 @@ const GetExam = () => {
             {/* <p key={user}>{user.Promotion}</p>
             <p key={user}>{user.Promotion_valid_for}</p> */}
           </>
-        
         </div>
-
-        
       ))}
-
-    
     </div>
-
-    
   );
 };
 
