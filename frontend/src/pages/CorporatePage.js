@@ -152,11 +152,7 @@ const CorporatePage = () => {
       </button>
       <br />
       <br />
-      <button class="button-17" onClick={forward4}>
-        Exercises
-        </button>
-      <br />
-      <br />
+     
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
       </button>
