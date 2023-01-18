@@ -8,6 +8,7 @@ const Instructor = require("../Models/Instructor");
 var nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 var dbcourses = [];
+const bcrypt = require("bcrypt");
 
 const Exams = require("../Models/Exams");
 appRouter.get("/Instructor_read", async (req, res) => {
@@ -289,13 +290,26 @@ appRouter.post("/instructor_viewRatings", async (req, res) => {
 });
 
 appRouter.post("/instructor_viewCourseRatings", async (req, res) => {
-  Course.find({ Instructor: req.body.Instructor }, (error, data) => {
+  var username = "";
+  Instructor.find({ Email: req.body.Email }, (error, data) => {
     if (error) {
       res.send(error);
-    } else res.send(data);
-  }).select(["Title", "Rating"]);
+    } else {
+      console.log(data);
+      username = data[0].Username;
+      console.log(username);
+    }
+    Course.find({ Instructor: username }, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else res.send(data);
+    }).select([
+      "Title",
+      "Rating",
+    ]);
+  });
 });
-
+["Title", "Rating"]
 appRouter.get("/instructor_search", async (req, res) => {
   //data = req.body.Courses;
   Course.find(

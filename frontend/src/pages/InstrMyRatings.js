@@ -5,6 +5,7 @@ import Axios from "axios";
 //import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import { useLocation } from "react-router-dom";
 var arr = [];
 var arrTitles = [];
 var wantedtitle = "";
@@ -13,11 +14,12 @@ var wantedtitle = "";
 const InstrMyRatings = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
 
   const ViewMyRatings = () => {
-    var email = document.getElementById("email").value;
     Axios.post("http://localhost:8000/instructor_viewRatings", {
-      Email: email,
+      Email: passedEmail,
     }).then((response) => {
       console.log(response);
       arr = response.data;
@@ -47,10 +49,6 @@ const InstrMyRatings = () => {
           </li>
         </ul>
       </nav>
-      <label>Your Email</label>
-      <input name="email" id="email" type="email" />
-      <br />
-      <br/>
       <br/>  
       <button onClick={ViewMyRatings}> View My Ratings</button>
       <br/>

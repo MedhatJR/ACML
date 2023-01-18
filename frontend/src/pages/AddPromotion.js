@@ -4,13 +4,17 @@ import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png"
+import { useLocation } from "react-router-dom";
 
 const AddPromotion = () => {
+  
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
   //const Instructor = document.getElementById("Iname").value;
   const [users, setData] = useState("");
   const nav = useNavigate();
-
   const Add = () => {
+    
     Axios.post("http://localhost:8000/Instructor_addpromotion", {
         Title: document.getElementById("CourseTitle").value,
         Promotion: document.getElementById("Promotion").value,
@@ -26,7 +30,7 @@ const AddPromotion = () => {
   };
 
   const back = () => {
-    nav("/InstructorPage");
+    nav("/InstructorPage",{state:{passedEmail:passedEmail}});
   };
 
 
@@ -65,17 +69,15 @@ const AddPromotion = () => {
             <br />
             <label> Enter The Original Price</label>
             <input type="text" name="OriginalPrice" id="OriginalPrice" /> <br />
-            <br />
-            <br />
-      
-       <button onClick={back} className="btn">
-        {" "}
-        back
-      </button>
       <br/>
       <br/>
       <button onClick={Add} className="btn">Confirm Promotion</button>
       <br />
+      <br />
+      <button onClick={back} className="btn">
+        {" "}
+        back
+      </button>
       
      
 

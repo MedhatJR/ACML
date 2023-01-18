@@ -12,6 +12,7 @@ var category="Instructor";
 const InstructorPage = () => {
   const location = useLocation();
   const passedData = location.state.Email;
+ const ppassedData = location.state.passedEmail;
   var [final, setFinal] = useState("");
   const nav = useNavigate();
   console.log("Hi");
@@ -37,35 +38,35 @@ const InstructorPage = () => {
     nav("/AddCourse", { state: { passedEmail: passedData } });
   };
   const viewMyRating = () => {
-    nav("/InstrMyRatings");
+    nav("/InstrMyRatings",{state:{passedEmail:passedData}});
   };
   const viewCourseRating = () => {
-    nav("/InstrCourseRatings");
+    nav("/InstrCourseRatings",{state:{passedEmail:passedData}});
   };
   // const forwardView = () => {
   //   nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
   // };
   const Add = () => {
-    nav("/AddPromotion");
+    nav("/AddPromotion",{state:{Category: category,passedEmail: passedData}});
   };
   const reports = () => {
     nav("/PrevProblems",{state:{Category: category,passedEmail: passedData}});
   };
   const Change = () => {
-    nav("/UpdatePassword");
+    nav("/UpdatePassword",{state:{Category: category,passedEmail: passedData}});
   };
   const Biography = () => {
-    nav("/UpdateBiography");
+    nav("/UpdateBiography",{state:{Category: category,passedEmail: passedData}});
   };
   const email = () => {
-    nav("/UpdateEmail");
+    nav("/UpdateEmail",{state:{Category: category,passedEmail: passedData}});
   };
 
   const forward2 = () => {
-    nav("/Addexam");
+    nav("/Addexam",{state:{Category: category,passedEmail: passedData}});
   };
   const viewCourses = () => {
-    nav("/AllCourses");
+    nav("/AllCourses", { state: { passedEmail: passedData }});
   };
   const MyCourses = () => {
     nav("/InstMyCourses", { state: { passedEmail: passedData } });

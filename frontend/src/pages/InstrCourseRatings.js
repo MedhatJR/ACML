@@ -5,6 +5,7 @@ import Axios from "axios";
 import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
+import { useLocation } from "react-router-dom";
 var arr = [];
 var arrTitles = [];
 var wantedtitle = "";
@@ -13,11 +14,12 @@ var wantedtitle = "";
 const InstrCourseRatings = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
 
   const ViewCourseRatings = () => {
-    var Username = document.getElementById("myName").value;
     Axios.post("http://localhost:8000/instructor_viewCourseRatings", {
-      Instructor: Username,
+      Email: passedEmail,
     }).then((response) => {
       console.log(response);
       arr = response.data;
@@ -42,7 +44,7 @@ const InstrCourseRatings = () => {
         <img src={logo} className="logo" alt="" />{" "}
         <ul>
           <li>
-            <a href="">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
             <a href="#news">News</a>
@@ -55,9 +57,6 @@ const InstrCourseRatings = () => {
           </li>
         </ul>
       </nav>
-      <label>Your Username</label>
-      <input name="myUsername" id="myName" type="text" />
-      <br />
       <button onClick={ViewCourseRatings} className="button-17">
         View My Courses
       </button>
