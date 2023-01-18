@@ -57,7 +57,6 @@ const CorpAllCourses = () => {
         nav("/CorpRequest", {
           state: { passedEmail: passedEmail, isClickedTitle: isClickedTitle },
         });
-        break;
       }
     }
   }
