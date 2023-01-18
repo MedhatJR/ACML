@@ -54,9 +54,7 @@ const CMCQ = () => {
           });
 
 };
-    const back = () => {
-      nav("/");
-    };
+
     const Yourgrade = () => {
       nav("/CoporateGradeAndAnswers");
     };
@@ -65,10 +63,6 @@ const CMCQ = () => {
   
     return (
       <div>
-        <button onClick={back} className="btn">
-          {" "}
-          back
-        </button>
         <h1>Click to view Exam</h1>
   
         <br />
@@ -84,7 +78,7 @@ const CMCQ = () => {
       {arr2.map((user)=>(
             <>{user.Course == isClickedTitle ?
               <>
-              <h1>Course:{user.Course}</h1>
+             <h1>Course:{user.Course}</h1>
        <h1>Question1:{user.Question1}</h1> 
        <h4>Choice11:{user.Choice11}</h4> 
        <h4>Choice12:{user.Choice12}</h4>

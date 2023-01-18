@@ -19,7 +19,6 @@ const IMCQ = () => {
             setData(response);
             console.log(response);
             arr1 = response.data;
-    
             setData(arr1);
             console.log(arr1);
         }

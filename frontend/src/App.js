@@ -139,7 +139,7 @@ function App() {
               <Route path="/AdminAddCORP" element={<AdminAddCORP />} />
               <Route path="/AdminAddI" element={<AdminAddI />} />
 
-              <Route path="/CorpRequest" element={<AdminAddAdmin />} />
+              <Route path="/CorpRequest" element={<CorpRequest />} />
               <Route path="/AdminAddCORP"
                 element={<AdminAddCORP />}
                 
@@ -247,7 +247,6 @@ function App() {
               <Route path="/Terms" element={<Terms />} />
               <Route path="/AllCourses" element={<AllCourses />} />
               <Route path="/Pay" element={<Pay />} />
-              <Route path="/CorpRequest" element={<CorpRequest />} />
               <Route
                 path="/ViewReportedProblems"
                 element={<ViewReportedProblems />}

@@ -16,7 +16,7 @@ const CorpRequest = () => {
  
   //const status = "unseen"
   console.log(passedEmail);
-  console.log(isClickedTitle);
+  console.log(isClickedTitle+" njkbn");
   //console.log(passedCategory);
   
   const report = () => {

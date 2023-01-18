@@ -91,7 +91,7 @@ const CorporateViewMyCourses = () => {
     }
 
     for (var i = 0; i < arrTitles.length; i++) {
-      if ((arrTitles[i]+"k") === isClickedTitle) {
+      if ((arrTitles[i]) === isClickedTitle) {
         // console.log(arrTitles[i]);
         nav("/CorporateCoursePage", {
           state: { passedEmail: passedEmail, isClickedTitle: arrTitles[i] },

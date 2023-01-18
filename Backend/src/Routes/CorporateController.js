@@ -247,6 +247,7 @@ appRouter.get("/Corporate_view_exam", async (req, res) => {
       "Choice22",
       "Choice23",
       "Choice24",
+      "Course",
     ])
   );
 });
