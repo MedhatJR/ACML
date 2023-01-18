@@ -6,21 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 var arr1=[];
-var arr2=[];
 const IMCQ = () => {
   const location = useLocation();
+  const passedEmail = location.state.passedEmail;
   var isClickedTitle = location.state.isClickedTitle;
-  console.log(isClickedTitle);
     const [users, setData] = useState("");
     const nav = useNavigate();
     const getExam = () => {
       
-            Axios.get("http://localhost:8000/Individual_view_exam",
-           { Course:isClickedTitle }).then(
+            Axios.get("http://localhost:8000/Individual_view_exam").then(
         (response) => {
             setData(response);
             console.log(response);
             arr1 = response.data;
+    
             setData(arr1);
             console.log(arr1);
         }
@@ -46,16 +45,10 @@ const IMCQ = () => {
           
 
 };
-    const back = () => {
-      nav("/");
-    };
   
     return (
       <div>
-        <button onClick={back} className="btn">
-          {" "}
-          back
-        </button>
+        
         <h1>Click to view Exam</h1>
   
         <br />
@@ -63,9 +56,10 @@ const IMCQ = () => {
           Get Exam
         </button>
 
-        {arr2.map((user)=>(
-            <>
-        <h1>Course:{user.Course}</h1>
+        {arr1.map((user)=>(
+            <>{user.Course == isClickedTitle ?
+              <>
+              <h1>Course:{user.Course}</h1>
        <h1>Question1:{user.Question1}</h1> 
        <h4>Choice11:{user.Choice11}</h4> 
        <h4>Choice12:{user.Choice12}</h4>
@@ -100,6 +94,8 @@ const IMCQ = () => {
        <br />
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
+             : null}
+        </>
         ))}
              
              

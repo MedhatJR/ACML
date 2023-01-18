@@ -445,15 +445,7 @@ appRouter.post("/Individual_submitAnswer", async (req, res) => {
 });
 appRouter.get("/Individual_view_exam", async (req, res) => {
   res.send(
-    await Exams.find({ Course: req.body.Course }, function (err, result1) {
-      if (err) {
-        res.send("err");
-      } else {
-        console.log("Done2");
-      }
-    }).select([
-      
-      "Course",
+    await Exams.find().select([
       "Question1",
       "Choice11",
       "Choice12",
@@ -464,6 +456,7 @@ appRouter.get("/Individual_view_exam", async (req, res) => {
       "Choice22",
       "Choice23",
       "Choice24",
+      "Course",
     ])
   );
 });

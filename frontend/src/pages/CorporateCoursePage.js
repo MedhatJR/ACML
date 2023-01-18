@@ -33,7 +33,7 @@ const CorporateViewMyCourses = () => {
       nav("/CMCQ");
     };
   const GetExam = () => {
-    nav("/CMCQ");
+    nav("/CMCQ",{state:{isClickedTitle:isClickedTitle}});
   };
 <div>
         You finished {count}% of the course.

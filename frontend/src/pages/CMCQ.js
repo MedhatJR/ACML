@@ -4,9 +4,10 @@ import Axios from "axios";
 import "../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
 var arr2=[];
 const CMCQ = () => {
+  const location = useLocation();
+  var isClickedTitle = location.state.isClickedTitle;
 
     const [users, setData] = useState("");
     const [exam, getExam] = useState("");
@@ -80,9 +81,10 @@ const CMCQ = () => {
         </button> */}
       
 
-        {arr2.map((user)=>(
-            <>
-        <h1>Course:{user.Course}</h1>
+      {arr2.map((user)=>(
+            <>{user.Course == isClickedTitle ?
+              <>
+              <h1>Course:{user.Course}</h1>
        <h1>Question1:{user.Question1}</h1> 
        <h4>Choice11:{user.Choice11}</h4> 
        <h4>Choice12:{user.Choice12}</h4>
@@ -96,28 +98,31 @@ const CMCQ = () => {
        <h1>Add Your Answers</h1>
        <label>Question1</label>
        <br />
-       <input type="text" name="Choice23" id="QAC1" /> <br />
+       <input type="text" name="Choice23" id="QA1" /> <br />
         <label>Answer1</label>
         <br />
-        <input type="text" name="Choice24" id="AAC1" /> <br />
+        <input type="text" name="Choice24" id="AA1" /> <br />
         <label>Question2</label>
         <br />
-        <input type="text" name="Answer2" id="QAC2" /> <br />
+        <input type="text" name="Answer2" id="QA2" /> <br />
         <label>Answer2</label>
         <br />
-        <input type="text" name="Course" id="AAC2" /> <br />
+        <input type="text" name="Course" id="AA2" /> <br />
         <br />
- <button onClick={SubmitAnswers1}>Submit Answers</button>
 
-               <button onClick={Yourgrade} className="btn">
+
+       <button onClick={SubmitAnswers1}>Submit Answers</button>
+       <button onClick={Yourgrade} className="btn">
           Get Grade
         </button>
       
        <br />
        <h1>مع اطيب التمنيات بالنجاح و التوفيق</h1>
        </>
+             : null}
+        </>
         ))}
-            
+              
       </div>
     );
   };
