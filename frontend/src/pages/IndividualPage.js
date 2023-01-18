@@ -169,9 +169,7 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward3}>Join the Exam</button>
-      <br />
-      <br />
+     
       <button class="button-17" role="button" onClick={Rate}>
         Rate An Instructor
       </button>
@@ -182,21 +180,15 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button class="button-17" role="button" onClick={grade}>
-        Your grades and check your anwsers
-      </button>
-      <br />
-      <br />
+     
       <button class="button-17" role="button" onClick={change}>
         Change Password
       </button>
       <br />
       <br />
-      <button onClick={forward3}>View Exam</button>
+      <button onClick={forward3}>Exercises</button>
       {/* <div>{location.state.Email}</div> */}
-      <button class="button-17" role="button" onClick={certificate}>
-        Certificates
-      </button>
+    
     </div>
   );
 };
