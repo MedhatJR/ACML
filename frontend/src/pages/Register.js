@@ -27,8 +27,8 @@ const Register = () => {
     return (
       <div className="checkbox-wrapper">
         <label> I hereby agree to the terms and conditions</label>
-          
-          <input  className="checkbox" type="checkbox"/>{label}
+
+        <input className="checkbox" type="checkbox" />{label}
 
       </div>
     );
@@ -189,50 +189,27 @@ const Register = () => {
         <input type="text" name="type" id="type" /> <br />
         <br />
         <br />
-          <option value="Individual" id="Individual">
-            Individual Trainee
-          </option>
-          <option value="Corporate" id="Corporate">
-            Corporate Trainee
-          </option>
-          <option value="Instructor" id="Instructor">
-            Instructor
-          </option>
-        
-        <br />
-        <br />
 
-        
-        <button onClick={Terms}> View terms and conditions     
-                    </button><br />
-                    <br />
+        <button onClick={Terms}> View terms and conditions
+        </button><br />
+        <div className="app">
         <br />
-                    
-    <div className="app">
-      
-    </div>
-  
-    <Checkbox   />
-                    
-  
-    <br></br>
-     
-        <br /> 
-                    <a href="/Terms">I hereby agree to the terms and conditions</a>
-<br/>
-<br/>
+        </div>
+        <a href="/Terms">I hereby agree to the terms and conditions</a>
+        <br />
+        <br />
         <button
           onClick={
             addData}
         >
-           
-         
+
+
           Submit
         </button>
         {/* <p> {pop}</p> */}
         {/* {final.Username} */}
       </div>
-      
+
     </>
   );
 };

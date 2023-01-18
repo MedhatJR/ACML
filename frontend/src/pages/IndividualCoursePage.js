@@ -44,7 +44,7 @@ const IndividualViewMyCourses = () => {
   //   nav("ICMCQ");
   // };
   const GetExam = () => {
-    nav("/IMCQ");
+    nav("/IMCQ",{state:{isClickedTitle:isClickedTitle}});
   };
   <div>
     You finished {count}% of the course.

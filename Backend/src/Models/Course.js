@@ -5,7 +5,7 @@ const courseSchema = new Schema(
   {
     Title: {
       type: String,
-      required: true,
+      required: false,
     },
     Subtitle: {
       type: String,
