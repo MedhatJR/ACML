@@ -48,6 +48,24 @@ appRouter.post("/Guest_filtercourse_price", async (req, res) => {
 //     async function fetchJson(url) {
 //       let res = await fetch(url);
 
+//           return await res.json();
+//       }
+
+
+//       let location = await fetchJson('https://api.ipdata.co?api-key=ec72d2a2d822f9832a689fbcacdb34e349a0aaeeac84487fb0fd6f80&fields=currency');
+//       let exchange = await fetchJson('https://github.com/samayo/country-json/blob/master/src/country-by-currency-code.json);
+//       console.log("loc", location);
+//       console.log("exc", exchange);
+//       fx.base = exchange.base;
+//       fx.rates = exchange.rates;
+//       console.log("ana hena", products.Price);
+//       // if (products.Discount > 0) {
+//       //   products.Price = products.Price - (products.Price) * (products.Discount / 100);
+//       //}
+//       console.log(location.currency.symbol + '' +
+//           fx(products.Price).from('USD').to(location.currency.code).toFixed(2));
+//       products.Price = fx(products.Price).from('USD').to(location.currency.code).toFixed(2) + '' + location.currency.symbol;
+//       console.log(products.Price);
 //       return await res.json();
 //     }
 

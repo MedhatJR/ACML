@@ -137,3 +137,19 @@ body{
     right: 1050px;
 
 }
+
+.description {
+    position: absolute;
+ left: 900px;
+ top: 140px;
+}
+.description1 {
+    position: absolute;
+ left: 900px;
+ top: 450px;
+}
+.description2 {
+    position: absolute;
+ left: 900px;
+ top: 800px;
+}

@@ -16,12 +16,9 @@ let alert = require('alert');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 //to display the register page
-appRouter.get("/", async (req, res) => {
-  res.status(200).send("Home");
-});
 
 appRouter.post("/Individual_Register", async (req, res) => {
-  const newuser =({
+  const newuser = ({
     Username: req.body.Username,
     Email: req.body.Email,
     Password: req.body.Password,
@@ -29,7 +26,7 @@ appRouter.post("/Individual_Register", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
-    Wallet: req.body.Wallet,
+    Wallet:req.body.Wallet,
   });
   email = newuser.Email;
   try {
@@ -45,7 +42,6 @@ appRouter.post("/Individual_Register", async (req, res) => {
       )
     ) {
       res.status(200).send("All input is required");
-      alert("All input is required");
     }
     const oldUser = await Individual.find({ Email: { $eq: req.body.Email } });
 
@@ -236,15 +232,14 @@ appRouter.post("/Individual_retrieveCourses", async (req, res) => {
   );
 });
 
-
 appRouter.post("/Individual_ReportAProblem", async (req, res) => {
   const problem = new Problem({
-    Email : req.body.Email,
+    Email: req.body.Email,
     Category: req.body.Category,
-    Description : req.body.Description,
-    Type : req.body.Type,
-    Course : req.body.Course,
-    Status : req.body.Status,
+    Description: req.body.Description,
+    Type: req.body.Type,
+    Course: req.body.Course,
+    Status: req.body.Status,
   });
   try {
     Problem.create(problem);
@@ -258,19 +253,13 @@ appRouter.post("/Individual_ReportAProblem", async (req, res) => {
 appRouter.post("/Individual_AllProblems", async (req, res) => {
   if (!req.body.Email) {
     console.log("All input is required");
-  };
-res.send(
-  await Problem.find( {
-    Email: { $eq: req.body.Email },
-    Category:{ $eq: "IndividualTrainee"},
-  }).select([
-    "Description",
-    "Type",
-    "Course",
-    "Status",
- 
-  ])
-);
+  }
+  res.send(
+    await Problem.find({
+      Email: { $eq: req.body.Email },
+      Category: { $eq: "IndividualTrainee" },
+    }).select(["Description", "Type", "Course", "Status"])
+  );
 });
 
 appRouter.post("/Individual_FollowUP", async (req, res) => {
@@ -425,6 +414,9 @@ appRouter.post("/Individual_retrieveMyCourseData", async (req, res) => {
           "SubLink",
           "SubLink1",
           "SubLink2",
+          "Description",
+          "Description1",
+          "Description2",
         ]);
       }
     }
@@ -693,6 +685,15 @@ appRouter.post("/Individual_QuestionAnswers", async (req, res) => {
     .select("Answer2");
 });
 
+//view the questions with the correct solution to view the incorrect answers
+appRouter .post("/Individual_getExamId" , async (req,res)=>{
+
+  const ans = await IndividualExam.find({}).sort({ _id: -1 }).limit(1) ;
+  const data = ans[0]._id;
+  //console.log(ans);
+  res.send(data);
+  
+  }) ;
 //see his/her progress in the course as a percentage of how much of the course has been completed so far
 
 appRouter.post("/Individual_addPaidCourse", async (req, res) => {
@@ -779,7 +780,7 @@ appRouter.post(
         console.log("email is sent");
       }
     });
-    res.json({ message: "email is sent" });
+    res.status(200).send( "email is sent" );
   }
 );
 
@@ -799,11 +800,32 @@ appRouter.post("/individual_Notes", async (req, res) => {
 //download the notes as a PDF
 
 //*************************************************************MENNA'S END PART*********************************************************** */
+
+appRouter.post("/Individual_Register", async (req, res) => {
+  const newIndividual = new Individual({
+    Username: req.body.Username,
+    Email: req.body.Email,
+    Password: req.body.Password,
+    Country: req.body.Country,
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Gender: req.body.Gender,
+    RegisteredCourses: req.body.RegisteredCourses,
+    Wallet: 0,
+  });
+
+  try {
+    Individual.create(newIndividual);
+    res.send("Data Inserted");
+  } catch (err) {
+    res.send("Error");
+  }
+});
 appRouter.post("/Individual_Wallet", async (req, res) => {
-  Individual.find({ Email:req.body.Email }, (error, data) => {
+  Individual.find({ Email: req.body.Email }, (error, data) => {
     if (error) {
       res.send(error);
     } else res.send(data);
-  }).select("Wallet")
+  }).select("Wallet");
 });
 module.exports = appRouter;

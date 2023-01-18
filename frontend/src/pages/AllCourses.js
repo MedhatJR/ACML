@@ -144,9 +144,24 @@ const AllCourses = () => {
             <p key={user} className="Hours">
               {user.Hours} Total Hours
             </p>
+                  {/*MENNAAA*******************/}
+                  <p key={user} className="Subtitles">
+              Subtites: {user.Subtitle},{user.Subtitle1},{user.Subtitle2}
+            </p>
+            <p key={user} className="exer">
+
+              Exercise: {user.Exercises}
+            </p>
+            <p key={user} className="HPS">
+
+              Hours per subtitle: {(user.Hours) / 3}
+            </p>
+            {/*MENNAAA*******************/}
             <p key={user} className="Price">
               {user.Price}$
             </p>
+
+        
             <p key={user} className="Promotion">
               ({user.Promotion}%) OFF
             </p>

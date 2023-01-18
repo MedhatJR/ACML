@@ -157,12 +157,7 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button class="button-17" role="button" onClick={reports}>
-        ALL Reports
-      </button>
-      <br />
-      <br />
-      <button onClick={forward3}>Join the Exam</button>
+      <button onClick={forward3}>Exercises</button>
       <br />
       <br />
       <button class="button-17" role="button" onClick={Rate}>
@@ -173,11 +168,7 @@ const IndividualPage = () => {
       <button class="button-17" role="button" onClick={RateCourse}>
         Rate A Course
       </button>
-      <br />
-      <br />
-      <button class="button-17" role="button" onClick={grade}>
-        Your grades and check your anwsers
-      </button>
+      
       <br />
       <br />
       <button class="button-17" role="button" onClick={change}>
@@ -185,11 +176,9 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward3}>View Exam</button>
+     
       {/* <div>{location.state.Email}</div> */}
-      <button class="button-17" role="button" onClick={certificate}>
-        Certificates
-      </button>
+    
     </div>
   );
 };

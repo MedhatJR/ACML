@@ -52,6 +52,9 @@ const ExamsSchema = new Schema(
       type: String,
       required: true,
     },
+    Course:{
+      type:String
+    }
    
   },
   { timestamps: true }

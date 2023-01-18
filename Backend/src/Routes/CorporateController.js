@@ -27,7 +27,7 @@ appRouter.get("/Corporate_read", async (req, res) => {
   });
 });
 
-appRouter.post("/Corporate_searchCourse", async (req, res) => {
+appRouter.get("/Corporate_searchCourse", async (req, res) => {
   Course.find(
     {
       $or: [
@@ -104,10 +104,6 @@ appRouter.post("/Corporate_Login", async (req, res) => {
     }
 
     const user = await Corporate.findOne({ Email });
-    console.log(Email);
-    console.log(Password);
-    console.log(user.Email);
-    console.log(user.Password);
 
     if (user && (await bcrypt.compare(Password, user.Password))) {
       // Create token
@@ -146,66 +142,66 @@ appRouter.get("/Corporate_retrieveAll", async (req, res) => {
   );
 });
 
-// appRouter.post("/createCorporateUser", async (req, res) => {
-//   const newuser = new Corporate({
-//     Username: req.body.Username,
-//     Email: req.body.Email,
-//     Password: req.body.Password,
-//     Country: req.body.Country,
-//     Firstname: req.body.Firstname,
-//     Lastname: req.body.Lastname,
-//     Gender: req.body.Gender,
-//     RegisteredCourses: req.body.RegisteredCourses,
-//   });
-//   email = newuser.Email;
-//   try {
-//     if (
-//       !(
-//         newuser.Username &&
-//         newuser.Email &&
-//         newuser.Password &&
-//         newuser.Country &&
-//         newuser.Firstname &&
-//         newuser.Lastname &&
-//         newuser.Gender
-//       )
-//     ) {
-//       res.status(200).send("All input is required");
-//     }
-//     const oldUser = await Corporate.find({ Email: { $eq: req.body.Email } });
+appRouter.post("/createCorporateUser", async (req, res) => {
+  const newuser = new Corporate({
+    Username: req.body.Username,
+    Email: req.body.Email,
+    Password: req.body.Password,
+    Country: req.body.Country,
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Gender: req.body.Gender,
+    RegisteredCourses: req.body.RegisteredCourses,
+  });
+  email = newuser.Email;
+  try {
+    if (
+      !(
+        newuser.Username &&
+        newuser.Email &&
+        newuser.Password &&
+        newuser.Country &&
+        newuser.Firstname &&
+        newuser.Lastname &&
+        newuser.Gender
+      )
+    ) {
+      res.status(200).send("All input is required");
+    }
+    const oldUser = await Corporate.find({ Email: { $eq: req.body.Email } });
 
-//     console.log(oldUser);
-//     console.log(email);
+    console.log(oldUser);
+    console.log(email);
 
-//     if (oldUser != "") {
-//       return res.status(200).send("User Already Exist. Please Login");
-//     }
+    if (oldUser != "") {
+      return res.status(200).send("User Already Exist. Please Login");
+    }
 
-//     await Corporate.create(newuser);
+    await Corporate.create(newuser);
 
-//     const token = jwt.sign(
-//       { newuser_id: newuser._id, email },
-//       "secret",
-//       process.env.JWT_ACCOUNT_ACTIVATION,
-//       {
-//         expiresIn: "24h",
-//       },
-//       (err, token) => {
-//         console.log(err);
-//         console.log(token);
-//       }
-//     );
+    const token = jwt.sign(
+      { newuser_id: newuser._id, email },
+      "secret",
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      {
+        expiresIn: "24h",
+      },
+      (err, token) => {
+        console.log(err);
+        console.log(token);
+      }
+    );
 
-//     newuser.token = token;
+    newuser.token = token;
 
-//     // return new user
-//     res.status(200).json(newuser);
-//     console.log("Registration Successful");
-//     // res.status(200).send("registration successful");
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+    // return new user
+    res.status(200).json(newuser);
+    console.log("Registration Successful");
+    // res.status(200).send("registration successful");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 appRouter.post("/Corporate_filtercourse", async (req, res) => {
   const minrating = req.body.minrating;
@@ -307,14 +303,18 @@ appRouter.post("/Corporate_Request_Course", async (req, res) => {
   res.status(200).send("Submitted Request");
 });
 
-appRouter.post("/Corporate_AllProblems", async (req, res) => {
+appRouter.get("/Corporate_AllProblems", async (req, res) => {
   if(!req.body.Email){
     console.log("All input is required");
   };
+  // if(!(Problem.find( {
+  //   Username: { $eq: req.body.Username }
+  // }))){
+  //   console.log("There is no a reported problem with this username");
+  // }
   res.send(
     await Problem.find( {
       Email: { $eq: req.body.Email },
-      Category:{ $eq: "CorporateTrainee"}
     }).select([
       "Description",
       "Type",
@@ -325,32 +325,6 @@ appRouter.post("/Corporate_AllProblems", async (req, res) => {
   );
 });
 
-appRouter.post("/Corporate_FollowUP", async (req, res) => {
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "aminmoataz072@gmail.com",
-      pass: "hunnwqvdqtpytwib",
-    },
-  });
-
-  var mailOptions = {
-    from: "aminmoataz072@gmail.com",
-    to: "aminmoataz072@gmail.com",
-    subject: "Sending Email to rest password",
-    text: `Please Check my report!`,
-    // html: '<h1>RESET YOUR PASSWORD</H1><P>This code is so confidential , Please do not share it with anyone else Your code to reset your password is 12345 </P>'
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log("error");
-    } else {
-      console.log("Email sent: " + info.response);
-      res.send("emailsent");
-    }
-  });
-});
 
 appRouter.post("/Corporate_ForgotPassword", async (req, res) => {
   const Username = req.body.Username;
@@ -505,6 +479,16 @@ appRouter.get("/Corporate_view_exam", async (req, res) => {
 });
 
 //****************************************************MENNAAAAAAAAAAAAAAA****************************** */
+
+//
+appRouter.post("/courses_ex",async(req,res)=>{
+  const course = await Exam.find({ Course: { $eq: req.body.Course } }).select("Question1").select("Question2");
+  console.log(course);
+res.status(200).send("Exercise 1 :" +course[0].Question1 +"     " +
+"Exercise 2: " + course[0].Question2 )
+
+  
+});
 //view his/her grade from the exercise
 appRouter.post("/Coporate_Grade", async (req, res) => {
   var grade = 0;
@@ -696,7 +680,7 @@ appRouter.post('/Corporate_Recieve_Certificate_Via_Email', async (req, res) => {
       bcc: "mennaabdullahh@gmail.com",
       text: "congrats...... here is an attachment of the certificate ",
       attachments: [
-          { filename: 'certificate.jpg', path: './picture.png' }
+          { filename: 'certificate.pdf', path: './Certificate .pdf' }
       ]
   }
   mailTransporter.sendMail(details, (err) => {
