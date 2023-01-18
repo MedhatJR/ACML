@@ -36,6 +36,7 @@ import IMCQ from "./pages/IMCQ";
 import CMCQ from "./pages/CMCQ";
 import Terms from "./pages/Terms";
 import AdminAddAdmin from "./pages/AdminAddAdmin";
+import IndRequest from "./pages/IndRequest";
 
 import AddPromotion from "./pages/AddPromotion";
 import CorporateResetEmail from "./pages/CorporateResetEmail";
@@ -125,8 +126,13 @@ function App() {
               />
               <Route path="/AdminAddCORP"
                 element={<AdminAddCORP />}
+                
               
               />
+              
+              <Route path="/IndRequest" element={<IndRequest />} />
+                
+
               <Route path="/AdminAddI"
                 element={<AdminAddI />}
               

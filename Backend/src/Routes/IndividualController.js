@@ -12,6 +12,7 @@ appRouter.use(cors());
 const mongoose = require("mongoose");
 const Problem = require("../Models/Problem");
 const dote = require("dotenv").config();
+const Refundrequest= require("../Models/Refundrequest");
 
 const bcrypt = require("bcrypt");
 //to display the register page
@@ -745,5 +746,19 @@ appRouter.post("/Individual_Wallet", async (req, res) => {
       res.send(error);
     } else res.send(data);
   }).select("Wallet")
+});
+appRouter.post("/Individual_Refund", async (req, res) => {
+  const refund = new Refundrequest({
+     Email : req.body.Email,
+     Course : req.body.Course,
+     Status : req.body.Status,
+  });
+  try {
+    Refundrequest.create(refund);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(refund);
+  res.status(200).send("Submitted Request");
 });
 module.exports = appRouter;

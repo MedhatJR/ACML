@@ -44,6 +44,7 @@ const IndividualViewMyCourses = () => {
     }
     setData(response);
   });
+  
 
   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
@@ -144,6 +145,7 @@ const IndividualViewMyCourses = () => {
             <button className="button-17" id={user.Title} onClick={problemReport}>
               Report a Problem
             </button>
+            
           </>
         </div>
       ))}

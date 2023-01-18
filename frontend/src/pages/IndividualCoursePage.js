@@ -17,16 +17,27 @@ var array = [];
 
 
 const IndividualViewMyCourses = () => {
-
+ 
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
+  var isClickedTitle = location.state.isClickedTitle;
   const [count, setCount] = useState(0);
+  const Requestrefund=()=>{
+    nav("/IndRequest", {
+      state: { passedEmail: passedEmail , passedcount : count , isClickedTitle  : isClickedTitle},
+    });
+  
+
+
+
+  }
   useEffect(() => {
     document.title = `You clicked ${count} times`;
   });
   // console.log(wantedtitle[0]);
   //   console.log(array);
-  const location = useLocation();
-  const passedEmail = location.state.passedEmail;
-  var isClickedTitle = location.state.isClickedTitle;
+
+  
   const [users, setData] = useState("");
   const nav = useNavigate();
 
@@ -36,6 +47,7 @@ const IndividualViewMyCourses = () => {
   // const Exam = () => {
   //   nav("ICMCQ");
   // };
+  
 const GetExam = () => {
   nav("/IMCQ");
 };
@@ -76,6 +88,7 @@ const GetExam = () => {
        <button onClick={() => setCount(count +(100/30)*10)}>
             Click after watching the video
           </button></p>
+         
       
     </div>
      
@@ -83,6 +96,11 @@ const GetExam = () => {
     
     
       <br />
+      <br />
+      
+
+      <button onClick={Requestrefund}>Request refund</button>
+    
       {/* <button onClick={viewMyCourses}>View</button> */}
       {array.map((user) => (
         <div className="fullCourse">

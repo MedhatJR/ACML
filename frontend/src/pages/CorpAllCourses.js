@@ -55,10 +55,10 @@ const CorpAllCourses = () => {
     for (var i = 0; i < arrTitles.length; i++) {
       if (arrTitles[i] === isClickedTitle) {
         // console.log(arrTitles[i]);
-        nav("/CorpRequest", {
+        
+      }nav("/CorpRequest", {
           state: { passedEmail: passedEmail, isClickedTitle: isClickedTitle },
         });
-      }
     }
   }
 
