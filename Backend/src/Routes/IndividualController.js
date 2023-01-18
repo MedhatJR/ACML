@@ -767,13 +767,14 @@ appRouter.post(
 
     let details = {
       from: "mennaabdullahh@gmail.com",
-      to: Email,
+      to:  "mennaabdullahh@gmail.com",
       subject: "completing the course",
       cc: "mennaabdullahh@gmail.com",
       bcc: "mennaabdullahh@gmail.com",
       text: "congrats...... here is an attachment of the certificate ",
-      attachments: [  { filename: 'certificate.pdf', path: './Certificate.pdf' }],
-    };
+      attachments: [
+        { filename: 'certificate.pdf', path: './Certificate .pdf' }
+    ]    };
     mailTransporter.sendMail(details, (err) => {
       if (err) {
         console.log(err);
