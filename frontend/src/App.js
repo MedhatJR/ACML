@@ -139,7 +139,7 @@ function App() {
               <Route path="/AdminAddCORP" element={<AdminAddCORP />} />
               <Route path="/AdminAddI" element={<AdminAddI />} />
 
-              />
+              <Route path="/CorpRequest" element={<AdminAddAdmin />} />
               <Route path="/AdminAddCORP"
                 element={<AdminAddCORP />}
                 

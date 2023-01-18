@@ -198,7 +198,7 @@ const Register = () => {
           <option value="Instructor" id="Instructor">
             Instructor
           </option>
-        </select>
+        
         <br />
         <br />
 
