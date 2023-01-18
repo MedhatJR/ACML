@@ -173,9 +173,6 @@ const AddCourse = () => {
         <button className="button-17" onClick={addCourse}>
           Add Course
         </button>
-        <button className="button-17" onClick={GoToViewCourses}>
-          View Courses
-        </button>
       </div>
     </div>
   );

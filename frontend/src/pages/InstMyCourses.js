@@ -22,7 +22,7 @@ const AllCourses = () => {
   const location = useLocation();
   const passedEmail = location.state.passedEmail;
 
-  // const GoToCreditCard = () => {
+  // const GoToCreditCard = () => {   
   //   nav("/Pay", { state: { passedTitle: passedTitle } });
   // };
 
