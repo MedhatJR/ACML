@@ -771,7 +771,7 @@ appRouter.post(
       cc: "mennaabdullahh@gmail.com",
       bcc: "mennaabdullahh@gmail.com",
       text: "congrats...... here is an attachment of the certificate ",
-      attachments: [{ filename: "certificate.jpg", path: "./picture.png" }],
+      attachments: [  { filename: 'certificate.pdf', path: './Certificate.pdf' }],
     };
     mailTransporter.sendMail(details, (err) => {
       if (err) {
