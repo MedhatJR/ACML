@@ -6,6 +6,7 @@ const Problem = require("../Models/Problem");
 const Course = require("../Models/Course");
 const Instructor = require("../Models/Instructor");
 var nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 var dbcourses = [];
 
 const Exams = require("../Models/Exams");
@@ -26,6 +27,7 @@ appRouter.post("/Instructor_Register", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    Wallet: req.body.Wallet,
   });
   email = newuser.Email;
   try {

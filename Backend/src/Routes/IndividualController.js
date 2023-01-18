@@ -12,15 +12,13 @@ appRouter.use(cors());
 const mongoose = require("mongoose");
 const Problem = require("../Models/Problem");
 const dote = require("dotenv").config();
-
+let alert = require('alert'); 
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 //to display the register page
-appRouter.get("/", async (req, res) => {
-  res.status(200).send("Home");
-});
 
 appRouter.post("/Individual_Register", async (req, res) => {
-  const newuser = {
+  const newuser = ({
     Username: req.body.Username,
     Email: req.body.Email,
     Password: req.body.Password,
@@ -28,7 +26,8 @@ appRouter.post("/Individual_Register", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
-  };
+    Wallet:req.body.Wallet,
+  });
   email = newuser.Email;
   try {
     if (
