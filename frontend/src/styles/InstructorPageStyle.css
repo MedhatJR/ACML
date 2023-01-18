@@ -225,3 +225,11 @@ p{
 .button-17:disabled {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
+
+.Log-Out{
+  margin-left: 1200px;
+  position: absolute;
+  top: 100px;
+  background-color: brown;
+  color: #131313;
+}

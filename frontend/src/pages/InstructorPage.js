@@ -43,6 +43,9 @@ const InstructorPage = () => {
   const viewCourseRating = () => {
     nav("/InstrCourseRatings",{state:{passedEmail:passedData}});
   };
+  const logout = () => {
+    nav("/");
+  };
   // const forwardView = () => {
   //   nav("/InstructorViewCourse",  { state: { passedEmail: passedData } });
   // };
@@ -110,6 +113,10 @@ const InstructorPage = () => {
         Explore Courses
       </button>
       <br />
+      <br />
+      <button className="Log-Out" onClick={logout}>
+        Log Out
+      </button>
       <br />
       <button class="button-17" role="button" onClick={MyCourses}>
         My Courses

@@ -50,6 +50,9 @@ const IndividualPage = () => {
   const viewCourses = () => {
     nav("/AllCourses", { state: { passedEmail: passedData } });
   };
+  const logout = () => {
+    nav("/");
+  };
   const viewWallet = () => {
     nav("/IndividualWallet", { state: { passedEmail: passedData } });
   };
@@ -144,6 +147,10 @@ const IndividualPage = () => {
 
       <button className="explore-button" onClick={viewCourses}>
         Explore Courses
+      </button>
+      <br />
+      <button className="Log-Out" onClick={logout}>
+        Log Out
       </button>
       <br />
       <button className="button-17" onClick={viewWallet}>
