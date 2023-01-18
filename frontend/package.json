@@ -10,6 +10,8 @@
 
     "@emailjs/browser": "^3.10.0",
 
+    "@floating-ui/core": "^1.1.0",
+
     "@progress/kendo-react-pdf": "^5.9.0",
 
     "@stripe/react-stripe-js": "^1.16.3",
@@ -24,11 +26,17 @@
 
     "bcrypt": "^5.1.0",
 
+    "bootstrap": "^5.2.3",
+
     "html2canvas": "^1.4.1",
 
     "jspdf": "^2.5.1",
 
     "react": "^18.2.0",
+
+    "react-bootstrap": "^2.7.0",
+
+    "react-bootstrap-country-select": "^1.0.0",
 
     "react-component-export-image": "^1.0.6",
 
@@ -44,13 +52,19 @@
 
     "react-scripts": "5.0.1",
 
+    "react-select": "^5.7.0",
+
     "react-toastify": "^9.1.1",
 
     "regex": "^0.1.1",
 
     "stripe": "^11.6.0",
 
+    "svg-country-flags": "^1.2.10",
+
     "uuid": "^9.0.0",
+
+    "vue-country-select": "^0.2.2",
 
     "web-vitals": "^2.1.4"
 

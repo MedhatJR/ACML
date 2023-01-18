@@ -2,8 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import React, { useState } from "react";
 
-import Home from "./pages/Home";
 
+import Home from "./pages/Home";
+import CountrySelect from"./pages/CountrySelect";
 import Register from "./pages/Register";
 import ViewData from "./pages/ViewData";
 import UpdateEmail from "./pages/UpdateEmaiL";
@@ -107,6 +108,7 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
+            <Route path="/CountrySelect" element={<CountrySelect />} />
               <Route path="/AdminOpenProblem" element={<AdminOpenProblem />} />
               <Route path="/IndividualUpdate" element={<IndividualUpdate />} />
               <Route

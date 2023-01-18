@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
+// import selectCountry from "./CountrySelect";  
 import Axios from "axios";
 //import "../styles/register.css";
 import "../styles/AllCourses.css";
@@ -81,6 +81,10 @@ const AllCourses = () => {
         });
       }
     }
+
+    
+  
+
   }
 
   return (
@@ -103,7 +107,10 @@ const AllCourses = () => {
             </li>
           </ul>
         </nav>
+        
       </>
+  
+
       <button   onClick={filter}>
               Filter Courses
             </button>
