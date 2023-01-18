@@ -8,6 +8,9 @@ const IndividualTrainee = require("../Models/IndividualTrainee");
 const Problem = require("../Models/Problem");
 const Requests = require("../Models/Requests");
 const Course = require("../Models/Course");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const { title, send } = require("process");
 const { isBooleanObject } = require("util/types");
 appRouter.use(cors());
@@ -207,7 +210,7 @@ appRouter.post("/Adminstrator_Login", async (req, res) => {
       res.status(400).send("All input is required");
     }
 
-    const user = await Corporate.findOne({ Email });
+    const user = await Adminstrator.findOne({ Email });
     console.log(Email);
     console.log(Password);
     console.log(user.Email);
@@ -228,7 +231,24 @@ appRouter.post("/Adminstrator_Login", async (req, res) => {
 
       // user
       res.status(200).json(user);
-    } else {
+    }
+    if (user && (Password== user.Password)) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, Email },
+        "secret",
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "24h",
+        }
+      );
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    }
+    else {
       res.status(400).send("Invalid Credentials");
     }
   } catch (err) {

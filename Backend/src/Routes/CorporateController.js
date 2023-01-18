@@ -120,7 +120,24 @@ appRouter.post("/Corporate_Login", async (req, res) => {
 
       // user
       res.status(200).json(user);
-    } else {
+    } 
+   else if (user && (Password==user.Password)) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, Email },
+        "secret",
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "24h",
+        }
+      );
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    }
+    else {
       res.status(400).send("Invalid Credentials");
     }
   } catch (err) {
