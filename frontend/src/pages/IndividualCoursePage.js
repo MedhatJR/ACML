@@ -86,8 +86,8 @@ const IndividualViewMyCourses = () => {
 
       <button onClick={GetExam}>Get your exam</button>
 
-      <br />
-      <br />
+<br />
+<br />
       
 
       <button onClick={Requestrefund}>Request refund</button>

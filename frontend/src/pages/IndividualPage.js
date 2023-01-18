@@ -186,7 +186,7 @@ const IndividualPage = () => {
       </button>
       <br />
       <br />
-      <button onClick={forward3}>Exercises</button>
+      {/* <button onClick={forward3}>Exercises</button> */}
       {/* <div>{location.state.Email}</div> */}
     
     </div>
