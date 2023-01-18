@@ -170,40 +170,43 @@ const Register = () => {
 
       <div className="Register">
         <h1>Please Register</h1>
+        <br />
         <label>Username</label>
         <input type="text" name="Username" id="user" /> <br />
+        <br />
         <label>Email</label>
         <input type="email" name="Email" id="email" /> <br />
+        <br />
         <label>Password</label>
         <input type="password" name="Password" id="pass" /> <br />
+        <br />
         <label>Country</label>
         <input type="text" name="Country" id="cou" /> <br />
+        <br />
         <label>First Name</label>
         <input type="text" name="Firstname" id="fn" /> <br />
+        <br />
         <label>Last Name</label>
         <input type="text" name="Lastname" id="ln" /> <br />
+        <br />
         <label>Gender</label>
         <input type="text" name="Gender" id="g" /> <br />
-        <label>Type</label>
         <br />
+        <label>Type</label>
         <input type="text" name="type" id="type" /> <br />
         <br />
-        <br />
-
-        <button onClick={Terms}> View terms and conditions
-        </button><br />
         <div className="app">
         <br />
         </div>
-        <a href="/Terms">I hereby agree to the terms and conditions</a>
+        <input className="checkbox1" type="checkbox"></input>
+        <a href="/Terms" className="checkbox">I hereby agree to the terms and conditions</a>
+        <br />
         <br />
         <br />
         <button
           onClick={
             addData}
         >
-
-
           Submit
         </button>
         {/* <p> {pop}</p> */}
