@@ -7,29 +7,28 @@ import { useLocation } from "react-router-dom";
 // import "./Dropdown.css";
 // const category = "CorporateTrainee"
 
-const CorpRequest = () => {
+const IndRequest = () => {
     const nav = useNavigate();
   var [final, setFinal] = useState("");
   const location = useLocation();
   const passedEmail = location.state.passedEmail;
   const isClickedTitle = location.state.isClickedTitle;
- 
+  const passedcount=location.state.passedcount;
   //const status = "unseen"
   console.log(passedEmail);
   console.log(isClickedTitle);
-  //console.log(passedCategory);
+  console.log(passedcount);
   
   const report = () => {
     console.log("ama")
-    //console.log("Hi");
-    // if (passedCategory === "CorporateTrainee") {
-    Axios.post("http://localhost:8000/Corporate_Request_Course", {
+   if(passedcount < 50){
+    Axios.post("http://localhost:8000/Individual_Refund", {
       Email: passedEmail,
       Course: isClickedTitle,
       Status: "pending",
     }).then((response) => {
         
-        // nav("/CorpAllCourses");
+        
       console.log(response);
 
       setFinal(response);
@@ -39,11 +38,11 @@ const CorpRequest = () => {
     console.log("ewgeron")
   }
   
-
+}
   return (
     <div className="ReportProblem">
 
-      <h1 class="report">Requesting Access to course </h1>
+      <h1 class="report">Request refund</h1>
 
       <label>Are you sure you want to request access? </label>
       
@@ -61,4 +60,4 @@ const CorpRequest = () => {
   );
 
 };
-export default CorpRequest;
+export default IndRequest;

@@ -13,15 +13,27 @@ import PdfContainer from "./PdfContainer";
 var array = [];
 
 const IndividualViewMyCourses = () => {
+ 
+  const location = useLocation();
+  const passedEmail = location.state.passedEmail;
+  var isClickedTitle = location.state.isClickedTitle;
   const [count, setCount] = useState(0);
+  const Requestrefund=()=>{
+    nav("/IndRequest", {
+      state: { passedEmail: passedEmail , passedcount : count , isClickedTitle  : isClickedTitle},
+    });
+  
+
+
+
+  }
   useEffect(() => {
     document.title = `You clicked ${count} times`;
   });
   // console.log(wantedtitle[0]);
   //   console.log(array);
-  const location = useLocation();
-  const passedEmail = location.state.passedEmail;
-  var isClickedTitle = location.state.isClickedTitle;
+
+  
   const [users, setData] = useState("");
   const nav = useNavigate();
 
@@ -75,6 +87,11 @@ const IndividualViewMyCourses = () => {
       <button onClick={GetExam}>Get your exam</button>
 
       <br />
+      <br />
+      
+
+      <button onClick={Requestrefund}>Request refund</button>
+    
       {/* <button onClick={viewMyCourses}>View</button> */}
       {array.map((user) => (
         <div className="fullCourse">

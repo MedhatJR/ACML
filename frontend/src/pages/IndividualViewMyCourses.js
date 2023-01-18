@@ -6,7 +6,6 @@ import "../styles/IndividualViewMyCourses.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Media/Logo.png";
 import LogIn from "./LogIn";
-import "../styles/Star.css";
 import { useLocation } from "react-router-dom";
 
 var arr = [];
@@ -47,6 +46,7 @@ const IndividualViewMyCourses = () => {
     }
     setData(response);
   });
+  
 
   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
@@ -151,15 +151,19 @@ const IndividualViewMyCourses = () => {
                 }
               })}
             </div>
-
+<div className="gotocoursedv">
             <button className="button-17" id={user.Title} onClick={reply_click}>
               Go To Course
             </button>
+            </div>
             <br/>
             <br/>
+            <div className="rep">
             <button className="button-17" name={user.Title} onClick={reply_click1}>
               Report a Problem
             </button>
+            </div>
+            
           </>
         </div>
       ))}

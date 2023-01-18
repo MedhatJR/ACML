@@ -12,6 +12,8 @@ appRouter.use(cors());
 const mongoose = require("mongoose");
 const Problem = require("../Models/Problem");
 const dote = require("dotenv").config();
+const Refundrequest= require("../Models/Refundrequest");
+
 let alert = require('alert'); 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -766,13 +768,14 @@ appRouter.post(
 
     let details = {
       from: "mennaabdullahh@gmail.com",
-      to: Email,
+      to:  "mennaabdullahh@gmail.com",
       subject: "completing the course",
       cc: "mennaabdullahh@gmail.com",
       bcc: "mennaabdullahh@gmail.com",
       text: "congrats...... here is an attachment of the certificate ",
-      attachments: [  { filename: 'certificate.pdf', path: './Certificate.pdf' }],
-    };
+      attachments: [
+        { filename: 'certificate.pdf', path: './Certificate .pdf' }
+    ]    };
     mailTransporter.sendMail(details, (err) => {
       if (err) {
         console.log(err);
@@ -827,5 +830,19 @@ appRouter.post("/Individual_Wallet", async (req, res) => {
       res.send(error);
     } else res.send(data);
   }).select("Wallet");
+});
+appRouter.post("/Individual_Refund", async (req, res) => {
+  const refund = new Refundrequest({
+     Email : req.body.Email,
+     Course : req.body.Course,
+     Status : req.body.Status,
+  });
+  try {
+    Refundrequest.create(refund);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(refund);
+  res.status(200).send("Submitted Request");
 });
 module.exports = appRouter;

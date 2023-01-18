@@ -110,7 +110,12 @@ button {
   will-change: transform,opacity;
   z-index: 0;
 }
-
+.checkbox-wrapper .checkbox {
+position: absolute;
+left: 380px;
+top: 785px;
+width: 30px;
+}
 button:hover {
   background: #F6F9FE;
   color: #174ea6;

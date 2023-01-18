@@ -37,6 +37,7 @@ import IMCQ from "./pages/IMCQ";
 import CMCQ from "./pages/CMCQ";
 import Terms from "./pages/Terms";
 import AdminAddAdmin from "./pages/AdminAddAdmin";
+import IndRequest from "./pages/IndRequest";
 import Searchtitlesubject from "./pages/Searchtitlesubject";
 
 import AddPromotion from "./pages/AddPromotion";
@@ -138,6 +139,21 @@ function App() {
               <Route path="/AdminAddCORP" element={<AdminAddCORP />} />
               <Route path="/AdminAddI" element={<AdminAddI />} />
 
+              <Route path="/CorpRequest" element={<AdminAddAdmin />} />
+              <Route path="/AdminAddCORP"
+                element={<AdminAddCORP />}
+                
+              
+              />
+              
+              <Route path="/IndRequest" element={<IndRequest />} />
+                
+
+              <Route path="/AdminAddI"
+                element={<AdminAddI />}
+              
+              />
+              
               <Route path="/CorpAllCourses" element={<CorpAllCourses />} />
               <Route path="/EnterEmail" element={<EnterEmail />} />
               <Route path="/ReportAProblem" element={<ReportAProblem />} />

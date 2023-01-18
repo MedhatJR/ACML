@@ -16,8 +16,8 @@ const AllCourses = () => {
   const [users, setData] = useState("");
   const nav = useNavigate();
   const location = useLocation();
-  const passedEmail = location.state.passedEmail;
-  const passedReg = location.state.passedReg;
+  //const passedEmail = location.state.passedEmail;
+  //const passedReg = location.state.passedReg;
   const Register = () => {
     nav("/Register");
   };
@@ -43,22 +43,22 @@ const AllCourses = () => {
       setData(arr);
     }
   );
-  const reg = () => {
-    Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
-      Email: passedEmail,
-    }).then((response) => {
-      console.log(response);
-      arrRegistered = response.data;
-      for (var i = 0; i < arrRegistered.length; i++) {
-        arrRegisteredTitles[i] = arrRegistered[i].Title;
-      }
-      console.log(arrRegistered + " !!!!!!!!!!!!!!!!!!!!!!!!");
+  // const reg = () => {
+  //   Axios.post("http://localhost:8000/Individual_retrieveMyCourse", {
+  //     Email: passedEmail,
+  //   }).then((response) => {
+  //     console.log(response);
+  //     arrRegistered = response.data;
+  //     for (var i = 0; i < arrRegistered.length; i++) {
+  //       arrRegisteredTitles[i] = arrRegistered[i].Title;
+  //     }
+  //     console.log(arrRegistered + " !!!!!!!!!!!!!!!!!!!!!!!!");
 
-      console.log(arrRegisteredTitles + " !!!!!!!!?????????!!!!!!!");
-      setData(response + " ????????????????");
-    });
-    return arrRegistered;
-  };
+  //     console.log(arrRegisteredTitles + " !!!!!!!!?????????!!!!!!!");
+  //     setData(response + " ????????????????");
+  //   });
+  //   return arrRegistered;
+  // };
   const buttonPressed = (e) => {
     isClickedTitle = e.target.id; // Get ID of Clicked Element
     console.log(isClickedTitle);

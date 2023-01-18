@@ -23,6 +23,16 @@ const Register = () => {
   const Terms = () => {
     nav("/Terms");
   };
+  const Checkbox = ({ label }) => {
+    return (
+      <div className="checkbox-wrapper">
+        <label> I hereby agree to the terms and conditions</label>
+          
+          <input  className="checkbox" type="checkbox"/>{label}
+
+      </div>
+    );
+  };
   const [values, setValues] = useState({
     Email: "",
     Passwor: "",
@@ -178,6 +188,35 @@ const Register = () => {
         <br />
         <input type="text" name="type" id="type" /> <br />
         <br />
+        <br />
+          <option value="Individual" id="Individual">
+            Individual Trainee
+          </option>
+          <option value="Corporate" id="Corporate">
+            Corporate Trainee
+          </option>
+          <option value="Instructor" id="Instructor">
+            Instructor
+          </option>
+        
+        <br />
+        <br />
+
+        
+        <button onClick={Terms}> View terms and conditions     
+                    </button><br />
+                    <br />
+        <br />
+                    
+    <div className="app">
+      
+    </div>
+  
+    <Checkbox   />
+                    
+  
+    <br></br>
+     
         <br /> 
                     <a href="/Terms">I hereby agree to the terms and conditions</a>
 <br/>
@@ -186,6 +225,8 @@ const Register = () => {
           onClick={
             addData}
         >
+           
+         
           Submit
         </button>
         {/* <p> {pop}</p> */}

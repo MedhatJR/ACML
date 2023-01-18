@@ -59,7 +59,8 @@ font-family: Arial, Helvetica, sans-serif;
 .MyCourse .rating {
     font-size: 15px;
     position: absolute;
-    bottom: 180px;
+    bottom: 200px;
+    left: 500px;
 }
 .MyCourse .star-rating{
     font-size: 15px;
@@ -125,3 +126,11 @@ font-family: Arial, Helvetica, sans-serif;
     .MyCourserequest .Statusrequest {
         margin-left: 180PX;
     }   
+    .rep .button-17 {
+        position: absolute;
+        bottom: 50px;
+    }
+    .gotocoursedv .button-17 {
+        margin-left: 1100px;
+        margin-top: 200px;
+    }

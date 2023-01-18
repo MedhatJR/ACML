@@ -27,7 +27,7 @@ appRouter.get("/Corporate_read", async (req, res) => {
   });
 });
 
-appRouter.get("/Corporate_searchCourse", async (req, res) => {
+appRouter.post("/Corporate_searchCourse", async (req, res) => {
   Course.find(
     {
       $or: [
