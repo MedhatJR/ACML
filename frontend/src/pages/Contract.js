@@ -20,8 +20,8 @@ const Contract = () => {
       const Terms = () => {
         nav("/Terms");
       };
-      const InstructorPage= () => {
-        nav("/InstructorPage");
+      const LogIn= () => {
+        nav("/LogIn");
       };
 
   return (
@@ -74,7 +74,7 @@ const Contract = () => {
                 </p>
             </div>
             <div>
-            <button onClick={InstructorPage}> Agree</button>
+            <button onClick={LogIn}> Agree</button>
             <button onClick={Home}> Discard</button>
             </div>
           

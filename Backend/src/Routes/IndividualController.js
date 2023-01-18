@@ -12,7 +12,8 @@ appRouter.use(cors());
 const mongoose = require("mongoose");
 const Problem = require("../Models/Problem");
 const dote = require("dotenv").config();
-
+let alert = require('alert'); 
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 //to display the register page
 appRouter.get("/", async (req, res) => {
@@ -28,6 +29,7 @@ appRouter.post("/Individual_Register", async (req, res) => {
     Firstname: req.body.Firstname,
     Lastname: req.body.Lastname,
     Gender: req.body.Gender,
+    Wallet: req.body.Wallet,
   });
   email = newuser.Email;
   try {
@@ -43,6 +45,7 @@ appRouter.post("/Individual_Register", async (req, res) => {
       )
     ) {
       res.status(200).send("All input is required");
+      alert("All input is required");
     }
     const oldUser = await Individual.find({ Email: { $eq: req.body.Email } });
 
