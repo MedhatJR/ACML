@@ -26,6 +26,12 @@ appRouter.post("/Guest_filtercourse_price", async (req, res) => {
 });
 //choose a course from the results and view (but not open) its details including course subtitles, excercises ,
 // total hours of each subtitle, total hours of the course and price (including % discount if applicable) according to the country selected
+appRouter.post("/GuestCountry_currency", async (req, res) => {
+const countryToCurrency = require( 'country-to-currency' );
+const country = req.body.Country;
+console.log( countryToCurrency[ country ] );
+res.send(  countryToCurrency[ country ] );
+});
 
 // var fx = require("money");
 
