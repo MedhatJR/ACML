@@ -135,7 +135,12 @@ appRouter.post("/Guest_filtercourse", async (req, res) => {
     }
   );
 });
-
+appRouter.post("/GuestCountry_currency", async (req, res) => {
+  const countryToCurrency = require( 'country-to-currency' );
+  const country = req.body.Country;
+  console.log( countryToCurrency[ country ] );
+  res.send(  countryToCurrency[ country ] );
+  });
 appRouter.post("/Guest_viewPopularCourses", async (req, res) => {
   const minrating = 4;
   const maxrating = 5;

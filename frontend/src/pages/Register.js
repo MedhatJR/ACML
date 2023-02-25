@@ -68,9 +68,10 @@ const Register = () => {
         console.log(response.data);
         console.log(response);
         setFinal = response.data;
+        LogIn();
       });
-    } else {
-      if (type === "Instructor") {
+    } else if(type === "Instructor"){
+       
         console.log("ana instructor");
         Axios.post("http://localhost:8000/Instructor_Register", {
           Username: Username,
@@ -88,12 +89,19 @@ const Register = () => {
           setFinal = response.data;
           contract();
         });
-      }
+      
     }
+    else{
+      console.log("Please register as an Instructor or an Individual");
+    }
+
   };
 
   const contract = () => {
     nav("/Contract");
+  };
+  const LogIn = () => {
+    nav("/LogIn");
   };
   //JWT------------------
   const generateError = (err) =>

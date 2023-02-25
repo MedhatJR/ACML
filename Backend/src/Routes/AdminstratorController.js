@@ -627,7 +627,7 @@ appRouter.post("/Adminstrator_Refund", async (req, res) => {
   var amount = req.body.amount;
   var W = 0;
 
-  if (Category == "Individual Trainee") {
+  if (Category == "IndividualTrainee") {
     IndividualTrainee.find({ Email: Email }, (error, data) => {
       if (error) {
         console.log("error");

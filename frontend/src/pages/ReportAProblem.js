@@ -49,7 +49,7 @@ const ReportAProblem = () => {
         Email: passedEmail,
         Category: passedCategory,
         Description: document.getElementById("description").value,
-        Type: document.getElementById("type").value,
+        Type: document.getElementById("typePro").value,
         Course: passedTitle,
         Status: "Unseen",
       }).then((response) => {
